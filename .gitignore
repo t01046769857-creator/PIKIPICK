@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+*.log
+*.csv
+*.joblib
+*.pkl

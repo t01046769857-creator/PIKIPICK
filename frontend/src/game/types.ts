@@ -4,3 +4,5 @@ export type Phase = 'START' | 'MODE_SELECT' | 'INSTRUCTION' | 'READY' | 'PLAYING
 export type InputSource = 'BUTTON' | 'AI';
 export interface GameInput { gesture: Gesture; source: InputSource }
 export interface RoundResult { success: boolean; player: Gesture; opponent: Gesture; mode: GameMode }
+export interface InputTiming { id: number; startedAt: number; decidedAt: number }
+export interface AdvanceTiming { id: number; startedAt: number; kind: 'NEXT' | 'RETRY' }

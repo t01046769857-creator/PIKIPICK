@@ -100,3 +100,441 @@ p { line-height: 1.6; }
 @keyframes intro-celebrate-exit { to { opacity: 0; transform: translate(-50%, -10%) scale(1.18) rotate(2deg); } }
 @media (max-width: 640px) { .piki-intro { padding: 18px; } .intro-topbar h1 { font-size: 1rem; } .intro-sound { padding: 9px 12px; } .intro-stage { min-height: calc(100dvh - 148px); } .intro-piki-track { width: min(94vw, 470px); bottom: 88px; } .intro-piki-figure { --piki-size: min(94vw, 470px) !important; } .intro-speech-bubble { left: 45%; bottom: 76%; max-width: min(270px, 70vw); padding: 12px 14px; } .intro-game-icons { top: 18%; right: -5%; } .intro-play-button { left: -2%; bottom: 4%; padding: 14px 18px; } .intro-footer { bottom: 10px; align-items: flex-end; font-size: .72rem; } .intro-footer p { max-width: 240px; } .piki-intro--peek .intro-piki-track { left: 110%; } }
 @media (prefers-reduced-motion: reduce) { .intro-piki-track, .intro-piki-figure, .intro-piki-figure img, .intro-speech-bubble, .intro-game-icons, .intro-play-button { animation: none !important; transition: none !important; } }
+
+/* Intro rig overrides: the character is assembled from independently animated PNG layers. */
+.intro-piki-track { width: min(78vw, 580px); }
+.intro-piki-rig { width: 100%; }
+.piki-rig { position: relative; width: 100%; aspect-ratio: 1 / 1; isolation: isolate; }
+.piki-rig img { display: block; width: 100%; user-select: none; }
+.piki-rig__frame-bridge { position: absolute; z-index: 9; bottom: 0; left: 6%; width: 88% !important; height: 94%; object-fit: contain; pointer-events: none; animation: piki-frame-bridge .23s ease-out both; }
+.piki-rig__body { position: absolute; z-index: 1; bottom: 0; left: 25%; width: 52%; }
+.piki-rig__head-motion { position: absolute; z-index: 3; top: 2%; left: 7%; width: 86%; transform-origin: 50% 78%; transition: transform .45s cubic-bezier(.22,.9,.31,1); }
+.piki-rig__face-fill { position: absolute; z-index: 1; top: 31%; left: 18%; width: 64%; height: 47%; border-radius: 48% 48% 45% 45%; background: #fff; }
+.piki-rig__head-shell { position: relative; z-index: 2; }
+.piki-rig__face { position: absolute; z-index: 3; inset: 0; }
+.piki-rig__eyes { position: absolute; left: 27%; top: 39%; width: 46%; opacity: 0; transition: opacity 60ms linear; }
+.piki-rig__eyes--open { opacity: 1; }
+.piki-rig__eyes--open.is-hidden, .piki-rig__eyes--blink.is-visible { opacity: 0; }
+.piki-rig__eyes--blink.is-visible { opacity: 1; }
+.piki-rig__mouth { position: absolute; left: 39%; top: 58%; width: 22%; opacity: 0; transition: opacity 70ms linear; }
+.piki-rig__mouth--closed { opacity: 1; }
+.piki-rig__mouth--closed.is-hidden, .piki-rig__mouth--open.is-visible { opacity: 0; }
+.piki-rig__mouth--open.is-visible { opacity: 1; }
+.piki-rig__arm { position: absolute; z-index: 2; transition: transform .42s cubic-bezier(.22,.9,.31,1); }
+.piki-rig__arm--reach { z-index: 5; top: 52%; left: -4%; width: 59%; transform-origin: 17% 58%; transform: rotate(12deg) scale(.86); }
+.piki-rig__arm--wave { z-index: 2; top: 34%; right: 3%; width: 36%; transform-origin: 28% 80%; transform: rotate(-15deg) scale(.82); }
+.piki-rig--notice .piki-rig__head-motion { animation: piki-rig-notice .72s ease-in-out both; }
+.piki-rig--approach .piki-rig__head-motion { animation: piki-rig-approach-head .55s ease-in-out infinite alternate; }
+.piki-rig--reach .piki-rig__head-motion, .piki-rig--talk .piki-rig__head-motion, .piki-rig--invite .piki-rig__head-motion, .piki-rig--idle .piki-rig__head-motion { transform: rotate(-2deg); }
+.piki-rig--reach .piki-rig__arm--reach, .piki-rig--talk .piki-rig__arm--reach, .piki-rig--invite .piki-rig__arm--reach, .piki-rig--idle .piki-rig__arm--reach { transform: translate(-7%, -7%) rotate(-5deg) scale(1.06); }
+.piki-rig--reach .piki-rig__arm--wave, .piki-rig--talk .piki-rig__arm--wave, .piki-rig--invite .piki-rig__arm--wave, .piki-rig--idle .piki-rig__arm--wave { animation: piki-rig-wave .72s ease-in-out infinite alternate; }
+.piki-rig--talk .piki-rig__head-motion, .piki-rig--invite .piki-rig__head-motion { animation: piki-rig-talk-head .42s ease-in-out infinite alternate; }
+.piki-rig--idle .piki-rig__body { animation: piki-rig-breathe 2.4s ease-in-out infinite; transform-origin: center bottom; }
+
+.piki-intro--ENTER .intro-piki-track { left: 106%; bottom: 9%; transform: translateX(-15%) scale(.35) rotate(-4deg); }
+.piki-intro--NOTICE .intro-piki-track { left: 82%; bottom: 10%; transform: translateX(-25%) scale(.48); }
+.piki-intro--APPROACH .intro-piki-track { left: 50%; transform: translateX(-50%) scale(.84); animation: intro-rig-approach 1.55s cubic-bezier(.22,.9,.31,1) both; }
+.piki-intro--REACH .intro-piki-track, .piki-intro--TALK .intro-piki-track, .piki-intro--INVITE .intro-piki-track, .piki-intro--IDLE .intro-piki-track { left: 50%; transform: translateX(-50%) scale(1); }
+.piki-intro--REACH .piki-rig { animation: intro-rig-settle .78s ease-out both; }
+
+/* Safe full-PNG fallback for the live intro. No rig layers are rendered here. */
+.piki-intro--REACH .intro-piki-figure { animation: intro-reach-settle .8s ease-out both !important; }
+.piki-intro--TALK .intro-piki-figure { animation: intro-talk-bob .34s ease-in-out infinite alternate !important; }
+.piki-intro--speaking .intro-piki-figure img { animation: intro-tuft-wobble .42s ease-in-out infinite alternate; }
+
+/* This anchor is above the head, so the speech never covers Piki's face. */
+.intro-speech-bubble { z-index: 8; bottom: calc(100% - 2.5rem); left: 51%; max-width: min(320px, 68vw); transform-origin: 18% 100%; }
+.intro-speech-bubble::after { left: 26px; bottom: -14px; }
+.intro-game-icons { z-index: 7; top: 20%; right: -4%; }
+.intro-play-button { left: -7%; bottom: 4%; }
+
+@keyframes piki-rig-notice { 0% { transform: rotate(0deg) scale(1); } 55% { transform: rotate(-9deg) scale(1.02); } 100% { transform: rotate(-5deg) scale(1); } }
+@keyframes piki-rig-approach-head { from { transform: rotate(-4deg) translateY(1%); } to { transform: rotate(4deg) translateY(-2%); } }
+@keyframes piki-rig-wave { from { transform: rotate(-16deg) scale(.96); } to { transform: rotate(13deg) scale(1.02); } }
+@keyframes piki-rig-talk-head { from { transform: rotate(-2.5deg) translateY(0); } to { transform: rotate(1.2deg) translateY(-1.4%); } }
+@keyframes piki-rig-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.015, .985); } }
+@keyframes intro-rig-approach { 0% { transform: translate(48vw, 10%) scale(.35) rotate(-4deg); } 35% { transform: translate(-50%, -5%) scale(.68, .58); } 58% { transform: translate(-50%, 0) scale(.79, .9); } 78% { transform: translate(-50%, -4%) scale(.88, .78); } 100% { transform: translate(-50%, 0) scale(.84); } }
+@keyframes intro-rig-settle { 0% { transform: scale(.9, 1.1); } 55% { transform: scale(1.05, .94); } 100% { transform: scale(1); } }
+@keyframes piki-frame-bridge { 0% { opacity: 0; transform: translateY(2%) scale(.96); } 35% { opacity: .35; } 100% { opacity: 0; transform: translateY(0) scale(1); } }
+
+@media (max-width: 640px) {
+  .intro-piki-track { width: min(94vw, 470px); bottom: 84px; }
+  .intro-speech-bubble { left: 38%; bottom: calc(100% - 1.2rem); max-width: min(260px, 70vw); }
+  .intro-game-icons { top: 17%; right: -2%; }
+  .intro-play-button { left: -1%; bottom: 1%; }
+  .piki-intro--ENTER .intro-piki-track { left: 112%; }
+  .piki-intro--NOTICE .intro-piki-track { left: 84%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .piki-rig *, .piki-rig, .piki-intro--APPROACH .intro-piki-track { animation: none !important; transition: none !important; }
+}
+
+/* One-shot opening story: valid full-character frames only (the rig stays offline). */
+.piki-intro--PEEK .intro-piki-track { left: 106%; bottom: 10%; transform: translateX(-15%) scale(.38) rotate(-4deg); }
+.piki-intro--NOTICE .intro-piki-track { left: 82%; bottom: 10%; transform: translateX(-25%) scale(.5) rotate(-4deg); }
+.piki-intro--NOTICE .intro-piki-figure { animation: intro-notice-tilt .85s ease-out both !important; }
+.piki-intro--APPROACH .intro-piki-track { left: 50%; bottom: clamp(50px, 9vh, 105px); animation: intro-story-approach 1.6s cubic-bezier(.22,.9,.31,1) both; }
+.piki-intro--REACH .intro-piki-track, .piki-intro--TALK .intro-piki-track, .piki-intro--INVITE .intro-piki-track, .piki-intro--IDLE .intro-piki-track { left: 50%; bottom: clamp(50px, 9vh, 105px); transform: translateX(-50%) scale(1); }
+.piki-intro--REACH .intro-piki-figure { animation: intro-reach-settle .8s ease-out both !important; }
+.piki-intro--TALK .intro-piki-figure { animation: intro-frame-in .22s ease-out both, intro-talk-nod .42s .22s ease-in-out 5 alternate !important; }
+.piki-intro--speaking .intro-piki-figure img { animation: intro-speaking-wobble .34s ease-in-out 6 alternate; }
+/* The idle loop never scales: it is only a very small listening sway. */
+.piki-intro--IDLE .intro-piki-figure { animation: intro-idle-listen 3.4s ease-in-out infinite !important; }
+.piki-intro--IDLE.piki-intro--speaking .intro-piki-figure { animation: intro-frame-in .18s ease-out both, intro-talk-nod .42s .18s ease-in-out 5 alternate !important; }
+.intro-piki-figure img { object-position: center bottom; }
+.intro-play-button--early { opacity: .94; animation: button-in .35s ease-out both; }
+.intro-game-icons { animation: none; }
+.intro-game-icons span { opacity: 0; animation: intro-icon-arrive .38s cubic-bezier(.22,1.2,.36,1) both; }
+.intro-game-icons span:nth-child(1) { animation-delay: .04s; }
+.intro-game-icons span:nth-child(2) { animation-delay: .19s; }
+.intro-game-icons span:nth-child(3) { animation-delay: .34s; }
+.intro-speech-bubble { max-width: min(320px, calc(100vw - 32px)); }
+
+@keyframes intro-notice-tilt { 0% { transform: rotate(0); } 58% { transform: rotate(-7deg) translateY(-2%); } 100% { transform: rotate(-4deg); } }
+@keyframes intro-story-approach { 0% { transform: translate(42vw, 7%) scale(.5) rotate(-4deg); } 32% { transform: translate(-50%, -5%) scale(.66, .57); } 55% { transform: translate(-50%, 0) scale(.79, .9); } 77% { transform: translate(-50%, -4%) scale(.9, .79); } 100% { transform: translate(-50%, 0) scale(1); } }
+@keyframes intro-frame-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes intro-talk-nod { from { transform: translateY(0) rotate(-.55deg); } to { transform: translateY(-3px) rotate(.55deg); } }
+@keyframes intro-speaking-wobble { from { transform: rotate(-.45deg); } to { transform: rotate(.45deg); } }
+@keyframes intro-idle-listen { 0%, 100% { transform: translateY(0) rotate(-.35deg); } 50% { transform: translateY(-2px) rotate(.35deg); } }
+@keyframes intro-icon-arrive { from { opacity: 0; transform: translateY(14px) scale(.65); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 640px) {
+  .piki-intro--APPROACH .intro-piki-track, .piki-intro--REACH .intro-piki-track, .piki-intro--TALK .intro-piki-track, .piki-intro--INVITE .intro-piki-track, .piki-intro--IDLE .intro-piki-track { bottom: 84px; }
+  .piki-intro--PEEK .intro-piki-track { left: 112%; }
+  .piki-intro--NOTICE .intro-piki-track { left: 84%; }
+  .intro-speech-bubble { left: 38%; bottom: calc(100% - 1.2rem); }
+}
+
+/* Compact, in-place game result layout. The result occupies Piki's existing area. */
+.play-card--game { min-height: min(620px, calc(100dvh - 150px)); height: min(620px, calc(100dvh - 150px)); padding: clamp(16px, 3vw, 30px); align-items: stretch; overflow: hidden; }
+.game-panel { width: min(100%, 820px); min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: clamp(8px, 2vh, 18px); }
+.game-main-grid { min-height: 0; display: grid; grid-template-columns: minmax(220px, .82fr) minmax(330px, 1.18fr); align-items: center; gap: clamp(18px, 4vw, 54px); }
+.opponent-area { min-width: 0; margin: 0; display: grid; justify-items: center; align-content: center; }
+.opponent-area .piki-character { --piki-size: clamp(142px, 21vw, 190px) !important; margin: 0 auto 2px; }
+.opponent-area p { margin: 0; font-weight: 800; }
+.opponent-area strong { font-size: clamp(1.05rem, 2vw, 1.3rem); }
+.player-choice { min-width: 0; display: grid; align-content: center; gap: clamp(8px, 2vh, 18px); }
+.choose-label { margin: 0; font-weight: 900; }
+.gesture-grid { gap: clamp(8px, 1.8vw, 14px); }
+.gesture-button { min-height: clamp(122px, 20vh, 166px); padding: 8px; }
+.gesture-button .piki-character { --piki-size: clamp(76px, 10vw, 108px) !important; }
+.result-box { width: min(100%, 280px); margin: 4px auto 0; padding: clamp(10px, 1.7vw, 16px); border-radius: 18px; }
+.result-box h2 { font-size: clamp(1.05rem, 2vw, 1.35rem); }
+.result-box p { margin: 2px 0; font-size: .88rem; }
+.result-box .primary { margin-top: 7px; padding: 11px 18px; }
+
+@media (max-width: 640px) {
+  .app-shell--game { width: min(100% - 20px, 560px); padding: 14px 0 20px; }
+  .app-shell--game .topbar { flex-direction: row; align-items: center; margin-bottom: 10px; }
+  .app-shell--game .topbar h1 { font-size: clamp(1rem, 4.5vw, 1.25rem); }
+  .app-shell--game .eyebrow { font-size: .68rem; }
+  .app-shell--game .star { font-size: 1.25rem; }
+  .play-card--game { min-height: min(500px, calc(100dvh - 112px)); height: min(500px, calc(100dvh - 112px)); padding: 12px 10px; border-radius: 22px; }
+  .game-main-grid { grid-template-columns: minmax(112px, .74fr) minmax(0, 1.26fr); gap: 10px; }
+  .opponent-area .piki-character { --piki-size: clamp(104px, 31vw, 150px) !important; }
+  .opponent-area p { font-size: .78rem; line-height: 1.25; }
+  .opponent-area strong { font-size: 1rem; }
+  .gesture-grid { gap: 7px; }
+  .gesture-button { min-height: clamp(88px, 16vh, 120px); border-radius: 15px; padding: 5px 2px; font-size: .84rem; }
+  .gesture-button .piki-character { --piki-size: clamp(54px, 16vw, 78px) !important; }
+  .result-box { padding: 8px 6px; border-radius: 14px; }
+  .result-box h2 { margin: 0; font-size: .93rem; line-height: 1.25; }
+  .result-box p { font-size: .7rem; line-height: 1.25; }
+  .result-box .primary { margin-top: 5px; padding: 8px 11px; box-shadow: 0 3px 0 #d85d37; font-size: .8rem; }
+  .app-shell--game .restart { margin: 8px auto 0; font-size: .76rem; }
+}
+@media (max-height: 610px) {
+  .app-shell--game .topbar { margin-bottom: 6px; }
+  .play-card--game { min-height: calc(100dvh - 88px); height: calc(100dvh - 88px); }
+  .game-panel { gap: 4px; }
+  .opponent-area .piki-character { --piki-size: min(27vh, 132px) !important; }
+  .gesture-button { min-height: min(17vh, 94px); }
+  .result-box { padding: 6px; }
+}
+
+/* Reward progression and Piki-centered game board. */
+.stars { display: grid; grid-template-columns: auto auto; justify-items: end; column-gap: 8px; row-gap: 1px; }
+.stars__row { grid-column: 1 / -1; display: flex; gap: 2px; }
+.party-count { color: #9a6f2b; font-size: .76rem; font-weight: 800; white-space: nowrap; }
+.stars--celebrating .stars__row { animation: stars-celebrate .62s ease-in-out 2; }
+
+.play-card--game { background: transparent; border: 0; box-shadow: none; overflow: visible; }
+.game-panel { position: relative; width: min(100%, 720px); grid-template-rows: auto minmax(0, 1fr) auto auto; gap: clamp(7px, 1.5vh, 14px); }
+.game-main-grid { display: contents; }
+.opponent-area { min-height: 0; margin: 0; display: grid; justify-items: center; align-content: center; }
+.opponent-area .piki-character { --piki-size: clamp(170px, 27vh, 250px) !important; margin: 0 auto; }
+.piki-dialogue { min-width: 180px; margin-top: -8px; padding: 7px 18px; border: 3px solid #543631; border-radius: 20px 20px 20px 7px; background: #fff; box-shadow: 0 5px 0 #f5cfc2; text-align: center; }
+.piki-dialogue p { margin: 0; font-weight: 800; line-height: 1.25; }
+.piki-dialogue strong { display: block; margin-top: 1px; color: #f47a50; font-size: 1.15rem; }
+.player-choice { display: grid; gap: 7px; }
+.choose-label { margin: 0; font-size: clamp(.95rem, 2vw, 1.1rem); }
+.gesture-grid { gap: clamp(10px, 2vw, 18px); }
+.gesture-button { min-height: clamp(104px, 16vh, 145px); padding: 10px; border-width: 3px; border-radius: 22px; font-size: clamp(1.05rem, 2vw, 1.22rem); }
+.gesture-button--rock { background: #fff1e9; border-color: #f1b28f; }
+.gesture-button--scissors { background: #eefbff; border-color: #91cbe0; }
+.gesture-button--paper { background: #fff9d9; border-color: #ebcf77; }
+.gesture-icon { display: block; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; }
+.gesture-button .piki-character { display: none; }
+.result-box { position: relative; width: min(100%, 340px); margin: -4px auto 0; padding: 10px 15px; border: 3px solid #543631; box-shadow: 0 5px 0 #e4c5a4; }
+.result-box::before { content: ''; position: absolute; top: -10px; left: 50%; width: 14px; height: 14px; border-top: 3px solid #543631; border-left: 3px solid #543631; background: inherit; transform: translateX(-50%) rotate(45deg); }
+.result-box.success { background: #fff4c9; }
+.result-box.retry { background: #fff0ed; }
+.result-box h2 { font-size: clamp(1rem, 2.2vw, 1.3rem); }
+.party-banner { display: block; color: #a96d00; font-size: .8rem; font-weight: 900; animation: party-banner-pop .45s ease-out both; }
+.piki-party-dance { animation: piki-party-dance .62s ease-in-out 2; transform-origin: center bottom; }
+.game-utility-actions { display: flex; justify-content: center; gap: 10px; }
+.secondary-action { border: 2px solid #d9c9bd; border-radius: 999px; padding: 8px 13px; background: #fffdf9; color: #725c52; font-size: .84rem; font-weight: 800; }
+.secondary-action--danger { border-color: #e4b2aa; color: #b15d52; }
+.record-confirm { position: absolute; z-index: 10; right: 0; bottom: 0; left: 0; margin: 0 auto; width: min(360px, 92%); padding: 16px; border: 3px solid #543631; border-radius: 20px; background: #fffdf9; box-shadow: 0 10px 26px #5436313b; text-align: center; }
+.record-confirm p { margin: 0 0 10px; font-weight: 800; }
+.record-confirm div { display: flex; justify-content: center; gap: 8px; }
+.record-confirm .primary { margin: 0; padding: 9px 14px; }
+
+@keyframes stars-celebrate { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.13) rotate(-3deg); } 70% { transform: scale(.96) rotate(3deg); } }
+@keyframes piki-party-dance { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translate(-8px, -9px) rotate(-5deg); } 50% { transform: translate(8px, -14px) rotate(5deg); } 75% { transform: translate(-5px, -7px) rotate(-3deg); } }
+@keyframes party-banner-pop { from { opacity: 0; transform: translateY(7px) scale(.8); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 640px) {
+  .app-shell--game .topbar { align-items: center; }
+  .stars { justify-items: end; column-gap: 4px; }
+  .star { font-size: 1.15rem; }
+  .success-count, .party-count { margin-left: 0; font-size: .64rem; }
+  .play-card--game { min-height: min(510px, calc(100dvh - 96px)); height: min(510px, calc(100dvh - 96px)); padding: 8px 4px; }
+  .game-panel { gap: 5px; }
+  .opponent-area .piki-character { --piki-size: clamp(116px, 25vh, 164px) !important; }
+  .piki-dialogue { min-width: 144px; margin-top: -4px; padding: 5px 11px; border-width: 2px; font-size: .76rem; }
+  .piki-dialogue strong { font-size: .95rem; }
+  .gesture-grid { gap: 8px; }
+  .gesture-button { min-height: clamp(78px, 13vh, 104px); border-radius: 16px; padding: 6px 2px; font-size: .9rem; }
+  .gesture-icon { font-size: clamp(2rem, 10vw, 2.8rem); }
+  .result-box { width: min(100%, 270px); padding: 7px 10px; border-width: 2px; border-radius: 15px; }
+  .result-box::before { top: -8px; border-top-width: 2px; border-left-width: 2px; }
+  .result-box h2 { font-size: .92rem; }
+  .result-box p, .party-banner { font-size: .68rem; }
+  .result-box .primary { margin-top: 4px; padding: 8px 13px; font-size: .8rem; }
+  .secondary-action { padding: 6px 10px; font-size: .72rem; }
+  .record-confirm { bottom: 4px; padding: 12px; }
+}
+@media (max-height: 610px) {
+  .play-card--game { min-height: calc(100dvh - 82px); height: calc(100dvh - 82px); }
+  .opponent-area .piki-character { --piki-size: min(23vh, 138px) !important; }
+  .gesture-button { min-height: min(13vh, 78px); }
+  .piki-dialogue { padding: 3px 10px; }
+  .game-utility-actions { gap: 6px; }
+}
+
+/* Child-first game hierarchy: Piki, Piki's move, then the child's large choice. */
+.app-shell--game .topbar { margin-bottom: 14px; }
+.app-shell--game .topbar h1 { color: #3f2a33; }
+.stars { min-width: 176px; padding: 7px 10px 6px; border: 2px solid #f0c35a; border-radius: 18px; background: #fffdf1; box-shadow: 0 4px 0 #f5e4b6; row-gap: 2px; }
+.stars__row { justify-content: flex-end; gap: 1px; }
+.star { font-size: clamp(1.55rem, 3vw, 2rem); line-height: 1; color: #d8d3ca; text-shadow: 0 1px 0 #fff; }
+.star.filled { color: #f6b51f; text-shadow: 0 2px 0 #d88d13; }
+.success-count { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 9px; margin: 0; color: #5c443d; font-size: .76rem; font-weight: 900; line-height: 1.15; white-space: nowrap; }
+.party-count { display: none; }
+
+.play-card--game { min-height: min(700px, calc(100dvh - 130px)); height: min(700px, calc(100dvh - 130px)); }
+.game-panel { width: min(100%, 760px); grid-template-rows: auto minmax(0, 1fr) auto auto; gap: clamp(9px, 1.8vh, 17px); }
+.round-heading { justify-content: flex-start; padding: 0 4px; color: #71544e; font-size: .92rem; font-weight: 800; }
+.opponent-area { position: relative; min-height: clamp(300px, 42vh, 420px); align-content: center; padding-top: 2px; }
+.opponent-area .piki-character { --piki-size: clamp(250px, 42vh, 380px) !important; margin: 0 auto; }
+.piki-dialogue { min-width: min(92vw, 340px); margin-top: -20px; padding: 9px 20px; border-width: 3px; border-radius: 24px 24px 24px 8px; box-shadow: 0 6px 0 #f1c7ba; color: #392c30; }
+.piki-dialogue p { color: #46363a; font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 900; }
+.piki-dialogue strong { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 2px; color: #e95d3e; font-size: clamp(1.45rem, 3.4vw, 1.85rem); font-weight: 900; line-height: 1.1; }
+.piki-move-icon { display: inline-block; font-size: 1.35em; line-height: 1; filter: drop-shadow(0 2px 0 #f7d1bd); }
+.player-choice { gap: 9px; }
+.choose-label { color: #3e3033; font-size: clamp(1.08rem, 2.3vw, 1.32rem); font-weight: 900; }
+.gesture-grid { gap: clamp(12px, 2.2vw, 22px); }
+.gesture-button { min-height: clamp(120px, 18vh, 164px); padding: 12px 8px; border-width: 3px; border-radius: 24px; color: #372b30; font-size: clamp(1.15rem, 2.4vw, 1.4rem); font-weight: 900; gap: 8px; box-shadow: 0 5px 0 #d9c7bd; }
+.gesture-button:hover:not(:disabled) { border-color: #e96545; box-shadow: 0 7px 0 #e6a88f; transform: translateY(-2px); }
+.gesture-button:focus-visible, .secondary-action:focus-visible { outline: 4px solid #4fae9e; outline-offset: 3px; }
+.gesture-icon { font-size: clamp(3.1rem, 7vw, 4.5rem); }
+.result-box { width: min(100%, 400px); padding: 13px 18px; font-size: 1rem; }
+.result-box h2 { color: #38292c; font-size: clamp(1.2rem, 2.6vw, 1.6rem); }
+.game-utility-actions { gap: 7px; }
+.secondary-action { border-width: 1px; padding: 6px 10px; background: transparent; color: #806d65; font-size: .72rem; font-weight: 800; }
+.secondary-action--danger { border-color: transparent; color: #a77770; }
+
+@media (max-width: 640px) {
+  .app-shell--game .topbar { flex-direction: row; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .app-shell--game .topbar h1 { font-size: 1.05rem; }
+  .stars { min-width: 144px; padding: 5px 7px; border-radius: 14px; }
+  .star { font-size: 1.35rem; }
+  .success-count { gap: 5px; font-size: .64rem; }
+  .play-card--game { min-height: min(590px, calc(100dvh - 94px)); height: min(590px, calc(100dvh - 94px)); padding: 7px 4px; }
+  .game-panel { gap: 6px; }
+  .round-heading { font-size: .76rem; }
+  .opponent-area { min-height: 250px; }
+  .opponent-area .piki-character { --piki-size: clamp(172px, 31vh, 235px) !important; }
+  .piki-dialogue { min-width: min(88vw, 290px); margin-top: -13px; padding: 6px 12px; border-width: 2px; border-radius: 18px 18px 18px 6px; }
+  .piki-dialogue p { font-size: .87rem; }
+  .piki-dialogue strong { gap: 6px; font-size: 1.25rem; }
+  .gesture-grid { gap: 9px; }
+  .gesture-button { min-height: clamp(92px, 15vh, 120px); border-radius: 18px; padding: 8px 3px; font-size: 1rem; gap: 4px; }
+  .gesture-icon { font-size: clamp(2.6rem, 13vw, 3.35rem); }
+  .choose-label { font-size: 1rem; }
+  .result-box { width: min(100%, 310px); padding: 9px 12px; }
+  .result-box h2 { font-size: 1.02rem; }
+  .secondary-action { padding: 5px 8px; font-size: .67rem; }
+}
+
+@media (max-height: 700px) {
+  .opponent-area .piki-character { --piki-size: min(38vh, 300px) !important; }
+  .gesture-button { min-height: min(16vh, 116px); }
+  .piki-dialogue { margin-top: -14px; }
+}
+@media (max-width: 640px) and (max-height: 610px) {
+  .opponent-area { min-height: 210px; }
+  .opponent-area .piki-character { --piki-size: min(30vh, 190px) !important; }
+  .piki-dialogue { padding: 4px 10px; }
+  .gesture-button { min-height: min(14vh, 92px); }
+}
+
+/* Shared safe-area contract for the intro: controls stay inside the track bounds. */
+.piki-intro .intro-stage { padding-inline: clamp(8px, 2vw, 28px); overflow: visible; }
+.piki-intro .intro-piki-track { max-width: calc(100% - 16px); overflow: visible; }
+.piki-intro .intro-speech-bubble { right: auto; max-width: min(320px, calc(100vw - 32px)); overflow-wrap: anywhere; pointer-events: none; }
+@media (max-width: 640px) {
+  .piki-intro .intro-stage { padding-inline: 8px; }
+  .piki-intro .intro-speech-bubble { left: 36%; max-width: calc(100vw - 28px); }
+}
+
+/* Game layout contract: header tools, Piki stage, and choices are separate flow rows. */
+.game-header-tools { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+.game-menu { position: relative; z-index: 20; }
+.game-menu-toggle { border: 1px solid #e4d4c6; border-radius: 999px; padding: 7px 10px; background: #fffdf9; color: #6f574f; font-size: .76rem; font-weight: 900; }
+.game-menu-panel { position: absolute; top: calc(100% + 8px); right: 0; display: grid; min-width: 132px; gap: 3px; padding: 6px; border: 2px solid #ead7c8; border-radius: 14px; background: #fffdf9; box-shadow: 0 10px 24px #5a403326; }
+.game-menu-panel button { border: 0; border-radius: 9px; padding: 9px 10px; background: transparent; color: #513d39; text-align: left; font-size: .78rem; font-weight: 800; }
+.game-menu-panel button:hover, .game-menu-panel button:focus-visible { background: #fff1df; outline: none; }
+.play-card--game { min-height: min(760px, calc(100dvh - 120px)); height: min(760px, calc(100dvh - 120px)); overflow: visible; }
+.game-panel { grid-template-rows: minmax(0, 1fr) auto; gap: clamp(8px, 1.7vh, 16px); }
+.opponent-area { min-height: clamp(300px, 43vh, 430px); align-content: center; justify-items: center; }
+.piki-feedback { width: min(100%, 360px); margin: -10px auto 0; padding: 8px 14px; border: 3px solid #543631; border-radius: 22px 22px 22px 7px; box-shadow: 0 5px 0 #e4c5a4; text-align: center; }
+.piki-feedback.success { background: #fff4c9; }
+.piki-feedback.retry { background: #fff0ed; }
+.piki-feedback h2 { margin: 0; color: #38292c; font-size: clamp(1.15rem, 2.5vw, 1.5rem); }
+.piki-feedback p { margin: 2px 0 0; color: #644b45; font-size: .9rem; font-weight: 800; }
+.player-choice { min-width: 0; padding-top: clamp(4px, 1vh, 10px); }
+.gesture-grid { width: 100%; gap: clamp(12px, 2.2vw, 22px); }
+.gesture-button { min-height: clamp(120px, 18vh, 164px); }
+.gesture-button:active:not(:disabled) { transform: translateY(4px) scale(.98); box-shadow: 0 2px 0 #d9c7bd; }
+.player-choice--waiting .gesture-button:nth-child(1) { animation: choice-beat 2.32s 0s ease-in-out infinite; }
+.player-choice--waiting .gesture-button:nth-child(2) { animation: choice-beat 2.32s .58s ease-in-out infinite; }
+.player-choice--waiting .gesture-button:nth-child(3) { animation: choice-beat 2.32s 1.16s ease-in-out infinite; }
+.record-confirm { position: fixed; top: 50%; right: auto; bottom: auto; left: 50%; width: min(360px, calc(100vw - 32px)); transform: translate(-50%, -50%); }
+@keyframes choice-beat { 0%, 70%, 100% { transform: translateY(0); } 14% { transform: translateY(-5px); } 28% { transform: translateY(0); } }
+@media (max-width: 640px) {
+  .game-header-tools { gap: 5px; }
+  .game-menu-toggle { padding: 6px 8px; font-size: .68rem; }
+  .game-menu-panel { top: calc(100% + 6px); }
+  .play-card--game { min-height: min(590px, calc(100dvh - 94px)); height: min(590px, calc(100dvh - 94px)); }
+  .opponent-area { min-height: 250px; }
+  .piki-feedback { width: min(100%, 310px); margin-top: -8px; padding: 7px 10px; }
+  .piki-feedback h2 { font-size: 1rem; }
+  .piki-feedback p { font-size: .72rem; }
+  .gesture-button { min-height: clamp(94px, 15vh, 122px); }
+}
+@media (max-width: 640px) and (max-height: 610px) {
+  .opponent-area { min-height: 210px; }
+  .gesture-button { min-height: min(14vh, 92px); }
+}
+
+/* Intro v2: one persistent stage, separate motion and pose layers, no legacy transform collisions. */
+.intro-v2-stage { position: relative; min-height: calc(100dvh - 175px); display: grid; place-items: stretch center; overflow: visible; }
+.intro-v2-safe { position: relative; width: min(900px, 100%); min-height: inherit; overflow: visible; }
+.intro-v2-motion { position: absolute; left: 50%; bottom: clamp(58px, 9vh, 108px); width: min(76vw, 580px); aspect-ratio: 1; transform: translate3d(-50%, 0, 0) scale(1); transform-origin: center bottom; transition: transform .32s cubic-bezier(.2,.8,.3,1); will-change: transform; }
+.intro-v2-hop { width: 100%; height: 100%; transform-origin: center bottom; }
+.intro-v2-frame-stack { position: relative; width: 100%; height: 100%; }
+.intro-v2-frame { position: absolute; inset: 0; display: grid; place-items: end center; pointer-events: none; }
+.intro-v2-frame--previous { z-index: 1; animation: intro-v2-fade-out .2s ease-out both; }
+.intro-v2-frame--current { z-index: 2; animation: intro-v2-fade-in .2s ease-in both; }
+.intro-v2-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; transform: translate3d(var(--piki-frame-x), var(--piki-frame-y), 0) scale(var(--piki-frame-scale)); transform-origin: center bottom; user-select: none; }
+.intro-v2[data-phase='PEEK'] .intro-v2-motion { transform: translate3d(calc(-50% + clamp(220px, 58vw, 840px)), 0, 0) scale(.42) rotate(-4deg); }
+.intro-v2[data-phase='NOTICE'] .intro-v2-motion, .intro-v2[data-phase='HOLD'] .intro-v2-motion { transform: translate3d(calc(-50% + clamp(90px, 22vw, 330px)), 0, 0) scale(.52) rotate(-3deg); }
+.intro-v2[data-phase='NOTICE'] .intro-v2-hop { animation: intro-v2-notice .7s ease-out both; }
+.intro-v2[data-phase='APPROACH'] .intro-v2-motion { transform: translate3d(-50%, 0, 0) scale(1); transition-duration: 1.45s; transition-timing-function: cubic-bezier(.16,.84,.24,1); }
+.intro-v2[data-phase='APPROACH'] .intro-v2-hop { animation: intro-v2-approach-hop 1.45s ease-in-out both; }
+.intro-v2[data-phase='SETTLE'] .intro-v2-hop { animation: intro-v2-settle .5s cubic-bezier(.18,.78,.34,1) both; }
+.intro-v2-speech { position: absolute; z-index: 4; bottom: calc(100% - 2.2rem); left: 53%; width: max-content; max-width: min(320px, calc(100vw - 32px)); padding: 13px 17px; border: 3px solid #543631; border-radius: 24px 24px 24px 7px; background: #fff; color: #513631; box-shadow: 0 7px 0 #f5cfc2; font-size: clamp(.96rem, 2.2vw, 1.15rem); font-weight: 900; line-height: 1.35; pointer-events: none; animation: intro-v2-bubble-in .24s ease-out both; }
+.intro-v2-speech::after { content: ''; position: absolute; bottom: -13px; left: 25px; width: 16px; height: 16px; border-right: 3px solid #543631; border-bottom: 3px solid #543631; background: #fff; transform: rotate(45deg); }
+.intro-v2-hand-target { position: absolute; z-index: 5; top: 48%; left: 61%; width: 29%; height: 29%; border: 0; border-radius: 45%; background: transparent; cursor: pointer; touch-action: manipulation; }
+.intro-v2-hand-target:focus-visible { outline: 4px solid #4fae9e; outline-offset: 4px; }
+.intro-v2-icons { position: absolute; z-index: 3; top: 19%; right: 1%; display: flex; gap: 7px; pointer-events: none; }
+.intro-v2-icons span { display: grid; width: clamp(38px, 5.5vw, 60px); aspect-ratio: 1; place-items: center; border: 3px solid #5a3d37; border-radius: 50%; background: #fff8df; box-shadow: 0 4px 0 #e7bd80; font-size: clamp(1.25rem, 2.8vw, 1.9rem); animation: intro-v2-icon-in .3s ease-out both; }
+.intro-v2-icons span:nth-child(2) { margin-top: -13px; background: #e7fbf6; animation-delay: .08s; }
+.intro-v2-icons span:nth-child(3) { background: #ffedf3; animation-delay: .16s; }
+.intro-v2--leaving .intro-v2-safe { animation: intro-v2-exit .46s ease-in both; }
+@keyframes intro-v2-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes intro-v2-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes intro-v2-notice { 0% { transform: rotate(0); } 65% { transform: translateY(-1%) rotate(-5deg); } 100% { transform: rotate(-3deg); } }
+@keyframes intro-v2-approach-hop { 0%, 100% { transform: translateY(0) scale(1); } 17% { transform: translateY(-3.8%) scale(1.025,.97); } 32% { transform: translateY(0) scale(.975,1.03); } 50% { transform: translateY(-3.2%) scale(1.02,.98); } 65% { transform: translateY(0) scale(.98,1.025); } 82% { transform: translateY(-2%) scale(1.01,.99); } }
+@keyframes intro-v2-settle { 0% { transform: translateY(-1%) scale(1.015,.985); } 55% { transform: translateY(0) scale(.985,1.02); } 100% { transform: translateY(0) scale(1); } }
+@keyframes intro-v2-bubble-in { from { opacity: 0; transform: translateY(8px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes intro-v2-icon-in { from { opacity: 0; transform: translateY(10px) scale(.78); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes intro-v2-exit { to { opacity: 0; transform: translateY(-1.5%) scale(1.02); } }
+@media (max-width: 640px) {
+  .intro-v2-stage { min-height: calc(100dvh - 148px); }
+  .intro-v2-motion { width: min(94vw, 470px); bottom: 84px; }
+  .intro-v2[data-phase='PEEK'] .intro-v2-motion { transform: translate3d(calc(-50% + 220px), 0, 0) scale(.42) rotate(-4deg); }
+  .intro-v2[data-phase='NOTICE'] .intro-v2-motion, .intro-v2[data-phase='HOLD'] .intro-v2-motion { transform: translate3d(calc(-50% + 82px), 0, 0) scale(.52) rotate(-3deg); }
+  .intro-v2-speech { bottom: calc(100% - 1.4rem); left: 34%; max-width: min(270px, calc(100vw - 28px)); padding: 11px 13px; }
+  .intro-v2-hand-target { top: 48%; left: 60%; width: 30%; height: 29%; }
+  .intro-v2-icons { top: 18%; right: -1%; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-v2-motion, .intro-v2-hop, .intro-v2-frame, .intro-v2-speech, .intro-v2-icons span, .intro-v2-safe { animation: none !important; transition: none !important; }
+}
+
+/* Registered intro layers: the body never swaps; only the screen-right hand moves. */
+.intro-v2-character { position: relative; width: 100%; height: 100%; }
+.piki-body-layer, .piki-reach-hand, .piki-reach-hand__art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.piki-body-layer, .piki-reach-hand__art { display: block; object-fit: contain; object-position: center bottom; user-select: none; }
+.piki-body-layer { z-index: 1; }
+.piki-reach-hand { z-index: 2; opacity: 0; transform: translate3d(-8%, 5%, 0) rotate(-4deg) scale(.9); transform-origin: 58% 68%; transition: opacity .18s ease-out, transform .68s cubic-bezier(.2,.82,.3,1); will-change: transform; }
+.piki-reach-hand--reaching, .piki-reach-hand--idle { opacity: 1; transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+.piki-reach-hand--idle { animation: piki-reach-hand-idle 2.6s ease-in-out .35s infinite; }
+.piki-reach-hand__target { position: absolute; z-index: 1; top: 52%; left: 55%; width: 27%; height: 28%; border: 0; border-radius: 42%; background: transparent; cursor: pointer; touch-action: manipulation; }
+.piki-reach-hand__target:focus-visible { outline: 4px solid #4fae9e; outline-offset: 3px; }
+@keyframes piki-reach-hand-idle { 0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1); } 38% { transform: translate3d(1.15%, -.55%, 0) rotate(.55deg) scale(1.014); } 58% { transform: translate3d(-.35%, .15%, 0) rotate(-.18deg) scale(.997); } }
+@media (max-width: 640px) {
+  .piki-reach-hand__target { top: 52%; left: 55%; width: 28%; height: 29%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .piki-reach-hand { animation: none !important; transition: none !important; }
+}
+
+/* Intro story: stable frame canvas with a short cross-fade between verified full-PNG poses. */
+.piki-intro .intro-piki-track { transition: left .3s ease, bottom .3s ease, transform .3s ease; }
+.piki-intro .intro-frame-stack { position: relative; width: 100%; aspect-ratio: 1; }
+.piki-intro .intro-frame-layer { position: absolute; inset: 0; display: grid; place-items: end center; pointer-events: none; }
+.piki-intro .intro-frame-layer--previous { z-index: 1; animation: intro-frame-out .28s ease both; }
+.piki-intro .intro-frame-layer--current { z-index: 2; animation: intro-frame-in .28s ease both; }
+.piki-intro .intro-frame-layer .intro-piki-figure { width: 100%; height: 100%; margin: 0; }
+.piki-intro .intro-frame-layer .intro-piki-figure img { width: 100%; height: 100%; object-fit: contain; }
+.piki-intro--PEEK .intro-piki-track { left: 92%; bottom: 10%; transform: translateX(-28%) scale(.42) rotate(-4deg); }
+.piki-intro--NOTICE .intro-piki-track { left: 80%; bottom: 10%; transform: translateX(-30%) scale(.5) rotate(-4deg); }
+.piki-intro--NOTICE .intro-piki-figure { animation: intro-notice-tilt .7s ease-out both !important; }
+.piki-intro--APPROACH .intro-piki-track { animation: intro-story-approach 1.4s cubic-bezier(.22,.9,.31,1) both; }
+.piki-intro--REACH .intro-piki-figure { animation: intro-reach-settle .72s ease-out both !important; }
+.piki-intro--TALK .intro-piki-figure { animation: intro-talk-nod .42s .18s ease-in-out 2 alternate !important; }
+.piki-intro--speaking .intro-piki-figure img { animation: intro-speaking-wobble .34s ease-in-out 3 alternate; }
+.piki-intro--IDLE .intro-piki-figure { animation: none !important; }
+.intro-hand-target { position: absolute; z-index: 10; left: 7%; bottom: 14%; width: 34%; height: 31%; border: 0; border-radius: 50%; background: transparent; color: #6d483d; cursor: pointer; touch-action: manipulation; }
+.intro-hand-target::before { content: ''; position: absolute; inset: 18% 16%; border: 3px solid #f2b05f; border-radius: 50%; opacity: .68; animation: hand-glimmer 1.7s ease-in-out infinite; }
+.intro-hand-target::after { content: none; }
+.intro-hand-target span { position: absolute; left: 50%; bottom: 4%; width: max-content; padding: 4px 9px; border: 2px solid #543631; border-radius: 999px; background: #fff8d8; box-shadow: 0 3px 0 #e4bd71; font-size: clamp(.78rem, 1.6vw, .95rem); font-weight: 900; transform: translateX(-50%) rotate(-5deg); }
+.intro-hand-target:focus-visible { outline: 4px solid #4fae9e; outline-offset: 4px; }
+.intro-hand-target:active::before { transform: scale(.88); }
+.piki-intro--holding .intro-hand-target::before { animation: hand-grab-ring .34s ease-out both; }
+@keyframes intro-frame-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(3px) scale(.985); } }
+@keyframes intro-frame-in { from { opacity: 0; transform: translateY(3px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hand-glimmer { 0%, 100% { opacity: .35; transform: scale(.88); } 50% { opacity: .9; transform: scale(1); } }
+@keyframes hand-grab-ring { from { opacity: .9; transform: scale(1); } to { opacity: 0; transform: scale(1.2); } }
+@media (max-width: 640px) {
+  .piki-intro--PEEK .intro-piki-track { left: 98%; }
+  .piki-intro--NOTICE .intro-piki-track { left: 82%; }
+  .intro-hand-target { left: 5%; bottom: 12%; width: 38%; height: 32%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .piki-intro .intro-frame-layer, .intro-hand-target::before { animation: none !important; }
+}

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
 import { PikiCharacter } from './components/PikiCharacter';
 import { PikiIntroScene } from './components/PikiIntroScene';
 import { SuccessStars } from './components/SuccessStars';
+import { BrandLogo } from './components/BrandLogo';
 import { feedback } from './game/feedback';
 import { inputFromButton } from './game/input';
 import { installMetricsDevtools, recordMetric } from './game/metrics';
@@ -50,6 +51,7 @@ export default function App() {
 
   useEffect(() => {
     if (state.phase !== 'RESULT') return undefined;
+    // 결과를 읽을 시간을 준 뒤 성공은 새 문제, 실패는 같은 문제로 자동 진행한다.
     feedbackTimer.current = window.setTimeout(() => {
       const requestedAt = devMode ? performance.now() : undefined;
       dispatch(state.result?.success ? { type: 'NEXT_ROUND', requestedAt } : { type: 'RETRY_ROUND', requestedAt });
@@ -89,6 +91,7 @@ export default function App() {
     return () => { window.cancelAnimationFrame(firstFrame); window.cancelAnimationFrame(secondFrame); };
   }, [state.lastAdvanceTiming, state.phase]);
 
+  // 버튼과 향후 AI 입력은 모두 GameInput으로 통일해 같은 reducer 규칙을 통과한다.
   const submitInput = (input: GameInput) => dispatch({ type: 'SUBMIT_INPUT', input, requestedAt: devMode ? performance.now() : undefined });
   const chooseAnotherMode = () => {
     setConfirmingReset(false);
@@ -107,9 +110,9 @@ export default function App() {
     ? (state.result.success ? feedback.success : feedback.retry)[state.roundId % (state.result.success ? feedback.success.length : feedback.retry.length)]
     : '';
 
-  return <main className={`app-shell ${gameScreen ? 'app-shell--game' : ''}`}>
+  return <main className={`app-shell app-shell--game-flow ${gameScreen ? 'app-shell--game' : ''}`}>
     <header className="topbar">
-      <div><p className="eyebrow">PIKIPICK</p><h1>피키와 가위바위보</h1></div>
+      <div className="app-brand"><BrandLogo /><h1>피키와 가위바위보</h1></div>
       <div className="game-header-tools">
         <SuccessStars count={state.successCount} partyCount={state.partyCount} roundId={state.roundId} celebrating={partyMoment} />
         {gameScreen && <div className="game-menu">

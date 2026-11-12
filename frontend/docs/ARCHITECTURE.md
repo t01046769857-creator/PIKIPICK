@@ -1,4 +1,33 @@
-# PIKIPICK 1차 구조
+# PIKIPICK 아키텍처
+
+- 문서 목적: 현재 코드가 어떤 층으로 나뉘어 있는지 설명합니다.
+- 관련 기능: 인트로, 게임 규칙, 기록, 에셋
+- 현재 상태: 현재 코드 기준 갱신됨
+- 마지막 확인일: 2026-11-12
+- 관련 코드 위치: [`../src`](../src)
+- 관련 문서: [프로젝트 개요](PROJECT_OVERVIEW.md) · [코드 가이드](CODE_GUIDE.md)
+
+> 아래의 초기 구조 설명은 보존하되, 현재 구현은 다음 구조를 우선합니다.
+
+```text
+App.tsx
+ ├─ PikiIntroScene (START)
+ │   └─ onBegin → reducer BEGIN
+ ├─ mode / instruction / ready screens
+ └─ game screen
+     ├─ PikiCharacter
+     ├─ SuccessStars
+     └─ reducer ← GameInput ← button / future AI adapter
+
+game/
+ ├─ rules.ts       순수 가위바위보 판정
+ ├─ reducer.ts     화면·문제·누적 기록 상태 전환
+ ├─ records.ts     localStorage 저장/복원
+ ├─ metrics.ts     개발용 성능 표본
+ └─ rhythm.ts      선택/축하 음향
+```
+
+현재 `PikiIntroScene`은 인트로 전용 상태를 자체 관리하고, 게임 진행 상태는 `App.tsx`의 `useReducer`가 관리합니다. 인트로의 최종 시각 구현은 수정 중이므로 [FEATURE-001](features/FEATURE-001_피키_손_터치_놀이_시작.md)을 함께 확인합니다.
 
 ## 폴더 구조
 

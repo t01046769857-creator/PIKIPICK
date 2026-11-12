@@ -65,6 +65,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return state.mode && state.phase === 'READY'
         ? { ...state, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null } : state;
     case 'SUBMIT_INPUT': {
+      // ★ 결과가 이미 있거나 PLAYING 단계가 아니면 같은 입력을 무시해 성공 기록 중복을 막는다.
       if (state.phase !== 'PLAYING' || state.result || !state.mode || !isGesture(state.opponent) || !isGesture(action.input.gesture) || !isInputSource(action.input.source)) return state;
       const result = judgeRound(state.mode, action.input.gesture, state.opponent);
       const id = state.inputSequence + 1;
@@ -92,9 +93,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'CHOOSE_ANOTHER_MODE':
       return state.phase !== 'START' ? { ...state, phase: 'MODE_SELECT', mode: null, opponent: null, result: null, lastInputTiming: null } : state;
     case 'CLEAR_RECORDS':
+      // 기록 초기화는 이 전용 액션에서만 수행한다. 화면/모드 이동은 누적 기록을 지우지 않는다.
       return { ...state, successCount: 0, partyCount: 0, celebrationId: 0 };
     case 'RESTART':
-      // Restart the flow without erasing the child's cumulative records.
+      // 놀이 흐름만 처음으로 돌리고 아이의 누적 기록은 보존한다.
       return { ...initialState, successCount: state.successCount, partyCount: state.partyCount, celebrationId: state.celebrationId };
   }
 }

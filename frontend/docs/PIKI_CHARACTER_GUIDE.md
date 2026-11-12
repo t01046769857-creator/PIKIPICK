@@ -1,5 +1,12 @@
 # 피키 캐릭터 가이드
 
+- 문서 목적: 피키 A번 원본을 기준으로 외형 일관성을 유지합니다.
+- 관련 기능: 피키 표정, 손동작, 인트로 에셋
+- 현재 상태: 디자인 기준 문서
+- 마지막 확인일: 2026-11-12
+- 관련 코드 위치: [`../src/assets/characters/piki`](../src/assets/characters/piki)
+- 관련 문서: [피키 에셋 기능 기록](features/FEATURE-005_피키_에셋과_표시.md)
+
 ## 기준 리소스
 
 피키의 외형 기준은 `src/assets/characters/piki/references/PIKI_MASTER_A.png` 하나로 고정한다. 콘셉트 시트와 표정·포즈 시트는 표현을 확장하기 위한 참고 자료이며, 다른 시안의 캐릭터 외형을 섞지 않는다.

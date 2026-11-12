@@ -30,6 +30,7 @@ export function saveRecords(state: Pick<GameState, 'successCount' | 'partyCount'
   if (typeof window === 'undefined') return;
 
   try {
+    // ★ 문제 진행 상태는 저장하지 않는다. 새로 열어도 누적 보상만 이어진다.
     window.localStorage.setItem(recordsStorageKey, JSON.stringify({
       successCount: state.successCount,
       partyCount: state.partyCount,

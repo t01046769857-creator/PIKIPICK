@@ -1,5 +1,12 @@
 # Piki rigging analysis (2026-11-10)
 
+- 문서 목적: 실패한 전체 리깅 시도의 원인과 재시도 조건을 보존합니다.
+- 관련 기능: 인트로 피키 파츠와 애니메이션
+- 현재 상태: 분석 자료 — 승인된 라이브 리깅 아님
+- 마지막 확인일: 2026-11-12
+- 관련 코드 위치: [`../src/assets/characters/piki/rig`](../src/assets/characters/piki/rig), [`../src/components/PikiIntroScene.tsx`](../src/components/PikiIntroScene.tsx)
+- 관련 문서: [FEATURE-001](features/FEATURE-001_피키_손_터치_놀이_시작.md) · [FEATURE-005](features/FEATURE-005_피키_에셋과_표시.md)
+
 ## Current decision
 
 The live intro deliberately does **not** render `PikiRig` or any `rig/` asset.

@@ -27,7 +27,11 @@ export function compareGestures(player: Gesture, opponent: Gesture): 1 | 0 | -1 
   return beats[player] === opponent ? 1 : -1;
 }
 
-/** Game-rule function only: it has no React, timing, or input-device dependency. */
+/**
+ * ★ 가위바위보 성공 판정
+ * 화면·타이머·입력 장치와 독립되어 있어 버튼과 미래 AI 입력이 같은 규칙을 사용한다.
+ * 관련 문서: docs/features/FEATURE-002_가위바위보_규칙과_상태.md
+ */
 export function isSuccessful(mode: GameMode, player: Gesture, opponent: Gesture): boolean {
   assertRoundValues(mode, player, opponent);
   const comparison = compareGestures(player, opponent);

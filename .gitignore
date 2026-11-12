@@ -12,3 +12,5 @@ __pycache__/
 *.csv
 *.joblib
 *.pkl
+
+.tmp/piki-hand-review/

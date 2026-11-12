@@ -6,6 +6,59 @@ function playingState(mode: 'WIN' | 'LOSE' | 'DRAW', opponent: 'ROCK' | 'SCISSOR
 }
 
 describe('game state', () => {
+  it.each(['START', 'MODE_SELECT', 'RULE_PRACTICE', 'RECORDS'] as const)('navigates to %s and restores the round without rolling back rewards', phase => {
+    const playing = { ...playingState('WIN', 'SCISSORS'), successCount: 4, partyCount: 0 };
+    const destination = gameReducer(playing, { type: 'NAVIGATE', phase });
+    expect(destination.phase).toBe(phase);
+    expect(destination.mode).toBeNull();
+    expect(destination.opponent).toBeNull();
+    expect(destination.successCount).toBe(4);
+    expect(gameReducer(destination, { type: 'SUBMIT_INPUT', input: { gesture: 'ROCK', source: 'BUTTON' } })).toBe(destination);
+    const cleared = gameReducer(destination, { type: 'CLEAR_RECORDS' });
+    const restored = gameReducer(cleared, { type: 'RESTORE_SCREEN', screen: {
+      phase: playing.phase, mode: playing.mode, opponent: playing.opponent, result: playing.result,
+    } });
+    expect(restored.phase).toBe('PLAYING');
+    expect(restored.mode).toBe('WIN');
+    expect(restored.opponent).toBe('SCISSORS');
+    expect(restored.roundId).toBe(playing.roundId);
+    expect(restored.successCount).toBe(0);
+    expect(restored.partyCount).toBe(0);
+    const result = gameReducer(restored, { type: 'SUBMIT_INPUT', input: { gesture: 'ROCK', source: 'BUTTON' } });
+    expect(result.successCount).toBe(1);
+    expect(gameReducer(result, { type: 'SUBMIT_INPUT', input: { gesture: 'ROCK', source: 'BUTTON' } })).toBe(result);
+  });
+
+  it.each(['WIN', 'LOSE', 'DRAW'] as const)('starts %s directly from selection, preserving records', mode => {
+    const base = { ...initialState, successCount: 8, partyCount: 1, celebrationId: 1 };
+    const selection = gameReducer(base, { type: 'BEGIN' });
+    const playing = gameReducer(selection, { type: 'SELECT_MODE', mode });
+    expect(playing.phase).toBe('PLAYING');
+    expect(playing.opponent).not.toBeNull();
+    expect(playing.roundId).toBe(1);
+    expect(playing.successCount).toBe(8);
+    expect(playing.partyCount).toBe(1);
+    expect(playing.celebrationId).toBe(1);
+    expect(playing.result).toBeNull();
+    expect(gameReducer(playing, { type: 'FINISH_INSTRUCTION' })).toBe(playing);
+    expect(gameReducer(selection, { type: 'FINISH_INSTRUCTION' })).toBe(selection);
+    const another = gameReducer(playing, { type: 'CHOOSE_ANOTHER_MODE' });
+    expect(gameReducer(another, { type: 'SELECT_MODE', mode }).phase).toBe('PLAYING');
+    expect(gameReducer(playing, { type: 'SELECT_MODE', mode })).toBe(playing);
+  });
+
+  it('opens practice independently and returns to selection without starting a round or changing records', () => {
+    const selection: GameState = { ...initialState, phase: 'MODE_SELECT', successCount: 8, partyCount: 1, celebrationId: 1, roundId: 4 };
+    const practice = gameReducer(selection, { type: 'OPEN_RULE_PRACTICE' });
+    expect(practice.phase).toBe('RULE_PRACTICE');
+    expect(practice.mode).toBeNull();
+    expect(practice.opponent).toBeNull();
+    expect(gameReducer(practice, { type: 'SUBMIT_INPUT', input: { gesture: 'ROCK', source: 'BUTTON' } })).toBe(practice);
+    expect(gameReducer(practice, { type: 'CHOOSE_ANOTHER_MODE' })).toEqual(selection);
+    expect(gameReducer(practice, { type: 'OPEN_RULE_PRACTICE' })).toBe(practice);
+    expect(gameReducer(initialState, { type: 'OPEN_RULE_PRACTICE' })).toBe(initialState);
+  });
+
   it('increments success once and ignores duplicate or rapid follow-up input', () => {
     let state = playingState('DRAW', 'ROCK');
     state = gameReducer(state, { type: 'SUBMIT_INPUT', input: { gesture: 'ROCK', source: 'BUTTON' } });

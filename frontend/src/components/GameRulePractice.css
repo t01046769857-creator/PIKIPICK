@@ -1,0 +1,14 @@
+.rule-practice .rule-practice-skip { display: grid; justify-items: center; margin-left: auto; border: 3px solid #70472f; border-radius: 24px; padding: 6px 12px; background: #dbeaf7; color: #593321; font-weight: 800; box-shadow: 0 4px 0 #c8a17c; }
+.rule-practice .rule-practice-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.rule-practice .rule-practice-choices button { display: grid; place-items: center; gap: 5px; min-height: 90px; padding: 10px; border: 2px solid #eadbd1; border-radius: 20px; background: #fffaf6; color: inherit; font-weight: 800; }
+.rule-practice .rule-practice-choices button[aria-pressed='true'] { border-color: #f47a50; background: #fff0cf; }
+.rule-practice .rule-practice-icon { display: block; width: clamp(64px, 16vw, 96px); max-width: 100%; }
+.rule-practice .rule-practice-opponent { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.rule-practice .rule-practice-opponent .piki-character { flex: 0 1 170px; max-width: 60%; min-width: 0; height: auto; aspect-ratio: 1; margin: 0; }
+.rule-practice .rule-practice-guide { flex: 0 1 144px; max-width: 36%; animation: piki-move-arrive .25s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .rule-practice .rule-practice-guide { animation: none; } }
+.rule-practice .rule-practice-feedback { min-height: 1.6em; font-weight: 800; }
+.rule-practice .rule-practice-navigation { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rule-practice .rule-practice-navigation button { display: grid; justify-items: center; min-width: 76px; border: 3px solid #70472f; border-radius: 24px; padding: 6px 12px; background: #dfeedd; color: #70472f; font-weight: 800; box-shadow: 0 4px 0 #c8a17c; }
+.rule-practice .rule-practice-navigation button:disabled { opacity: .45; cursor: default; }
+.rule-practice .rule-practice-navigation .story-icon, .rule-practice .rule-practice-skip .story-icon { width: 48px; height: 48px; }

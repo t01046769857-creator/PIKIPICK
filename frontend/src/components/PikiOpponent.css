@@ -1,0 +1,10 @@
+.app-shell--game .piki-opponent { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 2vw, 24px); width: 100%; min-width: 0; }
+.app-shell--game .piki-opponent-character { flex: 0 1 auto; min-width: 0; }
+.app-shell--game .opponent-area .piki-opponent .piki-character { --piki-size: min(100%, var(--opponent-piki-size)) !important; width: var(--opponent-piki-size); max-width: 100%; height: auto; aspect-ratio: 1; }
+.app-shell--game .piki-opponent-move { display: grid; flex: 0 0 clamp(144px, 22vw, 224px); justify-items: center; gap: 2px; color: #593321; font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 900; animation: piki-move-arrive .25s ease-out both; }
+@keyframes piki-move-arrive { from { opacity: .25; transform: translateY(5px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 520px) {
+  .app-shell--game .piki-opponent { flex-direction: column; gap: 0; }
+  .app-shell--game .piki-opponent-move { flex: none; width: clamp(128px, 32vw, 160px); }
+}
+@media (prefers-reduced-motion: reduce) { .app-shell--game .piki-opponent-move { animation: none; } }

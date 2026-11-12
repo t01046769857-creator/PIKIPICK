@@ -28,11 +28,14 @@ p { line-height: 1.6; }
 .piki-character--small { margin-bottom: 2px; }
 .primary { border: 0; border-radius: 999px; background: #f47a50; color: #fff; padding: 15px 28px; font-weight: 800; box-shadow: 0 5px 0 #d85d37; margin-top: 18px; }
 .primary:active { transform: translateY(3px); box-shadow: 0 2px 0 #d85d37; }
-.mode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
-.mode-card { border: 2px solid #f2d7c4; background: #fffaf4; border-radius: 20px; padding: 22px 12px; color: inherit; display: grid; gap: 8px; }
+.mode-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 14px; margin-top: 28px; }
+.mode-card { min-width: 0; min-height: 156px; border: 2px solid #f2d7c4; background: #fffaf4; border-radius: 20px; padding: 18px 12px; color: inherit; display: grid; align-content: center; justify-items: center; gap: 8px; }
 .mode-card:hover { border-color: #f47a50; }
-.mode-card strong { font-size: 1.15rem; }
-.mode-card span { color: #806b60; font-size: .9rem; }
+.mode-card strong { max-width: 100%; overflow-wrap: anywhere; font-size: 1.15rem; line-height: 1.3; }
+.mode-card .mode-card-art { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; max-width: 210px; height: clamp(74px, 12vw, 112px); }
+.mode-card-art .piki-hand { flex: 0 1 auto; width: auto; max-width: 50%; height: 100%; min-width: 0; }
+.mode-card-art .piki-hand:nth-last-child(3), .mode-card-art .piki-hand:nth-last-child(3) ~ .piki-hand { max-width: calc((100% - 8px) / 3); }
+.mode-card-art .story-icon { width: auto; max-width: 100%; height: 100%; }
 .mode-card.disabled { opacity: .48; cursor: not-allowed; }
 .pill { display: inline-block; padding: 6px 14px; border-radius: 999px; background: #fff0cf; color: #a66c18; font-weight: 800; font-size: .85rem; }
 .round-heading { display: flex; justify-content: space-between; align-items: center; color: #866f64; }
@@ -339,7 +342,7 @@ p { line-height: 1.6; }
 .app-shell--game .play-card--game { min-height: min(640px, calc(100svh - 132px)); height: auto; padding: clamp(10px, 2vw, 22px); overflow: visible; }
 .app-shell--game .game-panel { width: min(100%, 760px); min-height: 0; grid-template-rows: minmax(0, 1fr) auto; gap: clamp(8px, 1.7vh, 16px); }
 .app-shell--game .opponent-area { min-height: clamp(230px, 36vh, 350px); align-content: center; justify-items: center; }
-.app-shell--game .opponent-area .piki-character { --piki-size: clamp(210px, 34vh, 320px) !important; }
+.app-shell--game .opponent-area { --opponent-piki-size: clamp(294px, 47.6vh, 448px); }
 .app-shell--game .piki-feedback { width: min(100%, 360px); margin: -8px auto 0; padding: 8px 14px; border: 3px solid #543631; border-radius: 22px 22px 22px 7px; box-shadow: 0 5px 0 #e4c5a4; text-align: center; }
 .app-shell--game .piki-feedback.success { background: #fff4c9; }
 .app-shell--game .piki-feedback.retry { background: #fff0ed; }
@@ -348,6 +351,7 @@ p { line-height: 1.6; }
 .app-shell--game .player-choice { min-width: 0; padding-top: clamp(4px, 1vh, 10px); }
 .app-shell--game .gesture-grid { width: 100%; gap: clamp(12px, 2.2vw, 22px); }
 .app-shell--game .gesture-button { min-height: clamp(104px, 15vh, 142px); }
+.app-shell--game .gesture-icon .piki-hand { width: clamp(76px, 12vw, 112px); height: clamp(76px, 12vw, 112px); margin: -12px auto; }
 .app-shell--game .gesture-button:active:not(:disabled) { transform: translateY(4px) scale(.98); box-shadow: 0 2px 0 #d9c7bd; }
 .player-choice--waiting .gesture-button:nth-child(1) { animation: choice-beat 2.32s 0s ease-in-out infinite; }
 .player-choice--waiting .gesture-button:nth-child(2) { animation: choice-beat 2.32s .58s ease-in-out infinite; }
@@ -363,7 +367,7 @@ p { line-height: 1.6; }
   .app-shell--game-flow .play-card:not(.play-card--game) { min-height: 0; padding: 20px 10px; }
   .app-shell--game .play-card--game { min-height: 0; padding: 8px 4px; }
   .app-shell--game .opponent-area { min-height: clamp(190px, 31vh, 270px); }
-  .app-shell--game .opponent-area .piki-character { --piki-size: clamp(155px, 29vh, 220px) !important; }
+  .app-shell--game .opponent-area { --opponent-piki-size: clamp(217px, 40.6vh, 308px); }
   .app-shell--game .piki-feedback { width: min(100%, 310px); margin-top: -6px; padding: 7px 10px; }
   .app-shell--game .piki-feedback h2 { font-size: 1rem; }
   .app-shell--game .piki-feedback p { font-size: .72rem; }
@@ -372,7 +376,7 @@ p { line-height: 1.6; }
 }
 @media (max-width: 640px) and (max-height: 700px) {
   .app-shell--game .opponent-area { min-height: 180px; }
-  .app-shell--game .opponent-area .piki-character { --piki-size: min(27vh, 185px) !important; }
+  .app-shell--game .opponent-area { --opponent-piki-size: min(37.8vh, 259px); }
   .app-shell--game .gesture-button { min-height: 86px; }
 }
 
@@ -383,7 +387,7 @@ p { line-height: 1.6; }
 .intro-v2-hop { width: 100%; height: 100%; transform-origin: center bottom; }
 /* PEEK/LOOK: the canvas itself is pinned to the viewport edge. Only the visual may animate. */
 .intro-v2[data-phase='PEEK'] .intro-v2-motion,
-.intro-v2[data-phase='LOOK'] .intro-v2-motion { position: absolute; right: 0; bottom: 0; left: auto; transform: translate3d(0, var(--peek-y), 0) scale(.52); transform-origin: right bottom; }
+.intro-v2[data-phase='LOOK'] .intro-v2-motion { position: absolute; right: calc(50% - 50vw); bottom: 0; left: auto; transform: translate3d(0, var(--peek-y), 0) scale(.52); transform-origin: right bottom; }
 .intro-v2[data-phase='PEEK'] .intro-v2-motion { animation: intro-v2-peek .7s cubic-bezier(.24,.74,.32,1) both; }
 .intro-v2[data-phase='LOOK'] .intro-story-stack { transform-origin: 80% 58%; animation: intro-v2-look .8s ease-in-out both; }
 .intro-v2[data-phase='NOTICE'] .intro-v2-motion { transform: translate3d(40vw, -52%, 0) scale(.52) rotate(-3deg); transition-duration: .35s; }
@@ -402,7 +406,8 @@ p { line-height: 1.6; }
 }
 @keyframes intro-v2-look {
   0%, 100% { transform: rotate(0); }
-  45% { transform: rotate(-3deg) translateY(-1%); }
+  /* Offset the tilted PNG's straight right edge without changing the pose or timing. */
+  45% { transform: translateX(2.6%) rotate(-3deg) translateY(-1%); }
 }
 @keyframes intro-peek-blink {
   0%, 38%, 62%, 100% { opacity: 0; transform: scaleY(.15); }

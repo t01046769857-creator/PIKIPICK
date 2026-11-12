@@ -1,0 +1,89 @@
+﻿{
+    "status":  "registered-game-asset",
+    "canvas":  [
+                   1024,
+                   1024
+               ],
+    "pivot":  {
+                  "y":  820,
+                  "x":  512
+              },
+    "wristBottomY":  880,
+    "wristOuterWidth":  192,
+    "orientation":  "palm-front-thumb-viewer-left",
+    "processing":  "uniform-scale-and-translate-only; no-mask-no-silhouette-crop",
+    "alphaBoundsThreshold":  128,
+    "parts":  {
+                  "rock":  {
+                               "sha256":  "C583938E81408180C40FE596E83830FD79277C90573E79D43B4FFC0A9DACFD84",
+                               "sourcePivot":  [
+                                                   621.5,
+                                                   1028.5
+                                               ],
+                               "translation":  [
+                                                   85.828571428571422,
+                                                   114.74285714285713
+                                               ],
+                               "uniformScale":  0.68571428571428572,
+                               "sourceSize":  [
+                                                  1254,
+                                                  1254
+                                              ],
+                               "alphaBounds":  {
+                                                   "left":  281,
+                                                   "right":  750,
+                                                   "bottom":  879,
+                                                   "top":  417
+                                               },
+                               "file":  "piki-hand-rock.png"
+                           },
+                  "scissors":  {
+                                   "sha256":  "5D82B1B39B1F6708AE9F9BE14DB1EDC8F38EB5C64074C36DA1B422B434B3A1B7",
+                                   "sourcePivot":  [
+                                                       617,
+                                                       1011.0625
+                                                   ],
+                                   "translation":  [
+                                                       81.221818181818151,
+                                                       114.09454545454537
+                                                   ],
+                                   "uniformScale":  0.69818181818181824,
+                                   "sourceSize":  [
+                                                      1254,
+                                                      1254
+                                                  ],
+                                   "alphaBounds":  {
+                                                       "left":  294,
+                                                       "right":  712,
+                                                       "bottom":  879,
+                                                       "top":  242
+                                                   },
+                                   "file":  "piki-hand-scissors.png"
+                               },
+                  "paper":  {
+                                "sha256":  "A6B4901D868399277068676B6257C9873B31E3CFEE67F022F0EEDE845FA9263A",
+                                "sourcePivot":  [
+                                                    614.5,
+                                                    1028.75
+                                                ],
+                                "translation":  [
+                                                    84.52173913043481,
+                                                    104.3478260869565
+                                                ],
+                                "uniformScale":  0.69565217391304346,
+                                "sourceSize":  [
+                                                   1254,
+                                                   1254
+                                               ],
+                                "alphaBounds":  {
+                                                    "left":  216,
+                                                    "right":  819,
+                                                    "bottom":  879,
+                                                    "top":  224
+                                                },
+                                "file":  "piki-hand-paper.png"
+                            }
+              },
+    "registeredOn":  "2026-11-12",
+    "styleReference":  "piki-hand-scissors.png"
+}

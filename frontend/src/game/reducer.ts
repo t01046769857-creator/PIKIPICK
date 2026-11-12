@@ -31,11 +31,15 @@ export const initialState: GameState = {
 };
 
 export type GameAction =
+  | { type: 'NAVIGATE'; phase: 'START' | 'MODE_SELECT' | 'RULE_PRACTICE' | 'RECORDS' }
+  | { type: 'RESTORE_SCREEN'; screen: Pick<GameState, 'phase' | 'mode' | 'opponent' | 'result'> }
   | { type: 'BEGIN' }
   | { type: 'SELECT_MODE'; mode: GameMode }
+  | { type: 'OPEN_RULE_PRACTICE' }
   | { type: 'TO_INSTRUCTION' }
   | { type: 'TO_READY' }
   | { type: 'START_ROUND' }
+  | { type: 'FINISH_INSTRUCTION' }
   | { type: 'SUBMIT_INPUT'; input: GameInput; requestedAt?: number }
   | { type: 'NEXT_ROUND'; requestedAt?: number }
   | { type: 'RETRY_ROUND'; requestedAt?: number }
@@ -52,17 +56,26 @@ function advanceTiming(state: GameState, requestedAt: number | undefined, kind: 
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
+    case 'NAVIGATE':
+      return { ...state, phase: action.phase, mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null };
+    case 'RESTORE_SCREEN':
+      // Restore navigation only; accumulated rewards are never rolled back.
+      return { ...state, ...action.screen, lastInputTiming: null, lastAdvanceTiming: null };
     case 'BEGIN':
       return state.phase === 'START' ? { ...state, phase: 'MODE_SELECT' } : state;
     case 'SELECT_MODE':
       return state.phase === 'MODE_SELECT' && isGameMode(action.mode)
-        ? { ...state, mode: action.mode, phase: 'INSTRUCTION', result: null } : state;
+        ? { ...state, mode: action.mode, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null } : state;
+    case 'OPEN_RULE_PRACTICE':
+      return state.phase === 'MODE_SELECT'
+        ? { ...state, phase: 'RULE_PRACTICE', mode: null, opponent: null, result: null } : state;
     case 'TO_INSTRUCTION':
       return state.mode && state.phase === 'READY' ? { ...state, phase: 'INSTRUCTION' } : state;
     case 'TO_READY':
       return state.mode && state.phase === 'INSTRUCTION' ? { ...state, phase: 'READY' } : state;
+    case 'FINISH_INSTRUCTION':
     case 'START_ROUND':
-      return state.mode && state.phase === 'READY'
+      return state.mode && state.phase === (action.type === 'FINISH_INSTRUCTION' ? 'INSTRUCTION' : 'READY')
         ? { ...state, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null } : state;
     case 'SUBMIT_INPUT': {
       // ★ 결과가 이미 있거나 PLAYING 단계가 아니면 같은 입력을 무시해 성공 기록 중복을 막는다.

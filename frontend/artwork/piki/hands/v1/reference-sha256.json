@@ -1,0 +1,18 @@
+﻿[
+    {
+        "sha256":  "903C39AE53F03CDF12017701FE3657FB06F8B5C0FEEC133EE0581DDE74EF47C2",
+        "path":  "frontend/src/assets/characters/piki/references/PIKI_MASTER_A.png"
+    },
+    {
+        "sha256":  "C2160E777471B2258C9E85BF8CAAA9375BD6270B675EACB568FAD52A56372299",
+        "path":  "frontend/src/assets/characters/piki/gestures/piki-rock.png"
+    },
+    {
+        "sha256":  "0BC8A1379F27B87FAA8BDCFAC8269C2DFC578F74DC11CCFE3BDB5685E1900A56",
+        "path":  "frontend/src/assets/characters/piki/gestures/piki-scissors.png"
+    },
+    {
+        "sha256":  "FDB6574E35154782F54F69145886A15869033EB8D1833C786B779A4D3614F8C9",
+        "path":  "frontend/src/assets/characters/piki/gestures/piki-paper.png"
+    }
+]

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import playgroundBackground from '../assets/backgrounds/piki-playground-intro-background.png';
 import { pikiExpressions, type PikiExpression } from '../assets/characters/piki/assetMap';
 import playStartBody from '../assets/characters/piki/intro-layers/piki-intro-play-start-body.png';
@@ -32,6 +32,8 @@ const storyExpressionFor: Record<IntroPhase, StoryExpression> = {
 
 interface PikiIntroSceneProps {
   onBegin: () => void;
+  soundEnabled: boolean;
+  navigation: ReactNode;
 }
 
 function preloadAndDecode(source: string): Promise<void> {
@@ -54,10 +56,9 @@ function preloadAndDecode(source: string): Promise<void> {
  * 마지막에는 손 내밀기 레이어를 보여 준다.
  * 관련 문서: docs/features/FEATURE-001_피키_손_터치_놀이_시작.md
  */
-export function PikiIntroScene({ onBegin }: PikiIntroSceneProps) {
+export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroSceneProps) {
   const [phase, setPhase] = useState<IntroPhase>('PEEK');
   const [assetsReady, setAssetsReady] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -137,13 +138,6 @@ export function PikiIntroScene({ onBegin }: PikiIntroSceneProps) {
     if (leaveTimer.current !== null) window.clearTimeout(leaveTimer.current);
   }, []);
 
-  const enableSound = () => {
-    setSoundEnabled(true);
-    if (phase === 'IDLE') {
-      hasSpoken.current = false;
-      speakInvitation();
-    }
-  };
   const beginPlay = () => {
     // 손을 빠르게 여러 번 눌러도 화면 전환은 한 번만 실행한다.
     if (isBeginning.current) return;
@@ -158,7 +152,7 @@ export function PikiIntroScene({ onBegin }: PikiIntroSceneProps) {
       <img className="intro-playground-background" src={playgroundBackground} alt="" aria-hidden="true" />
       <header className="intro-topbar">
         <div className="intro-brand"><BrandLogo variant="intro" /></div>
-        <button className="intro-sound" type="button" onClick={enableSound} disabled={soundEnabled}>{soundEnabled ? '소리 켜짐' : '소리 켜기'}</button>
+        {navigation}
       </header>
 
       <section className="intro-v2-stage" aria-label="피키의 놀이 초대 화면">

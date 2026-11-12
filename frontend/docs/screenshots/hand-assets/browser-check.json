@@ -1,0 +1,2986 @@
+[
+  {
+    "name": "desktop",
+    "screen": "selection",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1440,
+    "cards": [
+      {
+        "x": 370,
+        "y": 436.328125,
+        "width": 343,
+        "height": 183.921875,
+        "bottom": 620.25,
+        "right": 713
+      },
+      {
+        "x": 727,
+        "y": 436.328125,
+        "width": 343,
+        "height": 183.921875,
+        "bottom": 620.25,
+        "right": 1070
+      },
+      {
+        "x": 370,
+        "y": 634.25,
+        "width": 343,
+        "height": 183.921875,
+        "bottom": 818.171875,
+        "right": 713
+      },
+      {
+        "x": 727,
+        "y": 634.25,
+        "width": 343,
+        "height": 183.921875,
+        "bottom": 818.171875,
+        "right": 1070
+      }
+    ],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 436.5,
+          "y": 456.328125,
+          "width": 103,
+          "height": 112,
+          "bottom": 568.328125,
+          "right": 539.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 543.5,
+          "y": 456.328125,
+          "width": 103,
+          "height": 112,
+          "bottom": 568.328125,
+          "right": 646.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 793.5,
+          "y": 456.328125,
+          "width": 103,
+          "height": 112,
+          "bottom": 568.328125,
+          "right": 896.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 900.5,
+          "y": 456.328125,
+          "width": 103,
+          "height": 112,
+          "bottom": 568.328125,
+          "right": 1003.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 436.5,
+          "y": 654.25,
+          "width": 103,
+          "height": 112,
+          "bottom": 766.25,
+          "right": 539.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 543.5,
+          "y": 654.25,
+          "width": 103,
+          "height": 112,
+          "bottom": 766.25,
+          "right": 646.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 793.5,
+          "y": 654.25,
+          "width": 67.328125,
+          "height": 112,
+          "bottom": 766.25,
+          "right": 860.828125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 864.828125,
+          "y": 654.25,
+          "width": 67.328125,
+          "height": 112,
+          "bottom": 766.25,
+          "right": 932.15625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 936.15625,
+          "y": 654.25,
+          "width": 67.328125,
+          "height": 112,
+          "bottom": 766.25,
+          "right": 1003.484375
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "desktop",
+    "screen": "practice",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1440,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 737,
+          "y": 393.921875,
+          "width": 144,
+          "height": 144,
+          "bottom": 537.921875,
+          "right": 881
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 435.328125,
+          "y": 620.515625,
+          "width": 96,
+          "height": 96,
+          "bottom": 716.515625,
+          "right": 531.328125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 671.984375,
+          "y": 620.515625,
+          "width": 96,
+          "height": 96,
+          "bottom": 716.515625,
+          "right": 767.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 908.65625,
+          "y": 620.515625,
+          "width": 96,
+          "height": 96,
+          "bottom": 716.515625,
+          "right": 1004.65625
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "desktop",
+    "screen": "WIN",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1440,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 834.1875,
+          "y": 262.515625,
+          "width": 224,
+          "height": 224,
+          "bottom": 486.515625,
+          "right": 1058.1875
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 403.328125,
+          "y": 626.5670166015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 738.5670166015625,
+          "right": 515.328125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 663.984375,
+          "y": 631.015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 743.015625,
+          "right": 775.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 924.65625,
+          "y": 631.015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 743.015625,
+          "right": 1036.65625
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-scissors.png",
+    "highlighted": "SCISSORS",
+    "opponentBox": {
+      "x": 340,
+      "y": 173.328125,
+      "width": 760,
+      "height": 430.390625,
+      "bottom": 603.71875,
+      "right": 1100
+    },
+    "choicesBox": {
+      "x": 340,
+      "y": 619.015625,
+      "width": 760,
+      "height": 164,
+      "bottom": 783.015625,
+      "right": 1100
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "desktop",
+    "screen": "LOSE",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1440,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 834.1875,
+          "y": 262.515625,
+          "width": 224,
+          "height": 224,
+          "bottom": 486.515625,
+          "right": 1058.1875
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 403.328125,
+          "y": 626.566162109375,
+          "width": 112,
+          "height": 112,
+          "bottom": 738.566162109375,
+          "right": 515.328125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 663.984375,
+          "y": 631.015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 743.015625,
+          "right": 775.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 924.65625,
+          "y": 631.015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 743.015625,
+          "right": 1036.65625
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-scissors.png",
+    "highlighted": "SCISSORS",
+    "opponentBox": {
+      "x": 340,
+      "y": 173.328125,
+      "width": 760,
+      "height": 430.390625,
+      "bottom": 603.71875,
+      "right": 1100
+    },
+    "choicesBox": {
+      "x": 340,
+      "y": 619.015625,
+      "width": 760,
+      "height": 164,
+      "bottom": 783.015625,
+      "right": 1100
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "desktop",
+    "screen": "DRAW",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1440,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 834.1875,
+          "y": 262.515625,
+          "width": 224,
+          "height": 224,
+          "bottom": 486.515625,
+          "right": 1058.1875
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 403.328125,
+          "y": 626.5669555664062,
+          "width": 112,
+          "height": 112,
+          "bottom": 738.5669555664062,
+          "right": 515.328125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 663.984375,
+          "y": 631.015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 743.015625,
+          "right": 775.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 924.65625,
+          "y": 631.015625,
+          "width": 112,
+          "height": 112,
+          "bottom": 743.015625,
+          "right": 1036.65625
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-rock.png",
+    "highlighted": "ROCK",
+    "opponentBox": {
+      "x": 340,
+      "y": 173.328125,
+      "width": 760,
+      "height": 430.390625,
+      "bottom": 603.71875,
+      "right": 1100
+    },
+    "choicesBox": {
+      "x": 340,
+      "y": 619.015625,
+      "width": 760,
+      "height": 164,
+      "bottom": 783.015625,
+      "right": 1100
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "tablet",
+    "screen": "selection",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "cards": [
+      {
+        "x": 40.03125,
+        "y": 408.515625,
+        "width": 336.96875,
+        "height": 164.078125,
+        "bottom": 572.59375,
+        "right": 377
+      },
+      {
+        "x": 391,
+        "y": 408.515625,
+        "width": 336.96875,
+        "height": 164.078125,
+        "bottom": 572.59375,
+        "right": 727.96875
+      },
+      {
+        "x": 40.03125,
+        "y": 586.59375,
+        "width": 336.96875,
+        "height": 164.078125,
+        "bottom": 750.671875,
+        "right": 377
+      },
+      {
+        "x": 391,
+        "y": 586.59375,
+        "width": 336.96875,
+        "height": 164.078125,
+        "bottom": 750.671875,
+        "right": 727.96875
+      }
+    ],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 114.359375,
+          "y": 428.515625,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 520.671875,
+          "right": 206.515625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 210.515625,
+          "y": 428.515625,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 520.671875,
+          "right": 302.671875
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 465.328125,
+          "y": 428.515625,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 520.671875,
+          "right": 557.484375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 561.484375,
+          "y": 428.515625,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 520.671875,
+          "right": 653.640625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 114.359375,
+          "y": 606.59375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 698.75,
+          "right": 206.515625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 210.515625,
+          "y": 606.59375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 698.75,
+          "right": 302.671875
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 454.484375,
+          "y": 606.59375,
+          "width": 67.328125,
+          "height": 92.15625,
+          "bottom": 698.75,
+          "right": 521.8125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 525.8125,
+          "y": 606.59375,
+          "width": 67.328125,
+          "height": 92.15625,
+          "bottom": 698.75,
+          "right": 593.140625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 597.140625,
+          "y": 606.59375,
+          "width": 67.328125,
+          "height": 92.15625,
+          "bottom": 698.75,
+          "right": 664.46875
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "tablet",
+    "screen": "practice",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 401,
+          "y": 366.109375,
+          "width": 144,
+          "height": 144,
+          "bottom": 510.109375,
+          "right": 545
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 103.34375,
+          "y": 592.703125,
+          "width": 96,
+          "height": 96,
+          "bottom": 688.703125,
+          "right": 199.34375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 335.984375,
+          "y": 592.703125,
+          "width": 96,
+          "height": 96,
+          "bottom": 688.703125,
+          "right": 431.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 568.625,
+          "y": 592.703125,
+          "width": 96,
+          "height": 96,
+          "bottom": 688.703125,
+          "right": 664.625
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "tablet",
+    "screen": "WIN",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 531.203125,
+          "y": 271.703125,
+          "width": 168.953125,
+          "height": 168.953125,
+          "bottom": 440.65625,
+          "right": 700.15625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 97.1875,
+          "y": 621.9386596679688,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 714.0949096679688,
+          "right": 189.34375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 337.90625,
+          "y": 626.609375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 718.765625,
+          "right": 430.0625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 578.625,
+          "y": 626.609375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 718.765625,
+          "right": 670.78125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-rock.png",
+    "highlighted": "ROCK",
+    "opponentBox": {
+      "x": 31.359375,
+      "y": 141.6875,
+      "width": 705.28125,
+      "height": 450,
+      "bottom": 591.6875,
+      "right": 736.640625
+    },
+    "choicesBox": {
+      "x": 31.359375,
+      "y": 607.6875,
+      "width": 705.28125,
+      "height": 152,
+      "bottom": 759.6875,
+      "right": 736.640625
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "tablet",
+    "screen": "LOSE",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 531.203125,
+          "y": 271.703125,
+          "width": 168.953125,
+          "height": 168.953125,
+          "bottom": 440.65625,
+          "right": 700.15625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 97.1875,
+          "y": 622.7735595703125,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 714.9298095703125,
+          "right": 189.34375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 337.90625,
+          "y": 626.609375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 718.765625,
+          "right": 430.0625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 578.625,
+          "y": 626.609375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 718.765625,
+          "right": 670.78125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-paper.png",
+    "highlighted": "PAPER",
+    "opponentBox": {
+      "x": 31.359375,
+      "y": 141.6875,
+      "width": 705.28125,
+      "height": 450,
+      "bottom": 591.6875,
+      "right": 736.640625
+    },
+    "choicesBox": {
+      "x": 31.359375,
+      "y": 607.6875,
+      "width": 705.28125,
+      "height": 152,
+      "bottom": 759.6875,
+      "right": 736.640625
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "tablet",
+    "screen": "DRAW",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 531.203125,
+          "y": 271.703125,
+          "width": 168.953125,
+          "height": 168.953125,
+          "bottom": 440.65625,
+          "right": 700.15625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 97.1875,
+          "y": 622.44189453125,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 714.59814453125,
+          "right": 189.34375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 337.90625,
+          "y": 626.609375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 718.765625,
+          "right": 430.0625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 578.625,
+          "y": 626.609375,
+          "width": 92.15625,
+          "height": 92.15625,
+          "bottom": 718.765625,
+          "right": 670.78125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-scissors.png",
+    "highlighted": "SCISSORS",
+    "opponentBox": {
+      "x": 31.359375,
+      "y": 141.6875,
+      "width": 705.28125,
+      "height": 450,
+      "bottom": 591.6875,
+      "right": 736.640625
+    },
+    "choicesBox": {
+      "x": 31.359375,
+      "y": 607.6875,
+      "width": 705.28125,
+      "height": 152,
+      "bottom": 759.6875,
+      "right": 736.640625
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "mobile",
+    "screen": "selection",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "cards": [
+      {
+        "x": 21,
+        "y": 350.203125,
+        "width": 169,
+        "height": 137.921875,
+        "bottom": 488.125,
+        "right": 190
+      },
+      {
+        "x": 200,
+        "y": 350.203125,
+        "width": 169,
+        "height": 137.921875,
+        "bottom": 488.125,
+        "right": 369
+      },
+      {
+        "x": 21,
+        "y": 498.125,
+        "width": 169,
+        "height": 137.921875,
+        "bottom": 636.046875,
+        "right": 190
+      },
+      {
+        "x": 200,
+        "y": 498.125,
+        "width": 169,
+        "height": 137.921875,
+        "bottom": 636.046875,
+        "right": 369
+      }
+    ],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 31,
+          "y": 366.203125,
+          "width": 72.5,
+          "height": 74,
+          "bottom": 440.203125,
+          "right": 103.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 107.5,
+          "y": 366.203125,
+          "width": 72.5,
+          "height": 74,
+          "bottom": 440.203125,
+          "right": 180
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 210,
+          "y": 366.203125,
+          "width": 72.5,
+          "height": 74,
+          "bottom": 440.203125,
+          "right": 282.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 286.5,
+          "y": 366.203125,
+          "width": 72.5,
+          "height": 74,
+          "bottom": 440.203125,
+          "right": 359
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 31,
+          "y": 514.125,
+          "width": 72.5,
+          "height": 74,
+          "bottom": 588.125,
+          "right": 103.5
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 107.5,
+          "y": 514.125,
+          "width": 72.5,
+          "height": 74,
+          "bottom": 588.125,
+          "right": 180
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 210.015625,
+          "y": 514.125,
+          "width": 46.984375,
+          "height": 74,
+          "bottom": 588.125,
+          "right": 257
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 261,
+          "y": 514.125,
+          "width": 46.984375,
+          "height": 74,
+          "bottom": 588.125,
+          "right": 307.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 311.984375,
+          "y": 514.125,
+          "width": 46.984375,
+          "height": 74,
+          "bottom": 588.125,
+          "right": 358.96875
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "mobile",
+    "screen": "practice",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 221.359375,
+          "y": 361.15625,
+          "width": 125.265625,
+          "height": 125.265625,
+          "bottom": 486.421875,
+          "right": 346.625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 43.65625,
+          "y": 578.390625,
+          "width": 64,
+          "height": 64,
+          "bottom": 642.390625,
+          "right": 107.65625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 162.984375,
+          "y": 578.390625,
+          "width": 64,
+          "height": 64,
+          "bottom": 642.390625,
+          "right": 226.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 282.328125,
+          "y": 578.390625,
+          "width": 64,
+          "height": 64,
+          "bottom": 642.390625,
+          "right": 346.328125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "mobile",
+    "screen": "WIN",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 131,
+          "y": 407.703125,
+          "width": 128,
+          "height": 128,
+          "bottom": 535.703125,
+          "right": 259
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 33.65625,
+          "y": 584.3137817382812,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.3137817382812,
+          "right": 109.65625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 156.984375,
+          "y": 588.984375,
+          "width": 76,
+          "height": 76,
+          "bottom": 664.984375,
+          "right": 232.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 280.328125,
+          "y": 588.984375,
+          "width": 76,
+          "height": 76,
+          "bottom": 664.984375,
+          "right": 356.328125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-paper.png",
+    "highlighted": "PAPER",
+    "opponentBox": {
+      "x": 14,
+      "y": 97.703125,
+      "width": 362,
+      "height": 461,
+      "bottom": 558.703125,
+      "right": 376
+    },
+    "choicesBox": {
+      "x": 14,
+      "y": 573.046875,
+      "width": 362,
+      "height": 124.4375,
+      "bottom": 697.484375,
+      "right": 376
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "mobile",
+    "screen": "LOSE",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 131,
+          "y": 407.703125,
+          "width": 128,
+          "height": 128,
+          "bottom": 535.703125,
+          "right": 259
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 33.65625,
+          "y": 584.535888671875,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.535888671875,
+          "right": 109.65625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 156.984375,
+          "y": 588.984375,
+          "width": 76,
+          "height": 76,
+          "bottom": 664.984375,
+          "right": 232.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 280.328125,
+          "y": 588.984375,
+          "width": 76,
+          "height": 76,
+          "bottom": 664.984375,
+          "right": 356.328125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-paper.png",
+    "highlighted": "PAPER",
+    "opponentBox": {
+      "x": 14,
+      "y": 97.703125,
+      "width": 362,
+      "height": 461,
+      "bottom": 558.703125,
+      "right": 376
+    },
+    "choicesBox": {
+      "x": 14,
+      "y": 573.046875,
+      "width": 362,
+      "height": 124.4375,
+      "bottom": 697.484375,
+      "right": 376
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "mobile",
+    "screen": "DRAW",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 131,
+          "y": 407.703125,
+          "width": 128,
+          "height": 128,
+          "bottom": 535.703125,
+          "right": 259
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 33.65625,
+          "y": 584.1498413085938,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.1498413085938,
+          "right": 109.65625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 156.984375,
+          "y": 588.984375,
+          "width": 76,
+          "height": 76,
+          "bottom": 664.984375,
+          "right": 232.984375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 280.328125,
+          "y": 588.984375,
+          "width": 76,
+          "height": 76,
+          "bottom": 664.984375,
+          "right": 356.328125
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-scissors.png",
+    "highlighted": "SCISSORS",
+    "opponentBox": {
+      "x": 14,
+      "y": 97.703125,
+      "width": 362,
+      "height": 461,
+      "bottom": 558.703125,
+      "right": 376
+    },
+    "choicesBox": {
+      "x": 14,
+      "y": 573.046875,
+      "width": 362,
+      "height": 124.4375,
+      "bottom": 697.484375,
+      "right": 376
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "small-mobile",
+    "screen": "selection",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "cards": [
+      {
+        "x": 21,
+        "y": 359.40625,
+        "width": 134,
+        "height": 137.921875,
+        "bottom": 497.328125,
+        "right": 155
+      },
+      {
+        "x": 165,
+        "y": 359.40625,
+        "width": 134,
+        "height": 137.921875,
+        "bottom": 497.328125,
+        "right": 299
+      },
+      {
+        "x": 21,
+        "y": 507.328125,
+        "width": 134,
+        "height": 137.921875,
+        "bottom": 645.25,
+        "right": 155
+      },
+      {
+        "x": 165,
+        "y": 507.328125,
+        "width": 134,
+        "height": 137.921875,
+        "bottom": 645.25,
+        "right": 299
+      }
+    ],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 31,
+          "y": 375.40625,
+          "width": 55,
+          "height": 74,
+          "bottom": 449.40625,
+          "right": 86
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 90,
+          "y": 375.40625,
+          "width": 55,
+          "height": 74,
+          "bottom": 449.40625,
+          "right": 145
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 175,
+          "y": 375.40625,
+          "width": 55,
+          "height": 74,
+          "bottom": 449.40625,
+          "right": 230
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 234,
+          "y": 375.40625,
+          "width": 55,
+          "height": 74,
+          "bottom": 449.40625,
+          "right": 289
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 31,
+          "y": 523.328125,
+          "width": 55,
+          "height": 74,
+          "bottom": 597.328125,
+          "right": 86
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 90,
+          "y": 523.328125,
+          "width": 55,
+          "height": 74,
+          "bottom": 597.328125,
+          "right": 145
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 175,
+          "y": 523.328125,
+          "width": 35.328125,
+          "height": 74,
+          "bottom": 597.328125,
+          "right": 210.328125
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 214.328125,
+          "y": 523.328125,
+          "width": 35.328125,
+          "height": 74,
+          "bottom": 597.328125,
+          "right": 249.65625
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 253.65625,
+          "y": 523.328125,
+          "width": 35.328125,
+          "height": 74,
+          "bottom": 597.328125,
+          "right": 288.984375
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "small-mobile",
+    "screen": "practice",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 197.359375,
+          "y": 381.359375,
+          "width": 100.078125,
+          "height": 100.078125,
+          "bottom": 481.4375,
+          "right": 297.4375
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 33,
+          "y": 584.390625,
+          "width": 64,
+          "height": 64,
+          "bottom": 648.390625,
+          "right": 97
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 129,
+          "y": 584.390625,
+          "width": 64,
+          "height": 64,
+          "bottom": 648.390625,
+          "right": 193
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 225,
+          "y": 584.390625,
+          "width": 64,
+          "height": 64,
+          "bottom": 648.390625,
+          "right": 289
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponentBox": null,
+    "choicesBox": null,
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "small-mobile",
+    "screen": "WIN",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 96,
+          "y": 412.25,
+          "width": 128,
+          "height": 128,
+          "bottom": 540.25,
+          "right": 224
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 22,
+          "y": 579.5744018554688,
+          "width": 76,
+          "height": 76,
+          "bottom": 655.5744018554688,
+          "right": 98
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 122,
+          "y": 584.515625,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.515625,
+          "right": 198
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 222,
+          "y": 584.515625,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.515625,
+          "right": 298
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-paper.png",
+    "highlighted": "PAPER",
+    "opponentBox": {
+      "x": 14,
+      "y": 109.8125,
+      "width": 292,
+      "height": 453.4375,
+      "bottom": 563.25,
+      "right": 306
+    },
+    "choicesBox": {
+      "x": 14,
+      "y": 575.828125,
+      "width": 292,
+      "height": 110.984375,
+      "bottom": 686.8125,
+      "right": 306
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "small-mobile",
+    "screen": "LOSE",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 96,
+          "y": 412.25,
+          "width": 128,
+          "height": 128,
+          "bottom": 540.25,
+          "right": 224
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 22,
+          "y": 579.6815185546875,
+          "width": 76,
+          "height": 76,
+          "bottom": 655.6815185546875,
+          "right": 98
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 122,
+          "y": 584.515625,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.515625,
+          "right": 198
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 222,
+          "y": 584.515625,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.515625,
+          "right": 298
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-scissors.png",
+    "highlighted": "SCISSORS",
+    "opponentBox": {
+      "x": 14,
+      "y": 109.8125,
+      "width": 292,
+      "height": 453.4375,
+      "bottom": 563.25,
+      "right": 306
+    },
+    "choicesBox": {
+      "x": 14,
+      "y": 575.828125,
+      "width": 292,
+      "height": 110.984375,
+      "bottom": 686.8125,
+      "right": 306
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  },
+  {
+    "name": "small-mobile",
+    "screen": "DRAW",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "cards": [],
+    "hands": [
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 96,
+          "y": 412.25,
+          "width": 128,
+          "height": 128,
+          "bottom": 540.25,
+          "right": 224
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "ROCK",
+        "loaded": true,
+        "box": {
+          "x": 22,
+          "y": 580.0664672851562,
+          "width": 76,
+          "height": 76,
+          "bottom": 656.0664672851562,
+          "right": 98
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "SCISSORS",
+        "loaded": true,
+        "box": {
+          "x": 122,
+          "y": 584.515625,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.515625,
+          "right": 198
+        },
+        "fit": "contain"
+      },
+      {
+        "gesture": "PAPER",
+        "loaded": true,
+        "box": {
+          "x": 222,
+          "y": 584.515625,
+          "width": 76,
+          "height": 76,
+          "bottom": 660.515625,
+          "right": 298
+        },
+        "fit": "contain"
+      }
+    ],
+    "opponent": "/src/assets/characters/piki/gestures/piki-scissors.png",
+    "highlighted": "SCISSORS",
+    "opponentBox": {
+      "x": 14,
+      "y": 109.8125,
+      "width": 292,
+      "height": 453.4375,
+      "bottom": 563.25,
+      "right": 306
+    },
+    "choicesBox": {
+      "x": 14,
+      "y": 575.828125,
+      "width": 292,
+      "height": 110.984375,
+      "bottom": 686.8125,
+      "right": 306
+    },
+    "oldMasks": 0,
+    "svgHands": 0
+  }
+]

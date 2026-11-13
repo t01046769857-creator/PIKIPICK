@@ -27,7 +27,7 @@ function tone(context: AudioContext, startAt: number, frequency: number, duratio
   oscillator.stop(startAt + duration + 0.03);
 }
 
-/** Optional, short waiting rhythm. A failed audio start never blocks input. */
+/** 선택적으로 재생하는 짧은 대기 리듬. 소리 재생에 실패해도 입력은 막지 않는다. */
 export function playChoiceRhythm(): () => void {
   const context = getAudioContext();
   if (!context) return () => undefined;

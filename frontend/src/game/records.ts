@@ -36,6 +36,6 @@ export function saveRecords(state: Pick<GameState, 'successCount' | 'partyCount'
       partyCount: state.partyCount,
     } satisfies SavedRecords));
   } catch {
-    // Private browsing or a full storage quota should not stop the game.
+    // 시크릿 모드나 저장 공간 부족 때문에 게임이 멈추면 안 된다.
   }
 }

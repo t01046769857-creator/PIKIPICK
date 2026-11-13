@@ -1,0 +1,542 @@
+[
+  {
+    "name": "desktop",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "IDLE",
+    "character": {
+      "x": 418.5,
+      "y": 237.484375,
+      "width": 603,
+      "height": 603,
+      "right": 1021.5,
+      "bottom": 840.484375
+    },
+    "body": {
+      "x": 418.5,
+      "y": 217.5853729248047,
+      "width": 603,
+      "height": 603,
+      "right": 1021.5,
+      "bottom": 820.5853729248047
+    },
+    "hand": {
+      "x": 500.84002685546875,
+      "y": 507.87213134765625,
+      "width": 222.3822021484375,
+      "height": 228.7374267578125,
+      "right": 723.2222290039062,
+      "bottom": 736.6095581054688
+    },
+    "logo": {
+      "x": 18,
+      "y": 18,
+      "width": 300,
+      "height": 104,
+      "right": 318,
+      "bottom": 122
+    },
+    "menu": {
+      "x": 1362,
+      "y": 18,
+      "width": 60,
+      "height": 60,
+      "right": 1422,
+      "bottom": 78
+    },
+    "footer": {
+      "x": 18,
+      "y": 853.984375,
+      "width": 1404,
+      "height": 32.015625,
+      "right": 1422,
+      "bottom": 886
+    },
+    "large": {
+      "x": 588.234375,
+      "y": 101.484375,
+      "width": 360,
+      "height": 160,
+      "right": 948.234375,
+      "bottom": 261.484375
+    },
+    "small": {
+      "x": 319.109375,
+      "y": 669.8353881835938,
+      "width": 220,
+      "height": 123.75,
+      "right": 539.109375,
+      "bottom": 793.5853881835938
+    },
+    "texts": [
+      "히히! 내 손 잡아볼래?",
+      "나랑 같이 놀자!"
+    ],
+    "animations": [
+      {
+        "class": "intro-v2-motion",
+        "animation": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "class": "intro-v2-hop",
+        "animation": "none",
+        "transform": "none"
+      },
+      {
+        "class": "play-start-hand is-inviting",
+        "animation": "1.75s ease-in-out infinite intro-hand-invite",
+        "transform": "matrix(1.05371, 0, 0, 1.05371, 0, 0)"
+      }
+    ],
+    "touchStyle": {
+      "pointerEvents": "auto"
+    },
+    "bubbles": [
+      {
+        "pointerEvents": "none",
+        "lines": 124,
+        "client": 124
+      },
+      {
+        "pointerEvents": "none",
+        "lines": 160,
+        "client": 160
+      }
+    ]
+  },
+  {
+    "name": "tablet",
+    "viewport": [
+      768,
+      1024
+    ],
+    "phase": "IDLE",
+    "character": {
+      "x": 84.484375,
+      "y": 367.1875,
+      "width": 599.03125,
+      "height": 599.03125,
+      "right": 683.515625,
+      "bottom": 966.21875
+    },
+    "body": {
+      "x": 84.484375,
+      "y": 347.4194641113281,
+      "width": 599.03125,
+      "height": 599.03125,
+      "right": 683.515625,
+      "bottom": 946.4507141113281
+    },
+    "hand": {
+      "x": 163.5106964111328,
+      "y": 634.01171875,
+      "width": 224.7992401123047,
+      "height": 231.2158203125,
+      "right": 388.3099365234375,
+      "bottom": 865.2275390625
+    },
+    "logo": {
+      "x": 18,
+      "y": 18,
+      "width": 185,
+      "height": 65.65625,
+      "right": 203,
+      "bottom": 83.65625
+    },
+    "menu": {
+      "x": 690,
+      "y": 18,
+      "width": 60,
+      "height": 60,
+      "right": 750,
+      "bottom": 78
+    },
+    "footer": {
+      "x": 18,
+      "y": 981.578125,
+      "width": 732,
+      "height": 28.421875,
+      "right": 750,
+      "bottom": 1010
+    },
+    "large": {
+      "x": 316.921875,
+      "y": 288.96875,
+      "width": 230,
+      "height": 102.21875,
+      "right": 546.921875,
+      "bottom": 391.1875
+    },
+    "small": {
+      "x": 14,
+      "y": 796.68505859375,
+      "width": 220,
+      "height": 123.75006103515625,
+      "right": 234,
+      "bottom": 920.4351196289062
+    },
+    "texts": [
+      "히히! 내 손 잡아볼래?",
+      "나랑 같이 놀자!"
+    ],
+    "animations": [
+      {
+        "class": "intro-v2-motion",
+        "animation": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "class": "intro-v2-hop",
+        "animation": "none",
+        "transform": "none"
+      },
+      {
+        "class": "play-start-hand is-inviting",
+        "animation": "1.75s ease-in-out infinite intro-hand-invite",
+        "transform": "matrix(1.07223, 0, 0, 1.07223, 0, 0)"
+      }
+    ],
+    "touchStyle": {
+      "pointerEvents": "auto"
+    },
+    "bubbles": [
+      {
+        "pointerEvents": "none",
+        "lines": 124,
+        "client": 124
+      },
+      {
+        "pointerEvents": "none",
+        "lines": 102,
+        "client": 102
+      }
+    ]
+  },
+  {
+    "name": "mobile",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "IDLE",
+    "character": {
+      "x": 15.59375,
+      "y": 436.78125,
+      "width": 358.796875,
+      "height": 358.796875,
+      "right": 374.390625,
+      "bottom": 795.578125
+    },
+    "body": {
+      "x": 15.59375,
+      "y": 424.9409484863281,
+      "width": 358.796875,
+      "height": 358.7968444824219,
+      "right": 374.390625,
+      "bottom": 783.73779296875
+    },
+    "hand": {
+      "x": 55.23637771606445,
+      "y": 592.75341796875,
+      "width": 146.17579650878906,
+      "height": 146.17578125,
+      "right": 201.41217422485352,
+      "bottom": 738.92919921875
+    },
+    "logo": {
+      "x": 14,
+      "y": 14,
+      "width": 128.6875,
+      "height": 46.890625,
+      "right": 142.6875,
+      "bottom": 60.890625
+    },
+    "menu": {
+      "x": 320,
+      "y": 14,
+      "width": 56,
+      "height": 56,
+      "right": 376,
+      "bottom": 70
+    },
+    "footer": {
+      "x": 14,
+      "y": 803.578125,
+      "width": 362,
+      "height": 28.421875,
+      "right": 376,
+      "bottom": 832
+    },
+    "large": {
+      "x": 80.6484375,
+      "y": 340.390625,
+      "width": 257.390625,
+      "height": 114.390625,
+      "right": 338.0390625,
+      "bottom": 454.78125
+    },
+    "small": {
+      "x": 8.421875,
+      "y": 708.37841796875,
+      "width": 111.921875,
+      "height": 76.9375,
+      "right": 120.34375,
+      "bottom": 785.31591796875
+    },
+    "texts": [
+      "히히! 내 손 잡아볼래?",
+      "나랑 같이 놀자!"
+    ],
+    "animations": [
+      {
+        "class": "intro-v2-motion",
+        "animation": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "class": "intro-v2-hop",
+        "animation": "none",
+        "transform": "none"
+      },
+      {
+        "class": "play-start-hand is-inviting",
+        "animation": "1.75s ease-in-out infinite intro-hand-invite",
+        "transform": "matrix(1.07223, 0, 0, 1.07223, 0, 0)"
+      }
+    ],
+    "touchStyle": {
+      "pointerEvents": "auto"
+    },
+    "bubbles": [
+      {
+        "pointerEvents": "none",
+        "lines": 77,
+        "client": 77
+      },
+      {
+        "pointerEvents": "none",
+        "lines": 114,
+        "client": 114
+      }
+    ]
+  },
+  {
+    "name": "small-mobile",
+    "viewport": [
+      320,
+      740
+    ],
+    "phase": "IDLE",
+    "character": {
+      "x": 14,
+      "y": 397.1875,
+      "width": 294.390625,
+      "height": 294.390625,
+      "right": 308.390625,
+      "bottom": 691.578125
+    },
+    "body": {
+      "x": 14,
+      "y": 387.47259521484375,
+      "width": 294.390625,
+      "height": 294.390625,
+      "right": 308.390625,
+      "bottom": 681.8632202148438
+    },
+    "hand": {
+      "x": 47.089088439941406,
+      "y": 525.5097045898438,
+      "width": 119.1438217163086,
+      "height": 119.143798828125,
+      "right": 166.23291015625,
+      "bottom": 644.6535034179688
+    },
+    "logo": {
+      "x": 14,
+      "y": 14,
+      "width": 105.59375,
+      "height": 39.1875,
+      "right": 119.59375,
+      "bottom": 53.1875
+    },
+    "menu": {
+      "x": 252.390625,
+      "y": 14,
+      "width": 56,
+      "height": 56,
+      "right": 308.390625,
+      "bottom": 70
+    },
+    "footer": {
+      "x": 14,
+      "y": 699.578125,
+      "width": 294.390625,
+      "height": 28.421875,
+      "right": 308.390625,
+      "bottom": 728
+    },
+    "large": {
+      "x": 57.96875,
+      "y": 312.96875,
+      "width": 230,
+      "height": 102.21875,
+      "right": 287.96875,
+      "bottom": 415.1875
+    },
+    "small": {
+      "x": 8.125,
+      "y": 620.0350952148438,
+      "width": 104,
+      "height": 71.5,
+      "right": 112.125,
+      "bottom": 691.5350952148438
+    },
+    "texts": [
+      "히히! 내 손 잡아볼래?",
+      "나랑 같이 놀자!"
+    ],
+    "animations": [
+      {
+        "class": "intro-v2-motion",
+        "animation": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "class": "intro-v2-hop",
+        "animation": "none",
+        "transform": "none"
+      },
+      {
+        "class": "play-start-hand is-inviting",
+        "animation": "1.75s ease-in-out infinite intro-hand-invite",
+        "transform": "matrix(1.06512, 0, 0, 1.06512, 0, 0)"
+      }
+    ],
+    "touchStyle": {
+      "pointerEvents": "auto"
+    },
+    "bubbles": [
+      {
+        "pointerEvents": "none",
+        "lines": 72,
+        "client": 72
+      },
+      {
+        "pointerEvents": "none",
+        "lines": 102,
+        "client": 102
+      }
+    ]
+  },
+  {
+    "name": "landscape",
+    "viewport": [
+      844,
+      390
+    ],
+    "phase": "IDLE",
+    "character": {
+      "x": 291.34375,
+      "y": 145.515625,
+      "width": 261.296875,
+      "height": 261.296875,
+      "right": 552.640625,
+      "bottom": 406.8125
+    },
+    "body": {
+      "x": 291.34375,
+      "y": 136.892822265625,
+      "width": 261.296875,
+      "height": 261.296875,
+      "right": 552.640625,
+      "bottom": 398.189697265625
+    },
+    "hand": {
+      "x": 326.2767028808594,
+      "y": 262.201171875,
+      "width": 97.40878295898438,
+      "height": 100.1881103515625,
+      "right": 423.68548583984375,
+      "bottom": 362.3892822265625
+    },
+    "logo": {
+      "x": 18,
+      "y": 18,
+      "width": 202.546875,
+      "height": 71.515625,
+      "right": 220.546875,
+      "bottom": 89.515625
+    },
+    "menu": {
+      "x": 766,
+      "y": 18,
+      "width": 60,
+      "height": 60,
+      "right": 826,
+      "bottom": 78
+    },
+    "footer": {
+      "x": 18,
+      "y": 347.109375,
+      "width": 808,
+      "height": 28.890625,
+      "right": 826,
+      "bottom": 376
+    },
+    "large": {
+      "x": 332.890625,
+      "y": 59.75,
+      "width": 220,
+      "height": 97.765625,
+      "right": 552.890625,
+      "bottom": 157.515625
+    },
+    "small": {
+      "x": 157.484375,
+      "y": 251.861572265625,
+      "width": 160,
+      "height": 90,
+      "right": 317.484375,
+      "bottom": 341.861572265625
+    },
+    "texts": [
+      "히히! 내 손 잡아볼래?",
+      "나랑 같이 놀자!"
+    ],
+    "animations": [
+      {
+        "class": "intro-v2-motion",
+        "animation": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "class": "intro-v2-hop",
+        "animation": "none",
+        "transform": "none"
+      },
+      {
+        "class": "play-start-hand is-inviting",
+        "animation": "1.75s ease-in-out infinite intro-hand-invite",
+        "transform": "matrix(1.06512, 0, 0, 1.06512, 0, 0)"
+      }
+    ],
+    "touchStyle": {
+      "pointerEvents": "auto"
+    },
+    "bubbles": [
+      {
+        "pointerEvents": "none",
+        "lines": 90,
+        "client": 90
+      },
+      {
+        "pointerEvents": "none",
+        "lines": 98,
+        "client": 98
+      }
+    ]
+  }
+]

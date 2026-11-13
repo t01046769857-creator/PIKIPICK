@@ -1,0 +1,110 @@
+[
+  {
+    "name": "mobile",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "IDLE",
+    "character": {
+      "x": 15.59375,
+      "y": 436.78125,
+      "width": 358.796875,
+      "height": 358.796875,
+      "right": 374.390625,
+      "bottom": 795.578125
+    },
+    "body": {
+      "x": 15.59375,
+      "y": 424.9409484863281,
+      "width": 358.796875,
+      "height": 358.7968444824219,
+      "right": 374.390625,
+      "bottom": 783.73779296875
+    },
+    "hand": {
+      "x": 62.234375,
+      "y": 597.15966796875,
+      "width": 136.328125,
+      "height": 136.328125,
+      "right": 198.5625,
+      "bottom": 733.48779296875
+    },
+    "logo": {
+      "x": 14,
+      "y": 14,
+      "width": 128.6875,
+      "height": 46.890625,
+      "right": 142.6875,
+      "bottom": 60.890625
+    },
+    "menu": {
+      "x": 320,
+      "y": 14,
+      "width": 56,
+      "height": 56,
+      "right": 376,
+      "bottom": 70
+    },
+    "footer": {
+      "x": 14,
+      "y": 803.578125,
+      "width": 362,
+      "height": 28.421875,
+      "right": 376,
+      "bottom": 832
+    },
+    "large": {
+      "x": 80.6484375,
+      "y": 340.390625,
+      "width": 257.390625,
+      "height": 114.390625,
+      "right": 338.0390625,
+      "bottom": 454.78125
+    },
+    "small": {
+      "x": 8.421875,
+      "y": 708.37841796875,
+      "width": 111.921875,
+      "height": 76.9375,
+      "right": 120.34375,
+      "bottom": 785.31591796875
+    },
+    "texts": [
+      "히히! 내 손 잡아볼래?",
+      "나랑 같이 놀자!"
+    ],
+    "animations": [
+      {
+        "class": "intro-v2-motion",
+        "animation": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "class": "intro-v2-hop",
+        "animation": "none",
+        "transform": "none"
+      },
+      {
+        "class": "play-start-hand is-inviting",
+        "animation": "none",
+        "transform": "none"
+      }
+    ],
+    "touchStyle": {
+      "pointerEvents": "auto"
+    },
+    "bubbles": [
+      {
+        "pointerEvents": "none",
+        "lines": 77,
+        "client": 77
+      },
+      {
+        "pointerEvents": "none",
+        "lines": 114,
+        "client": 114
+      }
+    ]
+  }
+]

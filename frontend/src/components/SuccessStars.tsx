@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function SuccessStars({ count, partyCount, roundId, celebrating = false, slots = 5 }: Props) {
-  // Keep the completed board visible only during the celebration result.
+  // 완성된 별판은 축하 결과 화면에서만 보이게 한다.
   const partyComplete = celebrating && count > 0 && count % slots === 0;
   const starsInCurrentSet = partyComplete ? slots : count % slots;
   const progressLabel = `별 ${starsInCurrentSet}/${slots} · 성공 ${count} · 문제 ${roundId}`;

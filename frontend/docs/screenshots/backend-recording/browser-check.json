@@ -1,0 +1,42 @@
+{
+  "database": "isolated-sqlite-in-memory",
+  "realTiDBVerified": false,
+  "modes": [
+    {
+      "mode": "WIN",
+      "sameSession": true,
+      "eventCount": 1,
+      "opponentMatches": true,
+      "playerMatches": true,
+      "success": true
+    },
+    {
+      "mode": "LOSE",
+      "sameSession": true,
+      "eventCount": 1,
+      "opponentMatches": true,
+      "playerMatches": true,
+      "success": true
+    },
+    {
+      "mode": "DRAW",
+      "sameSession": true,
+      "eventCount": 1,
+      "opponentMatches": true,
+      "playerMatches": true,
+      "success": true
+    }
+  ],
+  "offline": {
+    "gameContinued": true,
+    "localRewardsPreserved": true,
+    "pendingResults": 1,
+    "recoverySavedOnce": true
+  },
+  "productionHealth": {
+    "httpStatus": 503,
+    "status": "unavailable",
+    "code": "configuration_missing_or_invalid",
+    "tls_verified": false
+  }
+}

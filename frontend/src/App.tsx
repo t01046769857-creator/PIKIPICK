@@ -6,12 +6,14 @@ import { BrandLogo } from './components/BrandLogo';
 import { GameRulePractice } from './components/GameRulePractice';
 import { PikiOpponent } from './components/PikiOpponent';
 import { PikiHand } from './components/PikiHand';
+import { ModeCardHands, modeCardExamples } from './components/ModeCardHands';
 import { feedback } from './game/feedback';
 import { inputFromButton } from './game/input';
 import { installMetricsDevtools, recordMetric } from './game/metrics';
 import { gameReducer, initialState, type GameAction, type GameState } from './game/reducer';
 import { StoryIcon, StoryNavigation } from './components/StoryNavigation';
 import { readSavedRecords, saveRecords } from './game/records';
+import { useGameRecording } from './game/useGameRecording';
 import { gestureLabel } from './game/rules';
 import { playCelebrationChime, playChoiceRhythm } from './game/rhythm';
 import type { GameInput, GameMode, Gesture } from './game/types';
@@ -38,6 +40,7 @@ export default function App() {
   const feedbackTimer = useRef<number | null>(null);
   const gameScreen = state.phase === 'PLAYING' || state.phase === 'RESULT';
   const partyMoment = state.phase === 'RESULT' && state.result?.success === true && state.successCount > 0 && state.successCount % 5 === 0;
+  useGameRecording(state);
 
   useEffect(() => {
     if (devMode) installMetricsDevtools();
@@ -130,7 +133,7 @@ export default function App() {
     <header className="topbar">
       <div className="app-brand"><BrandLogo /><h1>피키와 가위바위보</h1></div>
       <div className="game-header-tools">
-        <SuccessStars count={state.successCount} partyCount={state.partyCount} roundId={state.roundId} celebrating={partyMoment} />
+        {state.phase !== 'MODE_SELECT' && <SuccessStars count={state.successCount} partyCount={state.partyCount} roundId={state.roundId} celebrating={partyMoment} />}
         {navigation}
       </div>
     </header>
@@ -146,14 +149,11 @@ export default function App() {
         <PikiCharacter expression="curious" size="medium" />
         <h2>어떤 놀이를 할까?</h2>
         <div className="mode-grid">
-          {modes.map(mode => <button type="button" className="mode-card" key={mode.id} aria-label={`${mode.title}: ${mode.description}`} onClick={() => navigate({ type: 'SELECT_MODE', mode: mode.id })}>
-            <span className="mode-card-art" aria-hidden="true">
-              <PikiHand decorative gesture={mode.id === 'WIN' ? 'PAPER' : mode.id === 'LOSE' ? 'ROCK' : 'SCISSORS'}/>
-              <PikiHand decorative gesture={mode.id === 'DRAW' ? 'SCISSORS' : mode.id === 'WIN' ? 'ROCK' : 'PAPER'}/>
-            </span>
+          {modes.map(mode => <button type="button" className="mode-card" data-mode={mode.id} key={mode.id} aria-label={`${mode.title}: ${mode.description} 왼쪽 피키 ${gestureLabel[modeCardExamples[mode.id].piki]}, 오른쪽 나 ${gestureLabel[modeCardExamples[mode.id].child]}`} onClick={() => navigate({ type: 'SELECT_MODE', mode: mode.id })}>
+            <ModeCardHands mode={mode.id}/>
             <strong>{mode.title}</strong>
           </button>)}
-          <button type="button" className="mode-card" aria-label="규칙 연습: 손 그림을 누르며 배워 보자!" onClick={() => navigate({ type: 'OPEN_RULE_PRACTICE' })}><span className="mode-card-art" aria-hidden="true"><PikiHand decorative gesture="ROCK"/><PikiHand decorative gesture="SCISSORS"/><PikiHand decorative gesture="PAPER"/></span><strong>규칙 연습</strong></button>
+          <button type="button" className="mode-card" data-mode="PRACTICE" aria-label="규칙 연습: 손 그림을 누르며 배워 보자!" onClick={() => navigate({ type: 'OPEN_RULE_PRACTICE' })}><ModeCardHands/><strong>규칙 연습</strong></button>
         </div>
       </div>}
 

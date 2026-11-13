@@ -32,10 +32,7 @@ p { line-height: 1.6; }
 .mode-card { min-width: 0; min-height: 156px; border: 2px solid #f2d7c4; background: #fffaf4; border-radius: 20px; padding: 18px 12px; color: inherit; display: grid; align-content: center; justify-items: center; gap: 8px; }
 .mode-card:hover { border-color: #f47a50; }
 .mode-card strong { max-width: 100%; overflow-wrap: anywhere; font-size: 1.15rem; line-height: 1.3; }
-.mode-card .mode-card-art { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; max-width: 210px; height: clamp(74px, 12vw, 112px); }
-.mode-card-art .piki-hand { flex: 0 1 auto; width: auto; max-width: 50%; height: 100%; min-width: 0; }
-.mode-card-art .piki-hand:nth-last-child(3), .mode-card-art .piki-hand:nth-last-child(3) ~ .piki-hand { max-width: calc((100% - 8px) / 3); }
-.mode-card-art .story-icon { width: auto; max-width: 100%; height: 100%; }
+.mode-card .mode-card-art { width: 100%; max-width: 210px; height: clamp(74px, 12vw, 112px); }
 .mode-card.disabled { opacity: .48; cursor: not-allowed; }
 .pill { display: inline-block; padding: 6px 14px; border-radius: 999px; background: #fff0cf; color: #a66c18; font-weight: 800; font-size: .85rem; }
 .round-heading { display: flex; justify-content: space-between; align-items: center; color: #866f64; }
@@ -63,7 +60,7 @@ p { line-height: 1.6; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 @media (max-width: 640px) { .app-shell { width: min(100% - 20px, 560px); padding-top: 18px; } .app-shell--game-flow .topbar { grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px; margin-bottom: 12px; } .app-brand h1 { font-size: clamp(.96rem, 4.2vw, 1.1rem); line-height: 1.18; } .stars { justify-content: flex-start; } .play-card { min-height: 600px; padding: 28px 14px; border-radius: 22px; } .mode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; } .mode-card { min-height: 104px; padding: 14px 8px; } .gesture-button { min-height: 145px; } }
 
-/* Character-led opening scene */
+/* 캐릭터가 이끄는 시작 장면 */
 /* ★ 인트로 안전 영역: 상단 HUD / 중앙 피키 / 하단 안내가 한 화면 높이를 넘지 않게 한다. */
 .piki-intro { position: relative; isolation: isolate; box-sizing: border-box; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(8px, 1.5vh, 16px); width: 100%; min-height: 100svh; height: 100svh; max-height: 100svh; overflow: hidden; overscroll-behavior: none; padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); color: #342b36; background: #e9f7ff; }
 .intro-playground-background { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: fill; object-position: center; opacity: 1; filter: saturate(.96) contrast(1.01); user-select: none; pointer-events: none; }
@@ -115,7 +112,7 @@ p { line-height: 1.6; }
 @media (max-width: 640px) { .piki-intro { padding: 18px; } .intro-topbar h1 { font-size: 1rem; } .intro-sound { padding: 9px 12px; } .intro-stage { min-height: calc(100dvh - 148px); } .intro-piki-track { width: min(94vw, 470px); bottom: 88px; } .intro-piki-figure { --piki-size: min(94vw, 470px) !important; } .intro-speech-bubble { left: 45%; bottom: 76%; max-width: min(270px, 70vw); padding: 12px 14px; } .intro-game-icons { top: 18%; right: -5%; } .intro-play-button { left: -2%; bottom: 4%; padding: 14px 18px; } .intro-footer { bottom: 10px; align-items: flex-end; font-size: .72rem; } .intro-footer p { max-width: 240px; } .piki-intro--peek .intro-piki-track { left: 110%; } }
 @media (prefers-reduced-motion: reduce) { .intro-piki-track, .intro-piki-figure, .intro-piki-figure img, .intro-speech-bubble, .intro-game-icons, .intro-play-button { animation: none !important; transition: none !important; } }
 
-/* One-shot opening story: valid full-character frames only (the rig stays offline). */
+/* 한 번만 재생하는 시작 이야기: 올바른 전신 프레임만 사용하며 리깅은 적용하지 않는다. */
 .piki-intro--PEEK .intro-piki-track { left: 106%; bottom: 10%; transform: translateX(-15%) scale(.38) rotate(-4deg); }
 .piki-intro--NOTICE .intro-piki-track { left: 82%; bottom: 10%; transform: translateX(-25%) scale(.5) rotate(-4deg); }
 .piki-intro--NOTICE .intro-piki-figure { animation: intro-notice-tilt .85s ease-out both !important; }
@@ -124,7 +121,7 @@ p { line-height: 1.6; }
 .piki-intro--REACH .intro-piki-figure { animation: intro-reach-settle .8s ease-out both !important; }
 .piki-intro--TALK .intro-piki-figure { animation: intro-frame-in .22s ease-out both, intro-talk-nod .42s .22s ease-in-out 5 alternate !important; }
 .piki-intro--speaking .intro-piki-figure img { animation: intro-speaking-wobble .34s ease-in-out 6 alternate; }
-/* The idle loop never scales: it is only a very small listening sway. */
+/* 대기 반복은 크기를 바꾸지 않고, 아주 작은 듣기 동작만 한다. */
 .piki-intro--IDLE .intro-piki-figure { animation: intro-idle-listen 3.4s ease-in-out infinite !important; }
 .piki-intro--IDLE.piki-intro--speaking .intro-piki-figure { animation: intro-frame-in .18s ease-out both, intro-talk-nod .42s .18s ease-in-out 5 alternate !important; }
 .intro-piki-figure img { object-position: center bottom; }
@@ -151,7 +148,7 @@ p { line-height: 1.6; }
   .intro-speech-bubble { left: 38%; bottom: calc(100% - 1.2rem); }
 }
 
-/* Compact, in-place game result layout. The result occupies Piki's existing area. */
+/* 작고 제자리에서 표시되는 게임 결과 레이아웃. 결과는 피키의 기존 영역을 사용한다. */
 .play-card--game { min-height: min(620px, calc(100dvh - 150px)); height: min(620px, calc(100dvh - 150px)); padding: clamp(16px, 3vw, 30px); align-items: stretch; overflow: hidden; }
 .game-panel { width: min(100%, 820px); min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: clamp(8px, 2vh, 18px); }
 .game-main-grid { min-height: 0; display: grid; grid-template-columns: minmax(220px, .82fr) minmax(330px, 1.18fr); align-items: center; gap: clamp(18px, 4vw, 54px); }
@@ -197,7 +194,7 @@ p { line-height: 1.6; }
   .result-box { padding: 6px; }
 }
 
-/* Reward progression and Piki-centered game board. */
+/* 보상 진행 상태와 피키 중심 게임판 */
 .stars { display: grid; grid-template-columns: auto auto; justify-items: end; column-gap: 8px; row-gap: 1px; }
 .stars__row { grid-column: 1 / -1; display: flex; gap: 2px; }
 .party-count { color: #9a6f2b; font-size: .76rem; font-weight: 800; white-space: nowrap; }
@@ -268,7 +265,7 @@ p { line-height: 1.6; }
   .game-utility-actions { gap: 6px; }
 }
 
-/* Child-first game hierarchy: Piki, Piki's move, then the child's large choice. */
+/* 유아 우선 게임 순서: 피키, 피키의 손동작, 아이의 큰 선택 버튼 */
 .app-shell--game .topbar { margin-bottom: 14px; }
 .app-shell--game .topbar h1 { color: #3f2a33; }
 .stars { min-width: 176px; padding: 7px 10px 6px; border: 2px solid #f0c35a; border-radius: 18px; background: #fffdf1; box-shadow: 0 4px 0 #f5e4b6; row-gap: 2px; }
@@ -335,7 +332,7 @@ p { line-height: 1.6; }
   .gesture-button { min-height: min(14vh, 92px); }
 }
 
-/* Game layout contract: one responsive grid for every screen after the intro. */
+/* 게임 레이아웃 규칙: 인트로 이후 모든 화면은 하나의 반응형 그리드를 사용한다. */
 .app-shell--game-flow .game-header-tools { display: flex; min-width: 0; align-items: center; justify-self: end; gap: 8px; }
 .app-shell--game-flow .stars { min-width: 176px; max-width: 100%; }
 .app-shell--game-flow .play-card:not(.play-card--game) { min-height: min(620px, calc(100svh - 150px)); padding: clamp(22px, 4vw, 36px) clamp(14px, 3vw, 28px); }
@@ -380,12 +377,12 @@ p { line-height: 1.6; }
   .app-shell--game .gesture-button { min-height: 86px; }
 }
 
-/* Intro v2: one persistent stage, separate motion and pose layers, no legacy transform collisions. */
+/* 인트로 v2: 하나의 무대를 유지하고 움직임·자세 레이어를 분리해 이전 transform 충돌을 막는다. */
 .intro-v2-stage { position: relative; z-index: 1; min-height: 0; display: grid; place-items: end center; overflow: visible; }
 .intro-v2-safe { position: relative; width: min(960px, 100%); height: 100%; min-height: 0; display: grid; place-items: end center; padding-top: clamp(48px, 7svh, 76px); overflow: visible; }
 .intro-v2-motion { --peek-y: -60%; position: relative; left: auto; bottom: auto; width: min(78vw, 67svh, 650px); aspect-ratio: 1; max-width: 100%; max-height: 100%; transform: translate3d(0, 0, 0) scale(1); transform-origin: center bottom; transition: transform .32s cubic-bezier(.2,.8,.3,1); will-change: transform; }
 .intro-v2-hop { width: 100%; height: 100%; transform-origin: center bottom; }
-/* PEEK/LOOK: the canvas itself is pinned to the viewport edge. Only the visual may animate. */
+/* 빼꼼/살펴보기 단계: 캔버스 자체는 화면 가장자리에 고정하고, 그림만 움직일 수 있다. */
 .intro-v2[data-phase='PEEK'] .intro-v2-motion,
 .intro-v2[data-phase='LOOK'] .intro-v2-motion { position: absolute; right: calc(50% - 50vw); bottom: 0; left: auto; transform: translate3d(0, var(--peek-y), 0) scale(.52); transform-origin: right bottom; }
 .intro-v2[data-phase='PEEK'] .intro-v2-motion { animation: intro-v2-peek .7s cubic-bezier(.24,.74,.32,1) both; }
@@ -395,8 +392,11 @@ p { line-height: 1.6; }
 .intro-v2[data-phase='APPROACH'] .intro-v2-motion { transform: translate3d(0, 0, 0) scale(1); transition-duration: 1.35s; transition-timing-function: cubic-bezier(.16,.84,.24,1); }
 .intro-v2[data-phase='APPROACH'] .intro-v2-hop { animation: intro-v2-approach-hop 1.35s ease-in-out both; }
 .intro-v2[data-phase='REACH'] .intro-v2-hop { animation: intro-v2-settle .7s cubic-bezier(.18,.78,.34,1) both; }
-.intro-v2-speech { position: absolute; z-index: 4; bottom: calc(100% - 1rem); left: 50%; width: max-content; max-width: min(320px, calc(100vw - 40px)); padding: 11px 15px; border: 3px solid #543631; border-radius: 24px 24px 24px 7px; background: #fff; color: #513631; box-shadow: 0 7px 0 #f5cfc2; font-size: clamp(.9rem, 2vw, 1.08rem); font-weight: 900; line-height: 1.35; pointer-events: none; transform: translateX(-50%); animation: intro-v2-bubble-in .24s ease-out both; }
-.intro-v2-speech::after { content: ''; position: absolute; bottom: -13px; left: 38%; width: 16px; height: 16px; border-right: 3px solid #543631; border-bottom: 3px solid #543631; background: #fff; transform: rotate(45deg); }
+.intro-v2 .intro-v2-speech { position: absolute; z-index: 4; bottom: calc(100% - 24px); left: 58%; width: clamp(230px, 28vw, 360px); max-width: calc(100vw - 32px); aspect-ratio: 360 / 160; pointer-events: none; transform: translateX(-50%); }
+.intro-v2 .intro-bubble-illustration { position: relative; width: 100%; height: 100%; }
+.intro-v2 .intro-bubble-outline { display: block; width: 100%; height: 100%; overflow: visible; fill: #fff3d6; stroke: #593526; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.intro-v2 .intro-bubble-copy { position: absolute; inset: 15% 9% 27%; display: grid; place-items: center; color: #593526; font-size: clamp(21px, 2.2vw, 29px); font-weight: 900; line-height: 1.35; text-align: center; word-break: keep-all; }
+.intro-v2 .intro-v2-speech .intro-bubble-illustration { animation: intro-v2-bubble-in .24s ease-out both; }
 .intro-v2--leaving .intro-v2-safe { animation: intro-v2-exit .46s ease-in both; }
 @keyframes intro-v2-notice { 0% { transform: translateY(0) scale(1); } 48% { transform: translateY(-1.2%) scale(1.025); } 100% { transform: translateY(0) scale(1); } }
 @keyframes intro-v2-peek {
@@ -406,7 +406,7 @@ p { line-height: 1.6; }
 }
 @keyframes intro-v2-look {
   0%, 100% { transform: rotate(0); }
-  /* Offset the tilted PNG's straight right edge without changing the pose or timing. */
+  /* 기울어진 PNG의 곧은 오른쪽 가장자리를 보정하되 자세나 타이밍은 바꾸지 않는다. */
   45% { transform: translateX(2.6%) rotate(-3deg) translateY(-1%); }
 }
 @keyframes intro-peek-blink {
@@ -425,13 +425,13 @@ p { line-height: 1.6; }
   .intro-v2-motion { width: min(92vw, 62svh, 460px); }
   .intro-v2[data-phase='PEEK'] .intro-v2-motion { transform: translate3d(0, var(--peek-y), 0) scale(.52); }
   .intro-v2[data-phase='NOTICE'] .intro-v2-motion { transform: translate3d(40vw, -52%, 0) scale(.52) rotate(-3deg); }
-  .intro-v2-speech { bottom: calc(100% - .7rem); max-width: min(260px, calc(100vw - 32px)); padding: 10px 12px; }
+  .intro-v2 .intro-v2-speech { bottom: calc(100% - 18px); left: 54%; width: clamp(230px, 66vw, 280px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .intro-v2-motion, .intro-v2-hop, .intro-v2-speech, .intro-v2-safe { animation: none !important; transition: none !important; }
 }
 
-/* The reach pose uses a stable body plus the actual viewer-left play-start hand. */
+/* 손 내밀기 자세는 안정된 몸통과 화면 왼쪽의 실제 놀이 시작 손을 함께 사용한다. */
 .intro-v2-character { position: relative; width: 100%; height: 100%; }
 .intro-reach-body, .play-start-hand, .play-start-hand img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; user-select: none; }
 .intro-reach-body { z-index: 1; }
@@ -442,20 +442,24 @@ p { line-height: 1.6; }
 .play-start-hand__target:focus-visible { outline: 4px solid #4fae9e; outline-offset: 3px; }
 @media (max-width: 640px) { .play-start-hand__target { top: 48%; left: 13%; width: 38%; height: 38%; } }
 
-/* A small cue explains the touch target without covering Piki or becoming a button. */
-.intro-hand-cue { position: absolute; z-index: 3; top: 73%; left: 4%; display: grid; width: 29%; min-width: 126px; height: 17%; pointer-events: none; }
-.intro-hand-cue span { align-self: end; justify-self: center; padding: 5px 9px; border: 2px solid #6a3c25; border-radius: 999px; background: #fff9dd; box-shadow: 0 3px 0 #e9bf72; color: #593321; font-size: clamp(.72rem, 1.45vw, .92rem); font-weight: 900; line-height: 1.1; white-space: nowrap; animation: intro-hand-cue 1.75s ease-in-out infinite; }
-.intro-hand-cue i { position: absolute; color: #ffd22e; font-style: normal; font-size: clamp(.95rem, 1.8vw, 1.25rem); line-height: 1; text-shadow: 0 1px 0 #9a6422; animation: intro-hand-sparkle 1.75s ease-in-out infinite; }
-.intro-hand-cue i:nth-child(1) { top: 3%; left: 10%; }
-.intro-hand-cue i:nth-child(2) { top: 28%; right: 4%; animation-delay: .28s; }
-.intro-hand-cue i:nth-child(3) { top: 60%; left: 0; animation-delay: .55s; }
+/* 그림 손 안내는 캐릭터 캔버스를 공유하고 그림 부분만 부드럽게 움직인다. */
+.intro-v2 .intro-hand-cue { --hand-bubble-width: clamp(160px, 35vw, 220px); position: absolute; z-index: 3; top: 75%; right: min(80%, calc(50% + 50vw - var(--hand-bubble-width) - 14px)); width: var(--hand-bubble-width); aspect-ratio: 320 / 180; pointer-events: none; }
+.intro-v2 .intro-hand-cue .intro-bubble-outline { fill: #ffe7e5; }
+.intro-v2 .intro-hand-cue .intro-bubble-copy { inset: 28% 10% 15%; font-size: clamp(14px, 1.35vw, 18px); line-height: 1.2; }
+.intro-v2 .intro-hand-cue .intro-bubble-illustration { animation: intro-hand-cue 1.75s ease-in-out infinite; }
 @keyframes intro-hand-invite { 0%, 100% { transform: scale(1); } 42% { transform: scale(1.1); } 58% { transform: scale(1.04); } }
-@keyframes intro-hand-sparkle { 0%, 100% { opacity: .22; transform: scale(.75) rotate(0); } 45% { opacity: 1; transform: scale(1.08) rotate(12deg); } }
-@keyframes intro-hand-cue { 0%, 100% { opacity: .78; transform: translateY(0); } 45% { opacity: 1; transform: translateY(-3px); } }
-@media (max-width: 640px) { .intro-hand-cue { top: 73%; left: 2%; min-width: 102px; } .intro-hand-cue span { padding: 4px 7px; font-size: .68rem; } }
-@media (prefers-reduced-motion: reduce) { .play-start-hand.is-inviting, .intro-hand-cue span, .intro-hand-cue i { animation: none; } }
+@keyframes intro-hand-cue { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-3px); } }
+@media (max-width: 640px) {
+  .intro-v2 .intro-hand-cue { top: 79%; right: auto; left: -2%; width: clamp(104px, 28.7vw, 136px); aspect-ratio: 320 / 220; }
+  .intro-v2 .intro-hand-cue .intro-bubble-copy { inset: 26% 9% 12%; }
+}
+@media (max-height: 500px) and (min-width: 641px) {
+  .intro-v2 .intro-v2-speech { width: 220px; bottom: calc(100% - 12px); }
+  .intro-v2 .intro-hand-cue { --hand-bubble-width: 160px; top: 44%; right: 90%; }
+}
+@media (prefers-reduced-motion: reduce) { .play-start-hand.is-inviting, .intro-v2 .intro-bubble-illustration { animation: none !important; } }
 
-/* Intro story v3: one canvas remains mounted from peek through invitation. */
+/* 인트로 이야기 v3: 빼꼼 등장부터 초대까지 하나의 캔버스를 유지한다. */
 .intro-story-stack,
 .intro-reach-assembly {
   position: absolute;
@@ -481,14 +485,14 @@ p { line-height: 1.6; }
 }
 .intro-story-frame--current { z-index: 2; animation: intro-story-frame-in .22s ease-out both; }
 .intro-story-frame--previous { z-index: 1; animation: intro-story-frame-out .22s ease-in both; }
-/* Normalize transparent PNG margins around the common foot baseline. */
+/* 공통 발 기준선에 맞춰 투명 PNG의 여백을 정규화한다. */
 .intro-story-frame--curious { transform: translateY(1.5%); }
 .intro-story-frame--surprised { transform: translateY(0); }
 .intro-story-frame--basicGreeting { transform: translateX(.7%); }
 .intro-peek-blink { position: absolute; z-index: 3; top: 46%; left: 72%; width: 15%; height: 10%; border-radius: 50%; background: #fffdfb; opacity: 0; transform-origin: center; animation: intro-peek-blink .8s ease-in-out both; }
 .intro-peek-blink::after { position: absolute; top: 46%; left: 12%; width: 76%; height: 17%; border-radius: 50%; background: #3f1b0b; content: ''; }
 
-/* The reach assembly shares the same canvas and only takes over in REACH. */
+/* 손 내밀기 조합은 같은 캔버스를 공유하고 REACH 단계에서만 표시한다. */
 .intro-reach-assembly {
   z-index: 2;
   opacity: 0;

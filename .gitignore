@@ -12,5 +12,13 @@ __pycache__/
 *.csv
 *.joblib
 *.pkl
+*.key
+*.pem
+*.p12
+*.pfx
+backend/certs/
+backend/.pytest_cache/
+backend/test-results/
+/.tmp/
 
 .tmp/piki-hand-review/

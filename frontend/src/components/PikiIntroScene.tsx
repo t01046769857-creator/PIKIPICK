@@ -172,7 +172,7 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
                     {/* 보이는 왼쪽 큰 손과 같은 좌표계의 투명 버튼: 손 자체를 누르는 경험을 만든다. */}
                     {(phase === 'REACH' || phase === 'IDLE') && <button className="play-start-hand__target" type="button" onClick={beginPlay} aria-label="피키 손을 눌러 놀이 시작" />}
                   </div>
-                  {phase === 'IDLE' && !isLeaving && <div className="intro-hand-cue" aria-hidden="true"><i>✦</i><i>✦</i><i>✦</i><span>피키 손을 잡아줘!</span></div>}
+                  {phase === 'IDLE' && !isLeaving && <PikiSpeechBubble variant="hand">히히! 내 손 잡아볼래?</PikiSpeechBubble>}
                 </div>
               </div>
             </div>

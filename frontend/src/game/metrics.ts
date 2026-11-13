@@ -54,7 +54,7 @@ declare global {
   }
 }
 
-/** Development-only developer-tools API; no metrics UI is rendered for children. */
+/** 개발 환경 전용 개발자 도구 API이며, 유아 화면에는 측정값 UI를 표시하지 않는다. */
 export function installMetricsDevtools() {
   window.__PIKIPICK_METRICS__ = { summary: metricSummary, reset: resetMetrics };
 }

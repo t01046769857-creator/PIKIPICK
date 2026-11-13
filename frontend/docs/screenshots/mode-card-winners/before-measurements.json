@@ -1,0 +1,862 @@
+[
+  {
+    "name": "desktop",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1425,
+    "logo": {
+      "x": 232.5,
+      "y": 28,
+      "width": 684,
+      "height": 109.328125,
+      "right": 916.5,
+      "bottom": 137.328125
+    },
+    "menu": {
+      "x": 1132.5,
+      "y": 30.484375,
+      "width": 60,
+      "height": 60,
+      "right": 1192.5,
+      "bottom": 90.484375
+    },
+    "stars": {
+      "x": 936.5,
+      "y": 28,
+      "width": 188,
+      "height": 64.96875,
+      "right": 1124.5,
+      "bottom": 92.96875
+    },
+    "character": {
+      "x": 626.5911254882812,
+      "y": 191.41925048828125,
+      "width": 171.8177490234375,
+      "height": 171.8177490234375,
+      "right": 798.4088745117188,
+      "bottom": 363.23699951171875
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 362.5,
+          "y": 436.328125,
+          "width": 343,
+          "height": 183.921875,
+          "right": 705.5,
+          "bottom": 620.25
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 429,
+              "y": 456.328125,
+              "width": 103,
+              "height": 112,
+              "right": 532,
+              "bottom": 568.328125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 536,
+              "y": 456.328125,
+              "width": 103,
+              "height": 112,
+              "right": 639,
+              "bottom": 568.328125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 719.5,
+          "y": 436.328125,
+          "width": 343,
+          "height": 183.921875,
+          "right": 1062.5,
+          "bottom": 620.25
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 786,
+              "y": 456.328125,
+              "width": 103,
+              "height": 112,
+              "right": 889,
+              "bottom": 568.328125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 893,
+              "y": 456.328125,
+              "width": 103,
+              "height": 112,
+              "right": 996,
+              "bottom": 568.328125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 362.5,
+          "y": 634.25,
+          "width": 343,
+          "height": 183.921875,
+          "right": 705.5,
+          "bottom": 818.171875
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 429,
+              "y": 654.25,
+              "width": 103,
+              "height": 112,
+              "right": 532,
+              "bottom": 766.25
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 536,
+              "y": 654.25,
+              "width": 103,
+              "height": 112,
+              "right": 639,
+              "bottom": 766.25
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 719.5,
+          "y": 634.25,
+          "width": 343,
+          "height": 183.921875,
+          "right": 1062.5,
+          "bottom": 818.171875
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 786,
+              "y": 654.25,
+              "width": 67.328125,
+              "height": 112,
+              "right": 853.328125,
+              "bottom": 766.25
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 857.328125,
+              "y": 654.25,
+              "width": 67.328125,
+              "height": 112,
+              "right": 924.65625,
+              "bottom": 766.25
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 928.65625,
+              "y": 654.25,
+              "width": 67.328125,
+              "height": 112,
+              "right": 995.984375,
+              "bottom": 766.25
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  },
+  {
+    "name": "tablet",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "logo": {
+      "x": 16,
+      "y": 28,
+      "width": 476.640625,
+      "height": 84.328125,
+      "right": 492.640625,
+      "bottom": 112.328125
+    },
+    "menu": {
+      "x": 692,
+      "y": 28,
+      "width": 60,
+      "height": 60,
+      "right": 752,
+      "bottom": 88
+    },
+    "stars": {
+      "x": 508,
+      "y": 29.109375,
+      "width": 176,
+      "height": 57.765625,
+      "right": 684,
+      "bottom": 86.875
+    },
+    "character": {
+      "x": 297.8616638183594,
+      "y": 163.3772735595703,
+      "width": 172.27667236328125,
+      "height": 172.27671813964844,
+      "right": 470.1383361816406,
+      "bottom": 335.65399169921875
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 40.03125,
+          "y": 408.515625,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 377,
+          "bottom": 572.59375
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 114.359375,
+              "y": 428.515625,
+              "width": 92.15625,
+              "height": 92.15625,
+              "right": 206.515625,
+              "bottom": 520.671875
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 210.515625,
+              "y": 428.515625,
+              "width": 92.15625,
+              "height": 92.15625,
+              "right": 302.671875,
+              "bottom": 520.671875
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 391,
+          "y": 408.515625,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 727.96875,
+          "bottom": 572.59375
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 465.328125,
+              "y": 428.515625,
+              "width": 92.15625,
+              "height": 92.15625,
+              "right": 557.484375,
+              "bottom": 520.671875
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 561.484375,
+              "y": 428.515625,
+              "width": 92.15625,
+              "height": 92.15625,
+              "right": 653.640625,
+              "bottom": 520.671875
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 40.03125,
+          "y": 586.59375,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 377,
+          "bottom": 750.671875
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 114.359375,
+              "y": 606.59375,
+              "width": 92.15625,
+              "height": 92.15625,
+              "right": 206.515625,
+              "bottom": 698.75
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 210.515625,
+              "y": 606.59375,
+              "width": 92.15625,
+              "height": 92.15625,
+              "right": 302.671875,
+              "bottom": 698.75
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 391,
+          "y": 586.59375,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 727.96875,
+          "bottom": 750.671875
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 454.484375,
+              "y": 606.59375,
+              "width": 67.328125,
+              "height": 92.15625,
+              "right": 521.8125,
+              "bottom": 698.75
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 525.8125,
+              "y": 606.59375,
+              "width": 67.328125,
+              "height": 92.15625,
+              "right": 593.140625,
+              "bottom": 698.75
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 597.140625,
+              "y": 606.59375,
+              "width": 67.328125,
+              "height": 92.15625,
+              "right": 664.46875,
+              "bottom": 698.75
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  },
+  {
+    "name": "mobile",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "logo": {
+      "x": 10,
+      "y": 18,
+      "width": 169,
+      "height": 67.203125,
+      "right": 179,
+      "bottom": 85.203125
+    },
+    "menu": {
+      "x": 324,
+      "y": 18,
+      "width": 56,
+      "height": 56,
+      "right": 380,
+      "bottom": 74
+    },
+    "stars": {
+      "x": 187,
+      "y": 22.78125,
+      "width": 132,
+      "height": 46.421875,
+      "right": 319,
+      "bottom": 69.203125
+    },
+    "character": {
+      "x": 108.86212921142578,
+      "y": 117.06525421142578,
+      "width": 172.2757568359375,
+      "height": 172.2757568359375,
+      "right": 281.1378860473633,
+      "bottom": 289.3410110473633
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 21,
+          "y": 350.203125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 190,
+          "bottom": 488.125
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 31,
+              "y": 366.203125,
+              "width": 72.5,
+              "height": 74,
+              "right": 103.5,
+              "bottom": 440.203125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 107.5,
+              "y": 366.203125,
+              "width": 72.5,
+              "height": 74,
+              "right": 180,
+              "bottom": 440.203125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 200,
+          "y": 350.203125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 369,
+          "bottom": 488.125
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 210,
+              "y": 366.203125,
+              "width": 72.5,
+              "height": 74,
+              "right": 282.5,
+              "bottom": 440.203125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 286.5,
+              "y": 366.203125,
+              "width": 72.5,
+              "height": 74,
+              "right": 359,
+              "bottom": 440.203125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 21,
+          "y": 498.125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 190,
+          "bottom": 636.046875
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 31,
+              "y": 514.125,
+              "width": 72.5,
+              "height": 74,
+              "right": 103.5,
+              "bottom": 588.125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 107.5,
+              "y": 514.125,
+              "width": 72.5,
+              "height": 74,
+              "right": 180,
+              "bottom": 588.125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 200,
+          "y": 498.125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 369,
+          "bottom": 636.046875
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 210.015625,
+              "y": 514.125,
+              "width": 46.984375,
+              "height": 74,
+              "right": 257,
+              "bottom": 588.125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 261,
+              "y": 514.125,
+              "width": 46.984375,
+              "height": 74,
+              "right": 307.984375,
+              "bottom": 588.125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 311.984375,
+              "y": 514.125,
+              "width": 46.984375,
+              "height": 74,
+              "right": 358.96875,
+              "bottom": 588.125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  },
+  {
+    "name": "small-mobile",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "logo": {
+      "x": 10,
+      "y": 18,
+      "width": 99,
+      "height": 76.40625,
+      "right": 109,
+      "bottom": 94.40625
+    },
+    "menu": {
+      "x": 254,
+      "y": 18,
+      "width": 56,
+      "height": 56,
+      "right": 310,
+      "bottom": 74
+    },
+    "stars": {
+      "x": 117,
+      "y": 22.78125,
+      "width": 132,
+      "height": 46.421875,
+      "right": 249,
+      "bottom": 69.203125
+    },
+    "character": {
+      "x": 73.73907470703125,
+      "y": 126.14532470703125,
+      "width": 172.5218505859375,
+      "height": 172.5218505859375,
+      "right": 246.26092529296875,
+      "bottom": 298.66717529296875
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 21,
+          "y": 359.40625,
+          "width": 134,
+          "height": 137.921875,
+          "right": 155,
+          "bottom": 497.328125
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 31,
+              "y": 375.40625,
+              "width": 55,
+              "height": 74,
+              "right": 86,
+              "bottom": 449.40625
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 90,
+              "y": 375.40625,
+              "width": 55,
+              "height": 74,
+              "right": 145,
+              "bottom": 449.40625
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 165,
+          "y": 359.40625,
+          "width": 134,
+          "height": 137.921875,
+          "right": 299,
+          "bottom": 497.328125
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 175,
+              "y": 375.40625,
+              "width": 55,
+              "height": 74,
+              "right": 230,
+              "bottom": 449.40625
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 234,
+              "y": 375.40625,
+              "width": 55,
+              "height": 74,
+              "right": 289,
+              "bottom": 449.40625
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 21,
+          "y": 507.328125,
+          "width": 134,
+          "height": 137.921875,
+          "right": 155,
+          "bottom": 645.25
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 31,
+              "y": 523.328125,
+              "width": 55,
+              "height": 74,
+              "right": 86,
+              "bottom": 597.328125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 90,
+              "y": 523.328125,
+              "width": 55,
+              "height": 74,
+              "right": 145,
+              "bottom": 597.328125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 165,
+          "y": 507.328125,
+          "width": 134,
+          "height": 137.921875,
+          "right": 299,
+          "bottom": 645.25
+        },
+        "background": "rgb(255, 250, 244)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "loaded": true,
+            "box": {
+              "x": 175,
+              "y": 523.328125,
+              "width": 35.328125,
+              "height": 74,
+              "right": 210.328125,
+              "bottom": 597.328125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "loaded": true,
+            "box": {
+              "x": 214.328125,
+              "y": 523.328125,
+              "width": 35.328125,
+              "height": 74,
+              "right": 249.65625,
+              "bottom": 597.328125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "loaded": true,
+            "box": {
+              "x": 253.65625,
+              "y": 523.328125,
+              "width": 35.328125,
+              "height": 74,
+              "right": 288.984375,
+              "bottom": 597.328125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  }
+]

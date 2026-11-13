@@ -20,7 +20,7 @@ function assertRoundValues(mode: unknown, player: unknown, opponent: unknown): a
   }
 }
 
-/** Returns 1 when player wins, 0 for draw, and -1 when player loses. */
+/** 아이가 이기면 1, 비기면 0, 지면 -1을 반환한다. */
 export function compareGestures(player: Gesture, opponent: Gesture): 1 | 0 | -1 {
   if (!isGesture(player) || !isGesture(opponent)) throw new RangeError('Invalid gesture');
   if (player === opponent) return 0;

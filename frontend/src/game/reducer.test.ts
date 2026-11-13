@@ -93,7 +93,7 @@ describe('game state', () => {
   });
 
   it('starts a fresh five-star set after each completed party without duplicate celebrations', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0); // every next opponent is ROCK
+    vi.spyOn(Math, 'random').mockReturnValue(0); // 다음 상대 손은 항상 ROCK이다.
     let state = playingState('DRAW', 'ROCK');
     const checkpoints = new Map([[4, [0, 0]], [5, [1, 1]], [6, [1, 1]], [10, [2, 2]], [11, [2, 2]]]);
     for (let success = 1; success <= 11; success += 1) {

@@ -1,0 +1,938 @@
+[
+  {
+    "name": "desktop",
+    "viewport": [
+      1440,
+      900
+    ],
+    "bodyWidth": 1425,
+    "logo": {
+      "x": 232.5,
+      "y": 28,
+      "width": 684,
+      "height": 109.328125,
+      "right": 916.5,
+      "bottom": 137.328125
+    },
+    "menu": {
+      "x": 1132.5,
+      "y": 30.484375,
+      "width": 60,
+      "height": 60,
+      "right": 1192.5,
+      "bottom": 90.484375
+    },
+    "stars": {
+      "x": 936.5,
+      "y": 28,
+      "width": 188,
+      "height": 64.96875,
+      "right": 1124.5,
+      "bottom": 92.96875
+    },
+    "character": {
+      "x": 626.4791259765625,
+      "y": 191.30722045898438,
+      "width": 172.041748046875,
+      "height": 172.04180908203125,
+      "right": 798.5208740234375,
+      "bottom": 363.3490295410156
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 362.5,
+          "y": 436.328125,
+          "width": 343,
+          "height": 183.921875,
+          "right": 705.5,
+          "bottom": 620.25
+        },
+        "mode": "WIN",
+        "background": "rgb(255, 240, 223)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 441.8125,
+              "y": 485.65673828125,
+              "width": 75.375,
+              "height": 75.375,
+              "right": 517.1875,
+              "bottom": 561.03173828125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 539.5,
+              "y": 466.9532165527344,
+              "width": 98,
+              "height": 97.99996948242188,
+              "right": 637.5,
+              "bottom": 564.9531860351562
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 719.5,
+          "y": 436.328125,
+          "width": 343,
+          "height": 183.921875,
+          "right": 1062.5,
+          "bottom": 620.25
+        },
+        "mode": "LOSE",
+        "background": "rgb(233, 244, 237)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 787.5,
+              "y": 466.9532165527344,
+              "width": 98,
+              "height": 97.99996948242188,
+              "right": 885.5,
+              "bottom": 564.9531860351562
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 907.8125,
+              "y": 485.65673828125,
+              "width": 75.375,
+              "height": 75.375,
+              "right": 983.1875,
+              "bottom": 561.03173828125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 362.5,
+          "y": 634.25,
+          "width": 343,
+          "height": 183.921875,
+          "right": 705.5,
+          "bottom": 818.171875
+        },
+        "mode": "DRAW",
+        "background": "rgb(234, 241, 252)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 430.5,
+              "y": 665.4609375,
+              "width": 98,
+              "height": 98,
+              "right": 528.5,
+              "bottom": 763.4609375
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 539.5,
+              "y": 665.4609375,
+              "width": 98,
+              "height": 98,
+              "right": 637.5,
+              "bottom": 763.4609375
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 719.5,
+          "y": 634.25,
+          "width": 343,
+          "height": 183.921875,
+          "right": 1062.5,
+          "bottom": 818.171875
+        },
+        "mode": "PRACTICE",
+        "background": "rgb(248, 234, 242)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 785.9921875,
+              "y": 690.0223999023438,
+              "width": 67.328125,
+              "height": 67.328125,
+              "right": 853.3203125,
+              "bottom": 757.3505249023438
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 857.3203125,
+              "y": 690.0223999023438,
+              "width": 67.328125,
+              "height": 67.328125,
+              "right": 924.6484375,
+              "bottom": 757.3505249023438
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 928.65625,
+              "y": 690.0098876953125,
+              "width": 67.34375,
+              "height": 67.34375,
+              "right": 996,
+              "bottom": 757.3536376953125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  },
+  {
+    "name": "tablet",
+    "viewport": [
+      768,
+      1024
+    ],
+    "bodyWidth": 768,
+    "logo": {
+      "x": 16,
+      "y": 28,
+      "width": 476.640625,
+      "height": 84.328125,
+      "right": 492.640625,
+      "bottom": 112.328125
+    },
+    "menu": {
+      "x": 692,
+      "y": 28,
+      "width": 60,
+      "height": 60,
+      "right": 752,
+      "bottom": 88
+    },
+    "stars": {
+      "x": 508,
+      "y": 29.109375,
+      "width": 176,
+      "height": 57.765625,
+      "right": 684,
+      "bottom": 86.875
+    },
+    "character": {
+      "x": 297.73834228515625,
+      "y": 163.25396728515625,
+      "width": 172.5233154296875,
+      "height": 172.5233154296875,
+      "right": 470.26165771484375,
+      "bottom": 335.77728271484375
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 40.03125,
+          "y": 408.515625,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 377,
+          "bottom": 572.59375
+        },
+        "mode": "WIN",
+        "background": "rgb(255, 240, 223)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 123.9609375,
+              "y": 454.17803955078125,
+              "width": 60.109375,
+              "height": 60.109375,
+              "right": 184.0703125,
+              "bottom": 514.2874145507812
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 223.9375,
+              "y": 438.8694152832031,
+              "width": 78.15625,
+              "height": 78.15621948242188,
+              "right": 302.09375,
+              "bottom": 517.025634765625
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 391,
+          "y": 408.515625,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 727.96875,
+          "bottom": 572.59375
+        },
+        "mode": "LOSE",
+        "background": "rgb(233, 244, 237)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 465.90625,
+              "y": 438.8694152832031,
+              "width": 78.15625,
+              "height": 78.15621948242188,
+              "right": 544.0625,
+              "bottom": 517.025634765625
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 583.9296875,
+              "y": 454.17803955078125,
+              "width": 60.109375,
+              "height": 60.109375,
+              "right": 644.0390625,
+              "bottom": 514.2874145507812
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 40.03125,
+          "y": 586.59375,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 377,
+          "bottom": 750.671875
+        },
+        "mode": "DRAW",
+        "background": "rgb(234, 241, 252)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 114.9375,
+              "y": 617.8045654296875,
+              "width": 78.15625,
+              "height": 78.15625,
+              "right": 193.09375,
+              "bottom": 695.9608154296875
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 223.9375,
+              "y": 617.8045654296875,
+              "width": 78.15625,
+              "height": 78.15625,
+              "right": 302.09375,
+              "bottom": 695.9608154296875
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 391,
+          "y": 586.59375,
+          "width": 336.96875,
+          "height": 164.078125,
+          "right": 727.96875,
+          "bottom": 750.671875
+        },
+        "mode": "PRACTICE",
+        "background": "rgb(248, 234, 242)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 454.4765625,
+              "y": 626.4755249023438,
+              "width": 67.328125,
+              "height": 67.328125,
+              "right": 521.8046875,
+              "bottom": 693.8036499023438
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 525.8046875,
+              "y": 626.4755249023438,
+              "width": 67.328125,
+              "height": 67.328125,
+              "right": 593.1328125,
+              "bottom": 693.8036499023438
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 597.140625,
+              "y": 626.4630126953125,
+              "width": 67.34375,
+              "height": 67.34375,
+              "right": 664.484375,
+              "bottom": 693.8067626953125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  },
+  {
+    "name": "mobile",
+    "viewport": [
+      390,
+      844
+    ],
+    "bodyWidth": 390,
+    "logo": {
+      "x": 10,
+      "y": 18,
+      "width": 169,
+      "height": 67.203125,
+      "right": 179,
+      "bottom": 85.203125
+    },
+    "menu": {
+      "x": 324,
+      "y": 18,
+      "width": 56,
+      "height": 56,
+      "right": 380,
+      "bottom": 74
+    },
+    "stars": {
+      "x": 187,
+      "y": 22.78125,
+      "width": 132,
+      "height": 46.421875,
+      "right": 319,
+      "bottom": 69.203125
+    },
+    "character": {
+      "x": 108.86221313476562,
+      "y": 117.06533813476562,
+      "width": 172.27557373046875,
+      "height": 172.27557373046875,
+      "right": 281.1377868652344,
+      "bottom": 289.3409118652344
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 21,
+          "y": 350.203125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 190,
+          "bottom": 488.125
+        },
+        "mode": "WIN",
+        "background": "rgb(255, 240, 223)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 43.1796875,
+              "y": 388.50457763671875,
+              "width": 46.140625,
+              "height": 46.140625,
+              "right": 89.3203125,
+              "bottom": 434.64520263671875
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 114.75,
+              "y": 376.6891174316406,
+              "width": 60,
+              "height": 60,
+              "right": 174.75,
+              "bottom": 436.6891174316406
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 200,
+          "y": 350.203125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 369,
+          "bottom": 488.125
+        },
+        "mode": "LOSE",
+        "background": "rgb(233, 244, 237)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 215.25,
+              "y": 376.6891174316406,
+              "width": 60,
+              "height": 60,
+              "right": 275.25,
+              "bottom": 436.6891174316406
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 300.6796875,
+              "y": 388.50457763671875,
+              "width": 46.140625,
+              "height": 46.140625,
+              "right": 346.8203125,
+              "bottom": 434.64520263671875
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 21,
+          "y": 498.125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 190,
+          "bottom": 636.046875
+        },
+        "mode": "DRAW",
+        "background": "rgb(234, 241, 252)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 36.25,
+              "y": 525.328125,
+              "width": 60,
+              "height": 60,
+              "right": 96.25,
+              "bottom": 585.328125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 114.75,
+              "y": 525.328125,
+              "width": 60,
+              "height": 60,
+              "right": 174.75,
+              "bottom": 585.328125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 200,
+          "y": 498.125,
+          "width": 169,
+          "height": 137.921875,
+          "right": 369,
+          "bottom": 636.046875
+        },
+        "mode": "PRACTICE",
+        "background": "rgb(248, 234, 242)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 210,
+              "y": 535.73828125,
+              "width": 47,
+              "height": 47,
+              "right": 257,
+              "bottom": 582.73828125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 261,
+              "y": 535.73828125,
+              "width": 47,
+              "height": 47,
+              "right": 308,
+              "bottom": 582.73828125
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 312,
+              "y": 535.73828125,
+              "width": 47,
+              "height": 47,
+              "right": 359,
+              "bottom": 582.73828125
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  },
+  {
+    "name": "small-mobile",
+    "viewport": [
+      320,
+      740
+    ],
+    "bodyWidth": 320,
+    "logo": {
+      "x": 10,
+      "y": 18,
+      "width": 99,
+      "height": 76.40625,
+      "right": 109,
+      "bottom": 94.40625
+    },
+    "menu": {
+      "x": 254,
+      "y": 18,
+      "width": 56,
+      "height": 56,
+      "right": 310,
+      "bottom": 74
+    },
+    "stars": {
+      "x": 117,
+      "y": 22.78125,
+      "width": 132,
+      "height": 46.421875,
+      "right": 249,
+      "bottom": 69.203125
+    },
+    "character": {
+      "x": 73.73872375488281,
+      "y": 126.14497375488281,
+      "width": 172.52255249023438,
+      "height": 172.52256774902344,
+      "right": 246.2612762451172,
+      "bottom": 298.66754150390625
+    },
+    "cards": [
+      {
+        "box": {
+          "x": 21,
+          "y": 359.40625,
+          "width": 134,
+          "height": 137.921875,
+          "right": 155,
+          "bottom": 497.328125
+        },
+        "mode": "WIN",
+        "background": "rgb(255, 240, 223)",
+        "hands": [
+          {
+            "gesture": "PAPER",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 37.1171875,
+              "y": 402.01190185546875,
+              "width": 40.765625,
+              "height": 40.765625,
+              "right": 77.8828125,
+              "bottom": 442.77752685546875
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 92,
+              "y": 391.3582458496094,
+              "width": 53,
+              "height": 53,
+              "right": 145,
+              "bottom": 444.3582458496094
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 165,
+          "y": 359.40625,
+          "width": 134,
+          "height": 137.921875,
+          "right": 299,
+          "bottom": 497.328125
+        },
+        "mode": "LOSE",
+        "background": "rgb(233, 244, 237)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": true,
+            "loaded": true,
+            "box": {
+              "x": 175,
+              "y": 391.3582458496094,
+              "width": 53,
+              "height": 53,
+              "right": 228,
+              "bottom": 444.3582458496094
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 242.1171875,
+              "y": 402.01190185546875,
+              "width": 40.765625,
+              "height": 40.765625,
+              "right": 282.8828125,
+              "bottom": 442.77752685546875
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 1
+      },
+      {
+        "box": {
+          "x": 21,
+          "y": 507.328125,
+          "width": 134,
+          "height": 137.921875,
+          "right": 155,
+          "bottom": 645.25
+        },
+        "mode": "DRAW",
+        "background": "rgb(234, 241, 252)",
+        "hands": [
+          {
+            "gesture": "SCISSORS",
+            "role": "piki",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 31,
+              "y": 540.13671875,
+              "width": 53,
+              "height": 53,
+              "right": 84,
+              "bottom": 593.13671875
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "role": "child",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 92,
+              "y": 540.13671875,
+              "width": 53,
+              "height": 53,
+              "right": 145,
+              "bottom": 593.13671875
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      },
+      {
+        "box": {
+          "x": 165,
+          "y": 507.328125,
+          "width": 134,
+          "height": 137.921875,
+          "right": 299,
+          "bottom": 645.25
+        },
+        "mode": "PRACTICE",
+        "background": "rgb(248, 234, 242)",
+        "hands": [
+          {
+            "gesture": "ROCK",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 174.9921875,
+              "y": 554.2880249023438,
+              "width": 35.328125,
+              "height": 35.328125,
+              "right": 210.3203125,
+              "bottom": 589.6161499023438
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "SCISSORS",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 214.3203125,
+              "y": 554.2880249023438,
+              "width": 35.328125,
+              "height": 35.328125,
+              "right": 249.6484375,
+              "bottom": 589.6161499023438
+            },
+            "fit": "contain"
+          },
+          {
+            "gesture": "PAPER",
+            "winner": false,
+            "loaded": true,
+            "box": {
+              "x": 253.6484375,
+              "y": 554.2880249023438,
+              "width": 35.328125,
+              "height": 35.328125,
+              "right": 288.9765625,
+              "bottom": 589.6161499023438
+            },
+            "fit": "contain"
+          }
+        ],
+        "winners": 0
+      }
+    ]
+  }
+]

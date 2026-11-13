@@ -1,0 +1,42 @@
+{
+  "database": "tidb-cloud",
+  "realTiDBVerified": true,
+  "modes": [
+    {
+      "mode": "WIN",
+      "sameSession": true,
+      "eventCount": 1,
+      "opponentMatches": true,
+      "playerMatches": true,
+      "success": true
+    },
+    {
+      "mode": "LOSE",
+      "sameSession": true,
+      "eventCount": 1,
+      "opponentMatches": true,
+      "playerMatches": true,
+      "success": true
+    },
+    {
+      "mode": "DRAW",
+      "sameSession": true,
+      "eventCount": 1,
+      "opponentMatches": true,
+      "playerMatches": true,
+      "success": true
+    }
+  ],
+  "offline": {
+    "gameContinued": true,
+    "localRewardsPreserved": true,
+    "pendingResults": 1,
+    "recoverySavedOnce": true
+  },
+  "productionHealth": {
+    "httpStatus": 200,
+    "status": "ok",
+    "database": "mysql",
+    "tls_verified": true
+  }
+}

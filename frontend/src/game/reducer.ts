@@ -59,7 +59,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'NAVIGATE':
       return { ...state, phase: action.phase, mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null };
     case 'RESTORE_SCREEN':
-      // Restore navigation only; accumulated rewards are never rolled back.
+      // 화면 이동만 복원하며, 누적 보상은 되돌리지 않는다.
       return { ...state, ...action.screen, lastInputTiming: null, lastAdvanceTiming: null };
     case 'BEGIN':
       return state.phase === 'START' ? { ...state, phase: 'MODE_SELECT' } : state;

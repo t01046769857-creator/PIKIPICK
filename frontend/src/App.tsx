@@ -7,6 +7,8 @@ import { GameRulePractice } from './components/GameRulePractice';
 import { PikiOpponent } from './components/PikiOpponent';
 import { PikiHand } from './components/PikiHand';
 import { ModeCardHands, modeCardExamples } from './components/ModeCardHands';
+import { ActivitySelection, ComingSoonNotice, type ActivityItem } from './components/ActivitySelection';
+import { SecretBadgeCollection, SecretBadgeDetail, SecretLandDashboard, type SecretBadge } from './components/SecretLandDashboard';
 import { feedback } from './game/feedback';
 import { inputFromButton } from './game/input';
 import { installMetricsDevtools, recordMetric } from './game/metrics';
@@ -16,7 +18,7 @@ import { readSavedRecords, saveRecords } from './game/records';
 import { useGameRecording } from './game/useGameRecording';
 import { gestureLabel } from './game/rules';
 import { playCelebrationChime, playChoiceRhythm } from './game/rhythm';
-import type { GameInput, GameMode, Gesture } from './game/types';
+import type { GameInput, GameMode, Gesture, Phase } from './game/types';
 import './styles.css';
 
 const modes: { id: GameMode; title: string; description: string }[] = [
@@ -27,13 +29,22 @@ const modes: { id: GameMode; title: string; description: string }[] = [
 const gestures: Gesture[] = ['ROCK', 'SCISSORS', 'PAPER'];
 const devMode = import.meta.env.DEV;
 
-export default function App() {
+export function phaseForPlayPath(pathname: string): Phase {
+  if (pathname === '/play/world') return 'SECRET_LAND';
+  if (pathname === '/play/games') return 'ACTIVITY_SELECT';
+  return 'START';
+}
+
+export default function App({ initialPhase = 'START' }: { initialPhase?: Phase }) {
   const [state, dispatch] = useReducer(gameReducer, initialState, (baseState) => {
     const savedRecords = readSavedRecords();
-    return savedRecords ? { ...baseState, ...savedRecords } : baseState;
+    return { ...baseState, ...(savedRecords ?? {}), phase: initialPhase };
   });
   const [confirmingReset, setConfirmingReset] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [comingSoonActivity, setComingSoonActivity] = useState<ActivityItem | null>(null);
+  const [secretDemoDiscovered, setSecretDemoDiscovered] = useState(false);
+  const [selectedSecretBadge, setSelectedSecretBadge] = useState<SecretBadge | null>(null);
   const navigationHistory = useRef<Pick<GameState, 'phase' | 'mode' | 'opponent' | 'result'>[]>([]);
   const measuredInputId = useRef(0);
   const measuredAdvanceId = useRef(0);
@@ -49,6 +60,12 @@ export default function App() {
   useEffect(() => {
     saveRecords(state);
   }, [state.successCount, state.partyCount]);
+
+  useEffect(() => {
+    const path = state.phase === 'START' ? '/play' : state.phase === 'SECRET_LAND' ? '/play/world'
+      : state.phase === 'ACTIVITY_SELECT' ? '/play/games' : null;
+    if (path && window.location.pathname !== path) window.history.replaceState(null, '', path);
+  }, [state.phase]);
 
   useEffect(() => {
     if (state.phase !== 'PLAYING' || !soundEnabled) return undefined;
@@ -107,6 +124,8 @@ export default function App() {
   const navigate = (action: GameAction) => {
     navigationHistory.current.push({ phase: state.phase, mode: state.mode, opponent: state.opponent, result: state.result });
     setConfirmingReset(false);
+    setComingSoonActivity(null);
+    setSelectedSecretBadge(null);
     dispatch(action);
   };
   const goBack = () => {
@@ -119,11 +138,11 @@ export default function App() {
     if (soundEnabled && 'speechSynthesis' in window) window.speechSynthesis.cancel();
     setSoundEnabled(value => !value);
   }} onNavigate={destination => {
-    const phase = { home: 'START', play: 'MODE_SELECT', practice: 'RULE_PRACTICE', stars: 'RECORDS' } as const;
+    const phase = { home: 'START', play: 'ACTIVITY_SELECT', practice: 'RULE_PRACTICE', secret: 'SECRET_LAND' } as const;
     if (phase[destination] !== state.phase) navigate({ type: 'NAVIGATE', phase: phase[destination] });
   }}/>;
 
-  if (state.phase === 'START') return <PikiIntroScene soundEnabled={soundEnabled} navigation={navigation} onBegin={() => navigate({ type: 'BEGIN' })} />;
+  if (state.phase === 'START') return <PikiIntroScene soundEnabled={soundEnabled} navigation={navigation} onBegin={() => navigate({ type: 'NAVIGATE', phase: 'ACTIVITY_SELECT' })} />;
 
   const resultMessage = state.result
     ? (state.result.success ? feedback.success : feedback.retry)[state.roundId % (state.result.success ? feedback.success.length : feedback.retry.length)]
@@ -133,7 +152,7 @@ export default function App() {
     <header className="topbar">
       <div className="app-brand"><BrandLogo /><h1>피키와 가위바위보</h1></div>
       <div className="game-header-tools">
-        {state.phase !== 'MODE_SELECT' && <SuccessStars count={state.successCount} partyCount={state.partyCount} roundId={state.roundId} celebrating={partyMoment} />}
+        {state.phase !== 'MODE_SELECT' && state.phase !== 'SECRET_LAND' && state.phase !== 'BADGE_COLLECTION' && <SuccessStars count={state.successCount} partyCount={state.partyCount} roundId={state.roundId} celebrating={partyMoment} />}
         {navigation}
       </div>
     </header>
@@ -156,6 +175,24 @@ export default function App() {
           <button type="button" className="mode-card" data-mode="PRACTICE" aria-label="규칙 연습: 손 그림을 누르며 배워 보자!" onClick={() => navigate({ type: 'OPEN_RULE_PRACTICE' })}><ModeCardHands/><strong>규칙 연습</strong></button>
         </div>
       </div>}
+
+      {state.phase === 'ACTIVITY_SELECT' && <ActivitySelection onSelect={activity => {
+        if (activity.id === 'RPS') navigate({ type: 'OPEN_RPS_MODE_SELECT' });
+        else setComingSoonActivity(activity);
+      }} />}
+
+      {state.phase === 'SECRET_LAND' && <SecretLandDashboard
+        discovered={secretDemoDiscovered}
+        onDiscover={() => setSecretDemoDiscovered(true)}
+        onBadges={() => navigate({ type: 'NAVIGATE', phase: 'BADGE_COLLECTION' })}
+        onPlay={() => navigate({ type: 'NAVIGATE', phase: 'ACTIVITY_SELECT' })}
+      />}
+
+      {state.phase === 'BADGE_COLLECTION' && <SecretBadgeCollection
+        discovered={secretDemoDiscovered}
+        onSelect={setSelectedSecretBadge}
+        onPlay={() => navigate({ type: 'NAVIGATE', phase: 'ACTIVITY_SELECT' })}
+      />}
 
       {state.phase === 'RULE_PRACTICE' && <GameRulePractice
         onComplete={() => { navigate({ type: 'NAVIGATE', phase: 'MODE_SELECT' }); }} />}
@@ -180,6 +217,8 @@ export default function App() {
         </div>
       </div>}
     </section>
+    {comingSoonActivity && <ComingSoonNotice activity={comingSoonActivity} onClose={() => setComingSoonActivity(null)} />}
+    {selectedSecretBadge && <SecretBadgeDetail badge={selectedSecretBadge} onClose={() => setSelectedSecretBadge(null)} />}
     {confirmingReset && <div className="record-confirm" role="alertdialog" aria-modal="true" aria-label="기록 초기화 확인">
       <p>별과 성공 기록을 모두 지울까요?</p>
       <div><button type="button" className="secondary-action" onClick={() => setConfirmingReset(false)}>취소</button><button type="button" className="primary" onClick={clearRecords}>기록 지우기</button></div>

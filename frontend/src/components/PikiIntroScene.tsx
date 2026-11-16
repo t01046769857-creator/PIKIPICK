@@ -9,7 +9,7 @@ import { PikiSpeechBubble } from './PikiSpeechBubble';
 type IntroPhase = 'PEEK' | 'LOOK' | 'NOTICE' | 'APPROACH' | 'REACH' | 'IDLE';
 type StoryExpression = Extract<PikiExpression, 'introPeekRight' | 'surprised' | 'basicGreeting'>;
 
-const invitation = '나랑 같이 놀자!';
+const invitation = '내 손 잡아볼래?';
 // ★ 인트로는 한 번만 진행한다. 각 숫자는 다음 장면으로 넘어가기 전 머무는 시간(ms)이다.
 const phaseDuration: Record<Exclude<IntroPhase, 'IDLE'>, number> = {
   PEEK: 700,
@@ -146,7 +146,6 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
     leaveTimer.current = window.setTimeout(onBegin, reducedMotion ? 0 : 460);
   };
 
-  const bubbleVisible = phase === 'IDLE';
   return (
     <main className={`piki-intro intro-v2 ${isSpeaking ? 'intro-v2--speaking' : ''} ${isLeaving ? 'intro-v2--leaving' : ''}`} data-phase={phase}>
       <img className="intro-playground-background" src={playgroundBackground} alt="" aria-hidden="true" />
@@ -160,6 +159,7 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
           <div className="intro-v2-motion">
             <div className="intro-v2-hop">
               <div className="intro-v2-character">
+                <span className="intro-ground-shadow" aria-hidden="true" />
                 <div className="intro-story-stack" aria-hidden="true">
                   {storyFrames.previous && <img className={`intro-story-frame intro-story-frame--previous intro-story-frame--${storyFrames.previous}`} src={pikiExpressions[storyFrames.previous]} alt="" draggable="false" />}
                   <img className={`intro-story-frame intro-story-frame--current intro-story-frame--${storyFrames.current}`} src={pikiExpressions[storyFrames.current]} alt="" draggable="false" />
@@ -172,11 +172,10 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
                     {/* 보이는 왼쪽 큰 손과 같은 좌표계의 투명 버튼: 손 자체를 누르는 경험을 만든다. */}
                     {(phase === 'REACH' || phase === 'IDLE') && <button className="play-start-hand__target" type="button" onClick={beginPlay} aria-label="피키 손을 눌러 놀이 시작" />}
                   </div>
-                  {phase === 'IDLE' && !isLeaving && <PikiSpeechBubble variant="hand">히히! 내 손 잡아볼래?</PikiSpeechBubble>}
+                  {phase === 'IDLE' && !isLeaving && <PikiSpeechBubble variant="hand">{invitation}</PikiSpeechBubble>}
                 </div>
               </div>
             </div>
-            {bubbleVisible && <PikiSpeechBubble>{invitation}</PikiSpeechBubble>}
           </div>
         </div>
       </section>

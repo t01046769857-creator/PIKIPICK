@@ -63,7 +63,11 @@ p { line-height: 1.6; }
 /* 캐릭터가 이끄는 시작 장면 */
 /* ★ 인트로 안전 영역: 상단 HUD / 중앙 피키 / 하단 안내가 한 화면 높이를 넘지 않게 한다. */
 .piki-intro { position: relative; isolation: isolate; box-sizing: border-box; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(8px, 1.5vh, 16px); width: 100%; min-height: 100svh; height: 100svh; max-height: 100svh; overflow: hidden; overscroll-behavior: none; padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); color: #342b36; background: #e9f7ff; }
-.intro-playground-background { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: fill; object-position: center; opacity: 1; filter: saturate(.96) contrast(1.01); user-select: none; pointer-events: none; }
+.intro-playground-background { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; opacity: 1; filter: saturate(.96) contrast(1.01); user-select: none; pointer-events: none; }
+/* 가로형 화면은 한 장의 놀이터 원본을 자르지 않아 벤치·미끄럼틀·나무가 함께 보이게 한다. */
+@media (min-width: 641px) and (min-aspect-ratio: 4 / 3) and (max-aspect-ratio: 3 / 2) {
+  .intro-playground-background { object-fit: contain; }
+}
 .intro-sky { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .intro-sky i { position: absolute; width: clamp(34px, 6vw, 72px); aspect-ratio: 1; border-radius: 50%; background: #fff9efaa; }
 .intro-sky i:nth-child(1) { top: 20%; left: 8%; }
@@ -379,8 +383,8 @@ p { line-height: 1.6; }
 
 /* 인트로 v2: 하나의 무대를 유지하고 움직임·자세 레이어를 분리해 이전 transform 충돌을 막는다. */
 .intro-v2-stage { position: relative; z-index: 1; min-height: 0; display: grid; place-items: end center; overflow: visible; }
-.intro-v2-safe { position: relative; width: min(960px, 100%); height: 100%; min-height: 0; display: grid; place-items: end center; padding-top: clamp(48px, 7svh, 76px); overflow: visible; }
-.intro-v2-motion { --peek-y: -60%; position: relative; left: auto; bottom: auto; width: min(78vw, 67svh, 650px); aspect-ratio: 1; max-width: 100%; max-height: 100%; transform: translate3d(0, 0, 0) scale(1); transform-origin: center bottom; transition: transform .32s cubic-bezier(.2,.8,.3,1); will-change: transform; }
+.intro-v2-safe { position: relative; box-sizing: border-box; width: min(960px, 100%); height: 100%; min-height: 0; display: grid; place-items: end center; padding: clamp(48px, 7svh, 76px) 0 clamp(18px, 3svh, 34px); overflow: visible; }
+.intro-v2-motion { --peek-y: -60%; position: relative; left: auto; bottom: auto; width: min(74vw, 67svh, 620px); aspect-ratio: 1; max-width: 100%; max-height: 100%; transform: translate3d(0, 0, 0) scale(1); transform-origin: center bottom; transition: transform .32s cubic-bezier(.2,.8,.3,1); will-change: transform; }
 .intro-v2-hop { width: 100%; height: 100%; transform-origin: center bottom; }
 /* 빼꼼/살펴보기 단계: 캔버스 자체는 화면 가장자리에 고정하고, 그림만 움직일 수 있다. */
 .intro-v2[data-phase='PEEK'] .intro-v2-motion,
@@ -433,29 +437,32 @@ p { line-height: 1.6; }
 
 /* 손 내밀기 자세는 안정된 몸통과 화면 왼쪽의 실제 놀이 시작 손을 함께 사용한다. */
 .intro-v2-character { position: relative; width: 100%; height: 100%; }
+.intro-ground-shadow { position: absolute; z-index: 0; left: 50%; bottom: 4.3%; width: 44%; height: 5.5%; border-radius: 50%; background: #6144382e; filter: blur(7px); transform: translateX(-50%); opacity: 0; transition: opacity .3s ease; pointer-events: none; }
 .intro-reach-body, .play-start-hand, .play-start-hand img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; user-select: none; }
 .intro-reach-body { z-index: 1; }
 .play-start-hand { z-index: 2; transform-origin: 40% 65%; }
-.play-start-hand.is-inviting { animation: intro-hand-invite 1.75s ease-in-out infinite; }
+.play-start-hand.is-inviting { animation: intro-hand-invite 3.6s ease-in-out infinite; }
 /* 이미지의 왼쪽 큰 손 알파 영역에 맞춘 투명 터치 범위. 눈/말풍선은 포함하지 않는다. */
 .play-start-hand__target { position: absolute; z-index: 3; top: 49%; left: 15%; width: 35%; height: 36%; border: 0; border-radius: 46%; background: transparent; cursor: pointer; touch-action: manipulation; }
 .play-start-hand__target:focus-visible { outline: 4px solid #4fae9e; outline-offset: 3px; }
 @media (max-width: 640px) { .play-start-hand__target { top: 48%; left: 13%; width: 38%; height: 38%; } }
 
 /* 그림 손 안내는 캐릭터 캔버스를 공유하고 그림 부분만 부드럽게 움직인다. */
-.intro-v2 .intro-hand-cue { --hand-bubble-width: clamp(160px, 35vw, 220px); position: absolute; z-index: 3; top: 75%; right: min(80%, calc(50% + 50vw - var(--hand-bubble-width) - 14px)); width: var(--hand-bubble-width); aspect-ratio: 320 / 180; pointer-events: none; }
+.intro-v2 .intro-hand-cue { --hand-bubble-width: clamp(160px, 22vw, 210px); position: absolute; z-index: 3; top: 57%; left: -4%; right: auto; width: var(--hand-bubble-width); aspect-ratio: 320 / 180; pointer-events: none; }
 .intro-v2 .intro-hand-cue .intro-bubble-outline { fill: #ffe7e5; }
 .intro-v2 .intro-hand-cue .intro-bubble-copy { inset: 28% 10% 15%; font-size: clamp(14px, 1.35vw, 18px); line-height: 1.2; }
-.intro-v2 .intro-hand-cue .intro-bubble-illustration { animation: intro-hand-cue 1.75s ease-in-out infinite; }
-@keyframes intro-hand-invite { 0%, 100% { transform: scale(1); } 42% { transform: scale(1.1); } 58% { transform: scale(1.04); } }
-@keyframes intro-hand-cue { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-3px); } }
+.intro-v2 .intro-hand-cue .intro-bubble-illustration { animation: intro-hand-cue 3.6s ease-in-out infinite; }
+.play-start-hand::before, .play-start-hand::after { position: absolute; z-index: 4; display: block; content: ''; border-radius: 50% 50% 50% 0; background: #fff4b7; box-shadow: 0 0 0 2px #bf8e6330; pointer-events: none; animation: intro-hand-sparkle 3.6s ease-in-out infinite; }.play-start-hand::before { top: 44%; left: 11%; width: 8px; height: 8px; }.play-start-hand::after { right: 15%; bottom: 24%; width: 6px; height: 6px; animation-delay: 1.2s; }
+@keyframes intro-hand-invite { 0%, 76%, 100% { transform: translateY(0) scale(1); } 84% { transform: translateY(-1.2%) scale(1.035); } 91% { transform: translateY(0) scale(1.012); } }
+@keyframes intro-hand-cue { 0%, 72%, 100% { transform: translateY(0); } 84% { transform: translateY(-2px); } }
+@keyframes intro-hand-sparkle { 0%, 68%, 100% { opacity: .2; transform: scale(.65) rotate(0); } 79% { opacity: .9; transform: scale(1.15) rotate(25deg); } 89% { opacity: .35; transform: scale(.8) rotate(50deg); } }
 @media (max-width: 640px) {
-  .intro-v2 .intro-hand-cue { top: 79%; right: auto; left: -2%; width: clamp(104px, 28.7vw, 136px); aspect-ratio: 320 / 220; }
+  .intro-v2 .intro-hand-cue { top: 64%; right: auto; left: -4%; width: clamp(112px, 31vw, 146px); aspect-ratio: 320 / 220; }
   .intro-v2 .intro-hand-cue .intro-bubble-copy { inset: 26% 9% 12%; }
 }
 @media (max-height: 500px) and (min-width: 641px) {
   .intro-v2 .intro-v2-speech { width: 220px; bottom: calc(100% - 12px); }
-  .intro-v2 .intro-hand-cue { --hand-bubble-width: 160px; top: 44%; right: 90%; }
+  .intro-v2 .intro-hand-cue { --hand-bubble-width: 160px; top: 48%; left: -6%; }
 }
 @media (prefers-reduced-motion: reduce) { .play-start-hand.is-inviting, .intro-v2 .intro-bubble-illustration { animation: none !important; } }
 
@@ -504,6 +511,10 @@ p { line-height: 1.6; }
 .intro-v2[data-phase='IDLE'] .intro-story-stack { opacity: 0; }
 .intro-v2[data-phase='REACH'] .intro-reach-assembly,
 .intro-v2[data-phase='IDLE'] .intro-reach-assembly { opacity: 1; pointer-events: auto; }
+.intro-v2[data-phase='REACH'] .intro-ground-shadow,
+.intro-v2[data-phase='IDLE'] .intro-ground-shadow { opacity: 1; }
+.intro-v2[data-phase='IDLE'] .intro-v2-character { animation: intro-idle-breathe 5.4s ease-in-out infinite; }
+.intro-v2--leaving .intro-v2-character { animation: intro-hand-welcome .46s ease-out both; }
 
 @keyframes intro-story-frame-in {
   from { opacity: 0; }
@@ -513,7 +524,10 @@ p { line-height: 1.6; }
   from { opacity: 1; }
   to { opacity: 0; }
 }
+@keyframes intro-idle-breathe { 0%, 100% { transform: translateY(0) rotate(-.18deg); } 50% { transform: translateY(-2px) rotate(.18deg); } }
+@keyframes intro-hand-welcome { 0% { transform: translateY(0) scale(1); } 52% { transform: translateY(-1.2%) scale(1.018); } 100% { transform: translateY(0) scale(1); } }
 @media (prefers-reduced-motion: reduce) {
   .intro-story-stack, .intro-reach-assembly { transition: none; }
   .intro-story-frame { animation: none !important; }
+  .intro-v2-character, .play-start-hand::before, .play-start-hand::after { animation: none !important; }
 }

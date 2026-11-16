@@ -31,9 +31,10 @@ export const initialState: GameState = {
 };
 
 export type GameAction =
-  | { type: 'NAVIGATE'; phase: 'START' | 'MODE_SELECT' | 'RULE_PRACTICE' | 'RECORDS' }
+  | { type: 'NAVIGATE'; phase: 'START' | 'ACTIVITY_SELECT' | 'MODE_SELECT' | 'RULE_PRACTICE' | 'RECORDS' | 'SECRET_LAND' | 'BADGE_COLLECTION' }
   | { type: 'RESTORE_SCREEN'; screen: Pick<GameState, 'phase' | 'mode' | 'opponent' | 'result'> }
   | { type: 'BEGIN' }
+  | { type: 'OPEN_RPS_MODE_SELECT' }
   | { type: 'SELECT_MODE'; mode: GameMode }
   | { type: 'OPEN_RULE_PRACTICE' }
   | { type: 'TO_INSTRUCTION' }
@@ -63,6 +64,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, ...action.screen, lastInputTiming: null, lastAdvanceTiming: null };
     case 'BEGIN':
       return state.phase === 'START' ? { ...state, phase: 'MODE_SELECT' } : state;
+    case 'OPEN_RPS_MODE_SELECT':
+      return state.phase === 'ACTIVITY_SELECT'
+        ? { ...state, phase: 'MODE_SELECT', mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null }
+        : state;
     case 'SELECT_MODE':
       return state.phase === 'MODE_SELECT' && isGameMode(action.mode)
         ? { ...state, mode: action.mode, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null } : state;

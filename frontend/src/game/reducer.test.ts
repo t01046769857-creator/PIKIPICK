@@ -1,12 +1,18 @@
 import { describe, expect, it, vi } from 'vitest';
 import { gameReducer, initialState, type GameState } from './reducer';
+import { phaseForPlayPath } from '../App';
 
 function playingState(mode: 'WIN' | 'LOSE' | 'DRAW', opponent: 'ROCK' | 'SCISSORS' | 'PAPER'): GameState {
   return { ...initialState, phase: 'PLAYING', mode, opponent, roundId: 1 };
 }
 
 describe('game state', () => {
-  it.each(['START', 'MODE_SELECT', 'RULE_PRACTICE', 'RECORDS'] as const)('navigates to %s and restores the round without rolling back rewards', phase => {
+  it('maps child-facing addresses to the intended entry screen', () => {
+    expect(phaseForPlayPath('/play')).toBe('START');
+    expect(phaseForPlayPath('/play/world')).toBe('SECRET_LAND');
+    expect(phaseForPlayPath('/play/games')).toBe('ACTIVITY_SELECT');
+  });
+  it.each(['START', 'ACTIVITY_SELECT', 'MODE_SELECT', 'RULE_PRACTICE', 'RECORDS', 'SECRET_LAND', 'BADGE_COLLECTION'] as const)('navigates to %s and restores the round without rolling back rewards', phase => {
     const playing = { ...playingState('WIN', 'SCISSORS'), successCount: 4, partyCount: 0 };
     const destination = gameReducer(playing, { type: 'NAVIGATE', phase });
     expect(destination.phase).toBe(phase);
@@ -45,6 +51,14 @@ describe('game state', () => {
     const another = gameReducer(playing, { type: 'CHOOSE_ANOTHER_MODE' });
     expect(gameReducer(another, { type: 'SELECT_MODE', mode }).phase).toBe('PLAYING');
     expect(gameReducer(playing, { type: 'SELECT_MODE', mode })).toBe(playing);
+  });
+
+  it('opens the existing rock-paper-scissors mode selection only from the activity selection', () => {
+    const activities = gameReducer(initialState, { type: 'NAVIGATE', phase: 'ACTIVITY_SELECT' });
+    const modes = gameReducer(activities, { type: 'OPEN_RPS_MODE_SELECT' });
+    expect(modes.phase).toBe('MODE_SELECT');
+    expect(modes.successCount).toBe(initialState.successCount);
+    expect(gameReducer(initialState, { type: 'OPEN_RPS_MODE_SELECT' })).toBe(initialState);
   });
 
   it('opens practice independently and returns to selection without starting a round or changing records', () => {

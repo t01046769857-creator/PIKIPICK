@@ -1,5 +1,8 @@
 import { BrandLogo } from './BrandLogo';
 import { PikiCharacter } from './PikiCharacter';
+import { useState, type FormEvent } from 'react';
+import { loginTeacher } from '../teacher/teacherApi';
+import { TeacherLmsDashboard } from './TeacherLmsDashboard';
 import './TeacherPortal.css';
 
 function TeacherShell({ children }: { children: React.ReactNode }) {
@@ -7,11 +10,17 @@ function TeacherShell({ children }: { children: React.ReactNode }) {
 }
 
 export function TeacherLogin() {
-  return <TeacherShell><section className="teacher-login"><PikiCharacter expression="curious" size="medium" /><div><span className="teacher-kicker">교사용 LMS · 준비 단계</span><h1>아이의 놀이를 함께 살펴봐요</h1><p>교사 계정 인증과 담당 아동 연결이 준비되면, 권한이 있는 기록만 이곳에서 확인할 수 있어요.</p><a className="teacher-primary" href="/teacher/dashboard">대시보드 구조 보기</a><small>현재는 실제 아동 기록을 표시하지 않습니다.</small></div></section></TeacherShell>;
+  const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState(''); const [busy, setBusy] = useState(false);
+  const submit = async (event: FormEvent) => { event.preventDefault(); setBusy(true); setError(''); try { await loginTeacher(email, password); window.location.assign('/teacher/dashboard'); } catch { setError('이메일 또는 비밀번호를 확인해 주세요.'); } finally { setBusy(false); } };
+  return <TeacherShell><section className="teacher-login"><PikiCharacter expression="curious" size="medium" /><div><span className="teacher-kicker">교사용 LMS</span><h1>아이의 놀이를 함께 살펴봐요</h1><p>권한이 있는 담당 아동의 저장된 기록만 확인할 수 있어요.</p><form className="teacher-login__form" onSubmit={submit}><label>이메일<input required type="email" value={email} onChange={event => setEmail(event.target.value)} autoComplete="username" /></label><label>비밀번호<input required type="password" minLength={8} value={password} onChange={event => setPassword(event.target.value)} autoComplete="current-password" /></label>{error && <p role="alert">{error}</p>}<button className="teacher-primary" disabled={busy}>{busy ? '확인 중…' : '로그인'}</button></form><small>계정과 담당 관계는 관리자 승인 절차로만 설정됩니다.</small></div></section></TeacherShell>;
 }
 
 export function TeacherDashboard() {
-  return <TeacherShell><section className="teacher-dashboard"><div className="teacher-dashboard__heading"><span className="teacher-kicker">교사용 LMS · 인증 연결 전</span><h1>담당 아이의 놀이 흐름</h1><p>순위나 비교 대신, 한 아이의 이전 놀이 경험과 다음 활동을 살펴보는 공간입니다.</p></div><div className="teacher-empty"><span aria-hidden="true">⌁</span><h2>담당 아동을 연결해 주세요</h2><p>인증과 담당 관계가 아직 설정되지 않아 실제 아동 이름, 놀이 기록, 성취 정보는 표시하지 않습니다.</p><a className="teacher-primary teacher-demo-link" href="/teacher/demo/child">대시보드 데모 보기</a></div><div className="teacher-sections" aria-label="인증 후 제공될 관찰 영역"><section><h2>놀이 기록</h2><p>참여 활동, 시도, 규칙 선택, 다시 도전한 경험을 확인합니다.</p></section><section><h2>개인 변화</h2><p>다른 아이와 비교하지 않고, 같은 아이의 이전 경험을 기준으로 봅니다.</p></section><section><h2>그림책·다음 활동</h2><p>도서 API 승인과 교사 선택 기능이 준비되면 관련 활동을 제안합니다.</p></section></div></section></TeacherShell>;
+  return <TeacherShell><TeacherLmsDashboard /><p className="teacher-demo-link"><a href="/teacher/demo/child">데모 데이터 화면 보기</a></p></TeacherShell>;
+}
+
+export function TeacherChildDashboard({ childId }: { childId: string }) {
+  return <TeacherShell><TeacherLmsDashboard childId={childId} /></TeacherShell>;
 }
 
 export function TeacherChildAccessBlocked() {

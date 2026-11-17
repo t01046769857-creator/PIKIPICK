@@ -3,17 +3,27 @@ import ssl
 import unittest
 from unittest.mock import MagicMock, patch
 
-from sqlalchemy import create_engine, select, text
+from sqlalchemy import create_engine, inspect, select, text
 from sqlalchemy.exc import IntegrityError, OperationalError
 
 from backend.database import Database
 from backend.migrate import apply_migrations, journal, SchemaConflict
-from backend.models import PlaySession, utcnow
+from backend.models import PlaySession, TeacherAccount, TeacherAuthSession, utcnow
 from backend.settings import Settings
 from backend.tests.test_api import LiveApi, sqlite_database
 
 
 class SecurityTests(unittest.TestCase):
+    def test_default_migration_never_applies_optional_lms_or_institution_tables(self):
+        engine = create_engine("sqlite://")
+        result = apply_migrations(engine)
+        tables = set(inspect(engine).get_table_names())
+        self.assertFalse({"teacher_accounts", "institutions", "home_record_access_grants"} & tables)
+        self.assertEqual(result["included"], {"lms": False, "manager_home": False, "legacy_institution": False})
+        with engine.connect() as connection:
+            self.assertEqual(connection.execute(select(journal.c.version)).scalars().all(), ["0001_initial_activities"])
+        engine.dispose()
+
     def test_tls_verifies_identity_and_url_preserves_special_password_characters(self):
         context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         settings = Settings(db_host="example.invalid", db_user="application-user",
@@ -68,7 +78,7 @@ class SecurityTests(unittest.TestCase):
         with self.assertRaises(SchemaConflict):
             apply_migrations(database.engine)
         with database.engine.connect() as connection:
-            self.assertEqual(connection.execute(select(journal.c.version)).scalars().all(), ["0001_initial_activities", "9999_future"])
+            self.assertEqual(connection.execute(select(journal.c.version)).scalars().all(), ["0001_initial_activities", "0002_teacher_lms", "0003_institution_sessions", "0004_manager_home_access", "9999_future"])
         database.close()
 
     def test_changed_schema_fingerprint_refuses_a_silent_revision_rewrite(self):
@@ -77,6 +87,25 @@ class SecurityTests(unittest.TestCase):
             connection.execute(journal.update().values(schema_hash="0" * 64))
         with self.assertRaises(SchemaConflict):
             apply_migrations(database.engine)
+        database.close()
+
+    def test_partial_teacher_lms_tables_without_a_journal_are_not_resumed(self):
+        """Interrupted DDL must be inspected, never silently completed."""
+        engine = create_engine("sqlite://")
+        TeacherAccount.__table__.create(engine)
+        with self.assertRaisesRegex(SchemaConflict, "exist without revision"):
+            apply_migrations(engine)
+        self.assertIn("teacher_accounts", inspect(engine).get_table_names())
+        engine.dispose()
+
+    def test_recorded_teacher_revision_requires_all_teacher_tables(self):
+        database = sqlite_database()
+        TeacherAuthSession.__table__.drop(database.engine)
+        with self.assertRaisesRegex(SchemaConflict, "required tables are missing"):
+            apply_migrations(database.engine)
+        with database.engine.connect() as connection:
+            revisions = connection.execute(select(journal.c.version)).scalars().all()
+        self.assertIn("0002_teacher_lms", revisions)
         database.close()
 
 

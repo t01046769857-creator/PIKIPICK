@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { PikiCharacter } from './PikiCharacter';
 import { PikiHand } from './PikiHand';
+import { fetchContentCatalog, type ApiContent } from '../game/contentCatalog';
 import './ActivitySelection.css';
 
 export interface ActivityItem {
@@ -11,7 +13,7 @@ export interface ActivityItem {
   tone: 'peach' | 'mint' | 'sky' | 'lemon' | 'lilac' | 'rose';
 }
 
-export const activities: readonly ActivityItem[] = [
+const defaultActivities: readonly ActivityItem[] = [
   { id: 'RPS', title: '가위바위보', status: 'READY', illustration: 'RPS', pictureLabel: '피키의 바위 가위 보 손동작 그림', tone: 'peach' },
   { id: 'MUK_JJI_PPA', title: '묵찌빠', status: 'COMING_SOON', illustration: 'MUK_JJI_PPA', pictureLabel: '서로 마주 보는 피키 손동작 대결 그림', tone: 'mint' },
   { id: 'FINGER_COUNT', title: '손가락 수 세기', status: 'COMING_SOON', illustration: 'FINGER_COUNT', pictureLabel: '펴진 손가락과 하나부터 다섯까지 세는 점 그림', tone: 'sky' },
@@ -19,6 +21,15 @@ export const activities: readonly ActivityItem[] = [
   { id: 'PATTERN', title: '패턴·순서 놀이', status: 'COMING_SOON', illustration: 'PATTERN', pictureLabel: '색과 모양이 반복되는 순서 그림', tone: 'lilac' },
   { id: 'PICTURE_BOOK', title: '그림책 놀이', status: 'COMING_SOON', illustration: 'PICTURE_BOOK', pictureLabel: '피키와 펼쳐진 그림책 그림', tone: 'rose' },
 ];
+export { defaultActivities as activities };
+
+function applyCatalog(current: readonly ActivityItem[], catalog: readonly ApiContent[]): ActivityItem[] {
+  const byId = new Map(catalog.map(item => [item.id, item]));
+  return current.map(activity => {
+    const remote = byId.get(activity.id);
+    return remote ? { ...activity, title: remote.title, status: remote.status === 'PLAYABLE' ? 'READY' : 'COMING_SOON' } : activity;
+  });
+}
 
 function ActivityIllustration({ activity }: { activity: ActivityItem }) {
   if (activity.illustration === 'RPS') return <span className="activity-illustration activity-illustration--rps" role="img" aria-label={activity.pictureLabel}>
@@ -42,6 +53,13 @@ function ActivityIllustration({ activity }: { activity: ActivityItem }) {
 }
 
 export function ActivitySelection({ onSelect }: { onSelect: (activity: ActivityItem) => void }) {
+  const [visibleActivities, setVisibleActivities] = useState<readonly ActivityItem[]>(defaultActivities);
+  useEffect(() => {
+    let active = true;
+    void fetchContentCatalog().then(catalog => { if (active && catalog) setVisibleActivities(applyCatalog(defaultActivities, catalog)); });
+    return () => { active = false; };
+  }, []);
+  const activities = visibleActivities;
   return <div className="activity-selection">
     <div className="activity-selection__heading">
       <PikiCharacter expression="basicGreeting" size="medium" className="activity-selection__piki" />

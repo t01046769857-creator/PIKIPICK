@@ -19,6 +19,7 @@ class Settings:
     db_password: str = field(default="", repr=False)
     db_name: str = "pikipick"
     db_ssl_ca: str = ""
+    allow_insecure_local: bool = False
     connect_timeout: int = 5
     data4library_api_key: str = field(default="", repr=False)
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
@@ -39,6 +40,7 @@ class Settings:
             db_password=os.getenv("DB_PASSWORD", ""),
             db_name=os.getenv("DB_NAME", "pikipick").strip(),
             db_ssl_ca=os.getenv("DB_SSL_CA", "").strip(), connect_timeout=timeout,
+            allow_insecure_local=os.getenv("DB_ALLOW_INSECURE_LOCAL", "").strip() == "1",
             data4library_api_key=os.getenv("DATA4LIBRARY_API_KEY", "").strip(),
             cors_origins=tuple(x.strip() for x in os.getenv(
                 "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
@@ -46,6 +48,14 @@ class Settings:
         )
 
     def validate_database(self):
+        if self.allow_insecure_local:
+            if self.db_host not in {"localhost", "127.0.0.1", "::1"}:
+                raise ConfigurationError("DB_ALLOW_INSECURE_LOCAL is restricted to loopback hosts")
+            missing = [key for key, value in {"DB_HOST": self.db_host, "DB_USER": self.db_user,
+                                              "DB_PASSWORD": self.db_password, "DB_NAME": self.db_name}.items() if not value]
+            if missing:
+                raise ConfigurationError("Missing environment variables: " + ", ".join(missing))
+            return None
         values = {"DB_HOST": self.db_host, "DB_USER": self.db_user,
                   "DB_PASSWORD": self.db_password, "DB_NAME": self.db_name,
                   "DB_SSL_CA": self.db_ssl_ca}

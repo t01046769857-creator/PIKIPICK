@@ -6,6 +6,7 @@ import ssl
 import threading
 import time
 import unittest
+from datetime import timedelta
 from unittest.mock import patch
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -16,9 +17,11 @@ from sqlalchemy.pool import StaticPool
 import uvicorn
 
 from backend.database import Database
-from backend.main import create_app
+from backend.main import create_app, hash_password, hash_token
 from backend.migrate import apply_migrations, inventory, SchemaConflict, seed_activities
-from backend.models import Activity, ActivityVersion
+from backend.models import (Activity, ActivityVersion, EnrolledChild, HomeRecordAccessGrant, Institution,
+                            InstitutionPlayLease, PlaySession, TeacherAccount, TeacherAuthSession,
+                            TeacherChildAssignment, TeacherInstitutionMembership, ManagerAccessAuditLog, utcnow)
 from backend.settings import Settings
 
 
@@ -60,7 +63,7 @@ def sqlite_database():
     @event.listens_for(engine, "connect")
     def foreign_keys(connection, _record):
         connection.execute("PRAGMA foreign_keys=ON")
-    apply_migrations(engine)
+    apply_migrations(engine, include_lms=True, include_manager_home=True, include_legacy_institution=True)
     seed_activities(engine)
     return Database(engine=engine)
 
@@ -95,6 +98,14 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(catalog["activities"][0]["slug"], "rock-paper-scissors")
 
+    def test_lxp_catalog_keeps_unbuilt_content_non_executable(self):
+        status, catalog = self.api.request("GET", "/api/content-catalog")
+        self.assertEqual(status, 200)
+        by_id = {content["id"]: content for content in catalog["contents"]}
+        self.assertEqual(by_id["RPS"]["status"], "PLAYABLE")
+        self.assertEqual(by_id["MUK_JJI_PPA"]["status"], "COMING_SOON")
+        self.assertEqual(by_id["MUK_JJI_PPA"]["metric_keys"], [])
+
     def test_save_read_retry_and_pagination(self):
         session = self.session()
         endpoint = "/api/sessions/" + session["id"]
@@ -123,6 +134,35 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(original["id"], repeated["id"])
         self.session_body["mode"] = "LOSE"
         self.assertEqual(self.api.request("POST", "/api/sessions", self.session_body)[0], 409)
+
+    def test_manager_can_read_only_explicitly_approved_home_history(self):
+        home = self.session()
+        with self.database.session_factory() as db:
+            stored = db.get(PlaySession, home["id"])
+            manager = TeacherAccount(email="manager-test@example.invalid", password_hash=hash_password("safe-test-password"))
+            db.add(manager); db.flush()
+            db.add(HomeRecordAccessGrant(manager_id=manager.id, player_id=stored.player_id,
+                                         approval_reference="test-approval-reference",
+                                         approved_at=stored.started_at - timedelta(seconds=1)))
+            db.commit()
+        _, login = self.api.request("POST", "/api/teacher/auth/login", {
+            "email": "manager-test@example.invalid", "password": "safe-test-password"})
+        token = login["access_token"]
+        status, dashboard = self.api.request("GET", f"/api/manager/children/{stored.player_id}/home-dashboard", token=token)
+        self.assertEqual(status, 200, dashboard)
+        self.assertEqual(dashboard["scope"], "HOME_PLAY_HISTORY")
+        self.assertEqual(dashboard["session_count"], 1)
+        self.assertIn("weekday_distribution", dashboard)
+        self.assertIn("gesture_distribution", dashboard)
+        self.assertEqual(dashboard["metric_evidence"][0]["data_version"], "content-analysis-v1")
+        self.assertTrue(dashboard["recommendation_basis"])
+        self.assertEqual(self.api.request("GET", f"/api/manager/children/{uuid4()}/home-dashboard", token=token)[0], 404)
+        with self.database.session_factory() as db:
+            grant = db.scalar(select(HomeRecordAccessGrant).where(HomeRecordAccessGrant.manager_id == manager.id))
+            grant.status = "revoked"; grant.revoked_at = utcnow(); db.commit()
+        self.assertEqual(self.api.request("GET", f"/api/manager/children/{stored.player_id}/home-dashboard", token=token)[0], 403)
+        with self.database.session_factory() as db:
+            self.assertEqual(db.query(ManagerAccessAuditLog).count(), 1)
 
     def test_authorization_validation_and_conflicts(self):
         session = self.session()
@@ -192,6 +232,85 @@ class ApiTests(unittest.TestCase):
         _, retrieved = self.api.request("GET", endpoint, token=session["session_token"])
         self.assertEqual(retrieved["events"][0]["details"], result["details"])
 
+    def test_teacher_login_and_assigned_child_dashboard_are_protected(self):
+        first = self.session()
+        self.assertEqual(self.api.request("POST", f"/api/sessions/{first['id']}/events", self.result(), first["session_token"])[0], 201)
+        other_body = {"mode": "DRAW", "client_session_id": str(uuid4()), "session_token": uuid4().hex}
+        _, second = self.api.request("POST", "/api/sessions", other_body)
+        with self.database.session_factory() as db:
+            first_session = db.get(PlaySession, first["id"])
+            second_session = db.get(PlaySession, second["id"])
+            teacher = TeacherAccount(email="teacher-test@example.invalid", password_hash=hash_password("safe-test-password"))
+            db.add(teacher); db.flush()
+            db.add(TeacherChildAssignment(teacher_id=teacher.id, player_id=first_session.player_id))
+            institution = Institution(name="Test institution")
+            db.add(institution); db.flush()
+            db.add(TeacherInstitutionMembership(teacher_id=teacher.id, institution_id=institution.id))
+            db.add(EnrolledChild(institution_id=institution.id, player_id=first_session.player_id))
+            other_institution = Institution(name="Other institution")
+            db.add(other_institution); db.flush()
+            db.add(TeacherChildAssignment(teacher_id=teacher.id, player_id=second_session.player_id))
+            db.add(EnrolledChild(institution_id=other_institution.id, player_id=second_session.player_id))
+            db.commit()
+        self.assertEqual(self.api.request("GET", "/api/teacher/children")[0], 401)
+        self.assertEqual(self.api.request("POST", "/api/teacher/auth/login", {"email": "teacher-test@example.invalid", "password": "wrong-password"})[0], 401)
+        status, login = self.api.request("POST", "/api/teacher/auth/login", {"email": "teacher-test@example.invalid", "password": "safe-test-password"})
+        self.assertEqual(status, 200, login)
+        token = login["access_token"]
+        self.assertEqual(self.api.request("POST", f"/api/teacher/children/{second_session.player_id}/institution-play", {}, token=token)[0], 403)
+        self.assertEqual(self.api.request("POST", "/api/sessions", {"mode": "WIN", "client_session_id": str(uuid4()),
+            "session_token": uuid4().hex, "institution_play_token": "x" * 32})[0], 401)
+        status, lease = self.api.request("POST", f"/api/teacher/children/{first_session.player_id}/institution-play", {}, token=token)
+        self.assertEqual(status, 200, lease)
+        institution_session = {"mode": "WIN", "client_session_id": str(uuid4()), "session_token": uuid4().hex,
+                               "institution_play_token": lease["institution_play_token"]}
+        status, created = self.api.request("POST", "/api/sessions", institution_session)
+        self.assertEqual(status, 201, created)
+        self.assertEqual(self.api.request("POST", f"/api/sessions/{created['id']}/events", self.result(), created["session_token"])[0], 201)
+        with self.database.session_factory() as db:
+            active_lease = db.scalar(select(InstitutionPlayLease).where(InstitutionPlayLease.token_hash == hash_token(lease["institution_play_token"])))
+            active_lease.expires_at = utcnow() - timedelta(seconds=1)
+            db.commit()
+        self.assertEqual(self.api.request("POST", f"/api/sessions/{created['id']}/events", self.result(2), created["session_token"])[0], 401)
+        _, second_lease = self.api.request("POST", f"/api/teacher/children/{first_session.player_id}/institution-play", {}, token=token)
+        second_institution_session = {"mode": "WIN", "client_session_id": str(uuid4()), "session_token": uuid4().hex,
+                                      "institution_play_token": second_lease["institution_play_token"]}
+        self.assertEqual(self.api.request("POST", "/api/sessions", second_institution_session)[0], 201)
+        status, children = self.api.request("GET", "/api/teacher/children", token=token)
+        self.assertEqual(status, 200, children)
+        self.assertCountEqual([child["id"] for child in children["children"]], [first_session.player_id, second_session.player_id])
+        status, dashboard = self.api.request("GET", f"/api/teacher/children/{first_session.player_id}/dashboard?days=30", token=token)
+        self.assertEqual(status, 200, dashboard)
+        self.assertEqual(dashboard["summary"]["attempts"], 1)
+        self.assertEqual(dashboard["summary"]["target_choices"], 1)
+        self.assertIsNone(dashboard["summary"]["retry_count"])
+        self.assertEqual(dashboard["recommendations"][0]["kind"], "rule_variation")
+        self.assertEqual(dashboard["content_metrics"][0]["activity_slug"], "rock-paper-scissors")
+        self.assertEqual(dashboard["book_recommendation_topic"], "rock-paper-scissors")
+        self.assertEqual(self.api.request("GET", f"/api/teacher/children/{second_session.player_id}/dashboard", token=token)[0], 200)
+        self.assertEqual(self.api.request("GET", "/api/teacher/children", token="tampered-token")[0], 401)
+        with self.database.session_factory() as db:
+            auth = db.scalar(select(TeacherAuthSession).where(TeacherAuthSession.token_hash == hash_token(token)))
+            auth.expires_at = utcnow() - timedelta(seconds=1)
+            db.commit()
+        self.assertEqual(self.api.request("GET", "/api/teacher/children", token=token)[0], 401)
+        _, renewed = self.api.request("POST", "/api/teacher/auth/login", {
+            "email": "teacher-test@example.invalid", "password": "safe-test-password"})
+        renewed_token = renewed["access_token"]
+        with self.database.session_factory() as db:
+            assignment = db.scalar(select(TeacherChildAssignment).where(
+                TeacherChildAssignment.teacher_id == teacher.id,
+                TeacherChildAssignment.player_id == first_session.player_id))
+            assignment.is_active = False
+            db.commit()
+        self.assertEqual(self.api.request(
+            "GET", f"/api/teacher/children/{first_session.player_id}/dashboard", token=renewed_token)[0], 403)
+        with self.database.session_factory() as db:
+            active_teacher = db.get(TeacherAccount, teacher.id)
+            active_teacher.is_active = False
+            db.commit()
+        self.assertEqual(self.api.request("GET", "/api/teacher/children", token=renewed_token)[0], 403)
+
 
 class SafetyTests(unittest.TestCase):
     def test_api_starts_without_database_and_does_not_leak_error(self):
@@ -211,7 +330,8 @@ class SafetyTests(unittest.TestCase):
         seed_activities(database.engine)
         with database.engine.connect() as connection:
             self.assertEqual(connection.execute(select(Activity.title)).scalar_one(), "Preserve existing title")
-        self.assertEqual(len(inventory(database.engine)), 6)
+        # schema_migrations + five play tables + three LMS + six institution tables
+        self.assertEqual(len(inventory(database.engine)), 17)
         database.close()
 
     def test_schema_collision_refuses_to_modify_existing_table(self):

@@ -27,6 +27,7 @@ class SessionCreate(ApiInput):
     client_session_id: UUID = Field(default_factory=uuid4)
     # 클라이언트가 생성한 권한 토큰으로 응답이 유실된 뒤 재시도해도 같은 요청으로 처리한다.
     session_token: str | None = Field(default=None, min_length=32, max_length=128, repr=False, pattern=r"^[A-Za-z0-9_-]+$")
+    institution_play_token: str | None = Field(default=None, min_length=32, max_length=128, repr=False, pattern=r"^[A-Za-z0-9_-]+$")
     player_id: UUID | None = None
     age_band: Literal[5, 6, 7] | None = None
     mode: str | None = Field(default=None, max_length=32)
@@ -50,3 +51,12 @@ class EventCreate(ApiInput):
         if value.tzinfo is None:
             raise ValueError("occurred_at must include a timezone")
         return value.astimezone(timezone.utc).replace(tzinfo=None)
+
+
+class TeacherLogin(ApiInput):
+    email: str = Field(min_length=3, max_length=254)
+    password: str = Field(min_length=8, max_length=256, repr=False)
+
+
+class InstitutionPlayLeaseCreate(ApiInput):
+    expires_in_minutes: int = Field(default=30, ge=5, le=120, strict=True)

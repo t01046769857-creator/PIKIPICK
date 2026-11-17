@@ -17,8 +17,10 @@ __pycache__/
 *.p12
 *.pfx
 backend/certs/
+backups/
 backend/.pytest_cache/
 backend/test-results/
 /.tmp/
 
 .tmp/piki-hand-review/
+backend/certs/

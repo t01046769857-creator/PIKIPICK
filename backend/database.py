@@ -37,17 +37,21 @@ class Database:
             try:
                 self.settings = settings or Settings.from_env()
                 ca = self.settings.validate_database()
-                context = ssl.create_default_context(cafile=str(ca))
-                context.check_hostname = True
-                context.verify_mode = ssl.CERT_REQUIRED
-                context.minimum_version = ssl.TLSVersion.TLSv1_2
+                context = None
+                if ca:
+                    context = ssl.create_default_context(cafile=str(ca))
+                    context.check_hostname = True
+                    context.verify_mode = ssl.CERT_REQUIRED
+                    context.minimum_version = ssl.TLSVersion.TLSv1_2
                 url = URL.create("mysql+pymysql", username=self.settings.db_user,
                                  password=self.settings.db_password, host=self.settings.db_host,
                                  port=self.settings.db_port, database=self.settings.db_name,
                                  query={"charset": "utf8mb4"})
+                connect_args = {"connect_timeout": self.settings.connect_timeout, "read_timeout": 5,
+                                "write_timeout": 5, "local_infile": False}
+                if context: connect_args["ssl"] = context
                 self.engine = create_engine(
-                    url, connect_args={"ssl": context, "connect_timeout": self.settings.connect_timeout,
-                                       "read_timeout": 5, "write_timeout": 5, "local_infile": False},
+                    url, connect_args=connect_args,
                     pool_pre_ping=True, pool_recycle=1800, pool_size=5, max_overflow=5,
                     pool_timeout=5, hide_parameters=True, echo=False,
                 )
@@ -66,9 +70,9 @@ class Database:
             tls = False
             if connection.dialect.name == "mysql":
                 row = connection.execute(text("SHOW STATUS LIKE 'Ssl_cipher'")).first()
-                if not row or not row[1]:
+                if (not row or not row[1]) and not (self.settings and self.settings.allow_insecure_local):
                     raise ConfigurationError("Database did not negotiate TLS")
-                tls = True
+                tls = bool(row and row[1])
             return {"status": "ok", "database": connection.dialect.name, "tls_verified": tls}
 
     def close(self):

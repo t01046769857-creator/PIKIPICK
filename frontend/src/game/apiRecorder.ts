@@ -1,5 +1,7 @@
 import type { GameState } from './reducer';
 import type { GameMode } from './types';
+import { clearInstitutionPlay, readInstitutionPlay, type InstitutionPlayHandoff } from './institutionPlay';
+import { rockPaperScissorsRuntime, type ContentRuntime } from './contentRuntime';
 
 export const outboxKey = 'pikipick.api.outbox.v1';
 const playerKey = 'pikipick.api.player.v1';
@@ -8,8 +10,9 @@ const maxEvents = 500;
 const maxSessions = 100;
 
 interface SessionRequest {
-  activity_slug: 'rock-paper-scissors'; activity_version: '1.0.0';
+  activity_slug: string; activity_version: string;
   client_session_id: string; player_id: string; session_token: string; mode: GameMode;
+  institution_play_token?: string;
 }
 interface RecordedEvent {
   client_event_id: string; sequence: number; event_type: 'round_result' | 'session_ended';
@@ -27,14 +30,14 @@ function browserStorage(): Storage | undefined {
   catch { return undefined; }
 }
 
-function restore(storage: Storage | undefined): PendingSession[] {
+function restore(storage: Storage | undefined, runtime: ContentRuntime): PendingSession[] {
   try {
     const raw = storage?.getItem(outboxKey);
     if (!raw || raw.length > 2_000_000) return [];
     const value: unknown = JSON.parse(raw);
     if (!Array.isArray(value) || value.length > maxSessions) return [];
     return value.filter((item): item is PendingSession => !!item && typeof item === 'object'
-      && item.request?.activity_slug === 'rock-paper-scissors' && item.request?.activity_version === '1.0.0'
+      && item.request?.activity_slug === runtime.activitySlug && item.request?.activity_version === runtime.activityVersion
       && uuidPattern.test(item.request?.client_session_id) && uuidPattern.test(item.request?.player_id)
       && typeof item.request?.session_token === 'string' && /^[a-f0-9]{64}$/.test(item.request.session_token)
       && ['WIN', 'LOSE', 'DRAW'].includes(item.request?.mode)
@@ -44,7 +47,7 @@ function restore(storage: Storage | undefined): PendingSession[] {
       && Array.isArray(item.events) && item.events.length <= maxEvents
       && item.events.every((event: RecordedEvent) => event && uuidPattern.test(event.client_event_id)
         && Number.isInteger(event.sequence) && event.sequence > 0
-        && ['round_result', 'session_ended'].includes(event.event_type)
+        && [runtime.resultEventType, runtime.sessionEndedEventType].includes(event.event_type)
         && typeof event.occurred_at === 'string' && Number.isFinite(Date.parse(event.occurred_at))
         && event.details && typeof event.details === 'object'));
   } catch { return []; }
@@ -59,17 +62,20 @@ export class GameApiRecorder {
   private retryAt = 0;
   private warned = false;
   private playerId: string;
+  private institutionPlay: InstitutionPlayHandoff | null;
   status: 'idle' | 'pending' | 'synced' | 'offline' = 'idle';
 
   constructor(
     private baseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/$/, ''),
     private storage: Storage | undefined = browserStorage(),
     private transport: Transport = (url, init) => fetch(url, init),
+    private runtime: ContentRuntime = rockPaperScissorsRuntime,
   ) {
-    this.queue = restore(storage);
+    this.queue = restore(storage, runtime);
     let savedPlayer: string | null = null;
     try { savedPlayer = storage?.getItem(playerKey) ?? null; } catch { /* 메모리 저장 방식으로 대체 */ }
-    this.playerId = savedPlayer && uuidPattern.test(savedPlayer) ? savedPlayer : crypto.randomUUID();
+    this.institutionPlay = readInstitutionPlay();
+    this.playerId = this.institutionPlay?.playerId ?? (savedPlayer && uuidPattern.test(savedPlayer) ? savedPlayer : crypto.randomUUID());
     try { storage?.setItem(playerKey, this.playerId); } catch { /* 게임은 계속 진행해야 한다. */ }
     // 이전 페이지 방문은 끝났으므로, 대기 중인 결과는 보존하고 종료 이벤트를 한 번만 추가한다.
     for (const job of this.queue) if (!job.closed) this.end(job);
@@ -84,8 +90,9 @@ export class GameApiRecorder {
     job.closed = true;
     if (this.queue.reduce((sum, item) => sum + item.events.length, 0) < maxEvents) {
       job.events.push({ client_event_id: crypto.randomUUID(), sequence: job.nextSequence++,
-        event_type: 'session_ended', occurred_at: new Date().toISOString(), details: {} });
+        event_type: this.runtime.sessionEndedEventType as RecordedEvent['event_type'], occurred_at: new Date().toISOString(), details: {} });
     }
+    if (job.request.institution_play_token) { clearInstitutionPlay(); this.institutionPlay = null; }
   }
 
   observe(state: Pick<GameState, 'phase' | 'mode' | 'inputSequence' | 'result' | 'roundId' | 'successCount' | 'partyCount'>) {
@@ -103,9 +110,10 @@ export class GameApiRecorder {
     if (!this.current || this.current.request.mode !== state.mode) {
       if (this.current) this.end(this.current);
       if (this.queue.length >= maxSessions) { this.warnOffline(); return; }
-      this.current = { request: { activity_slug: 'rock-paper-scissors', activity_version: '1.0.0',
+      this.current = { request: { activity_slug: this.runtime.activitySlug, activity_version: this.runtime.activityVersion,
         client_session_id: crypto.randomUUID(), player_id: this.playerId,
-        session_token: (crypto.randomUUID() + crypto.randomUUID()).replaceAll('-', ''), mode: state.mode },
+        session_token: (crypto.randomUUID() + crypto.randomUUID()).replaceAll('-', ''), mode: state.mode,
+        ...(this.institutionPlay ? { institution_play_token: this.institutionPlay.token } : {}) },
         nextSequence: 1, closed: false, events: [] };
       this.queue.push(this.current);
     }
@@ -115,7 +123,7 @@ export class GameApiRecorder {
         this.warnOffline(); return;
       }
       this.current.events.push({ client_event_id: crypto.randomUUID(), sequence: this.current.nextSequence++,
-        event_type: 'round_result', occurred_at: new Date().toISOString(), round_index: state.roundId,
+        event_type: this.runtime.resultEventType as RecordedEvent['event_type'], occurred_at: new Date().toISOString(), round_index: state.roundId,
         success: state.result.success, details: { mode: state.result.mode, player: state.result.player,
           opponent: state.result.opponent, success_count: state.successCount, party_count: state.partyCount } });
     }

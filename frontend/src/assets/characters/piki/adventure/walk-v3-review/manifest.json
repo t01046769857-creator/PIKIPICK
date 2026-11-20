@@ -1,0 +1,172 @@
+{
+  "status": "REVIEW_ONLY_NOT_RUNTIME_APPROVED",
+  "canvas": [
+    1254,
+    1254
+  ],
+  "bottom_alpha_baseline_y": 1198,
+  "target_supportFoot_x": 627,
+  "note": "Prepared images normalize visible character silhouette size and bottom y only, NOT verified stance foot at x627; do not infer correct contact gait. Some scenes are independently generated and require motion review.",
+  "entries": [
+    {
+      "file": "prepared/left/piki-walk-left-01.png",
+      "original": "originals/left/piki-walk-left-01.png",
+      "original_bbox_alpha_gt32": [
+        197,
+        55,
+        955,
+        1209
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/left/piki-walk-left-02.png",
+      "original": "originals/left/piki-walk-left-02.png",
+      "original_bbox_alpha_gt32": [
+        205,
+        54,
+        956,
+        1188
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/left/piki-walk-left-03.png",
+      "original": "originals/left/piki-walk-left-03.png",
+      "original_bbox_alpha_gt32": [
+        254,
+        96,
+        944,
+        1168
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/left/piki-walk-left-04.png",
+      "original": "originals/left/piki-walk-left-04.png",
+      "original_bbox_alpha_gt32": [
+        205,
+        52,
+        946,
+        1181
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/right/piki-walk-right-01.png",
+      "original": "originals/right/piki-walk-right-01.png",
+      "original_bbox_alpha_gt32": [
+        209,
+        0,
+        949,
+        1206
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/right/piki-walk-right-02.png",
+      "original": "originals/right/piki-walk-right-02.png",
+      "original_bbox_alpha_gt32": [
+        226,
+        26,
+        1047,
+        1215
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/right/piki-walk-right-03.png",
+      "original": "originals/right/piki-walk-right-03.png",
+      "original_bbox_alpha_gt32": [
+        213,
+        25,
+        1015,
+        1217
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    },
+    {
+      "file": "prepared/right/piki-walk-right-04.png",
+      "original": "originals/right/piki-walk-right-04.png",
+      "original_bbox_alpha_gt32": [
+        234,
+        53,
+        1058,
+        1187
+      ],
+      "prepared_size": [
+        1254,
+        1254
+      ],
+      "normalized_visual_height_px": 1100,
+      "normalized_bottom_y_px": 1198,
+      "supportFoot": "UNVERIFIED",
+      "leftSole": null,
+      "rightSole": null,
+      "gait_phase": "UNVERIFIED"
+    }
+  ]
+}

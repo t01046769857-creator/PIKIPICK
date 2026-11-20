@@ -1,0 +1,53 @@
+{
+  "status": "IMAGE CANDIDATES - NOT VERIFIED SEAMLESS / NOT INTEGRATED IN SOURCE CODE",
+  "world": {
+    "width": 9000,
+    "height": 900,
+    "speed_px_per_sec": 100
+  },
+  "assets": [
+    {
+      "name": "secret-land-terrain-left-connector-3100x900.png",
+      "worldX": 0,
+      "worldY": 0,
+      "width": 3100,
+      "height": 900,
+      "opaque": true,
+      "origin_size": [
+        2172,
+        724
+      ]
+    },
+    {
+      "name": "secret-land-terrain-right-connector-3500x900.png",
+      "worldX": 5500,
+      "worldY": 0,
+      "width": 3500,
+      "height": 900,
+      "opaque": true,
+      "origin_size": [
+        2172,
+        724
+      ]
+    }
+  ],
+  "approved_bridge": {
+    "filename": "world-terrain-compact-rainbow-bridge-v3-2400x800.png",
+    "must_use_existing_repo_file": true,
+    "worldX": 3100,
+    "worldY": 50,
+    "width": 2400,
+    "height": 800
+  },
+  "reference_upload": {
+    "filename": "rainbow-bridge-user-reference-2048x682.png",
+    "purpose": "visual guidance only, NOT a replacement for approved bridge original"
+  },
+  "critical_issues": [
+    "Image-gen backgrounds are concept art and boundaries may NOT align pixel-for-pixel with bridge edges (x=3100/x=5500).",
+    "Dirt road inside generated background might not follow actual 27-point Catmull-Rom route.",
+    "Current 900 px-height candidates are resized from 3:1 generated scenes; proportions should be examined.",
+    "The approved bridge covers y=50..850. Review top/bottom 50 px on the central section.",
+    "Do NOT claim foot contact or route alignment without browser checking."
+  ]
+}

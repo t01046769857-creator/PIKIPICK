@@ -6,28 +6,28 @@ import playStartHand from '../assets/characters/piki/intro-layers/piki-intro-pla
 import { BrandLogo } from './BrandLogo';
 import { PikiSpeechBubble } from './PikiSpeechBubble';
 
-type IntroPhase = 'PEEK' | 'LOOK' | 'NOTICE' | 'APPROACH' | 'REACH' | 'IDLE';
-type StoryExpression = Extract<PikiExpression, 'introPeekRight' | 'surprised' | 'basicGreeting'>;
+type IntroPhase = 'PEEK' | 'REVEAL' | 'ENTER' | 'FRONT_WALK' | 'REACH' | 'HOLD';
+type StoryExpression = Extract<PikiExpression, 'introPeekRight' | 'surprised'>;
 
 const invitation = '내 손 잡아볼래?';
 // ★ 인트로는 한 번만 진행한다. 각 숫자는 다음 장면으로 넘어가기 전 머무는 시간(ms)이다.
-const phaseDuration: Record<Exclude<IntroPhase, 'IDLE'>, number> = {
+const phaseDuration: Record<Exclude<IntroPhase, 'HOLD'>, number> = {
   PEEK: 700,
-  LOOK: 800,
-  NOTICE: 500,
-  APPROACH: 1350,
+  REVEAL: 800,
+  ENTER: 520,
+  FRONT_WALK: 1350,
   REACH: 700,
 };
-const nextPhase: Record<Exclude<IntroPhase, 'IDLE'>, IntroPhase> = {
-  PEEK: 'LOOK', LOOK: 'NOTICE', NOTICE: 'APPROACH', APPROACH: 'REACH', REACH: 'IDLE',
+const nextPhase: Record<Exclude<IntroPhase, 'HOLD'>, IntroPhase> = {
+  PEEK: 'REVEAL', REVEAL: 'ENTER', ENTER: 'FRONT_WALK', FRONT_WALK: 'REACH', REACH: 'HOLD',
 };
 const storyExpressionFor: Record<IntroPhase, StoryExpression> = {
   PEEK: 'introPeekRight',
-  LOOK: 'introPeekRight',
-  NOTICE: 'surprised',
-  APPROACH: 'basicGreeting',
-  REACH: 'basicGreeting',
-  IDLE: 'basicGreeting',
+  REVEAL: 'introPeekRight',
+  ENTER: 'surprised',
+  FRONT_WALK: 'surprised',
+  REACH: 'surprised',
+  HOLD: 'surprised',
 };
 
 interface PikiIntroSceneProps {
@@ -97,9 +97,7 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
     let cancelled = false;
     const requiredSources = [
       pikiExpressions.surprised,
-      pikiExpressions.basicGreeting,
       pikiExpressions.introPeekRight,
-      pikiExpressions.introReach,
       playStartBody,
       playStartHand,
     ];
@@ -120,17 +118,17 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
 
   useEffect(() => {
     if (reducedMotion) {
-      setPhase('IDLE');
+      setPhase('HOLD');
       return undefined;
     }
-    if (!assetsReady || phase === 'IDLE') return undefined;
+    if (!assetsReady || phase === 'HOLD') return undefined;
     const timer = window.setTimeout(() => setPhase(nextPhase[phase]), phaseDuration[phase]);
     return () => window.clearTimeout(timer);
   }, [assetsReady, phase, reducedMotion]);
 
   useEffect(() => {
-    if (phase === 'IDLE') hasSpoken.current = false;
-    if (phase === 'IDLE' && soundEnabled) speakInvitation();
+    if (phase === 'HOLD') hasSpoken.current = false;
+    if (phase === 'HOLD' && soundEnabled) speakInvitation();
   }, [phase, soundEnabled, speakInvitation]);
 
   useEffect(() => () => {
@@ -163,16 +161,16 @@ export function PikiIntroScene({ onBegin, soundEnabled, navigation }: PikiIntroS
                 <div className="intro-story-stack" aria-hidden="true">
                   {storyFrames.previous && <img className={`intro-story-frame intro-story-frame--previous intro-story-frame--${storyFrames.previous}`} src={pikiExpressions[storyFrames.previous]} alt="" draggable="false" />}
                   <img className={`intro-story-frame intro-story-frame--current intro-story-frame--${storyFrames.current}`} src={pikiExpressions[storyFrames.current]} alt="" draggable="false" />
-                  {phase === 'LOOK' && <span className="intro-peek-blink" aria-hidden="true" />}
+                  {phase === 'REVEAL' && <span className="intro-peek-blink" aria-hidden="true" />}
                 </div>
-                <div className="intro-reach-assembly" aria-hidden={phase !== 'REACH' && phase !== 'IDLE'}>
+                <div className="intro-reach-assembly" aria-hidden={phase !== 'REACH' && phase !== 'HOLD'}>
                   <img className="intro-reach-body" src={playStartBody} alt="피키가 손을 내밀고 있어요" draggable="false" />
-                  <div className={`play-start-hand ${phase === 'IDLE' && !isLeaving ? 'is-inviting' : ''}`}>
+                  <div className={`play-start-hand ${phase === 'HOLD' && !isLeaving ? 'is-inviting' : ''}`}>
                     <img src={playStartHand} alt="" draggable="false" />
                     {/* 보이는 왼쪽 큰 손과 같은 좌표계의 투명 버튼: 손 자체를 누르는 경험을 만든다. */}
-                    {(phase === 'REACH' || phase === 'IDLE') && <button className="play-start-hand__target" type="button" onClick={beginPlay} aria-label="피키 손을 눌러 놀이 시작" />}
+                    {(phase === 'REACH' || phase === 'HOLD') && <button className="play-start-hand__target" type="button" onClick={beginPlay} aria-label="피키 손을 눌러 놀이 시작" />}
                   </div>
-                  {phase === 'IDLE' && !isLeaving && <PikiSpeechBubble variant="hand">{invitation}</PikiSpeechBubble>}
+                  {phase === 'HOLD' && !isLeaving && <PikiSpeechBubble variant="hand">{invitation}</PikiSpeechBubble>}
                 </div>
               </div>
             </div>

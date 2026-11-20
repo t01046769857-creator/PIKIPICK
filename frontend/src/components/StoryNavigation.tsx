@@ -1,10 +1,28 @@
 import { useEffect, useRef } from 'react';
 import './StoryNavigation.css';
 import { PikiHand } from './PikiHand';
+import menuHome from '../assets/menu-icons/popup-replace/menu-home.png';
+import menuImagination from '../assets/menu-icons/popup-replace/menu-imagination.png';
+import menuPlaySelect from '../assets/menu-icons/popup-replace/menu-play-select.png';
+import menuRulePractice from '../assets/menu-icons/popup-replace/menu-rule-practice.png';
+import menuSecretLand from '../assets/menu-icons/popup-replace/menu-secret-land.png';
+import menuSoundOn from '../assets/menu-icons/popup-replace/menu-sound-on.png';
 
-export type StoryIconName = 'home' | 'play' | 'practice' | 'stars' | 'secret' | 'sound' | 'back' | 'next' | 'skip' | 'menu' | 'close';
+export type StoryIconName = 'home' | 'play' | 'practice' | 'imagination' | 'stars' | 'secret' | 'sound' | 'back' | 'next' | 'skip' | 'menu' | 'close';
+
+const menuIconSources: Partial<Record<StoryIconName, string>> = {
+  home: menuHome,
+  play: menuPlaySelect,
+  practice: menuRulePractice,
+  secret: menuSecretLand,
+  imagination: menuImagination,
+};
 
 export function StoryIcon({ name, muted = false }: { name: StoryIconName; muted?: boolean }) {
+  const menuIcon = menuIconSources[name];
+  if (menuIcon) return <img className="story-icon story-icon-image" src={menuIcon} alt="" aria-hidden="true" />;
+  if (name === 'sound' && !muted) return <img className="story-icon story-icon-image" src={menuSoundOn} alt="" aria-hidden="true" />;
+  if (name === 'imagination') return <span className="story-icon story-imagination-art" aria-hidden="true"><PikiHand decorative gesture="SCISSORS"/><i /></span>;
   if (name === 'play' || name === 'practice') return <span className="story-icon story-hand-parts" aria-hidden="true">
     {name === 'play' ? <><PikiHand decorative gesture="ROCK"/><PikiHand decorative gesture="SCISSORS"/><PikiHand decorative gesture="PAPER"/></> : <PikiHand decorative gesture="SCISSORS"/>}
   </span>;
@@ -20,7 +38,7 @@ export function StoryIcon({ name, muted = false }: { name: StoryIconName; muted?
   </svg>;
 }
 
-type Destination = 'home' | 'play' | 'practice' | 'secret';
+type Destination = 'home' | 'play' | 'practice' | 'secret' | 'imagination';
 export function StoryNavigation({ soundEnabled, onSound, onNavigate }: {
   soundEnabled: boolean; onSound: () => void; onNavigate: (destination: Destination) => void;
 }) {
@@ -38,6 +56,7 @@ export function StoryNavigation({ soundEnabled, onSound, onNavigate }: {
       <nav className="story-menu-cards" aria-label="이동 메뉴">
         {items.map(item => <button type="button" key={item.id} onClick={() => { dialog.current?.close(); onNavigate(item.id); }}><StoryIcon name={item.id}/><span>{item.label}</span></button>)}
         <button type="button" aria-label={soundEnabled ? '소리 끄기' : '소리 켜기'} aria-pressed={soundEnabled} onClick={onSound}><StoryIcon name="sound" muted={!soundEnabled}/><span>{soundEnabled ? '소리 켜짐' : '소리 꺼짐'}</span></button>
+        <button type="button" onClick={() => { dialog.current?.close(); onNavigate('imagination'); }}><StoryIcon name="imagination"/><span>상상표현놀이</span></button>
       </nav>
     </dialog>
   </div>;

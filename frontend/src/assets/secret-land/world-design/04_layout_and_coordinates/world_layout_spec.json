@@ -1,0 +1,99 @@
+{
+  "project": "PIKIPICK Secret Land 2D connected-world visual design pack",
+  "status": "DESIGN PROPOSAL — NOT A FINAL PLAYABLE WORLD OR ENGINE COORDINATES",
+  "source_overview": "00_overview/full_concept_board.png",
+  "approved_existing_bridge_must_remain": "Use current project approved compact rainbow bridge background and geometry; provided bridge image is a visual reference, not a replacement.",
+  "zone_count": 5,
+  "prototype_design_grid": {
+    "width": 9000,
+    "height": 900,
+    "unit": "concept design px, NOT game world px"
+  },
+  "goal_walk_seconds_between_stops": [
+    15,
+    20
+  ],
+  "stages": [
+    {
+      "design_stage": 1,
+      "design_name": "새싹 언덕",
+      "stage_name_verified_in_repo": false,
+      "suggested_center_x": 900,
+      "suggested_center_y": 520,
+      "suggested_zone_bounds_x": [
+        0,
+        1800
+      ],
+      "design_reference": "01_zone_references/01_sprout_hill_concept_card.png",
+      "scene_reference": "01_zone_references/01_sprout_hill_scene_reference.png",
+      "implementation_status": "reference only; compare with actual repo stage ID, unlock order, path and collision"
+    },
+    {
+      "design_stage": 2,
+      "design_name": "마법 샘",
+      "stage_name_verified_in_repo": false,
+      "suggested_center_x": 2700,
+      "suggested_center_y": 520,
+      "suggested_zone_bounds_x": [
+        1800,
+        3600
+      ],
+      "design_reference": "01_zone_references/02_magic_spring_concept_card.png",
+      "scene_reference": "01_zone_references/02_magic_spring_scene_reference.png",
+      "implementation_status": "reference only; compare with actual repo stage ID, unlock order, path and collision"
+    },
+    {
+      "design_stage": 3,
+      "design_name": "무지개 다리",
+      "stage_name_verified_in_repo": false,
+      "suggested_center_x": 4500,
+      "suggested_center_y": 520,
+      "suggested_zone_bounds_x": [
+        3600,
+        5400
+      ],
+      "design_reference": "01_zone_references/03_rainbow_bridge_concept_card.png",
+      "scene_reference": "01_zone_references/03_rainbow_bridge_scene_reference.png",
+      "implementation_status": "reference only; compare with actual repo stage ID, unlock order, path and collision"
+    },
+    {
+      "design_stage": 4,
+      "design_name": "구름 정원 (임시 시안)",
+      "stage_name_verified_in_repo": false,
+      "suggested_center_x": 6300,
+      "suggested_center_y": 520,
+      "suggested_zone_bounds_x": [
+        5400,
+        7200
+      ],
+      "design_reference": "01_zone_references/04_cloud_garden_CANDIDATE_concept_card.png",
+      "scene_reference": "01_zone_references/04_cloud_garden_CANDIDATE_scene_reference.png",
+      "implementation_status": "reference only; compare with actual repo stage ID, unlock order, path and collision"
+    },
+    {
+      "design_stage": 5,
+      "design_name": "별빛 궁전 (임시 시안)",
+      "stage_name_verified_in_repo": false,
+      "suggested_center_x": 8100,
+      "suggested_center_y": 520,
+      "suggested_zone_bounds_x": [
+        7200,
+        9000
+      ],
+      "design_reference": "01_zone_references/05_starlight_palace_CANDIDATE_concept_card.png",
+      "scene_reference": "01_zone_references/05_starlight_palace_CANDIDATE_scene_reference.png",
+      "implementation_status": "reference only; compare with actual repo stage ID, unlock order, path and collision"
+    }
+  ],
+  "movement_requirements": {
+    "free_backtracking": true,
+    "stop_stays_at_current_location": true,
+    "reopen_at_last_unlocked_destination": true,
+    "no_autoteleport_except_reentry": true,
+    "walk_path_foot_alignment_required": true,
+    "camera_follows_smoothly": true
+  },
+  "path_artifacts": "03_common_path_reference contains opaque crops from a concept board, NOT production transparent overlays",
+  "coordinate_mapping_required": "Map stage order/names and anchors from source repo first. Transform any art anchors to current engine world basis. Validate visible feet against walkable path. 15-20s requires measuring real speed, not fixed pixels.",
+  "fourth_and_fifth_themes": "Cloud Garden and Starlight Palace are TEMPORARY VISUAL CONCEPTS from generated board. Do not rename or overwrite existing project stage names."
+}

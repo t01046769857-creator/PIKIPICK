@@ -1,0 +1,26 @@
+{
+  "injected": {
+    "source": "http://127.0.0.1:5173/src/assets/secret-land/place-rainbow-bridge-v2.png",
+    "routeZIndex": "21"
+  },
+  "metrics": {
+    "image": {
+      "x": 447.69775390625,
+      "y": 553.667236328125,
+      "width": 529.578125,
+      "height": 299.328125,
+      "right": 977.27587890625,
+      "bottom": 852.995361328125
+    },
+    "route": {
+      "x": -4353.13818359375,
+      "y": 340.6906433105469,
+      "width": 10361.53125,
+      "height": 1036.140625,
+      "right": 6008.39306640625,
+      "bottom": 1376.8312683105469
+    },
+    "source": "http://127.0.0.1:5173/src/assets/secret-land/place-rainbow-bridge-v2.png",
+    "pathUnchanged": true
+  }
+}

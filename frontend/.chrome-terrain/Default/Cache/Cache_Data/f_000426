@@ -1,0 +1,297 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/TeacherPortal.tsx");const _jsxDEV = __vite__cjsImport6_react_jsxDevRuntime["jsxDEV"];const useState = __vite__cjsImport2_react["useState"];import { BrandLogo } from "/src/components/BrandLogo.tsx";
+import { PikiCharacter } from "/src/components/PikiCharacter.tsx";
+import __vite__cjsImport2_react from "/node_modules/.vite/deps/react.js?v=5e370e6a";
+import { loginTeacher } from "/src/teacher/teacherApi.ts";
+import { TeacherLmsDashboard } from "/src/components/TeacherLmsDashboard.tsx";
+import "/src/components/TeacherPortal.css";
+var _jsxFileName = "C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherPortal.tsx";
+import __vite__cjsImport6_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=5e370e6a";
+var _s = $RefreshSig$();
+function TeacherShell({ children }) {
+	return /* @__PURE__ */ _jsxDEV("main", {
+		className: "teacher-portal",
+		children: [/* @__PURE__ */ _jsxDEV("header", {
+			className: "teacher-portal__header",
+			children: [/* @__PURE__ */ _jsxDEV("a", {
+				href: "/teacher/login",
+				"aria-label": "피키픽 교사용 시작",
+				children: [/* @__PURE__ */ _jsxDEV(BrandLogo, {}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 9,
+					columnNumber: 135
+				}, this), /* @__PURE__ */ _jsxDEV("span", { children: "교사용 관찰 공간" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 9,
+					columnNumber: 148
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 9,
+				columnNumber: 86
+			}, this), /* @__PURE__ */ _jsxDEV("a", {
+				className: "teacher-portal__child-link",
+				href: "/play",
+				children: "아이 놀이로"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 9,
+				columnNumber: 174
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 9,
+			columnNumber: 43
+		}, this), children]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 9,
+		columnNumber: 10
+	}, this);
+}
+_c = TeacherShell;
+export function TeacherLogin() {
+	_s();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const [busy, setBusy] = useState(false);
+	const submit = async (event) => {
+		event.preventDefault();
+		setBusy(true);
+		setError("");
+		try {
+			await loginTeacher(email, password);
+			window.location.assign("/teacher/dashboard");
+		} catch {
+			setError("이메일 또는 비밀번호를 확인해 주세요.");
+		} finally {
+			setBusy(false);
+		}
+	};
+	return /* @__PURE__ */ _jsxDEV(TeacherShell, { children: /* @__PURE__ */ _jsxDEV("section", {
+		className: "teacher-login",
+		children: [/* @__PURE__ */ _jsxDEV(PikiCharacter, {
+			expression: "curious",
+			size: "medium"
+		}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 15,
+			columnNumber: 59
+		}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+			/* @__PURE__ */ _jsxDEV("span", {
+				className: "teacher-kicker",
+				children: "교사용 LMS"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 116
+			}, this),
+			/* @__PURE__ */ _jsxDEV("h1", { children: "아이의 놀이를 함께 살펴봐요" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 163
+			}, this),
+			/* @__PURE__ */ _jsxDEV("p", { children: "권한이 있는 담당 아동의 저장된 기록만 확인할 수 있어요." }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 187
+			}, this),
+			/* @__PURE__ */ _jsxDEV("form", {
+				className: "teacher-login__form",
+				onSubmit: submit,
+				children: [
+					/* @__PURE__ */ _jsxDEV("label", { children: ["이메일", /* @__PURE__ */ _jsxDEV("input", {
+						required: true,
+						type: "email",
+						value: email,
+						onChange: (event) => setEmail(event.target.value),
+						autoComplete: "username"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 292
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 282
+					}, this),
+					/* @__PURE__ */ _jsxDEV("label", { children: ["비밀번호", /* @__PURE__ */ _jsxDEV("input", {
+						required: true,
+						type: "password",
+						minLength: 8,
+						value: password,
+						onChange: (event) => setPassword(event.target.value),
+						autoComplete: "current-password"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 429
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 418
+					}, this),
+					error && /* @__PURE__ */ _jsxDEV("p", {
+						role: "alert",
+						children: error
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 596
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						className: "teacher-primary",
+						disabled: busy,
+						children: busy ? "확인 중…" : "로그인"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 624
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 226
+			}, this),
+			/* @__PURE__ */ _jsxDEV("small", { children: "계정과 담당 관계는 관리자 승인 절차로만 설정됩니다." }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 716
+			}, this)
+		] }, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 15,
+			columnNumber: 111
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 15,
+		columnNumber: 24
+	}, this) }, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 15,
+		columnNumber: 10
+	}, this);
+}
+_s(TeacherLogin, "AVwAwza6pRSs2G1y2KW5sk+pDWA=");
+_c2 = TeacherLogin;
+export function TeacherDashboard() {
+	return /* @__PURE__ */ _jsxDEV(TeacherShell, { children: [/* @__PURE__ */ _jsxDEV(TeacherLmsDashboard, {}, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 19,
+		columnNumber: 24
+	}, this), /* @__PURE__ */ _jsxDEV("p", {
+		className: "teacher-demo-link",
+		children: /* @__PURE__ */ _jsxDEV("a", {
+			href: "/teacher/demo/child",
+			children: "데모 데이터 화면 보기"
+		}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 19,
+			columnNumber: 80
+		}, this)
+	}, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 19,
+		columnNumber: 47
+	}, this)] }, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 19,
+		columnNumber: 10
+	}, this);
+}
+_c3 = TeacherDashboard;
+export function TeacherChildDashboard({ childId }) {
+	return /* @__PURE__ */ _jsxDEV(TeacherShell, { children: /* @__PURE__ */ _jsxDEV(TeacherLmsDashboard, { childId }, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 23,
+		columnNumber: 24
+	}, this) }, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 23,
+		columnNumber: 10
+	}, this);
+}
+_c4 = TeacherChildDashboard;
+export function TeacherChildAccessBlocked() {
+	return /* @__PURE__ */ _jsxDEV(TeacherShell, { children: /* @__PURE__ */ _jsxDEV("section", {
+		className: "teacher-blocked",
+		children: [
+			/* @__PURE__ */ _jsxDEV(PikiCharacter, {
+				expression: "encourage",
+				size: "medium"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 27,
+				columnNumber: 61
+			}, this),
+			/* @__PURE__ */ _jsxDEV("span", {
+				className: "teacher-kicker",
+				children: "권한 확인 필요"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 27,
+				columnNumber: 115
+			}, this),
+			/* @__PURE__ */ _jsxDEV("h1", { children: "이 아이의 기록은 아직 열 수 없어요" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 27,
+				columnNumber: 163
+			}, this),
+			/* @__PURE__ */ _jsxDEV("p", { children: "교사 인증과 담당 아동 권한이 설정되기 전에는 개인 놀이 기록을 URL로 직접 열 수 없습니다." }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 27,
+				columnNumber: 192
+			}, this),
+			/* @__PURE__ */ _jsxDEV("a", {
+				className: "teacher-primary",
+				href: "/teacher/login",
+				children: "교사 시작 화면으로"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 27,
+				columnNumber: 252
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 27,
+		columnNumber: 24
+	}, this) }, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 27,
+		columnNumber: 10
+	}, this);
+}
+_c5 = TeacherChildAccessBlocked;
+var _c, _c2, _c3, _c4, _c5;
+$RefreshReg$(_c, "TeacherShell");
+$RefreshReg$(_c2, "TeacherLogin");
+$RefreshReg$(_c3, "TeacherDashboard");
+$RefreshReg$(_c4, "TeacherChildDashboard");
+$RefreshReg$(_c5, "TeacherChildAccessBlocked");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/TeacherPortal.tsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherPortal.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherPortal.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherPortal.tsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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O1lBQW5CO0dBQXFDLHdCQUFDLGVBQUQ7SUFBZSxZQUFXO0lBQVksTUFBSztHQUFVOzs7OztHQUFDLHdCQUFDLFFBQUQ7SUFBTSxXQUFVO2NBQWlCO0dBQWM7Ozs7O0dBQUMsd0JBQUMsTUFBRCxZQUFJLHVCQUF3Qjs7Ozs7R0FBQyx3QkFBQyxLQUFELFlBQUcsd0RBQXdEOzs7OztHQUFDLHdCQUFDLEtBQUQ7SUFBRyxXQUFVO0lBQWtCLE1BQUs7Y0FBaUI7R0FBYTs7Ozs7RUFBVTs7Ozs7VUFBZTs7Ozs7QUFDdFYiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiVGVhY2hlclBvcnRhbC50c3giXSwidmVyc2lvbiI6Mywic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQnJhbmRMb2dvIH0gZnJvbSAnLi9CcmFuZExvZ28nO1xyXG5pbXBvcnQgeyBQaWtpQ2hhcmFjdGVyIH0gZnJvbSAnLi9QaWtpQ2hhcmFjdGVyJztcclxuaW1wb3J0IHsgdXNlU3RhdGUsIHR5cGUgRm9ybUV2ZW50IH0gZnJvbSAncmVhY3QnO1xyXG5pbXBvcnQgeyBsb2dpblRlYWNoZXIgfSBmcm9tICcuLi90ZWFjaGVyL3RlYWNoZXJBcGknO1xyXG5pbXBvcnQgeyBUZWFjaGVyTG1zRGFzaGJvYXJkIH0gZnJvbSAnLi9UZWFjaGVyTG1zRGFzaGJvYXJkJztcclxuaW1wb3J0ICcuL1RlYWNoZXJQb3J0YWwuY3NzJztcclxuXHJcbmZ1bmN0aW9uIFRlYWNoZXJTaGVsbCh7IGNoaWxkcmVuIH06IHsgY2hpbGRyZW46IFJlYWN0LlJlYWN0Tm9kZSB9KSB7XHJcbiAgcmV0dXJuIDxtYWluIGNsYXNzTmFtZT1cInRlYWNoZXItcG9ydGFsXCI+PGhlYWRlciBjbGFzc05hbWU9XCJ0ZWFjaGVyLXBvcnRhbF9faGVhZGVyXCI+PGEgaHJlZj1cIi90ZWFjaGVyL2xvZ2luXCIgYXJpYS1sYWJlbD1cIu2UvO2CpO2UvSDqtZDsgqzsmqkg7Iuc7J6RXCI+PEJyYW5kTG9nbyAvPjxzcGFuPuq1kOyCrOyaqSDqtIDssLAg6rO16rCEPC9zcGFuPjwvYT48YSBjbGFzc05hbWU9XCJ0ZWFjaGVyLXBvcnRhbF9fY2hpbGQtbGlua1wiIGhyZWY9XCIvcGxheVwiPuyVhOydtCDrhoDsnbTroZw8L2E+PC9oZWFkZXI+e2NoaWxkcmVufTwvbWFpbj47XHJcbn1cclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBUZWFjaGVyTG9naW4oKSB7XHJcbiAgY29uc3QgW2VtYWlsLCBzZXRFbWFpbF0gPSB1c2VTdGF0ZSgnJyk7IGNvbnN0IFtwYXNzd29yZCwgc2V0UGFzc3dvcmRdID0gdXNlU3RhdGUoJycpOyBjb25zdCBbZXJyb3IsIHNldEVycm9yXSA9IHVzZVN0YXRlKCcnKTsgY29uc3QgW2J1c3ksIHNldEJ1c3ldID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IHN1Ym1pdCA9IGFzeW5jIChldmVudDogRm9ybUV2ZW50KSA9PiB7IGV2ZW50LnByZXZlbnREZWZhdWx0KCk7IHNldEJ1c3kodHJ1ZSk7IHNldEVycm9yKCcnKTsgdHJ5IHsgYXdhaXQgbG9naW5UZWFjaGVyKGVtYWlsLCBwYXNzd29yZCk7IHdpbmRvdy5sb2NhdGlvbi5hc3NpZ24oJy90ZWFjaGVyL2Rhc2hib2FyZCcpOyB9IGNhdGNoIHsgc2V0RXJyb3IoJ+ydtOuplOydvCDrmJDripQg67mE67CA67KI7Zi466W8IO2ZleyduO2VtCDso7zshLjsmpQuJyk7IH0gZmluYWxseSB7IHNldEJ1c3koZmFsc2UpOyB9IH07XHJcbiAgcmV0dXJuIDxUZWFjaGVyU2hlbGw+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sb2dpblwiPjxQaWtpQ2hhcmFjdGVyIGV4cHJlc3Npb249XCJjdXJpb3VzXCIgc2l6ZT1cIm1lZGl1bVwiIC8+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuq1kOyCrOyaqSBMTVM8L3NwYW4+PGgxPuyVhOydtOydmCDrhoDsnbTrpbwg7ZWo6ruYIOyCtO2OtOu0kOyalDwvaDE+PHA+6raM7ZWc7J20IOyeiOuKlCDri7Tri7kg7JWE64+Z7J2YIOyggOyepeuQnCDquLDroZ3rp4wg7ZmV7J247ZWgIOyImCDsnojslrTsmpQuPC9wPjxmb3JtIGNsYXNzTmFtZT1cInRlYWNoZXItbG9naW5fX2Zvcm1cIiBvblN1Ym1pdD17c3VibWl0fT48bGFiZWw+7J2066mU7J28PGlucHV0IHJlcXVpcmVkIHR5cGU9XCJlbWFpbFwiIHZhbHVlPXtlbWFpbH0gb25DaGFuZ2U9e2V2ZW50ID0+IHNldEVtYWlsKGV2ZW50LnRhcmdldC52YWx1ZSl9IGF1dG9Db21wbGV0ZT1cInVzZXJuYW1lXCIgLz48L2xhYmVsPjxsYWJlbD7ruYTrsIDrsojtmLg8aW5wdXQgcmVxdWlyZWQgdHlwZT1cInBhc3N3b3JkXCIgbWluTGVuZ3RoPXs4fSB2YWx1ZT17cGFzc3dvcmR9IG9uQ2hhbmdlPXtldmVudCA9PiBzZXRQYXNzd29yZChldmVudC50YXJnZXQudmFsdWUpfSBhdXRvQ29tcGxldGU9XCJjdXJyZW50LXBhc3N3b3JkXCIgLz48L2xhYmVsPntlcnJvciAmJiA8cCByb2xlPVwiYWxlcnRcIj57ZXJyb3J9PC9wPn08YnV0dG9uIGNsYXNzTmFtZT1cInRlYWNoZXItcHJpbWFyeVwiIGRpc2FibGVkPXtidXN5fT57YnVzeSA/ICftmZXsnbgg7KSR4oCmJyA6ICfroZzqt7jsnbgnfTwvYnV0dG9uPjwvZm9ybT48c21hbGw+6rOE7KCV6rO8IOuLtOuLuSDqtIDqs4TripQg6rSA66as7J6QIOyKueyduCDsoIjssKjroZzrp4wg7ISk7KCV65Cp64uI64ukLjwvc21hbGw+PC9kaXY+PC9zZWN0aW9uPjwvVGVhY2hlclNoZWxsPjtcclxufVxyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIFRlYWNoZXJEYXNoYm9hcmQoKSB7XHJcbiAgcmV0dXJuIDxUZWFjaGVyU2hlbGw+PFRlYWNoZXJMbXNEYXNoYm9hcmQgLz48cCBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW8tbGlua1wiPjxhIGhyZWY9XCIvdGVhY2hlci9kZW1vL2NoaWxkXCI+642w66qoIOuNsOydtO2EsCDtmZTrqbQg67O06riwPC9hPjwvcD48L1RlYWNoZXJTaGVsbD47XHJcbn1cclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBUZWFjaGVyQ2hpbGREYXNoYm9hcmQoeyBjaGlsZElkIH06IHsgY2hpbGRJZDogc3RyaW5nIH0pIHtcclxuICByZXR1cm4gPFRlYWNoZXJTaGVsbD48VGVhY2hlckxtc0Rhc2hib2FyZCBjaGlsZElkPXtjaGlsZElkfSAvPjwvVGVhY2hlclNoZWxsPjtcclxufVxyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIFRlYWNoZXJDaGlsZEFjY2Vzc0Jsb2NrZWQoKSB7XHJcbiAgcmV0dXJuIDxUZWFjaGVyU2hlbGw+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1ibG9ja2VkXCI+PFBpa2lDaGFyYWN0ZXIgZXhwcmVzc2lvbj1cImVuY291cmFnZVwiIHNpemU9XCJtZWRpdW1cIiAvPjxzcGFuIGNsYXNzTmFtZT1cInRlYWNoZXIta2lja2VyXCI+6raM7ZWcIO2ZleyduCDtlYTsmpQ8L3NwYW4+PGgxPuydtCDslYTsnbTsnZgg6riw66Gd7J2AIOyVhOyngSDsl7Qg7IiYIOyXhuyWtOyalDwvaDE+PHA+6rWQ7IKsIOyduOymneqzvCDri7Tri7kg7JWE64+ZIOq2jO2VnOydtCDshKTsoJXrkJjquLAg7KCE7JeQ64qUIOqwnOyduCDrhoDsnbQg6riw66Gd7J2EIFVSTOuhnCDsp4HsoJEg7Je0IOyImCDsl4bsirXri4jri6QuPC9wPjxhIGNsYXNzTmFtZT1cInRlYWNoZXItcHJpbWFyeVwiIGhyZWY9XCIvdGVhY2hlci9sb2dpblwiPuq1kOyCrCDsi5zsnpEg7ZmU66m07Jy866GcPC9hPjwvc2VjdGlvbj48L1RlYWNoZXJTaGVsbD47XHJcbn1cclxuIl19

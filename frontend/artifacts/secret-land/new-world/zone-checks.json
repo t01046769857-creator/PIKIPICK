@@ -1,0 +1,377 @@
+[
+  {
+    "name": "sprout",
+    "progress": 0,
+    "traveler": null,
+    "landmarks": [
+      {
+        "x": 7159.67,
+        "y": 446.61,
+        "width": 460.5,
+        "height": 310.83,
+        "visible": false
+      },
+      {
+        "x": 9013.22,
+        "y": 401.7,
+        "width": 437.48,
+        "height": 310.83,
+        "visible": false
+      }
+    ],
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": 21.73,
+          "y": 306.15,
+          "width": 2072.3,
+          "height": 690.75,
+          "visible": true
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": 21.73,
+          "y": 237.07,
+          "width": 2500.58,
+          "height": 833.52,
+          "visible": true
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": 1921.34,
+          "y": 225.55,
+          "width": 2072.3,
+          "height": 1061.45,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": 3763.39,
+          "y": 75.9,
+          "width": 2187.42,
+          "height": 1093.7,
+          "visible": false
+        }
+      }
+    ],
+    "routeLayer": {
+      "x": 21.73,
+      "y": 29.85,
+      "width": 10361.53,
+      "height": 1036.14,
+      "visible": true
+    },
+    "screenshot": "zone-sprout.png"
+  },
+  {
+    "name": "spring",
+    "progress": 0.25,
+    "traveler": null,
+    "landmarks": [
+      {
+        "x": 5029.8,
+        "y": 527.19,
+        "width": 460.5,
+        "height": 310.83,
+        "visible": false
+      },
+      {
+        "x": 6883.35,
+        "y": 482.29,
+        "width": 437.48,
+        "height": 310.83,
+        "visible": false
+      }
+    ],
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -2108.14,
+          "y": 386.73,
+          "width": 2072.3,
+          "height": 690.75,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -2108.14,
+          "y": 317.66,
+          "width": 2500.58,
+          "height": 833.52,
+          "visible": true
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -208.53,
+          "y": 306.14,
+          "width": 2072.3,
+          "height": 1061.45,
+          "visible": true
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": 1633.52,
+          "y": 156.48,
+          "width": 2187.42,
+          "height": 1093.7,
+          "visible": false
+        }
+      }
+    ],
+    "routeLayer": {
+      "x": -2108.14,
+      "y": 110.44,
+      "width": 10361.53,
+      "height": 1036.14,
+      "visible": true
+    },
+    "screenshot": "zone-spring.png"
+  },
+  {
+    "name": "bridge",
+    "progress": 0.5,
+    "traveler": null,
+    "landmarks": [
+      {
+        "x": 2784.8,
+        "y": 757.45,
+        "width": 460.5,
+        "height": 310.83,
+        "visible": false
+      },
+      {
+        "x": 4638.35,
+        "y": 712.54,
+        "width": 437.48,
+        "height": 310.83,
+        "visible": false
+      }
+    ],
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -4353.14,
+          "y": 616.99,
+          "width": 2072.3,
+          "height": 690.75,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -4353.14,
+          "y": 547.91,
+          "width": 2500.58,
+          "height": 833.52,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -2453.53,
+          "y": 536.39,
+          "width": 2072.3,
+          "height": 1061.45,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": -611.48,
+          "y": 386.74,
+          "width": 2187.42,
+          "height": 1093.7,
+          "visible": true
+        }
+      }
+    ],
+    "routeLayer": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "visible": true
+    },
+    "screenshot": "zone-bridge.png"
+  },
+  {
+    "name": "castle",
+    "progress": 0.75,
+    "traveler": null,
+    "landmarks": [
+      {
+        "x": 597.37,
+        "y": 527.19,
+        "width": 460.5,
+        "height": 310.83,
+        "visible": true
+      },
+      {
+        "x": 2450.92,
+        "y": 482.29,
+        "width": 437.48,
+        "height": 310.83,
+        "visible": false
+      }
+    ],
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -6540.57,
+          "y": 386.73,
+          "width": 2072.3,
+          "height": 690.75,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -6540.57,
+          "y": 317.66,
+          "width": 2500.58,
+          "height": 833.52,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -4640.96,
+          "y": 306.14,
+          "width": 2072.3,
+          "height": 1061.45,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": -2798.92,
+          "y": 156.48,
+          "width": 2187.42,
+          "height": 1093.7,
+          "visible": false
+        }
+      }
+    ],
+    "routeLayer": {
+      "x": -6540.57,
+      "y": 110.44,
+      "width": 10361.53,
+      "height": 1036.14,
+      "visible": true
+    },
+    "screenshot": "zone-castle.png"
+  },
+  {
+    "name": "gate",
+    "progress": 1,
+    "traveler": null,
+    "landmarks": [
+      {
+        "x": -1244.68,
+        "y": 550.22,
+        "width": 460.5,
+        "height": 310.83,
+        "visible": false
+      },
+      {
+        "x": 608.87,
+        "y": 505.31,
+        "width": 437.48,
+        "height": 310.83,
+        "visible": true
+      }
+    ],
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -8382.62,
+          "y": 409.76,
+          "width": 2072.3,
+          "height": 690.75,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -8382.62,
+          "y": 340.68,
+          "width": 2500.58,
+          "height": 833.52,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -6483.01,
+          "y": 329.17,
+          "width": 2072.3,
+          "height": 1061.45,
+          "visible": false
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": -4640.97,
+          "y": 179.51,
+          "width": 2187.42,
+          "height": 1093.7,
+          "visible": false
+        }
+      }
+    ],
+    "routeLayer": {
+      "x": -8382.62,
+      "y": 133.46,
+      "width": 10361.53,
+      "height": 1036.14,
+      "visible": true
+    },
+    "screenshot": "zone-gate.png"
+  }
+]

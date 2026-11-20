@@ -1,0 +1,1570 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/TeacherLmsDashboard.tsx");const useEffect = __vite__cjsImport0_react["useEffect"]; const useMemo = __vite__cjsImport0_react["useMemo"]; const useState = __vite__cjsImport0_react["useState"];const _jsxDEV = __vite__cjsImport5_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport5_react_jsxDevRuntime["Fragment"];import __vite__cjsImport0_react from "/node_modules/.vite/deps/react.js?v=5e370e6a";
+import { getTeacherChildren, getTeacherDashboard, hasTeacherSession } from "/src/teacher/teacherApi.ts";
+import { fetchContentCatalog } from "/src/game/contentCatalog.ts";
+import { contentHasRecordedExperience, getAnalyticsModule, metricLabel } from "/src/teacher/contentAnalytics.ts";
+import "/src/components/TeacherLmsDashboard.css";
+var _jsxFileName = "C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherLmsDashboard.tsx";
+import __vite__cjsImport5_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=5e370e6a";
+var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+const periods = [
+	7,
+	30,
+	90
+];
+const weekdayLabels = [
+	"월",
+	"화",
+	"수",
+	"목",
+	"금",
+	"토",
+	"일"
+];
+const gestureLabels = {
+	ROCK: "바위",
+	SCISSORS: "가위",
+	PAPER: "보"
+};
+function Empty({ children }) {
+	return /* @__PURE__ */ _jsxDEV("p", {
+		className: "teacher-lms__empty",
+		children
+	}, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 12,
+		columnNumber: 64
+	}, this);
+}
+_c = Empty;
+function BarList({ items, label, value, itemKeys = [] }) {
+	const max = Math.max(1, ...items.map((item) => item.value));
+	if (!items.length) return /* @__PURE__ */ _jsxDEV(Empty, { children: [label, " 기록이 아직 없습니다."] }, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 16,
+		columnNumber: 29
+	}, this);
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "teacher-lms__bars",
+		"aria-label": label,
+		children: items.map((item, index) => /* @__PURE__ */ _jsxDEV("div", {
+			"data-activity": itemKeys[index],
+			children: [
+				/* @__PURE__ */ _jsxDEV("span", { children: item.label }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 17,
+					columnNumber: 146
+				}, this),
+				/* @__PURE__ */ _jsxDEV("i", { children: /* @__PURE__ */ _jsxDEV("b", { style: { width: `${item.value / max * 100}%` } }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 17,
+					columnNumber: 174
+				}, this) }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 17,
+					columnNumber: 171
+				}, this),
+				/* @__PURE__ */ _jsxDEV("strong", { children: [item.value, value] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 17,
+					columnNumber: 233
+				}, this)
+			]
+		}, item.label, true, {
+			fileName: _jsxFileName,
+			lineNumber: 17,
+			columnNumber: 92
+		}, this))
+	}, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 17,
+		columnNumber: 10
+	}, this);
+}
+_c2 = BarList;
+function EvidencePanel({ evidence, onClose }) {
+	return /* @__PURE__ */ _jsxDEV("aside", {
+		className: "teacher-lms__evidence-panel",
+		"aria-label": "분석 상세",
+		children: [/* @__PURE__ */ _jsxDEV("div", {
+			className: "teacher-lms__panel-heading",
+			children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "분석 근거" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 21,
+				columnNumber: 125
+			}, this), /* @__PURE__ */ _jsxDEV("h2", { children: evidence ? evidence.activity_slug : "지표를 선택해 주세요" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 21,
+				columnNumber: 143
+			}, this)] }, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 21,
+				columnNumber: 120
+			}, this), evidence && /* @__PURE__ */ _jsxDEV("button", {
+				type: "button",
+				onClick: onClose,
+				"aria-label": "상세 패널 닫기",
+				children: "닫기"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 21,
+				columnNumber: 222
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 21,
+			columnNumber: 76
+		}, this), evidence ? /* @__PURE__ */ _jsxDEV(_Fragment, { children: [
+			/* @__PURE__ */ _jsxDEV("dl", {
+				className: "teacher-lms__facts",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("dt", { children: "대상 기간" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 59
+					}, this), /* @__PURE__ */ _jsxDEV("dd", { children: [
+						"최근 ",
+						evidence.period_days,
+						"일"
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 73
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 54
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("dt", { children: "원본 데이터 수" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 119
+					}, this), /* @__PURE__ */ _jsxDEV("dd", { children: [evidence.event_count, "건"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 136
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 114
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("dt", { children: "버전" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 179
+					}, this), /* @__PURE__ */ _jsxDEV("dd", { children: evidence.data_version }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 190
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 174
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 19
+			}, this),
+			/* @__PURE__ */ _jsxDEV("h3", { children: "계산식" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 233
+			}, this),
+			/* @__PURE__ */ _jsxDEV("code", { children: evidence.formula }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 245
+			}, this),
+			/* @__PURE__ */ _jsxDEV("h3", { children: "계산된 지표" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 276
+			}, this),
+			/* @__PURE__ */ _jsxDEV("ul", {
+				className: "teacher-lms__plain-list",
+				children: evidence.metrics.map((metric) => /* @__PURE__ */ _jsxDEV("li", { children: [
+					/* @__PURE__ */ _jsxDEV("b", { children: metric.value }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 384
+					}, this),
+					" ",
+					metric.key,
+					/* @__PURE__ */ _jsxDEV("small", { children: metric.definition }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 418
+					}, this)
+				] }, metric.key, true, {
+					fileName: _jsxFileName,
+					lineNumber: 22,
+					columnNumber: 363
+				}, this))
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 291
+			}, this),
+			/* @__PURE__ */ _jsxDEV("h3", { children: "해석의 한계" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 464
+			}, this),
+			/* @__PURE__ */ _jsxDEV("ul", {
+				className: "teacher-lms__plain-list",
+				children: evidence.limitations.map((item) => /* @__PURE__ */ _jsxDEV("li", { children: item }, item, false, {
+					fileName: _jsxFileName,
+					lineNumber: 22,
+					columnNumber: 553
+				}, this))
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 479
+			}, this)
+		] }, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 22,
+			columnNumber: 17
+		}, this) : /* @__PURE__ */ _jsxDEV("p", {
+			className: "teacher-lms__panel-note",
+			children: "그래프나 지표 카드를 선택하면 승인된 원본 기록과 계산 기준을 확인할 수 있습니다."
+		}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 22,
+			columnNumber: 592
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 21,
+		columnNumber: 10
+	}, this);
+}
+_c3 = EvidencePanel;
+function ContentCatalogCards({ catalog, data, selected, onSelect }) {
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "teacher-lms__catalog",
+		"aria-label": "놀이 콘텐츠 카탈로그",
+		children: catalog.map((content) => {
+			const recorded = contentHasRecordedExperience(data, content.slug);
+			return /* @__PURE__ */ _jsxDEV("button", {
+				type: "button",
+				className: `${selected === content.slug ? "is-selected " : ""}${content.status === "COMING_SOON" ? "is-coming-soon" : ""}`,
+				onClick: () => onSelect(content.slug),
+				children: [/* @__PURE__ */ _jsxDEV("span", { children: content.title }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 30,
+					columnNumber: 7
+				}, this), /* @__PURE__ */ _jsxDEV("small", { children: content.status === "PLAYABLE" ? recorded ? "경험 기록 있음" : "아직 경험하지 않음" : "준비 중" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 30,
+					columnNumber: 35
+				}, this)]
+			}, content.slug, true, {
+				fileName: _jsxFileName,
+				lineNumber: 29,
+				columnNumber: 12
+			}, this);
+		})
+	}, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 27,
+		columnNumber: 10
+	}, this);
+}
+_c4 = ContentCatalogCards;
+function ContentAnalysisView({ content, data, onEvidence }) {
+	const module = getAnalyticsModule(content);
+	const activity = data.activities.find((item) => item.activity_slug === content?.slug);
+	const metrics = data.content_metrics.find((item) => item.activity_slug === content?.slug);
+	if (!content || content.status === "COMING_SOON" || !module.supported) return /* @__PURE__ */ _jsxDEV("section", {
+		className: "teacher-lms__card teacher-lms__card--wide teacher-lms__coming-soon",
+		children: [
+			/* @__PURE__ */ _jsxDEV("span", { children: "콘텐츠 상태" }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 39,
+				columnNumber: 169
+			}, this),
+			/* @__PURE__ */ _jsxDEV("h2", { children: [content?.title ?? "콘텐츠", " · COMING_SOON"] }, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 39,
+				columnNumber: 188
+			}, this),
+			/* @__PURE__ */ _jsxDEV("p", { children: module.limitation }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 39,
+				columnNumber: 236
+			}, this),
+			/* @__PURE__ */ _jsxDEV("small", { children: "실행·기록·분석 모듈이 준비되기 전까지 실제 데이터나 평가 수치를 표시하지 않습니다." }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 39,
+				columnNumber: 262
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 39,
+		columnNumber: 81
+	}, this);
+	return /* @__PURE__ */ _jsxDEV(_Fragment, { children: [
+		/* @__PURE__ */ _jsxDEV("section", {
+			className: "teacher-lms__card",
+			children: [/* @__PURE__ */ _jsxDEV("div", {
+				className: "teacher-lms__card-heading",
+				children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "콘텐츠 분석" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 99
+				}, this), /* @__PURE__ */ _jsxDEV("h2", { children: module.title }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 118
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 94
+				}, this), /* @__PURE__ */ _jsxDEV("small", { children: ["분석 모듈: ", module.slug] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 147
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 51
+			}, this), activity ? /* @__PURE__ */ _jsxDEV(_Fragment, { children: [/* @__PURE__ */ _jsxDEV("div", {
+				className: "teacher-lms__metric-highlight",
+				children: [
+					/* @__PURE__ */ _jsxDEV("b", { children: activity.attempts }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 249
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: "실제 round_result 시도" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 275
+					}, this),
+					/* @__PURE__ */ _jsxDEV("b", { children: activity.target_choices }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 306
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: "목표 일치 선택" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 338
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 202
+			}, this), /* @__PURE__ */ _jsxDEV("p", {
+				className: "teacher-lms__note",
+				children: [
+					"목표 불일치 ",
+					activity.target_misses,
+					"회는 재도전으로 해석하지 않습니다."
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 365
+			}, this)] }, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 200
+			}, this) : /* @__PURE__ */ _jsxDEV(Empty, { children: "선택한 콘텐츠의 승인된 기록이 없습니다." }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 458
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 40,
+			columnNumber: 12
+		}, this),
+		/* @__PURE__ */ _jsxDEV("section", {
+			className: "teacher-lms__card",
+			children: [/* @__PURE__ */ _jsxDEV("div", {
+				className: "teacher-lms__card-heading",
+				children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "손동작 선택" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 593
+				}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "실제 이벤트 분포" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 612
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 588
+				}, this)
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 545
+			}, this), /* @__PURE__ */ _jsxDEV(BarList, {
+				items: data.gesture_distribution.map((item) => ({
+					label: gestureLabels[item.gesture] ?? item.gesture,
+					value: item.count
+				})),
+				label: "손동작 선택",
+				value: "회"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 642
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 40,
+			columnNumber: 506
+		}, this),
+		/* @__PURE__ */ _jsxDEV("section", {
+			className: "teacher-lms__card teacher-lms__card--wide",
+			children: [/* @__PURE__ */ _jsxDEV("div", {
+				className: "teacher-lms__card-heading",
+				children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "콘텐츠 지표" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 922
+				}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "원본 이벤트 기반 계산" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 941
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 917
+				}, this), /* @__PURE__ */ _jsxDEV("button", {
+					type: "button",
+					className: "teacher-lms__text-button",
+					onClick: () => onEvidence(content.slug),
+					children: "계산 근거 보기"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 968
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 874
+			}, this), metrics ? /* @__PURE__ */ _jsxDEV("div", {
+				className: "teacher-lms__metric-cards",
+				children: metrics.metrics.map((item) => /* @__PURE__ */ _jsxDEV("button", {
+					type: "button",
+					onClick: () => onEvidence(content.slug),
+					children: [
+						/* @__PURE__ */ _jsxDEV("b", { children: metricLabel(module, item.key) }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 1252
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: [item.value, "회"] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 1290
+						}, this),
+						/* @__PURE__ */ _jsxDEV("small", { children: item.definition }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 1316
+						}, this)
+					]
+				}, item.key, true, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 1174
+				}, this))
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 1102
+			}, this) : /* @__PURE__ */ _jsxDEV(Empty, { children: "분석 가능한 이벤트가 없습니다." }, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 1368
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 40,
+			columnNumber: 811
+		}, this)
+	] }, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 40,
+		columnNumber: 10
+	}, this);
+}
+_c5 = ContentAnalysisView;
+function DashboardView({ data, days, catalog, tab, onTab }) {
+	_s();
+	const [evidence, setEvidence] = useState(null);
+	const [selectedContent, setSelectedContent] = useState(catalog.find((item) => item.status === "PLAYABLE")?.slug ?? "");
+	useEffect(() => {
+		if (!selectedContent && catalog.length) setSelectedContent(catalog.find((item) => item.status === "PLAYABLE")?.slug ?? catalog[0].slug);
+	}, [catalog, selectedContent]);
+	const evidenceBySlug = useMemo(() => new Map(data.metric_evidence.map((item) => [item.activity_slug, item])), [data.metric_evidence]);
+	const activityBars = data.activities.map((item) => ({
+		label: item.activity,
+		value: item.attempts
+	}));
+	const weekdayBars = data.weekday_distribution.map((item) => ({
+		label: weekdayLabels[item.weekday] ?? "기타",
+		value: item.attempts
+	}));
+	const gestureBars = data.gesture_distribution.map((item) => ({
+		label: gestureLabels[item.gesture] ?? item.gesture,
+		value: item.count
+	}));
+	const chooseEvidence = (activitySlug) => setEvidence(evidenceBySlug.get(activitySlug) ?? null);
+	const pageTitle = tab === "overview" ? "전체 현황" : tab === "content" ? "아동별 놀이 기록" : tab === "evidence" ? "분석 근거" : "추천·교육적 점검";
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "teacher-lms__layout",
+		children: [/* @__PURE__ */ _jsxDEV("div", {
+			className: "teacher-lms__main",
+			children: [
+				/* @__PURE__ */ _jsxDEV("header", {
+					className: "teacher-lms__dashboard-heading",
+					children: [/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("span", { children: "교육기업 개인 담당자 · 승인된 HOME 기록" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 53,
+							columnNumber: 138
+						}, this),
+						/* @__PURE__ */ _jsxDEV("h1", { children: pageTitle }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 53,
+							columnNumber: 176
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: [
+							"최근 ",
+							days,
+							"일 · 다른 아동과 비교하지 않고 한 아동의 변화만 확인합니다."
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 53,
+							columnNumber: 196
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 53,
+						columnNumber: 133
+					}, this), /* @__PURE__ */ _jsxDEV("span", {
+						className: "teacher-lms__scope",
+						children: ["권한 범위: ", data.scope]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 53,
+						columnNumber: 253
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 53,
+					columnNumber: 82
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-lms__summary",
+					children: [
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("b", { children: data.summary.participations }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 48
+						}, this), /* @__PURE__ */ _jsxDEV("span", { children: "참여 세션" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 84
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 43
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("b", { children: data.summary.attempts }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 113
+						}, this), /* @__PURE__ */ _jsxDEV("span", { children: "시도" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 143
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 108
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("b", { children: data.summary.target_choices }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 169
+						}, this), /* @__PURE__ */ _jsxDEV("span", { children: "목표에 맞는 선택" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 205
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 164
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("b", { children: data.summary.target_misses }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 238
+						}, this), /* @__PURE__ */ _jsxDEV("span", { children: "다시 살펴볼 선택" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 273
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 54,
+							columnNumber: 233
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 54,
+					columnNumber: 5
+				}, this),
+				/* @__PURE__ */ _jsxDEV("nav", {
+					className: "teacher-lms__tabs",
+					"aria-label": "대시보드 탭",
+					children: [
+						["overview", "전체 놀이 경험"],
+						["content", "콘텐츠별 분석"],
+						["evidence", "분석 근거"],
+						["support", "교육적 근거·점검"]
+					].map(([key, label]) => /* @__PURE__ */ _jsxDEV("button", {
+						type: "button",
+						className: tab === key ? "is-active" : "",
+						onClick: () => onTab(key),
+						children: label
+					}, key, false, {
+						fileName: _jsxFileName,
+						lineNumber: 55,
+						columnNumber: 194
+					}, this))
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 55,
+					columnNumber: 5
+				}, this),
+				tab === "overview" && /* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-lms__content-grid",
+					children: [
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card teacher-lms__card--wide",
+							children: [/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__card-heading",
+								children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "참여 현황" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 56,
+									columnNumber: 182
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "콘텐츠별 경험" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 56,
+									columnNumber: 200
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 56,
+									columnNumber: 177
+								}, this), /* @__PURE__ */ _jsxDEV("small", { children: "지표를 선택하면 근거가 열립니다." }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 56,
+									columnNumber: 222
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 56,
+								columnNumber: 134
+							}, this), /* @__PURE__ */ _jsxDEV("div", {
+								onClick: (event) => {
+									const target = event.target.closest("[data-activity]")?.getAttribute("data-activity");
+									if (target) chooseEvidence(target);
+								},
+								children: /* @__PURE__ */ _jsxDEV(BarList, {
+									items: activityBars,
+									itemKeys: data.activities.map((item) => item.activity_slug),
+									label: "콘텐츠별 시도",
+									value: "회"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 56,
+									columnNumber: 429
+								}, this)
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 56,
+								columnNumber: 261
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 56,
+							columnNumber: 71
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card",
+							children: [/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__card-heading",
+								children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "기간 변화" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 57,
+									columnNumber: 94
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "일별 참여 추이" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 57,
+									columnNumber: 112
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 57,
+									columnNumber: 89
+								}, this)
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 57,
+								columnNumber: 46
+							}, this), data.trend.length ? /* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__trend",
+								children: data.trend.map((item) => /* @__PURE__ */ _jsxDEV("div", {
+									title: `${item.date}: ${item.attempts}회`,
+									children: [/* @__PURE__ */ _jsxDEV("i", { style: { height: `${Math.max(12, item.attempts * 18)}px` } }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 57,
+										columnNumber: 285
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: item.date.slice(5) }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 57,
+										columnNumber: 350
+									}, this)]
+								}, item.date, true, {
+									fileName: _jsxFileName,
+									lineNumber: 57,
+									columnNumber: 222
+								}, this))
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 57,
+								columnNumber: 162
+							}, this) : /* @__PURE__ */ _jsxDEV(Empty, { children: "추이를 표시할 기록이 부족합니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 57,
+								columnNumber: 400
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 57,
+							columnNumber: 7
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card",
+							children: [/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__card-heading",
+								children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "참여 패턴" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 58,
+									columnNumber: 94
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "요일별 분포" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 58,
+									columnNumber: 112
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 58,
+									columnNumber: 89
+								}, this)
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 58,
+								columnNumber: 46
+							}, this), /* @__PURE__ */ _jsxDEV(BarList, {
+								items: weekdayBars,
+								label: "요일별 시도",
+								value: "회"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 58,
+								columnNumber: 139
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 58,
+							columnNumber: 7
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card teacher-lms__card--wide",
+							children: [/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__card-heading",
+								children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "놀이 여정" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 118
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "최근 경험 타임라인" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 136
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 113
+								}, this), /* @__PURE__ */ _jsxDEV("small", { children: "승인된 이벤트만 표시합니다." }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 161
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 59,
+								columnNumber: 70
+							}, this), data.recent_events.length ? /* @__PURE__ */ _jsxDEV("ol", {
+								className: "teacher-lms__timeline",
+								children: data.recent_events.slice(0, 6).map((event) => /* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV("b", { children: event.occurred_at ? new Date(event.occurred_at).toLocaleDateString("ko-KR") : "미기록" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 328
+								}, this), /* @__PURE__ */ _jsxDEV("span", { children: [
+									event.event_type,
+									" · ",
+									event.success === true ? "목표 일치" : event.success === false ? "목표 불일치" : "결과 미기록"
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 420
+								}, this)] }, event.id, true, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 309
+								}, this))
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 59,
+								columnNumber: 226
+							}, this) : /* @__PURE__ */ _jsxDEV(Empty, { children: "여정을 표시할 이벤트가 없습니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 59,
+								columnNumber: 551
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 59,
+							columnNumber: 7
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card",
+							children: [
+								/* @__PURE__ */ _jsxDEV("div", {
+									className: "teacher-lms__card-heading",
+									children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "새로운 경험" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 59,
+										columnNumber: 682
+									}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "아직 선택하지 않은 놀이" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 59,
+										columnNumber: 701
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 59,
+										columnNumber: 677
+									}, this)
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 634
+								}, this),
+								/* @__PURE__ */ _jsxDEV("p", {
+									className: "teacher-lms__note",
+									children: "선택하지 않았다는 사실을 선호하지 않음으로 해석하지 않습니다."
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 735
+								}, this),
+								/* @__PURE__ */ _jsxDEV("div", {
+									className: "teacher-lms__new-experiences",
+									children: [catalog.filter((item) => item.status === "PLAYABLE" && !contentHasRecordedExperience(data, item.slug)).map((item) => /* @__PURE__ */ _jsxDEV("span", { children: item.title }, item.slug, false, {
+										fileName: _jsxFileName,
+										lineNumber: 59,
+										columnNumber: 966
+									}, this)), !catalog.some((item) => item.status === "PLAYABLE" && !contentHasRecordedExperience(data, item.slug)) && /* @__PURE__ */ _jsxDEV("small", { children: "현재 공개된 놀이를 모두 경험했거나 카탈로그 기록이 없습니다." }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 59,
+										columnNumber: 1113
+									}, this)]
+								}, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 806
+								}, this)
+							]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 59,
+							columnNumber: 595
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card",
+							children: [/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__card-heading",
+								children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "그림책 주제 연결" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 1266
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "연계 가능한 주제" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 1288
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 59,
+									columnNumber: 1261
+								}, this)
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 59,
+								columnNumber: 1218
+							}, this), data.book_recommendation_topic ? /* @__PURE__ */ _jsxDEV("p", { children: data.book_recommendation_topic }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 59,
+								columnNumber: 1352
+							}, this) : /* @__PURE__ */ _jsxDEV("p", {
+								className: "teacher-lms__unsupported",
+								children: "기록에서 연결된 주제가 없습니다. 실제 도서 추천 결과는 미지원입니다."
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 59,
+								columnNumber: 1394
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 59,
+							columnNumber: 1179
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 56,
+					columnNumber: 28
+				}, this),
+				tab === "content" && /* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-lms__content-grid",
+					children: [/* @__PURE__ */ _jsxDEV("section", {
+						className: "teacher-lms__card teacher-lms__card--wide",
+						children: [/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-lms__card-heading",
+							children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "LXP 콘텐츠 카탈로그" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 60,
+								columnNumber: 181
+							}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "분석할 놀이 선택" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 60,
+								columnNumber: 206
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 60,
+								columnNumber: 176
+							}, this), /* @__PURE__ */ _jsxDEV("small", { children: "PLAYABLE만 실제 기록을 분석합니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 60,
+								columnNumber: 230
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 60,
+							columnNumber: 133
+						}, this), /* @__PURE__ */ _jsxDEV(ContentCatalogCards, {
+							catalog,
+							data,
+							selected: selectedContent,
+							onSelect: setSelectedContent
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 60,
+							columnNumber: 274
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 60,
+						columnNumber: 70
+					}, this), /* @__PURE__ */ _jsxDEV(ContentAnalysisView, {
+						content: catalog.find((item) => item.slug === selectedContent),
+						data,
+						onEvidence: chooseEvidence
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 60,
+						columnNumber: 394
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 60,
+					columnNumber: 27
+				}, this),
+				tab === "evidence" && /* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-lms__content-grid",
+					children: [/* @__PURE__ */ _jsxDEV("section", {
+						className: "teacher-lms__card teacher-lms__card--wide",
+						children: [/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-lms__card-heading",
+							children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "출처가 있는 지표" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 182
+							}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "계산 근거를 선택하세요" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 204
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 177
+							}, this)
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 61,
+							columnNumber: 134
+						}, this), /* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-lms__metric-cards",
+							children: data.metric_evidence.length ? data.metric_evidence.map((item) => /* @__PURE__ */ _jsxDEV("button", {
+								type: "button",
+								onClick: () => setEvidence(item),
+								children: [
+									/* @__PURE__ */ _jsxDEV("b", { children: item.activity_slug }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 61,
+										columnNumber: 425
+									}, this),
+									/* @__PURE__ */ _jsxDEV("span", { children: [
+										item.event_count,
+										"개 이벤트 · ",
+										item.data_version
+									] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 61,
+										columnNumber: 452
+									}, this),
+									/* @__PURE__ */ _jsxDEV("span", { children: item.formula }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 61,
+										columnNumber: 510
+									}, this)
+								]
+							}, item.activity_slug, true, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 344
+							}, this)) : /* @__PURE__ */ _jsxDEV(Empty, { children: "현재 기간에 분석 가능한 이벤트가 없습니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 550
+							}, this)
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 61,
+							columnNumber: 237
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 61,
+						columnNumber: 71
+					}, this), /* @__PURE__ */ _jsxDEV("section", {
+						className: "teacher-lms__card",
+						children: [/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-lms__card-heading",
+							children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "원본 이벤트" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 693
+							}, this), /* @__PURE__ */ _jsxDEV("h2", { children: [
+								"최근 ",
+								data.recent_events.length,
+								"건"
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 712
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 688
+							}, this)
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 61,
+							columnNumber: 645
+						}, this), /* @__PURE__ */ _jsxDEV("ul", {
+							className: "teacher-lms__event-list",
+							children: data.recent_events.slice(0, 10).map((event) => /* @__PURE__ */ _jsxDEV("li", { children: [
+								/* @__PURE__ */ _jsxDEV("b", { children: event.event_type }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 61,
+									columnNumber: 869
+								}, this),
+								/* @__PURE__ */ _jsxDEV("span", { children: event.details.player ? `${gestureLabels[event.details.player] ?? event.details.player} · ${gestureLabels[event.details.opponent ?? ""] ?? event.details.opponent}` : "상세 미기록" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 61,
+									columnNumber: 894
+								}, this),
+								/* @__PURE__ */ _jsxDEV("small", { children: event.success === true ? "성공" : event.success === false ? "실패" : "결과 미기록" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 61,
+									columnNumber: 1082
+								}, this)
+							] }, event.id, true, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 850
+							}, this))
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 61,
+							columnNumber: 764
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 61,
+						columnNumber: 606
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 61,
+					columnNumber: 28
+				}, this),
+				tab === "support" && /* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-lms__content-grid",
+					children: [
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card",
+							children: [
+								/* @__PURE__ */ _jsxDEV("div", {
+									className: "teacher-lms__card-heading",
+									children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "다음 활동" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 62,
+										columnNumber: 157
+									}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "추천 근거" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 62,
+										columnNumber: 175
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 62,
+										columnNumber: 152
+									}, this)
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 109
+								}, this),
+								/* @__PURE__ */ _jsxDEV("p", { children: data.recommendation_basis }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 201
+								}, this),
+								data.recommendations.length ? data.recommendations.map((item) => /* @__PURE__ */ _jsxDEV("article", {
+									className: "teacher-lms__recommendation",
+									children: [
+										/* @__PURE__ */ _jsxDEV("h3", { children: item.title }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 62,
+											columnNumber: 364
+										}, this),
+										/* @__PURE__ */ _jsxDEV("p", { children: item.reason }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 62,
+											columnNumber: 385
+										}, this),
+										item.available_path && /* @__PURE__ */ _jsxDEV("a", {
+											href: item.available_path,
+											children: "놀이 선택으로 이동"
+										}, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 62,
+											columnNumber: 429
+										}, this)
+									]
+								}, item.kind, true, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 299
+								}, this)) : /* @__PURE__ */ _jsxDEV(Empty, { children: "현재 기록에서 선택 가능한 다음 놀이 추천이 없습니다." }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 488
+								}, this)
+							]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 62,
+							columnNumber: 70
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card",
+							children: [
+								/* @__PURE__ */ _jsxDEV("div", {
+									className: "teacher-lms__card-heading",
+									children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "교육적 근거" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 62,
+										columnNumber: 631
+									}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "누리과정 연결" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 62,
+										columnNumber: 650
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 62,
+										columnNumber: 626
+									}, this)
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 583
+								}, this),
+								/* @__PURE__ */ _jsxDEV("p", {
+									className: "teacher-lms__unsupported",
+									children: data.education_evidence.reason
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 678
+								}, this),
+								/* @__PURE__ */ _jsxDEV("h3", { children: "담당자 점검 메모" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 754
+								}, this),
+								/* @__PURE__ */ _jsxDEV("textarea", {
+									"aria-label": "담당자 점검 메모",
+									placeholder: "관찰한 내용을 기록할 수 있습니다. 저장 기능은 별도 승인 후 연결됩니다.",
+									disabled: true
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 772
+								}, this)
+							]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 62,
+							columnNumber: 544
+						}, this),
+						/* @__PURE__ */ _jsxDEV("section", {
+							className: "teacher-lms__card teacher-lms__card--wide",
+							children: [/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-lms__card-heading",
+								children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "그림책" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 993
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "연계 추천" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 1009
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 62,
+									columnNumber: 988
+								}, this)
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 62,
+								columnNumber: 945
+							}, this), /* @__PURE__ */ _jsxDEV("p", { children: data.book_recommendations.reason }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 62,
+								columnNumber: 1035
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 62,
+							columnNumber: 882
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 62,
+					columnNumber: 27
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 53,
+			columnNumber: 47
+		}, this), /* @__PURE__ */ _jsxDEV(EvidencePanel, {
+			evidence,
+			onClose: () => setEvidence(null)
+		}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 63,
+			columnNumber: 9
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 53,
+		columnNumber: 10
+	}, this);
+}
+_s(DashboardView, "M+2A+Wm96E1Yp+oIQKWLN9MY+Lw=");
+_c6 = DashboardView;
+export function TeacherLmsDashboard({ childId }) {
+	_s2();
+	const [children, setChildren] = useState([]);
+	const [selected, setSelected] = useState(childId ?? "");
+	const [days, setDays] = useState(30);
+	const [catalog, setCatalog] = useState([]);
+	const [tab, setTab] = useState("overview");
+	const [data, setData] = useState(null);
+	const [error, setError] = useState("");
+	useEffect(() => {
+		if (!hasTeacherSession()) {
+			setError("AUTH_REQUIRED");
+			return;
+		}
+		getTeacherChildren().then((result) => {
+			setChildren(result.children);
+			setSelected((current) => current || result.children[0]?.id || "");
+		}).catch((error) => setError(error.message));
+	}, []);
+	useEffect(() => {
+		fetchContentCatalog().then((result) => setCatalog(result ?? []));
+	}, []);
+	useEffect(() => {
+		if (!selected) return;
+		setData(null);
+		setError("");
+		getTeacherDashboard(selected, days).then(setData).catch((error) => setError(error.message));
+	}, [selected, days]);
+	const childOptions = useMemo(() => children.map((child, index) => ({
+		...child,
+		label: `담당 아동 ${index + 1}`
+	})), [children]);
+	if (error === "AUTH_REQUIRED") return /* @__PURE__ */ _jsxDEV("section", {
+		className: "teacher-lms__gate",
+		children: [/* @__PURE__ */ _jsxDEV("h1", { children: "담당자 로그인이 필요합니다." }, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 75,
+			columnNumber: 80
+		}, this), /* @__PURE__ */ _jsxDEV("a", {
+			href: "/teacher/login",
+			children: "로그인으로 이동"
+		}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 75,
+			columnNumber: 104
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 75,
+		columnNumber: 41
+	}, this);
+	if (error === "CHILD_FORBIDDEN") return /* @__PURE__ */ _jsxDEV("section", {
+		className: "teacher-lms__gate",
+		children: [/* @__PURE__ */ _jsxDEV("h1", { children: "이 아동의 기록을 볼 권한이 없습니다." }, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 76,
+			columnNumber: 82
+		}, this), /* @__PURE__ */ _jsxDEV("a", {
+			href: "/teacher/dashboard",
+			children: "담당 아동 목록으로"
+		}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 76,
+			columnNumber: 112
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 76,
+		columnNumber: 43
+	}, this);
+	return /* @__PURE__ */ _jsxDEV("section", {
+		className: "teacher-lms teacher-lms--workspace",
+		children: [/* @__PURE__ */ _jsxDEV("aside", {
+			className: "teacher-lms__sidebar",
+			"aria-label": "LMS 메뉴",
+			children: [
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-lms__sidebar-brand",
+					children: [/* @__PURE__ */ _jsxDEV("strong", { children: "PIKIPICK" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 170
+					}, this), /* @__PURE__ */ _jsxDEV("span", { children: "교육 담당자 LMS" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 195
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 126
+				}, this),
+				/* @__PURE__ */ _jsxDEV("nav", {
+					className: "teacher-lms__sidebar-nav",
+					children: [
+						["overview", "전체 현황"],
+						["content", "아동별 놀이 기록"],
+						["evidence", "분석 근거"],
+						["support", "추천·교육적 점검"]
+					].map(([key, label]) => /* @__PURE__ */ _jsxDEV("button", {
+						type: "button",
+						className: tab === key ? "is-active" : "",
+						onClick: () => setTab(key),
+						children: label
+					}, key, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 399
+					}, this))
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 224
+				}, this),
+				/* @__PURE__ */ _jsxDEV("a", {
+					className: "teacher-lms__sidebar-link",
+					href: "/play",
+					children: "아이용 화면"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 526
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 77,
+			columnNumber: 66
+		}, this), /* @__PURE__ */ _jsxDEV("div", {
+			className: "teacher-lms__workspace-main",
+			children: [
+				/* @__PURE__ */ _jsxDEV("header", {
+					className: "teacher-lms__toolbar",
+					children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "PIKIPICK 개인 담당자 LMS" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 689
+					}, this), /* @__PURE__ */ _jsxDEV("h1", { children: "담당 아동 현황" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 721
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 684
+					}, this), /* @__PURE__ */ _jsxDEV("label", { children: ["조회 기간", /* @__PURE__ */ _jsxDEV("select", {
+						value: days,
+						onChange: (event) => setDays(Number(event.target.value)),
+						children: periods.map((value) => /* @__PURE__ */ _jsxDEV("option", {
+							value,
+							children: [
+								"최근 ",
+								value,
+								"일"
+							]
+						}, value, true, {
+							fileName: _jsxFileName,
+							lineNumber: 77,
+							columnNumber: 855
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 756
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 744
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 643
+				}, this),
+				childOptions.length > 0 && /* @__PURE__ */ _jsxDEV("nav", {
+					className: "teacher-lms__children",
+					"aria-label": "담당 아동 선택",
+					children: childOptions.map((child) => /* @__PURE__ */ _jsxDEV("button", {
+						type: "button",
+						className: child.id === selected ? "is-selected" : "",
+						onClick: () => setSelected(child.id),
+						children: child.label
+					}, child.id, false, {
+						fileName: _jsxFileName,
+						lineNumber: 77,
+						columnNumber: 1053
+					}, this))
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 965
+				}, this),
+				!children.length && !error && /* @__PURE__ */ _jsxDEV(Empty, { children: "승인된 HOME 기록을 조회할 담당 아동이 없습니다." }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 1245
+				}, this),
+				data ? /* @__PURE__ */ _jsxDEV(DashboardView, {
+					data,
+					days,
+					catalog,
+					tab,
+					onTab: setTab
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 1298
+				}, this) : selected ? /* @__PURE__ */ _jsxDEV(Empty, { children: "권한을 확인하고 기록을 불러오는 중입니다." }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 77,
+					columnNumber: 1396
+				}, this) : null
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 77,
+			columnNumber: 598
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 77,
+		columnNumber: 10
+	}, this);
+}
+_s2(TeacherLmsDashboard, "0tyfh6bxulm0B1YQ65/18O/Y4aU=");
+_c7 = TeacherLmsDashboard;
+var _c, _c2, _c3, _c4, _c5, _c6, _c7;
+$RefreshReg$(_c, "Empty");
+$RefreshReg$(_c2, "BarList");
+$RefreshReg$(_c3, "EvidencePanel");
+$RefreshReg$(_c4, "ContentCatalogCards");
+$RefreshReg$(_c5, "ContentAnalysisView");
+$RefreshReg$(_c6, "DashboardView");
+$RefreshReg$(_c7, "TeacherLmsDashboard");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/TeacherLmsDashboard.tsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherLmsDashboard.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherLmsDashboard.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherLmsDashboard.tsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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ckxtc0Rhc2hib2FyZC50c3giXSwidmVyc2lvbiI6Mywic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdXNlRWZmZWN0LCB1c2VNZW1vLCB1c2VTdGF0ZSwgdHlwZSBSZWFjdE5vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBnZXRUZWFjaGVyQ2hpbGRyZW4sIGdldFRlYWNoZXJEYXNoYm9hcmQsIGhhc1RlYWNoZXJTZXNzaW9uLCB0eXBlIFRlYWNoZXJDaGlsZCwgdHlwZSBUZWFjaGVyRGFzaGJvYXJkRGF0YSB9IGZyb20gJy4uL3RlYWNoZXIvdGVhY2hlckFwaSc7XG5pbXBvcnQgeyBmZXRjaENvbnRlbnRDYXRhbG9nLCB0eXBlIEFwaUNvbnRlbnQgfSBmcm9tICcuLi9nYW1lL2NvbnRlbnRDYXRhbG9nJztcbmltcG9ydCB7IGNvbnRlbnRIYXNSZWNvcmRlZEV4cGVyaWVuY2UsIGdldEFuYWx5dGljc01vZHVsZSwgbWV0cmljTGFiZWwgfSBmcm9tICcuLi90ZWFjaGVyL2NvbnRlbnRBbmFseXRpY3MnO1xuaW1wb3J0ICcuL1RlYWNoZXJMbXNEYXNoYm9hcmQuY3NzJztcblxuY29uc3QgcGVyaW9kcyA9IFs3LCAzMCwgOTBdIGFzIGNvbnN0O1xudHlwZSBUYWIgPSAnb3ZlcnZpZXcnIHwgJ2NvbnRlbnQnIHwgJ2V2aWRlbmNlJyB8ICdzdXBwb3J0JztcbmNvbnN0IHdlZWtkYXlMYWJlbHMgPSBbJ+yblCcsICftmZQnLCAn7IiYJywgJ+uqqScsICfquIgnLCAn7YagJywgJ+ydvCddO1xuY29uc3QgZ2VzdHVyZUxhYmVsczogUmVjb3JkPHN0cmluZywgc3RyaW5nPiA9IHsgUk9DSzogJ+uwlOychCcsIFNDSVNTT1JTOiAn6rCA7JyEJywgUEFQRVI6ICfrs7QnIH07XG5cbmZ1bmN0aW9uIEVtcHR5KHsgY2hpbGRyZW4gfTogeyBjaGlsZHJlbjogUmVhY3ROb2RlIH0pIHsgcmV0dXJuIDxwIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19lbXB0eVwiPntjaGlsZHJlbn08L3A+OyB9XG5cbmZ1bmN0aW9uIEJhckxpc3QoeyBpdGVtcywgbGFiZWwsIHZhbHVlLCBpdGVtS2V5cyA9IFtdIH06IHsgaXRlbXM6IHsgbGFiZWw6IHN0cmluZzsgdmFsdWU6IG51bWJlciB9W107IGxhYmVsOiBzdHJpbmc7IHZhbHVlOiBzdHJpbmc7IGl0ZW1LZXlzPzogc3RyaW5nW10gfSkge1xuICBjb25zdCBtYXggPSBNYXRoLm1heCgxLCAuLi5pdGVtcy5tYXAoaXRlbSA9PiBpdGVtLnZhbHVlKSk7XG4gIGlmICghaXRlbXMubGVuZ3RoKSByZXR1cm4gPEVtcHR5PntsYWJlbH0g6riw66Gd7J20IOyVhOyngSDsl4bsirXri4jri6QuPC9FbXB0eT47XG4gIHJldHVybiA8ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19iYXJzXCIgYXJpYS1sYWJlbD17bGFiZWx9PntpdGVtcy5tYXAoKGl0ZW0sIGluZGV4KSA9PiA8ZGl2IGtleT17aXRlbS5sYWJlbH0gZGF0YS1hY3Rpdml0eT17aXRlbUtleXNbaW5kZXhdfT48c3Bhbj57aXRlbS5sYWJlbH08L3NwYW4+PGk+PGIgc3R5bGU9e3sgd2lkdGg6IGAkeyhpdGVtLnZhbHVlIC8gbWF4KSAqIDEwMH0lYCB9fSAvPjwvaT48c3Ryb25nPntpdGVtLnZhbHVlfXt2YWx1ZX08L3N0cm9uZz48L2Rpdj4pfTwvZGl2Pjtcbn1cblxuZnVuY3Rpb24gRXZpZGVuY2VQYW5lbCh7IGV2aWRlbmNlLCBvbkNsb3NlIH06IHsgZXZpZGVuY2U6IFRlYWNoZXJEYXNoYm9hcmREYXRhWydtZXRyaWNfZXZpZGVuY2UnXVtudW1iZXJdIHwgbnVsbDsgb25DbG9zZTogKCkgPT4gdm9pZCB9KSB7XG4gIHJldHVybiA8YXNpZGUgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2V2aWRlbmNlLXBhbmVsXCIgYXJpYS1sYWJlbD1cIuu2hOyEnSDsg4HshLhcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19wYW5lbC1oZWFkaW5nXCI+PGRpdj48c3Bhbj7rtoTshJ0g6re86rGwPC9zcGFuPjxoMj57ZXZpZGVuY2UgPyBldmlkZW5jZS5hY3Rpdml0eV9zbHVnIDogJ+yngO2RnOulvCDshKDtg53tlbQg7KO87IS47JqUJ308L2gyPjwvZGl2PntldmlkZW5jZSAmJiA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBvbkNsaWNrPXtvbkNsb3NlfSBhcmlhLWxhYmVsPVwi7IOB7IS4IO2MqOuEkCDri6vquLBcIj7ri6vquLA8L2J1dHRvbj59PC9kaXY+XG4gICAge2V2aWRlbmNlID8gPD48ZGwgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2ZhY3RzXCI+PGRpdj48ZHQ+64yA7IOBIOq4sOqwhDwvZHQ+PGRkPuy1nOq3vCB7ZXZpZGVuY2UucGVyaW9kX2RheXN97J28PC9kZD48L2Rpdj48ZGl2PjxkdD7sm5Drs7gg642w7J207YSwIOyImDwvZHQ+PGRkPntldmlkZW5jZS5ldmVudF9jb3VudH3qsbQ8L2RkPjwvZGl2PjxkaXY+PGR0PuuyhOyghDwvZHQ+PGRkPntldmlkZW5jZS5kYXRhX3ZlcnNpb259PC9kZD48L2Rpdj48L2RsPjxoMz7qs4TsgrDsi508L2gzPjxjb2RlPntldmlkZW5jZS5mb3JtdWxhfTwvY29kZT48aDM+6rOE7IKw65CcIOyngO2RnDwvaDM+PHVsIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19wbGFpbi1saXN0XCI+e2V2aWRlbmNlLm1ldHJpY3MubWFwKG1ldHJpYyA9PiA8bGkga2V5PXttZXRyaWMua2V5fT48Yj57bWV0cmljLnZhbHVlfTwvYj4ge21ldHJpYy5rZXl9PHNtYWxsPnttZXRyaWMuZGVmaW5pdGlvbn08L3NtYWxsPjwvbGk+KX08L3VsPjxoMz7tlbTshJ3snZgg7ZWc6rOEPC9oMz48dWwgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX3BsYWluLWxpc3RcIj57ZXZpZGVuY2UubGltaXRhdGlvbnMubWFwKGl0ZW0gPT4gPGxpIGtleT17aXRlbX0+e2l0ZW19PC9saT4pfTwvdWw+PC8+IDogPHAgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX3BhbmVsLW5vdGVcIj7qt7jrnpjtlITrgpgg7KeA7ZGcIOy5tOuTnOulvCDshKDtg53tlZjrqbQg7Iq57J2465CcIOybkOuzuCDquLDroZ3qs7wg6rOE7IKwIOq4sOykgOydhCDtmZXsnbjtlaAg7IiYIOyeiOyKteuLiOuLpC48L3A+fVxuICA8L2FzaWRlPjtcbn1cblxuZnVuY3Rpb24gQ29udGVudENhdGFsb2dDYXJkcyh7IGNhdGFsb2csIGRhdGEsIHNlbGVjdGVkLCBvblNlbGVjdCB9OiB7IGNhdGFsb2c6IEFwaUNvbnRlbnRbXTsgZGF0YTogVGVhY2hlckRhc2hib2FyZERhdGE7IHNlbGVjdGVkOiBzdHJpbmc7IG9uU2VsZWN0OiAoc2x1Zzogc3RyaW5nKSA9PiB2b2lkIH0pIHtcbiAgcmV0dXJuIDxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhdGFsb2dcIiBhcmlhLWxhYmVsPVwi64aA7J20IOy9mO2FkOy4oCDsubTtg4jroZzqt7hcIj57Y2F0YWxvZy5tYXAoY29udGVudCA9PiB7XG4gICAgY29uc3QgcmVjb3JkZWQgPSBjb250ZW50SGFzUmVjb3JkZWRFeHBlcmllbmNlKGRhdGEsIGNvbnRlbnQuc2x1Zyk7XG4gICAgcmV0dXJuIDxidXR0b24gdHlwZT1cImJ1dHRvblwiIGtleT17Y29udGVudC5zbHVnfSBjbGFzc05hbWU9e2Ake3NlbGVjdGVkID09PSBjb250ZW50LnNsdWcgPyAnaXMtc2VsZWN0ZWQgJyA6ICcnfSR7Y29udGVudC5zdGF0dXMgPT09ICdDT01JTkdfU09PTicgPyAnaXMtY29taW5nLXNvb24nIDogJyd9YH0gb25DbGljaz17KCkgPT4gb25TZWxlY3QoY29udGVudC5zbHVnKX0+XG4gICAgICA8c3Bhbj57Y29udGVudC50aXRsZX08L3NwYW4+PHNtYWxsPntjb250ZW50LnN0YXR1cyA9PT0gJ1BMQVlBQkxFJyA/IHJlY29yZGVkID8gJ+qyve2XmCDquLDroZ0g7J6I7J2MJyA6ICfslYTsp4Eg6rK97ZeY7ZWY7KeAIOyViuydjCcgOiAn7KSA67mEIOykkSd9PC9zbWFsbD5cbiAgICA8L2J1dHRvbj47XG4gIH0pfTwvZGl2Pjtcbn1cblxuZnVuY3Rpb24gQ29udGVudEFuYWx5c2lzVmlldyh7IGNvbnRlbnQsIGRhdGEsIG9uRXZpZGVuY2UgfTogeyBjb250ZW50OiBBcGlDb250ZW50IHwgdW5kZWZpbmVkOyBkYXRhOiBUZWFjaGVyRGFzaGJvYXJkRGF0YTsgb25FdmlkZW5jZTogKHNsdWc6IHN0cmluZykgPT4gdm9pZCB9KSB7XG4gIGNvbnN0IG1vZHVsZSA9IGdldEFuYWx5dGljc01vZHVsZShjb250ZW50KTtcbiAgY29uc3QgYWN0aXZpdHkgPSBkYXRhLmFjdGl2aXRpZXMuZmluZChpdGVtID0+IGl0ZW0uYWN0aXZpdHlfc2x1ZyA9PT0gY29udGVudD8uc2x1Zyk7XG4gIGNvbnN0IG1ldHJpY3MgPSBkYXRhLmNvbnRlbnRfbWV0cmljcy5maW5kKGl0ZW0gPT4gaXRlbS5hY3Rpdml0eV9zbHVnID09PSBjb250ZW50Py5zbHVnKTtcbiAgaWYgKCFjb250ZW50IHx8IGNvbnRlbnQuc3RhdHVzID09PSAnQ09NSU5HX1NPT04nIHx8ICFtb2R1bGUuc3VwcG9ydGVkKSByZXR1cm4gPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQgdGVhY2hlci1sbXNfX2NhcmQtLXdpZGUgdGVhY2hlci1sbXNfX2NvbWluZy1zb29uXCI+PHNwYW4+7L2Y7YWQ7LigIOyDge2DnDwvc3Bhbj48aDI+e2NvbnRlbnQ/LnRpdGxlID8/ICfsvZjthZDsuKAnfSDCtyBDT01JTkdfU09PTjwvaDI+PHA+e21vZHVsZS5saW1pdGF0aW9ufTwvcD48c21hbGw+7Iuk7ZaJwrfquLDroZ3Ct+u2hOyEnSDrqqjrk4jsnbQg7KSA67mE65CY6riwIOyghOq5jOyngCDsi6TsoJwg642w7J207YSw64KYIO2PieqwgCDsiJjsuZjrpbwg7ZGc7Iuc7ZWY7KeAIOyViuyKteuLiOuLpC48L3NtYWxsPjwvc2VjdGlvbj47XG4gIHJldHVybiA8PjxzZWN0aW9uIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkXCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZC1oZWFkaW5nXCI+PGRpdj48c3Bhbj7svZjthZDsuKAg67aE7ISdPC9zcGFuPjxoMj57bW9kdWxlLnRpdGxlfTwvaDI+PC9kaXY+PHNtYWxsPuu2hOyEnSDrqqjrk4g6IHttb2R1bGUuc2x1Z308L3NtYWxsPjwvZGl2PnthY3Rpdml0eSA/IDw+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fbWV0cmljLWhpZ2hsaWdodFwiPjxiPnthY3Rpdml0eS5hdHRlbXB0c308L2I+PHNwYW4+7Iuk7KCcIHJvdW5kX3Jlc3VsdCDsi5zrj4Q8L3NwYW4+PGI+e2FjdGl2aXR5LnRhcmdldF9jaG9pY2VzfTwvYj48c3Bhbj7rqqntkZwg7J287LmYIOyEoO2DnTwvc3Bhbj48L2Rpdj48cCBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fbm90ZVwiPuuqqe2RnCDrtojsnbzsuZgge2FjdGl2aXR5LnRhcmdldF9taXNzZXN97ZqM64qUIOyerOuPhOyghOycvOuhnCDtlbTshJ3tlZjsp4Ag7JWK7Iq164uI64ukLjwvcD48Lz4gOiA8RW1wdHk+7ISg7YOd7ZWcIOy9mO2FkOy4oOydmCDsirnsnbjrkJwg6riw66Gd7J20IOyXhuyKteuLiOuLpC48L0VtcHR5Pn08L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmRcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuyGkOuPmeyekSDshKDtg508L3NwYW4+PGgyPuyLpOygnCDsnbTrsqTtirgg67aE7Y+sPC9oMj48L2Rpdj48L2Rpdj48QmFyTGlzdCBpdGVtcz17ZGF0YS5nZXN0dXJlX2Rpc3RyaWJ1dGlvbi5tYXAoaXRlbSA9PiAoeyBsYWJlbDogZ2VzdHVyZUxhYmVsc1tpdGVtLmdlc3R1cmVdID8/IGl0ZW0uZ2VzdHVyZSwgdmFsdWU6IGl0ZW0uY291bnQgfSkpfSBsYWJlbD1cIuyGkOuPmeyekSDshKDtg51cIiB2YWx1ZT1cIu2ajFwiIC8+PC9zZWN0aW9uPjxzZWN0aW9uIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkIHRlYWNoZXItbG1zX19jYXJkLS13aWRlXCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZC1oZWFkaW5nXCI+PGRpdj48c3Bhbj7svZjthZDsuKAg7KeA7ZGcPC9zcGFuPjxoMj7sm5Drs7gg7J2067Kk7Yq4IOq4sOuwmCDqs4TsgrA8L2gyPjwvZGl2PjxidXR0b24gdHlwZT1cImJ1dHRvblwiIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX190ZXh0LWJ1dHRvblwiIG9uQ2xpY2s9eygpID0+IG9uRXZpZGVuY2UoY29udGVudC5zbHVnKX0+6rOE7IKwIOq3vOqxsCDrs7TquLA8L2J1dHRvbj48L2Rpdj57bWV0cmljcyA/IDxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX21ldHJpYy1jYXJkc1wiPnttZXRyaWNzLm1ldHJpY3MubWFwKGl0ZW0gPT4gPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIga2V5PXtpdGVtLmtleX0gb25DbGljaz17KCkgPT4gb25FdmlkZW5jZShjb250ZW50LnNsdWcpfT48Yj57bWV0cmljTGFiZWwobW9kdWxlLCBpdGVtLmtleSl9PC9iPjxzcGFuPntpdGVtLnZhbHVlfe2ajDwvc3Bhbj48c21hbGw+e2l0ZW0uZGVmaW5pdGlvbn08L3NtYWxsPjwvYnV0dG9uPil9PC9kaXY+IDogPEVtcHR5Puu2hOyEnSDqsIDriqXtlZwg7J2067Kk7Yq46rCAIOyXhuyKteuLiOuLpC48L0VtcHR5Pn08L3NlY3Rpb24+PC8+O1xufVxuXG5mdW5jdGlvbiBEYXNoYm9hcmRWaWV3KHsgZGF0YSwgZGF5cywgY2F0YWxvZywgdGFiLCBvblRhYiB9OiB7IGRhdGE6IFRlYWNoZXJEYXNoYm9hcmREYXRhOyBkYXlzOiBudW1iZXI7IGNhdGFsb2c6IEFwaUNvbnRlbnRbXTsgdGFiOiBUYWI7IG9uVGFiOiAobmV4dDogVGFiKSA9PiB2b2lkIH0pIHtcbiAgY29uc3QgW2V2aWRlbmNlLCBzZXRFdmlkZW5jZV0gPSB1c2VTdGF0ZTxUZWFjaGVyRGFzaGJvYXJkRGF0YVsnbWV0cmljX2V2aWRlbmNlJ11bbnVtYmVyXSB8IG51bGw+KG51bGwpO1xuICBjb25zdCBbc2VsZWN0ZWRDb250ZW50LCBzZXRTZWxlY3RlZENvbnRlbnRdID0gdXNlU3RhdGUoY2F0YWxvZy5maW5kKGl0ZW0gPT4gaXRlbS5zdGF0dXMgPT09ICdQTEFZQUJMRScpPy5zbHVnID8/ICcnKTtcbiAgdXNlRWZmZWN0KCgpID0+IHsgaWYgKCFzZWxlY3RlZENvbnRlbnQgJiYgY2F0YWxvZy5sZW5ndGgpIHNldFNlbGVjdGVkQ29udGVudChjYXRhbG9nLmZpbmQoaXRlbSA9PiBpdGVtLnN0YXR1cyA9PT0gJ1BMQVlBQkxFJyk/LnNsdWcgPz8gY2F0YWxvZ1swXS5zbHVnKTsgfSwgW2NhdGFsb2csIHNlbGVjdGVkQ29udGVudF0pO1xuICBjb25zdCBldmlkZW5jZUJ5U2x1ZyA9IHVzZU1lbW8oKCkgPT4gbmV3IE1hcChkYXRhLm1ldHJpY19ldmlkZW5jZS5tYXAoaXRlbSA9PiBbaXRlbS5hY3Rpdml0eV9zbHVnLCBpdGVtXSkpLCBbZGF0YS5tZXRyaWNfZXZpZGVuY2VdKTtcbiAgY29uc3QgYWN0aXZpdHlCYXJzID0gZGF0YS5hY3Rpdml0aWVzLm1hcChpdGVtID0+ICh7IGxhYmVsOiBpdGVtLmFjdGl2aXR5LCB2YWx1ZTogaXRlbS5hdHRlbXB0cyB9KSk7XG4gIGNvbnN0IHdlZWtkYXlCYXJzID0gZGF0YS53ZWVrZGF5X2Rpc3RyaWJ1dGlvbi5tYXAoaXRlbSA9PiAoeyBsYWJlbDogd2Vla2RheUxhYmVsc1tpdGVtLndlZWtkYXldID8/ICfquLDtg4AnLCB2YWx1ZTogaXRlbS5hdHRlbXB0cyB9KSk7XG4gIGNvbnN0IGdlc3R1cmVCYXJzID0gZGF0YS5nZXN0dXJlX2Rpc3RyaWJ1dGlvbi5tYXAoaXRlbSA9PiAoeyBsYWJlbDogZ2VzdHVyZUxhYmVsc1tpdGVtLmdlc3R1cmVdID8/IGl0ZW0uZ2VzdHVyZSwgdmFsdWU6IGl0ZW0uY291bnQgfSkpO1xuICBjb25zdCBjaG9vc2VFdmlkZW5jZSA9IChhY3Rpdml0eVNsdWc6IHN0cmluZykgPT4gc2V0RXZpZGVuY2UoZXZpZGVuY2VCeVNsdWcuZ2V0KGFjdGl2aXR5U2x1ZykgPz8gbnVsbCk7XG4gIGNvbnN0IHBhZ2VUaXRsZSA9IHRhYiA9PT0gJ292ZXJ2aWV3JyA/ICfsoITssrQg7ZiE7ZmpJyA6IHRhYiA9PT0gJ2NvbnRlbnQnID8gJ+yVhOuPmeuzhCDrhoDsnbQg6riw66GdJyA6IHRhYiA9PT0gJ2V2aWRlbmNlJyA/ICfrtoTshJ0g6re86rGwJyA6ICfstpTsspzCt+q1kOycoeyggSDsoJDqsoAnO1xuICByZXR1cm4gPGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fbGF5b3V0XCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fbWFpblwiPjxoZWFkZXIgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2Rhc2hib2FyZC1oZWFkaW5nXCI+PGRpdj48c3Bhbj7qtZDsnKHquLDsl4Ug6rCc7J24IOuLtOuLueyekCDCtyDsirnsnbjrkJwgSE9NRSDquLDroZ08L3NwYW4+PGgxPntwYWdlVGl0bGV9PC9oMT48cD7stZzqt7wge2RheXN97J28IMK3IOuLpOuluCDslYTrj5nqs7wg67mE6rWQ7ZWY7KeAIOyViuqzoCDtlZwg7JWE64+Z7J2YIOuzgO2ZlOunjCDtmZXsnbjtlanri4jri6QuPC9wPjwvZGl2PjxzcGFuIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19zY29wZVwiPuq2jO2VnCDrspTsnIQ6IHtkYXRhLnNjb3BlfTwvc3Bhbj48L2hlYWRlcj5cbiAgICA8ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19zdW1tYXJ5XCI+PGRpdj48Yj57ZGF0YS5zdW1tYXJ5LnBhcnRpY2lwYXRpb25zfTwvYj48c3Bhbj7ssLjsl6wg7IS47IWYPC9zcGFuPjwvZGl2PjxkaXY+PGI+e2RhdGEuc3VtbWFyeS5hdHRlbXB0c308L2I+PHNwYW4+7Iuc64+EPC9zcGFuPjwvZGl2PjxkaXY+PGI+e2RhdGEuc3VtbWFyeS50YXJnZXRfY2hvaWNlc308L2I+PHNwYW4+66qp7ZGc7JeQIOunnuuKlCDshKDtg508L3NwYW4+PC9kaXY+PGRpdj48Yj57ZGF0YS5zdW1tYXJ5LnRhcmdldF9taXNzZXN9PC9iPjxzcGFuPuuLpOyLnCDsgrTtjrTrs7wg7ISg7YOdPC9zcGFuPjwvZGl2PjwvZGl2PlxuICAgIDxuYXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX3RhYnNcIiBhcmlhLWxhYmVsPVwi64yA7Iuc67O065OcIO2DrVwiPnsoW1snb3ZlcnZpZXcnLCAn7KCE7LK0IOuGgOydtCDqsr3tl5gnXSwgWydjb250ZW50JywgJ+y9mO2FkOy4oOuzhCDrtoTshJ0nXSwgWydldmlkZW5jZScsICfrtoTshJ0g6re86rGwJ10sIFsnc3VwcG9ydCcsICfqtZDsnKHsoIEg6re86rGwwrfsoJDqsoAnXV0gYXMgY29uc3QpLm1hcCgoW2tleSwgbGFiZWxdKSA9PiA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBrZXk9e2tleX0gY2xhc3NOYW1lPXt0YWIgPT09IGtleSA/ICdpcy1hY3RpdmUnIDogJyd9IG9uQ2xpY2s9eygpID0+IG9uVGFiKGtleSl9PntsYWJlbH08L2J1dHRvbj4pfTwvbmF2PlxuICAgIHt0YWIgPT09ICdvdmVydmlldycgJiYgPGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY29udGVudC1ncmlkXCI+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQgdGVhY2hlci1sbXNfX2NhcmQtLXdpZGVcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuywuOyXrCDtmITtmak8L3NwYW4+PGgyPuy9mO2FkOy4oOuzhCDqsr3tl5g8L2gyPjwvZGl2PjxzbWFsbD7sp4DtkZzrpbwg7ISg7YOd7ZWY66m0IOq3vOqxsOqwgCDsl7Trpr3ri4jri6QuPC9zbWFsbD48L2Rpdj48ZGl2IG9uQ2xpY2s9e2V2ZW50ID0+IHsgY29uc3QgdGFyZ2V0ID0gKGV2ZW50LnRhcmdldCBhcyBIVE1MRWxlbWVudCkuY2xvc2VzdCgnW2RhdGEtYWN0aXZpdHldJyk/LmdldEF0dHJpYnV0ZSgnZGF0YS1hY3Rpdml0eScpOyBpZiAodGFyZ2V0KSBjaG9vc2VFdmlkZW5jZSh0YXJnZXQpOyB9fT48QmFyTGlzdCBpdGVtcz17YWN0aXZpdHlCYXJzfSBpdGVtS2V5cz17ZGF0YS5hY3Rpdml0aWVzLm1hcChpdGVtID0+IGl0ZW0uYWN0aXZpdHlfc2x1Zyl9IGxhYmVsPVwi7L2Y7YWQ7Lig67OEIOyLnOuPhFwiIHZhbHVlPVwi7ZqMXCIgLz48L2Rpdj48L3NlY3Rpb24+XG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZFwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQtaGVhZGluZ1wiPjxkaXY+PHNwYW4+6riw6rCEIOuzgO2ZlDwvc3Bhbj48aDI+7J2867OEIOywuOyXrCDstpTsnbQ8L2gyPjwvZGl2PjwvZGl2PntkYXRhLnRyZW5kLmxlbmd0aCA/IDxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX3RyZW5kXCI+e2RhdGEudHJlbmQubWFwKGl0ZW0gPT4gPGRpdiBrZXk9e2l0ZW0uZGF0ZX0gdGl0bGU9e2Ake2l0ZW0uZGF0ZX06ICR7aXRlbS5hdHRlbXB0c33tmoxgfT48aSBzdHlsZT17eyBoZWlnaHQ6IGAke01hdGgubWF4KDEyLCBpdGVtLmF0dGVtcHRzICogMTgpfXB4YCB9fSAvPjxzcGFuPntpdGVtLmRhdGUuc2xpY2UoNSl9PC9zcGFuPjwvZGl2Pil9PC9kaXY+IDogPEVtcHR5Puy2lOydtOulvCDtkZzsi5ztlaAg6riw66Gd7J20IOu2gOyhse2VqeuLiOuLpC48L0VtcHR5Pn08L3NlY3Rpb24+XG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZFwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQtaGVhZGluZ1wiPjxkaXY+PHNwYW4+7LC47JesIO2MqO2EtDwvc3Bhbj48aDI+7JqU7J2867OEIOu2hO2PrDwvaDI+PC9kaXY+PC9kaXY+PEJhckxpc3QgaXRlbXM9e3dlZWtkYXlCYXJzfSBsYWJlbD1cIuyalOydvOuzhCDsi5zrj4RcIiB2YWx1ZT1cIu2ajFwiIC8+PC9zZWN0aW9uPlxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQgdGVhY2hlci1sbXNfX2NhcmQtLXdpZGVcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuuGgOydtCDsl6zsoJU8L3NwYW4+PGgyPuy1nOq3vCDqsr3tl5gg7YOA7J6E65287J24PC9oMj48L2Rpdj48c21hbGw+7Iq57J2465CcIOydtOuypO2KuOunjCDtkZzsi5ztlanri4jri6QuPC9zbWFsbD48L2Rpdj57ZGF0YS5yZWNlbnRfZXZlbnRzLmxlbmd0aCA/IDxvbCBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fdGltZWxpbmVcIj57ZGF0YS5yZWNlbnRfZXZlbnRzLnNsaWNlKDAsIDYpLm1hcChldmVudCA9PiA8bGkga2V5PXtldmVudC5pZH0+PGI+e2V2ZW50Lm9jY3VycmVkX2F0ID8gbmV3IERhdGUoZXZlbnQub2NjdXJyZWRfYXQpLnRvTG9jYWxlRGF0ZVN0cmluZygna28tS1InKSA6ICfrr7jquLDroZ0nfTwvYj48c3Bhbj57ZXZlbnQuZXZlbnRfdHlwZX0gwrcge2V2ZW50LnN1Y2Nlc3MgPT09IHRydWUgPyAn66qp7ZGcIOydvOy5mCcgOiBldmVudC5zdWNjZXNzID09PSBmYWxzZSA/ICfrqqntkZwg67aI7J287LmYJyA6ICfqsrDqs7wg66+46riw66GdJ308L3NwYW4+PC9saT4pfTwvb2w+IDogPEVtcHR5PuyXrOygleydhCDtkZzsi5ztlaAg7J2067Kk7Yq46rCAIOyXhuyKteuLiOuLpC48L0VtcHR5Pn08L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmRcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuyDiOuhnOyatCDqsr3tl5g8L3NwYW4+PGgyPuyVhOyngSDshKDtg53tlZjsp4Ag7JWK7J2AIOuGgOydtDwvaDI+PC9kaXY+PC9kaXY+PHAgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX25vdGVcIj7shKDtg53tlZjsp4Ag7JWK7JWY64uk64qUIOyCrOyLpOydhCDshKDtmLjtlZjsp4Ag7JWK7J2M7Jy866GcIO2VtOyEne2VmOyngCDslYrsirXri4jri6QuPC9wPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX25ldy1leHBlcmllbmNlc1wiPntjYXRhbG9nLmZpbHRlcihpdGVtID0+IGl0ZW0uc3RhdHVzID09PSAnUExBWUFCTEUnICYmICFjb250ZW50SGFzUmVjb3JkZWRFeHBlcmllbmNlKGRhdGEsIGl0ZW0uc2x1ZykpLm1hcChpdGVtID0+IDxzcGFuIGtleT17aXRlbS5zbHVnfT57aXRlbS50aXRsZX08L3NwYW4+KX17IWNhdGFsb2cuc29tZShpdGVtID0+IGl0ZW0uc3RhdHVzID09PSAnUExBWUFCTEUnICYmICFjb250ZW50SGFzUmVjb3JkZWRFeHBlcmllbmNlKGRhdGEsIGl0ZW0uc2x1ZykpICYmIDxzbWFsbD7tmITsnqwg6rO16rCc65CcIOuGgOydtOulvCDrqqjrkZAg6rK97ZeY7ZaI6rGw64KYIOy5tO2DiOuhnOq3uCDquLDroZ3snbQg7JeG7Iq164uI64ukLjwvc21hbGw+fTwvZGl2Pjwvc2VjdGlvbj48c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZFwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQtaGVhZGluZ1wiPjxkaXY+PHNwYW4+6re466a87LGFIOyjvOygnCDsl7DqsrA8L3NwYW4+PGgyPuyXsOqzhCDqsIDriqXtlZwg7KO87KCcPC9oMj48L2Rpdj48L2Rpdj57ZGF0YS5ib29rX3JlY29tbWVuZGF0aW9uX3RvcGljID8gPHA+e2RhdGEuYm9va19yZWNvbW1lbmRhdGlvbl90b3BpY308L3A+IDogPHAgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX3Vuc3VwcG9ydGVkXCI+6riw66Gd7JeQ7IScIOyXsOqysOuQnCDso7zsoJzqsIAg7JeG7Iq164uI64ukLiDsi6TsoJwg64+E7IScIOy2lOyynCDqsrDqs7zripQg66+47KeA7JuQ7J6F64uI64ukLjwvcD59PC9zZWN0aW9uPjwvZGl2Pn1cbiAgICB7dGFiID09PSAnY29udGVudCcgJiYgPGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY29udGVudC1ncmlkXCI+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQgdGVhY2hlci1sbXNfX2NhcmQtLXdpZGVcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPkxYUCDsvZjthZDsuKAg7Lm07YOI66Gc6re4PC9zcGFuPjxoMj7rtoTshJ3tlaAg64aA7J20IOyEoO2DnTwvaDI+PC9kaXY+PHNtYWxsPlBMQVlBQkxF66eMIOyLpOygnCDquLDroZ3snYQg67aE7ISd7ZWp64uI64ukLjwvc21hbGw+PC9kaXY+PENvbnRlbnRDYXRhbG9nQ2FyZHMgY2F0YWxvZz17Y2F0YWxvZ30gZGF0YT17ZGF0YX0gc2VsZWN0ZWQ9e3NlbGVjdGVkQ29udGVudH0gb25TZWxlY3Q9e3NldFNlbGVjdGVkQ29udGVudH0gLz48L3NlY3Rpb24+PENvbnRlbnRBbmFseXNpc1ZpZXcgY29udGVudD17Y2F0YWxvZy5maW5kKGl0ZW0gPT4gaXRlbS5zbHVnID09PSBzZWxlY3RlZENvbnRlbnQpfSBkYXRhPXtkYXRhfSBvbkV2aWRlbmNlPXtjaG9vc2VFdmlkZW5jZX0gLz48L2Rpdj59XG4gICAge3RhYiA9PT0gJ2V2aWRlbmNlJyAmJiA8ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jb250ZW50LWdyaWRcIj48c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZCB0ZWFjaGVyLWxtc19fY2FyZC0td2lkZVwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQtaGVhZGluZ1wiPjxkaXY+PHNwYW4+7Lac7LKY6rCAIOyeiOuKlCDsp4DtkZw8L3NwYW4+PGgyPuqzhOyCsCDqt7zqsbDrpbwg7ISg7YOd7ZWY7IS47JqUPC9oMj48L2Rpdj48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19tZXRyaWMtY2FyZHNcIj57ZGF0YS5tZXRyaWNfZXZpZGVuY2UubGVuZ3RoID8gZGF0YS5tZXRyaWNfZXZpZGVuY2UubWFwKGl0ZW0gPT4gPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIga2V5PXtpdGVtLmFjdGl2aXR5X3NsdWd9IG9uQ2xpY2s9eygpID0+IHNldEV2aWRlbmNlKGl0ZW0pfT48Yj57aXRlbS5hY3Rpdml0eV9zbHVnfTwvYj48c3Bhbj57aXRlbS5ldmVudF9jb3VudH3qsJwg7J2067Kk7Yq4IMK3IHtpdGVtLmRhdGFfdmVyc2lvbn08L3NwYW4+PHNwYW4+e2l0ZW0uZm9ybXVsYX08L3NwYW4+PC9idXR0b24+KSA6IDxFbXB0eT7tmITsnqwg6riw6rCE7JeQIOu2hOyEnSDqsIDriqXtlZwg7J2067Kk7Yq46rCAIOyXhuyKteuLiOuLpC48L0VtcHR5Pn08L2Rpdj48L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmRcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuybkOuzuCDsnbTrsqTtirg8L3NwYW4+PGgyPuy1nOq3vCB7ZGF0YS5yZWNlbnRfZXZlbnRzLmxlbmd0aH3qsbQ8L2gyPjwvZGl2PjwvZGl2Pjx1bCBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fZXZlbnQtbGlzdFwiPntkYXRhLnJlY2VudF9ldmVudHMuc2xpY2UoMCwgMTApLm1hcChldmVudCA9PiA8bGkga2V5PXtldmVudC5pZH0+PGI+e2V2ZW50LmV2ZW50X3R5cGV9PC9iPjxzcGFuPntldmVudC5kZXRhaWxzLnBsYXllciA/IGAke2dlc3R1cmVMYWJlbHNbZXZlbnQuZGV0YWlscy5wbGF5ZXJdID8/IGV2ZW50LmRldGFpbHMucGxheWVyfSDCtyAke2dlc3R1cmVMYWJlbHNbZXZlbnQuZGV0YWlscy5vcHBvbmVudCA/PyAnJ10gPz8gZXZlbnQuZGV0YWlscy5vcHBvbmVudH1gIDogJ+yDgeyEuCDrr7jquLDroZ0nfTwvc3Bhbj48c21hbGw+e2V2ZW50LnN1Y2Nlc3MgPT09IHRydWUgPyAn7ISx6rO1JyA6IGV2ZW50LnN1Y2Nlc3MgPT09IGZhbHNlID8gJ+yLpO2MqCcgOiAn6rKw6rO8IOuvuOq4sOuhnSd9PC9zbWFsbD48L2xpPil9PC91bD48L3NlY3Rpb24+PC9kaXY+fVxuICAgIHt0YWIgPT09ICdzdXBwb3J0JyAmJiA8ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jb250ZW50LWdyaWRcIj48c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2FyZFwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQtaGVhZGluZ1wiPjxkaXY+PHNwYW4+64uk7J2MIO2ZnOuPmTwvc3Bhbj48aDI+7LaU7LKcIOq3vOqxsDwvaDI+PC9kaXY+PC9kaXY+PHA+e2RhdGEucmVjb21tZW5kYXRpb25fYmFzaXN9PC9wPntkYXRhLnJlY29tbWVuZGF0aW9ucy5sZW5ndGggPyBkYXRhLnJlY29tbWVuZGF0aW9ucy5tYXAoaXRlbSA9PiA8YXJ0aWNsZSBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fcmVjb21tZW5kYXRpb25cIiBrZXk9e2l0ZW0ua2luZH0+PGgzPntpdGVtLnRpdGxlfTwvaDM+PHA+e2l0ZW0ucmVhc29ufTwvcD57aXRlbS5hdmFpbGFibGVfcGF0aCAmJiA8YSBocmVmPXtpdGVtLmF2YWlsYWJsZV9wYXRofT7rhoDsnbQg7ISg7YOd7Jy866GcIOydtOuPmTwvYT59PC9hcnRpY2xlPikgOiA8RW1wdHk+7ZiE7J6sIOq4sOuhneyXkOyEnCDshKDtg50g6rCA64ql7ZWcIOuLpOydjCDrhoDsnbQg7LaU7LKc7J20IOyXhuyKteuLiOuLpC48L0VtcHR5Pn08L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmRcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuq1kOycoeyggSDqt7zqsbA8L3NwYW4+PGgyPuuIhOumrOqzvOyglSDsl7DqsrA8L2gyPjwvZGl2PjwvZGl2PjxwIGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX191bnN1cHBvcnRlZFwiPntkYXRhLmVkdWNhdGlvbl9ldmlkZW5jZS5yZWFzb259PC9wPjxoMz7ri7Tri7nsnpAg7KCQ6rKAIOuplOuqqDwvaDM+PHRleHRhcmVhIGFyaWEtbGFiZWw9XCLri7Tri7nsnpAg7KCQ6rKAIOuplOuqqFwiIHBsYWNlaG9sZGVyPVwi6rSA7LCw7ZWcIOuCtOyaqeydhCDquLDroZ3tlaAg7IiYIOyeiOyKteuLiOuLpC4g7KCA7J6lIOq4sOuKpeydgCDrs4Trj4Qg7Iq57J24IO2bhCDsl7DqsrDrkKnri4jri6QuXCIgZGlzYWJsZWQgLz48L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2NhcmQgdGVhY2hlci1sbXNfX2NhcmQtLXdpZGVcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19jYXJkLWhlYWRpbmdcIj48ZGl2PjxzcGFuPuq3uOumvOyxhTwvc3Bhbj48aDI+7Jew6rOEIOy2lOyynDwvaDI+PC9kaXY+PC9kaXY+PHA+e2RhdGEuYm9va19yZWNvbW1lbmRhdGlvbnMucmVhc29ufTwvcD48L3NlY3Rpb24+PC9kaXY+fVxuICA8L2Rpdj48RXZpZGVuY2VQYW5lbCBldmlkZW5jZT17ZXZpZGVuY2V9IG9uQ2xvc2U9eygpID0+IHNldEV2aWRlbmNlKG51bGwpfSAvPjwvZGl2Pjtcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIFRlYWNoZXJMbXNEYXNoYm9hcmQoeyBjaGlsZElkIH06IHsgY2hpbGRJZD86IHN0cmluZyB9KSB7XG4gIGNvbnN0IFtjaGlsZHJlbiwgc2V0Q2hpbGRyZW5dID0gdXNlU3RhdGU8VGVhY2hlckNoaWxkW10+KFtdKTsgY29uc3QgW3NlbGVjdGVkLCBzZXRTZWxlY3RlZF0gPSB1c2VTdGF0ZShjaGlsZElkID8/ICcnKTsgY29uc3QgW2RheXMsIHNldERheXNdID0gdXNlU3RhdGUoMzApO1xuICBjb25zdCBbY2F0YWxvZywgc2V0Q2F0YWxvZ10gPSB1c2VTdGF0ZTxBcGlDb250ZW50W10+KFtdKTtcbiAgY29uc3QgW3RhYiwgc2V0VGFiXSA9IHVzZVN0YXRlPFRhYj4oJ292ZXJ2aWV3Jyk7XG4gIGNvbnN0IFtkYXRhLCBzZXREYXRhXSA9IHVzZVN0YXRlPFRlYWNoZXJEYXNoYm9hcmREYXRhIHwgbnVsbD4obnVsbCk7IGNvbnN0IFtlcnJvciwgc2V0RXJyb3JdID0gdXNlU3RhdGUoJycpO1xuICB1c2VFZmZlY3QoKCkgPT4geyBpZiAoIWhhc1RlYWNoZXJTZXNzaW9uKCkpIHsgc2V0RXJyb3IoJ0FVVEhfUkVRVUlSRUQnKTsgcmV0dXJuOyB9IGdldFRlYWNoZXJDaGlsZHJlbigpLnRoZW4ocmVzdWx0ID0+IHsgc2V0Q2hpbGRyZW4ocmVzdWx0LmNoaWxkcmVuKTsgc2V0U2VsZWN0ZWQoY3VycmVudCA9PiBjdXJyZW50IHx8IHJlc3VsdC5jaGlsZHJlblswXT8uaWQgfHwgJycpOyB9KS5jYXRjaChlcnJvciA9PiBzZXRFcnJvcihlcnJvci5tZXNzYWdlKSk7IH0sIFtdKTtcbiAgdXNlRWZmZWN0KCgpID0+IHsgZmV0Y2hDb250ZW50Q2F0YWxvZygpLnRoZW4ocmVzdWx0ID0+IHNldENhdGFsb2cocmVzdWx0ID8/IFtdKSk7IH0sIFtdKTtcbiAgdXNlRWZmZWN0KCgpID0+IHsgaWYgKCFzZWxlY3RlZCkgcmV0dXJuOyBzZXREYXRhKG51bGwpOyBzZXRFcnJvcignJyk7IGdldFRlYWNoZXJEYXNoYm9hcmQoc2VsZWN0ZWQsIGRheXMpLnRoZW4oc2V0RGF0YSkuY2F0Y2goZXJyb3IgPT4gc2V0RXJyb3IoZXJyb3IubWVzc2FnZSkpOyB9LCBbc2VsZWN0ZWQsIGRheXNdKTtcbiAgY29uc3QgY2hpbGRPcHRpb25zID0gdXNlTWVtbygoKSA9PiBjaGlsZHJlbi5tYXAoKGNoaWxkLCBpbmRleCkgPT4gKHsgLi4uY2hpbGQsIGxhYmVsOiBg64u064u5IOyVhOuPmSAke2luZGV4ICsgMX1gIH0pKSwgW2NoaWxkcmVuXSk7XG4gIGlmIChlcnJvciA9PT0gJ0FVVEhfUkVRVUlSRUQnKSByZXR1cm4gPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX2dhdGVcIj48aDE+64u064u57J6QIOuhnOq3uOyduOydtCDtlYTsmpTtlanri4jri6QuPC9oMT48YSBocmVmPVwiL3RlYWNoZXIvbG9naW5cIj7roZzqt7jsnbjsnLzroZwg7J2064+ZPC9hPjwvc2VjdGlvbj47XG4gIGlmIChlcnJvciA9PT0gJ0NISUxEX0ZPUkJJRERFTicpIHJldHVybiA8c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fZ2F0ZVwiPjxoMT7snbQg7JWE64+Z7J2YIOq4sOuhneydhCDrs7wg6raM7ZWc7J20IOyXhuyKteuLiOuLpC48L2gxPjxhIGhyZWY9XCIvdGVhY2hlci9kYXNoYm9hcmRcIj7ri7Tri7kg7JWE64+ZIOuqqeuhneycvOuhnDwvYT48L3NlY3Rpb24+O1xuICByZXR1cm4gPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1sbXMgdGVhY2hlci1sbXMtLXdvcmtzcGFjZVwiPjxhc2lkZSBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fc2lkZWJhclwiIGFyaWEtbGFiZWw9XCJMTVMg66mU64m0XCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fc2lkZWJhci1icmFuZFwiPjxzdHJvbmc+UElLSVBJQ0s8L3N0cm9uZz48c3Bhbj7qtZDsnKEg64u064u57J6QIExNUzwvc3Bhbj48L2Rpdj48bmF2IGNsYXNzTmFtZT1cInRlYWNoZXItbG1zX19zaWRlYmFyLW5hdlwiPnsoW1snb3ZlcnZpZXcnLCAn7KCE7LK0IO2YhO2ZqSddLCBbJ2NvbnRlbnQnLCAn7JWE64+Z67OEIOuGgOydtCDquLDroZ0nXSwgWydldmlkZW5jZScsICfrtoTshJ0g6re86rGwJ10sIFsnc3VwcG9ydCcsICfstpTsspzCt+q1kOycoeyggSDsoJDqsoAnXV0gYXMgY29uc3QpLm1hcCgoW2tleSwgbGFiZWxdKSA9PiA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBrZXk9e2tleX0gY2xhc3NOYW1lPXt0YWIgPT09IGtleSA/ICdpcy1hY3RpdmUnIDogJyd9IG9uQ2xpY2s9eygpID0+IHNldFRhYihrZXkpfT57bGFiZWx9PC9idXR0b24+KX08L25hdj48YSBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fc2lkZWJhci1saW5rXCIgaHJlZj1cIi9wbGF5XCI+7JWE7J207JqpIO2ZlOuptDwvYT48L2FzaWRlPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1sbXNfX3dvcmtzcGFjZS1tYWluXCI+PGhlYWRlciBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fdG9vbGJhclwiPjxkaXY+PHNwYW4+UElLSVBJQ0sg6rCc7J24IOuLtOuLueyekCBMTVM8L3NwYW4+PGgxPuuLtOuLuSDslYTrj5kg7ZiE7ZmpPC9oMT48L2Rpdj48bGFiZWw+7KGw7ZqMIOq4sOqwhDxzZWxlY3QgdmFsdWU9e2RheXN9IG9uQ2hhbmdlPXtldmVudCA9PiBzZXREYXlzKE51bWJlcihldmVudC50YXJnZXQudmFsdWUpKX0+e3BlcmlvZHMubWFwKHZhbHVlID0+IDxvcHRpb24gdmFsdWU9e3ZhbHVlfSBrZXk9e3ZhbHVlfT7stZzqt7wge3ZhbHVlfeydvDwvb3B0aW9uPil9PC9zZWxlY3Q+PC9sYWJlbD48L2hlYWRlcj57Y2hpbGRPcHRpb25zLmxlbmd0aCA+IDAgJiYgPG5hdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWxtc19fY2hpbGRyZW5cIiBhcmlhLWxhYmVsPVwi64u064u5IOyVhOuPmSDshKDtg51cIj57Y2hpbGRPcHRpb25zLm1hcChjaGlsZCA9PiA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBrZXk9e2NoaWxkLmlkfSBjbGFzc05hbWU9e2NoaWxkLmlkID09PSBzZWxlY3RlZCA/ICdpcy1zZWxlY3RlZCcgOiAnJ30gb25DbGljaz17KCkgPT4gc2V0U2VsZWN0ZWQoY2hpbGQuaWQpfT57Y2hpbGQubGFiZWx9PC9idXR0b24+KX08L25hdj59eyFjaGlsZHJlbi5sZW5ndGggJiYgIWVycm9yICYmIDxFbXB0eT7sirnsnbjrkJwgSE9NRSDquLDroZ3snYQg7KGw7ZqM7ZWgIOuLtOuLuSDslYTrj5nsnbQg7JeG7Iq164uI64ukLjwvRW1wdHk+fXtkYXRhID8gPERhc2hib2FyZFZpZXcgZGF0YT17ZGF0YX0gZGF5cz17ZGF5c30gY2F0YWxvZz17Y2F0YWxvZ30gdGFiPXt0YWJ9IG9uVGFiPXtzZXRUYWJ9IC8+IDogc2VsZWN0ZWQgPyA8RW1wdHk+6raM7ZWc7J2EIO2ZleyduO2VmOqzoCDquLDroZ3snYQg67aI65+s7Jik64qUIOykkeyeheuLiOuLpC48L0VtcHR5PiA6IG51bGx9PC9kaXY+PC9zZWN0aW9uPjtcbn1cbiJdfQ==

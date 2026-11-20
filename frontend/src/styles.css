@@ -339,7 +339,7 @@ p { line-height: 1.6; }
 /* 게임 레이아웃 규칙: 인트로 이후 모든 화면은 하나의 반응형 그리드를 사용한다. */
 .app-shell--game-flow .game-header-tools { display: flex; min-width: 0; align-items: center; justify-self: end; gap: 8px; }
 .app-shell--game-flow .stars { min-width: 176px; max-width: 100%; }
-.app-shell--game-flow .play-card:not(.play-card--game) { min-height: min(620px, calc(100svh - 150px)); padding: clamp(22px, 4vw, 36px) clamp(14px, 3vw, 28px); }
+.app-shell--game-flow .play-card:not(.play-card--game):not(.play-card--secret-land) { min-height: min(620px, calc(100svh - 150px)); padding: clamp(22px, 4vw, 36px) clamp(14px, 3vw, 28px); }
 .app-shell--game .play-card--game { min-height: min(640px, calc(100svh - 132px)); height: auto; padding: clamp(10px, 2vw, 22px); overflow: visible; }
 .app-shell--game .game-panel { width: min(100%, 760px); min-height: 0; grid-template-rows: minmax(0, 1fr) auto; gap: clamp(8px, 1.7vh, 16px); }
 .app-shell--game .opponent-area { min-height: clamp(230px, 36vh, 350px); align-content: center; justify-items: center; }
@@ -365,7 +365,7 @@ p { line-height: 1.6; }
   .app-shell--game-flow .star { font-size: 1.2rem; }
   .app-shell--game-flow .success-count { gap: 4px; font-size: .61rem; }
   .app-shell--game-flow .game-menu-toggle { padding: 6px 8px; font-size: .68rem; }
-  .app-shell--game-flow .play-card:not(.play-card--game) { min-height: 0; padding: 20px 10px; }
+  .app-shell--game-flow .play-card:not(.play-card--game):not(.play-card--secret-land) { min-height: 0; padding: 20px 10px; }
   .app-shell--game .play-card--game { min-height: 0; padding: 8px 4px; }
   .app-shell--game .opponent-area { min-height: clamp(190px, 31vh, 270px); }
   .app-shell--game .opponent-area { --opponent-piki-size: clamp(217px, 40.6vh, 308px); }
@@ -388,13 +388,12 @@ p { line-height: 1.6; }
 .intro-v2-hop { width: 100%; height: 100%; transform-origin: center bottom; }
 /* 빼꼼/살펴보기 단계: 캔버스 자체는 화면 가장자리에 고정하고, 그림만 움직일 수 있다. */
 .intro-v2[data-phase='PEEK'] .intro-v2-motion,
-.intro-v2[data-phase='LOOK'] .intro-v2-motion { position: absolute; right: calc(50% - 50vw); bottom: 0; left: auto; transform: translate3d(0, var(--peek-y), 0) scale(.52); transform-origin: right bottom; }
+.intro-v2[data-phase='REVEAL'] .intro-v2-motion { position: absolute; right: calc(50% - 50vw); bottom: 0; left: auto; transform: translate3d(0, var(--peek-y), 0) scale(.52); transform-origin: right bottom; }
 .intro-v2[data-phase='PEEK'] .intro-v2-motion { animation: intro-v2-peek .7s cubic-bezier(.24,.74,.32,1) both; }
-.intro-v2[data-phase='LOOK'] .intro-story-stack { transform-origin: 80% 58%; animation: intro-v2-look .8s ease-in-out both; }
-.intro-v2[data-phase='NOTICE'] .intro-v2-motion { transform: translate3d(40vw, -52%, 0) scale(.52) rotate(-3deg); transition-duration: .35s; }
-.intro-v2[data-phase='NOTICE'] .intro-v2-hop { animation: intro-v2-notice .7s ease-out both; }
-.intro-v2[data-phase='APPROACH'] .intro-v2-motion { transform: translate3d(0, 0, 0) scale(1); transition-duration: 1.35s; transition-timing-function: cubic-bezier(.16,.84,.24,1); }
-.intro-v2[data-phase='APPROACH'] .intro-v2-hop { animation: intro-v2-approach-hop 1.35s ease-in-out both; }
+.intro-v2[data-phase='REVEAL'] .intro-story-stack { transform-origin: 80% 58%; animation: intro-v2-look .8s ease-in-out both; }
+.intro-v2[data-phase='ENTER'] .intro-v2-motion { transform: translate3d(40vw, -52%, 0) scale(.52); transition-duration: .52s; }
+.intro-v2[data-phase='ENTER'] .intro-v2-hop { animation: intro-v2-notice .52s ease-out both; }
+.intro-v2[data-phase='FRONT_WALK'] .intro-v2-motion { transform: translate3d(0, 0, 0) scale(1); transition-duration: 1.35s; transition-timing-function: cubic-bezier(.16,.84,.24,1); }
 .intro-v2[data-phase='REACH'] .intro-v2-hop { animation: intro-v2-settle .7s cubic-bezier(.18,.78,.34,1) both; }
 .intro-v2 .intro-v2-speech { position: absolute; z-index: 4; bottom: calc(100% - 24px); left: 58%; width: clamp(230px, 28vw, 360px); max-width: calc(100vw - 32px); aspect-ratio: 360 / 160; pointer-events: none; transform: translateX(-50%); }
 .intro-v2 .intro-bubble-illustration { position: relative; width: 100%; height: 100%; }
@@ -427,8 +426,9 @@ p { line-height: 1.6; }
   .intro-footer p { max-width: min(100%, 300px); }
   .intro-v2-safe { padding-top: clamp(44px, 7svh, 62px); }
   .intro-v2-motion { width: min(92vw, 62svh, 460px); }
-  .intro-v2[data-phase='PEEK'] .intro-v2-motion { transform: translate3d(0, var(--peek-y), 0) scale(.52); }
-  .intro-v2[data-phase='NOTICE'] .intro-v2-motion { transform: translate3d(40vw, -52%, 0) scale(.52) rotate(-3deg); }
+  .intro-v2[data-phase='PEEK'] .intro-v2-motion,
+  .intro-v2[data-phase='REVEAL'] .intro-v2-motion { transform: translate3d(0, var(--peek-y), 0) scale(.52); }
+  .intro-v2[data-phase='ENTER'] .intro-v2-motion { transform: translate3d(40vw, -52%, 0) scale(.52); }
   .intro-v2 .intro-v2-speech { bottom: calc(100% - 18px); left: 54%; width: clamp(230px, 66vw, 280px); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -508,12 +508,13 @@ p { line-height: 1.6; }
   transition: opacity .18s ease-out;
 }
 .intro-v2[data-phase='REACH'] .intro-story-stack,
-.intro-v2[data-phase='IDLE'] .intro-story-stack { opacity: 0; }
+.intro-v2[data-phase='HOLD'] .intro-story-stack { opacity: 0; }
 .intro-v2[data-phase='REACH'] .intro-reach-assembly,
-.intro-v2[data-phase='IDLE'] .intro-reach-assembly { opacity: 1; pointer-events: auto; }
+.intro-v2[data-phase='HOLD'] .intro-reach-assembly { opacity: 1; pointer-events: auto; }
+.intro-v2[data-phase='FRONT_WALK'] .intro-ground-shadow,
 .intro-v2[data-phase='REACH'] .intro-ground-shadow,
-.intro-v2[data-phase='IDLE'] .intro-ground-shadow { opacity: 1; }
-.intro-v2[data-phase='IDLE'] .intro-v2-character { animation: intro-idle-breathe 5.4s ease-in-out infinite; }
+.intro-v2[data-phase='HOLD'] .intro-ground-shadow { opacity: 1; }
+.intro-v2[data-phase='HOLD'] .intro-v2-character { animation: intro-idle-breathe 5.4s ease-in-out infinite; }
 .intro-v2--leaving .intro-v2-character { animation: intro-hand-welcome .46s ease-out both; }
 
 @keyframes intro-story-frame-in {

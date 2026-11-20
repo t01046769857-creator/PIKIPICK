@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-20",
+  "runtimeApplied": false,
+  "approvedBridge": {
+    "path": "frontend/src/assets/secret-land/world-terrain-compact-rainbow-bridge-v3-2400x800.png",
+    "world": { "x": 3100, "y": 50, "width": 2400, "height": 800 },
+    "size": [2400, 800],
+    "mode": "RGB",
+    "opaque": true
+  },
+  "connectors": {
+    "left": {
+      "path": "frontend/src/assets/secret-land/connectors-review-v1/secret-land-terrain-left-connector-3100x900.png",
+      "world": { "x": 0, "y": 0, "width": 3100, "height": 900 },
+      "size": [3100, 900],
+      "mode": "RGB",
+      "opaque": true
+    },
+    "right": {
+      "path": "frontend/src/assets/secret-land/connectors-review-v1/secret-land-terrain-right-connector-3500x900.png",
+      "world": { "x": 5500, "y": 0, "width": 3500, "height": 900 },
+      "size": [3500, 900],
+      "mode": "RGB",
+      "opaque": true
+    }
+  },
+  "seams": {
+    "x3100": {
+      "candidateRoadCoreWorldY": [477, 558],
+      "candidateRoadCenterWorldY": 517.5,
+      "candidateRoadWidthPx": 82,
+      "bridgeRoadCoreWorldY": [552, 655],
+      "bridgeRoadCenterWorldY": 603.5,
+      "bridgeRoadWidthPx": 104,
+      "bridgeMinusCandidateCenterDeltaPx": 86,
+      "routeNode": { "index": 9, "x": 3100, "y": 690 },
+      "routeMinusBridgeCenterDeltaPx": 86.5,
+      "routeMinusCandidateCenterDeltaPx": 172.5,
+      "lowerWaterLikeVisibleRangeCandidateWorldY": [757, 787],
+      "lowerWaterLikeVisibleRangeBridgeWorldY": null,
+      "bankBoundaryStatus": "no common continuous water edge at this seam; manual redraw required",
+      "requiredRedraw": "left connector rightmost ~300-400px, with road/forest/bank transition"
+    },
+    "x5500": {
+      "bridgeRoadCoreWorldY": [420, 460],
+      "bridgeRoadCenterWorldY": 440,
+      "bridgeRoadWidthPx": 41,
+      "candidateRoadCoreWorldY": [443, 518],
+      "candidateRoadCenterWorldY": 480.5,
+      "candidateRoadWidthPx": 76,
+      "candidateMinusBridgeCenterDeltaPx": 40.5,
+      "routePosition": { "x": 5500, "y": 470.676827910146 },
+      "routeMinusBridgeCenterDeltaPx": 30.676827910146,
+      "routeMinusCandidateCenterDeltaPx": -9.823172089854,
+      "lowerWaterLikeVisibleRangeBridgeWorldY": [756, 849],
+      "lowerWaterLikeVisibleRangeCandidateWorldY": [679, 899],
+      "waterOnsetDeltaPx": 77,
+      "bankBoundaryStatus": "candidate water/bank starts earlier and spans a wider vertical range",
+      "requiredRedraw": "right connector leftmost ~300-400px, with road/forest/bank transition"
+    }
+  },
+  "edgeStripRgbDifference": {
+    "x3100MeanAbsoluteError": 84.74,
+    "x5500MeanAbsoluteError": 76.51,
+    "note": "20px edge strips, common world y=50..850; auxiliary indicator only"
+  },
+  "timing": [
+    { "fromStop": 1, "toStop": 7, "distancePx": 1862.1307425737452, "calculatedSeconds": 18.621307425737452, "browserSeconds": 18.63 },
+    { "fromStop": 7, "toStop": 14, "distancePx": 1988.663998089061, "calculatedSeconds": 19.88663998089061, "browserSeconds": 19.90 },
+    { "fromStop": 14, "toStop": 20, "distancePx": 1943.8213349168086, "calculatedSeconds": 19.438213349168088, "browserSeconds": 19.44 },
+    { "fromStop": 20, "toStop": 25, "distancePx": 1610.6616396889392, "calculatedSeconds": 16.106616396889393, "browserSeconds": 16.12 }
+  ],
+  "preserved": ["approved bridge", "27 route nodes", "100px/s", "8 walk frames", "foot contact", "camera", "unlock", "re-entry", "storage"]
+}

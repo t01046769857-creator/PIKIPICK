@@ -11,8 +11,10 @@ describe('game state', () => {
     expect(phaseForPlayPath('/play')).toBe('START');
     expect(phaseForPlayPath('/play/world')).toBe('SECRET_LAND');
     expect(phaseForPlayPath('/play/games')).toBe('ACTIVITY_SELECT');
+    expect(phaseForPlayPath('/play/imagination')).toBe('IMAGINATION_EXPRESSION');
+    expect(phaseForPlayPath('/play/learning')).toBe('LEARNING_PLAY');
   });
-  it.each(['START', 'ACTIVITY_SELECT', 'MODE_SELECT', 'RULE_PRACTICE', 'RECORDS', 'SECRET_LAND', 'BADGE_COLLECTION'] as const)('navigates to %s and restores the round without rolling back rewards', phase => {
+  it.each(['START', 'ACTIVITY_SELECT', 'IMAGINATION_EXPRESSION', 'LEARNING_PLAY', 'MODE_SELECT', 'RULE_PRACTICE', 'RECORDS', 'SECRET_LAND', 'BADGE_COLLECTION'] as const)('navigates to %s and restores the round without rolling back rewards', phase => {
     const playing = { ...playingState('WIN', 'SCISSORS'), successCount: 4, partyCount: 0 };
     const destination = gameReducer(playing, { type: 'NAVIGATE', phase });
     expect(destination.phase).toBe(phase);
@@ -22,7 +24,7 @@ describe('game state', () => {
     expect(gameReducer(destination, { type: 'SUBMIT_INPUT', input: { gesture: 'ROCK', source: 'BUTTON' } })).toBe(destination);
     const cleared = gameReducer(destination, { type: 'CLEAR_RECORDS' });
     const restored = gameReducer(cleared, { type: 'RESTORE_SCREEN', screen: {
-      phase: playing.phase, mode: playing.mode, opponent: playing.opponent, result: playing.result,
+      phase: playing.phase, mode: playing.mode, learningGameId: playing.learningGameId, opponent: playing.opponent, result: playing.result,
     } });
     expect(restored.phase).toBe('PLAYING');
     expect(restored.mode).toBe('WIN');
@@ -59,6 +61,24 @@ describe('game state', () => {
     expect(modes.phase).toBe('MODE_SELECT');
     expect(modes.successCount).toBe(initialState.successCount);
     expect(gameReducer(initialState, { type: 'OPEN_RPS_MODE_SELECT' })).toBe(initialState);
+  });
+
+  it('opens imagination expression play only from the activity selection', () => {
+    const activities = gameReducer(initialState, { type: 'NAVIGATE', phase: 'ACTIVITY_SELECT' });
+    const imagination = gameReducer(activities, { type: 'OPEN_IMAGINATION_EXPRESSION' });
+    expect(imagination.phase).toBe('IMAGINATION_EXPRESSION');
+    expect(imagination.mode).toBeNull();
+    expect(imagination.successCount).toBe(initialState.successCount);
+    expect(gameReducer(initialState, { type: 'OPEN_IMAGINATION_EXPRESSION' })).toBe(initialState);
+  });
+
+  it('opens each learning rule game without changing the existing reward record', () => {
+    const selection = gameReducer(initialState, { type: 'NAVIGATE', phase: 'ACTIVITY_SELECT' });
+    const learning = gameReducer(selection, { type: 'OPEN_LEARNING_GAME', gameId: 'COUNTING' });
+    expect(learning.phase).toBe('LEARNING_PLAY');
+    expect(learning.learningGameId).toBe('COUNTING');
+    expect(learning.successCount).toBe(0);
+    expect(gameReducer(initialState, { type: 'OPEN_LEARNING_GAME', gameId: 'COUNTING' })).toBe(initialState);
   });
 
   it('opens practice independently and returns to selection without starting a round or changing records', () => {

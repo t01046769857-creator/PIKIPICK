@@ -1,0 +1,394 @@
+[
+  {
+    "name": "desktop",
+    "viewport": [
+      1440,
+      900
+    ],
+    "document": {
+      "scrollWidth": 1425,
+      "scrollHeight": 1220
+    },
+    "world": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 6008.39,
+      "bottom": 1376.83
+    },
+    "terrain": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 6008.39,
+      "bottom": 1376.83
+    },
+    "background": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 6008.39,
+      "bottom": 1376.83
+    },
+    "bridge": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 6008.39,
+      "bottom": 1376.83
+    },
+    "transitionForest": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 6008.39,
+      "bottom": 1376.83
+    },
+    "routeLayer": {
+      "x": -4353.14,
+      "y": 340.69,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 6008.39,
+      "bottom": 1376.83
+    },
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -4353.14,
+          "y": 616.99,
+          "width": 2072.3,
+          "height": 690.75,
+          "right": -2280.84,
+          "bottom": 1307.74
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -4353.14,
+          "y": 547.91,
+          "width": 2500.58,
+          "height": 833.52,
+          "right": -1852.56,
+          "bottom": 1381.43
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -2453.53,
+          "y": 536.39,
+          "width": 2072.3,
+          "height": 1061.45,
+          "right": -381.23,
+          "bottom": 1597.85
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": -611.48,
+          "y": 386.74,
+          "width": 2187.42,
+          "height": 1093.7,
+          "right": 1575.94,
+          "bottom": 1480.44
+        }
+      }
+    ],
+    "landmarkCount": 2,
+    "traveler": {
+      "x": 653.09,
+      "y": 707.23,
+      "width": 116.34,
+      "height": 106.37,
+      "right": 769.43,
+      "bottom": 813.6
+    },
+    "legacyApprovedBridgeCount": 0,
+    "legacyPathCount": 0,
+    "motion": {
+      "status": "verified",
+      "before": {
+        "left": "48.8889%",
+        "top": "45.5556%"
+      },
+      "afterClick": {
+        "left": "48.4441%",
+        "top": "46.2045%"
+      },
+      "afterRight": {
+        "left": "48.8889%",
+        "top": "45.5556%"
+      },
+      "afterLeft": {
+        "left": "48.0986%",
+        "top": "46.9304%"
+      },
+      "clickChanged": true,
+      "rightChanged": true,
+      "leftChanged": true,
+      "restoredPosition": "0.5"
+    },
+    "screenshot": "desktop.png"
+  },
+  {
+    "name": "tablet",
+    "viewport": [
+      1024,
+      768
+    ],
+    "document": {
+      "scrollWidth": 1009,
+      "scrollHeight": 1095
+    },
+    "world": {
+      "x": -4561.14,
+      "y": 261.6,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 5800.39,
+      "bottom": 1297.74
+    },
+    "terrain": {
+      "x": -4561.14,
+      "y": 261.6,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 5800.39,
+      "bottom": 1297.74
+    },
+    "background": {
+      "x": -4561.14,
+      "y": 261.6,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 5800.39,
+      "bottom": 1297.74
+    },
+    "bridge": {
+      "x": -4561.14,
+      "y": 261.6,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 5800.39,
+      "bottom": 1297.74
+    },
+    "transitionForest": {
+      "x": -4561.14,
+      "y": 261.6,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 5800.39,
+      "bottom": 1297.74
+    },
+    "routeLayer": {
+      "x": -4561.14,
+      "y": 261.6,
+      "width": 10361.53,
+      "height": 1036.14,
+      "right": 5800.39,
+      "bottom": 1297.74
+    },
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -4561.14,
+          "y": 537.9,
+          "width": 2072.3,
+          "height": 690.75,
+          "right": -2488.84,
+          "bottom": 1228.65
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -4561.14,
+          "y": 468.82,
+          "width": 2500.58,
+          "height": 833.52,
+          "right": -2060.56,
+          "bottom": 1302.33
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -2661.53,
+          "y": 457.3,
+          "width": 2072.3,
+          "height": 1061.45,
+          "right": -589.23,
+          "bottom": 1518.76
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": -819.48,
+          "y": 307.65,
+          "width": 2187.42,
+          "height": 1093.7,
+          "right": 1367.94,
+          "bottom": 1401.35
+        }
+      }
+    ],
+    "landmarkCount": 2,
+    "traveler": {
+      "x": 445.09,
+      "y": 628.14,
+      "width": 116.34,
+      "height": 106.37,
+      "right": 561.43,
+      "bottom": 734.51
+    },
+    "legacyApprovedBridgeCount": 0,
+    "legacyPathCount": 0,
+    "motion": {
+      "status": "not-run"
+    },
+    "screenshot": "tablet.png"
+  },
+  {
+    "name": "mobile",
+    "viewport": [
+      390,
+      844
+    ],
+    "document": {
+      "scrollWidth": 375,
+      "scrollHeight": 1346
+    },
+    "world": {
+      "x": -1919.48,
+      "y": 618.8,
+      "width": 4309.73,
+      "height": 430.97,
+      "right": 2390.25,
+      "bottom": 1049.77
+    },
+    "terrain": {
+      "x": -1919.48,
+      "y": 618.8,
+      "width": 4309.73,
+      "height": 430.97,
+      "right": 2390.25,
+      "bottom": 1049.77
+    },
+    "background": {
+      "x": -1919.48,
+      "y": 618.8,
+      "width": 4309.73,
+      "height": 430.97,
+      "right": 2390.25,
+      "bottom": 1049.77
+    },
+    "bridge": {
+      "x": -1919.48,
+      "y": 618.8,
+      "width": 4309.73,
+      "height": 430.97,
+      "right": 2390.25,
+      "bottom": 1049.77
+    },
+    "transitionForest": {
+      "x": -1919.48,
+      "y": 618.8,
+      "width": 4309.73,
+      "height": 430.97,
+      "right": 2390.25,
+      "bottom": 1049.77
+    },
+    "routeLayer": {
+      "x": -1919.48,
+      "y": 618.8,
+      "width": 4309.73,
+      "height": 430.97,
+      "right": 2390.25,
+      "bottom": 1049.77
+    },
+    "environmentAssets": [
+      {
+        "id": "secret-land-sprout-path-foreground-cluster-v1",
+        "zone": "sprout",
+        "box": {
+          "x": -1919.48,
+          "y": 733.72,
+          "width": 861.94,
+          "height": 287.3,
+          "right": -1057.54,
+          "bottom": 1021.02
+        }
+      },
+      {
+        "id": "secret-land-sprout-spring-path-strip-v1",
+        "zone": "sprout-spring",
+        "box": {
+          "x": -1919.48,
+          "y": 704.98,
+          "width": 1040.08,
+          "height": 346.69,
+          "right": -879.4,
+          "bottom": 1051.67
+        }
+      },
+      {
+        "id": "secret-land-magic-spring-waterbank-cluster-v1",
+        "zone": "spring",
+        "box": {
+          "x": -1129.37,
+          "y": 700.19,
+          "width": 861.94,
+          "height": 441.5,
+          "right": -267.43,
+          "bottom": 1141.69
+        }
+      },
+      {
+        "id": "secret-land-rainbow-bridge-approach-cluster-v1",
+        "zone": "bridge",
+        "box": {
+          "x": -363.2,
+          "y": 637.94,
+          "width": 909.83,
+          "height": 454.91,
+          "right": 546.63,
+          "bottom": 1092.84
+        }
+      }
+    ],
+    "landmarkCount": 2,
+    "traveler": {
+      "x": 132.18,
+      "y": 716.92,
+      "width": 108.32,
+      "height": 99.04,
+      "right": 240.5,
+      "bottom": 815.96
+    },
+    "legacyApprovedBridgeCount": 0,
+    "legacyPathCount": 0,
+    "motion": {
+      "status": "not-run"
+    },
+    "screenshot": "mobile.png"
+  }
+]

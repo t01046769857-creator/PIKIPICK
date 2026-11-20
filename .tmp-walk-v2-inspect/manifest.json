@@ -1,0 +1,122 @@
+{
+  "status": "review_only_not_approved_for_game",
+  "canvas": [
+    1254,
+    1254
+  ],
+  "prepared_baseline_y": 1198,
+  "frames": [
+    {
+      "file": "prepared/right/piki-walk-right-01.png",
+      "original": "걷는_포즈의_귀여운_탐험가_피키.png",
+      "direction": "right",
+      "source_bbox": [
+        234,
+        53,
+        1058,
+        1187
+      ],
+      "scale_to_common_height": 0.98765,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/right/piki-walk-right-02.png",
+      "original": "탐험가_피키의_활기찬_걷기_자세.png",
+      "direction": "right",
+      "source_bbox": [
+        233,
+        43,
+        1095,
+        1205
+      ],
+      "scale_to_common_height": 0.96386,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/right/piki-walk-right-03.png",
+      "original": "모험가_피키의_즐거운_산책.png",
+      "direction": "right",
+      "source_bbox": [
+        235,
+        53,
+        1073,
+        1189
+      ],
+      "scale_to_common_height": 0.98592,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/right/piki-walk-right-04.png",
+      "original": "귀여운_탐험가_피키의_걷는_순간.png",
+      "direction": "right",
+      "source_bbox": [
+        227,
+        42,
+        1078,
+        1194
+      ],
+      "scale_to_common_height": 0.97222,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/left/piki-walk-left-01.png",
+      "original": "왼쪽으로_걷는_꼬마_탐험가_피키.png",
+      "direction": "left",
+      "source_bbox": [
+        205,
+        52,
+        946,
+        1181
+      ],
+      "scale_to_common_height": 0.99203,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/left/piki-walk-left-02.png",
+      "original": "귀여운_꼬마_탐험가의_전진_քայլ기.png",
+      "direction": "left",
+      "source_bbox": [
+        212,
+        62,
+        956,
+        1186
+      ],
+      "scale_to_common_height": 0.99644,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/left/piki-walk-left-03.png",
+      "original": "왼쪽으로_걷는_귀여운_탐험가_피키.png",
+      "direction": "left",
+      "source_bbox": [
+        254,
+        96,
+        944,
+        1168
+      ],
+      "scale_to_common_height": 1.04478,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    },
+    {
+      "file": "prepared/left/piki-walk-left-04.png",
+      "original": "피키_탐험가의_걷기_동작_4프레임.png",
+      "direction": "left",
+      "source_bbox": [
+        225,
+        56,
+        959,
+        1181
+      ],
+      "scale_to_common_height": 0.99556,
+      "prepared_contact_baseline_y": 1198,
+      "review_required": true
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "status": "REVIEW_ONLY_NOT_VALIDATED_FOR_RUNTIME",
+  "world": {
+    "width": 9000,
+    "height": 900
+  },
+  "central_original": {
+    "file": "world-terrain-compact-rainbow-bridge-v3-2400x800.png",
+    "world_x": 3100,
+    "world_y": 50,
+    "width": 2400,
+    "height": 800,
+    "sha256": "d6153ab7d99a0e0b85ca68c39d791f7e86dd3eaae57a88e778f321ee504215dc"
+  },
+  "left": {
+    "file": "secret-land-terrain-left-connector-3100x900-v3-REVIEW.png",
+    "width": 3100,
+    "height": 900,
+    "world_x": 0,
+    "world_y": 0,
+    "modified_local_x": [
+      2600,
+      3099
+    ],
+    "road_center_target_world_y_approx": 603.5
+  },
+  "right": {
+    "file": "secret-land-terrain-right-connector-3500x900-v3-REVIEW.png",
+    "width": 3500,
+    "height": 900,
+    "world_x": 5500,
+    "world_y": 0,
+    "modified_local_x": [
+      0,
+      499
+    ],
+    "road_center_target_world_y_approx": 440
+  },
+  "method": "local vertical geometric correction with low/high frequency edge color matching and exact endpoint pixels; no mirrored trees; bridging top/bottom 50px repeated edge ONLY IN PREVIEW; runtime must address these margins",
+  "warnings": [
+    "Pixel seam equals zero but visual road/river continuity is NOT guaranteed.",
+    "Bridge source is placed at y=50 and 800px high; top/bottom 50px need game-level art or background treatment.",
+    "Original road route node at (3100,690) differs from the visual dirt road at x3100 (~603.5). Not edited.",
+    "Do not apply until visual inspection and walking path overlay pass."
+  ]
+}

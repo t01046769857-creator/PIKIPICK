@@ -26,6 +26,13 @@ describe('피키픽 비밀나라', () => {
   it('메뉴에 피키픽 비밀나라를 표시한다', () => {
     const html = renderToStaticMarkup(<StoryNavigation soundEnabled onSound={() => undefined} onNavigate={() => undefined} />);
     expect(html).toContain('피키픽 비밀나라');
+    expect(html).toContain('상상표현놀이');
+    expect(html).toContain('popup-replace/menu-home.png');
+    expect(html).toContain('popup-replace/menu-play-select.png');
+    expect(html).toContain('menu-rule-practice.png');
+    expect(html).toContain('menu-secret-land.png');
+    expect(html).toContain('popup-replace/menu-sound-on.png');
+    expect(html).toContain('menu-imagination.png');
     expect(html).not.toContain('내 별');
   });
 });

@@ -1,0 +1,1310 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/TeacherDemoDashboard.tsx");const useMemo = __vite__cjsImport0_react["useMemo"]; const useState = __vite__cjsImport0_react["useState"];const _jsxDEV = __vite__cjsImport4_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react from "/node_modules/.vite/deps/react.js?v=5e370e6a";
+import { BrandLogo } from "/src/components/BrandLogo.tsx";
+import "/src/components/TeacherPortal.css";
+import "/src/components/TeacherDemoDashboard.css";
+var _jsxFileName = "C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherDemoDashboard.tsx";
+import __vite__cjsImport4_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=5e370e6a";
+var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+export const teacherDemoSessions = [
+	{
+		id: "demo-01",
+		date: "5월 8일",
+		daysAgo: 16,
+		activity: "가위바위보",
+		rule: "규칙 연습",
+		attempts: 3,
+		targetChoices: 2,
+		retried: true,
+		note: "피키의 손을 보고 다시 골라 보았어요."
+	},
+	{
+		id: "demo-02",
+		date: "5월 14일",
+		daysAgo: 10,
+		activity: "가위바위보",
+		rule: "이기기",
+		attempts: 2,
+		targetChoices: 1,
+		retried: false,
+		note: "이기는 손을 골라 놀이를 이어 갔어요."
+	},
+	{
+		id: "demo-03",
+		date: "5월 20일",
+		daysAgo: 4,
+		activity: "가위바위보",
+		rule: "비기기",
+		attempts: 3,
+		targetChoices: 2,
+		retried: true,
+		note: "같은 손을 찾으며 다시 도전했어요."
+	},
+	{
+		id: "demo-04",
+		date: "5월 23일",
+		daysAgo: 1,
+		activity: "가위바위보",
+		rule: "지기",
+		attempts: 2,
+		targetChoices: 2,
+		retried: false,
+		note: "목표에 맞는 손을 스스로 골랐어요."
+	}
+];
+const badges = [
+	[
+		"🌱",
+		"처음 해 봤어요",
+		"가위바위보 규칙 연습을 처음 경험한 데모 배지"
+	],
+	[
+		"🔁",
+		"다시 해 봤어요",
+		"어려웠던 선택 뒤에 다시 시도한 데모 배지"
+	],
+	[
+		"🧩",
+		"규칙을 찾았어요",
+		"목표에 맞는 손을 골라 본 데모 배지"
+	]
+];
+const periods = [
+	{
+		id: "7",
+		label: "최근 7일",
+		days: 7
+	},
+	{
+		id: "30",
+		label: "최근 30일",
+		days: 30
+	},
+	{
+		id: "all",
+		label: "전체 데모",
+		days: Infinity
+	}
+];
+function LegacyTeacherDemoDashboard() {
+	_s();
+	const [periodId, setPeriodId] = useState("all");
+	const period = periods.find((item) => item.id === periodId) ?? periods[2];
+	const records = useMemo(() => teacherDemoSessions.filter((item) => item.daysAgo <= period.days), [period.days]);
+	const total = (key) => records.reduce((sum, item) => sum + item[key], 0);
+	const first = teacherDemoSessions[0];
+	const latest = records.at(-1) ?? teacherDemoSessions.at(-1);
+	return /* @__PURE__ */ _jsxDEV("main", {
+		className: "teacher-portal teacher-demo",
+		children: [/* @__PURE__ */ _jsxDEV("header", {
+			className: "teacher-portal__header",
+			children: [/* @__PURE__ */ _jsxDEV("a", {
+				href: "/teacher/dashboard",
+				"aria-label": "PIKIPICK Teacher 대시보드로 돌아가기",
+				children: [/* @__PURE__ */ _jsxDEV(BrandLogo, {}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 30,
+					columnNumber: 169
+				}, this), /* @__PURE__ */ _jsxDEV("span", { children: "PIKIPICK Teacher" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 30,
+					columnNumber: 182
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 30,
+				columnNumber: 99
+			}, this), /* @__PURE__ */ _jsxDEV("a", {
+				className: "teacher-portal__child-link",
+				href: "/play",
+				children: "아이 놀이로"
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 30,
+				columnNumber: 215
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 30,
+			columnNumber: 56
+		}, this), /* @__PURE__ */ _jsxDEV("section", {
+			className: "teacher-demo__content",
+			"aria-label": "개인 아동 중심 LMS 대시보드 데모",
+			children: [
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-demo__notice",
+					role: "note",
+					children: "데모 데이터 · 실제 아동 기록이 아닙니다"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 31,
+					columnNumber: 5
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-demo__heading",
+					children: [/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "teacher-kicker",
+							children: "개인 아동 관찰 · 데모"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 32,
+							columnNumber: 49
+						}, this),
+						/* @__PURE__ */ _jsxDEV("h1", { children: "아동 A의 놀이 흐름" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 32,
+							columnNumber: 102
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: "다른 아동과 비교하지 않고, 아동 A가 해 본 놀이와 다음 활동을 준비하는 예시 화면입니다." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 32,
+							columnNumber: 122
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 32,
+						columnNumber: 44
+					}, this), /* @__PURE__ */ _jsxDEV("label", {
+						className: "teacher-demo__period",
+						children: ["조회 기간", /* @__PURE__ */ _jsxDEV("select", {
+							value: periodId,
+							onChange: (event) => setPeriodId(event.target.value),
+							children: periods.map((item) => /* @__PURE__ */ _jsxDEV("option", {
+								value: item.id,
+								children: item.label
+							}, item.id, false, {
+								fileName: _jsxFileName,
+								lineNumber: 32,
+								columnNumber: 348
+							}, this))
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 32,
+							columnNumber: 231
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 32,
+						columnNumber: 186
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 32,
+					columnNumber: 5
+				}, this),
+				/* @__PURE__ */ _jsxDEV("section", {
+					className: "teacher-demo__section",
+					"aria-labelledby": "play-records",
+					children: [
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__section-heading",
+							children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+								className: "teacher-kicker",
+								children: "놀이 기록"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 131
+							}, this), /* @__PURE__ */ _jsxDEV("h2", {
+								id: "play-records",
+								children: "최근 놀이 경험"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 176
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 126
+							}, this), /* @__PURE__ */ _jsxDEV("p", { children: [period.label, " 기준"] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 217
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 33,
+							columnNumber: 79
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__summary",
+							children: [
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: records.length }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 291
+								}, this), /* @__PURE__ */ _jsxDEV("span", { children: "놀이 참여" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 324
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 286
+								}, this),
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: total("attempts") }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 353
+								}, this), /* @__PURE__ */ _jsxDEV("span", { children: "시도" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 389
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 348
+								}, this),
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: total("targetChoices") }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 415
+								}, this), /* @__PURE__ */ _jsxDEV("span", { children: "목표에 맞는 선택" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 456
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 410
+								}, this),
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: records.filter((item) => item.retried).length }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 489
+								}, this), /* @__PURE__ */ _jsxDEV("span", { children: "다시 도전" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 551
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 484
+								}, this)
+							]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 33,
+							columnNumber: 247
+						}, this),
+						/* @__PURE__ */ _jsxDEV("ol", {
+							className: "teacher-demo__timeline",
+							children: records.slice().reverse().map((item) => /* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV("time", { children: item.date }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 677
+							}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+								/* @__PURE__ */ _jsxDEV("strong", { children: [
+									item.activity,
+									" · ",
+									item.rule
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 706
+								}, this),
+								/* @__PURE__ */ _jsxDEV("p", { children: item.note }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 752
+								}, this),
+								/* @__PURE__ */ _jsxDEV("span", { children: [
+									"시도 ",
+									item.attempts,
+									"회 · 목표 선택 ",
+									item.targetChoices,
+									"회",
+									item.retried ? " · 다시 도전" : ""
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 33,
+									columnNumber: 770
+								}, this)
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 701
+							}, this)] }, item.id, true, {
+								fileName: _jsxFileName,
+								lineNumber: 33,
+								columnNumber: 659
+							}, this))
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 33,
+							columnNumber: 581
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 33,
+					columnNumber: 5
+				}, this),
+				/* @__PURE__ */ _jsxDEV("section", {
+					className: "teacher-demo__section teacher-demo__growth",
+					"aria-labelledby": "growth",
+					children: [
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__section-heading",
+							children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+								className: "teacher-kicker",
+								children: "성취와 개인별 변화"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 146
+							}, this), /* @__PURE__ */ _jsxDEV("h2", {
+								id: "growth",
+								children: "아동 A의 이전 경험과 최근 경험"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 196
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 141
+							}, this), /* @__PURE__ */ _jsxDEV("p", { children: "데모 배지" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 241
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 34,
+							columnNumber: 94
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__path",
+							children: [
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "처음 시도" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 300
+								}, this), /* @__PURE__ */ _jsxDEV("strong", { children: [
+									first.date,
+									" · ",
+									first.rule
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 318
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 295
+								}, this),
+								/* @__PURE__ */ _jsxDEV("i", { children: "→" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 368
+								}, this),
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "최근 다시 도전" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 381
+								}, this), /* @__PURE__ */ _jsxDEV("strong", { children: "5월 20일 · 비기기" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 402
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 376
+								}, this),
+								/* @__PURE__ */ _jsxDEV("i", { children: "→" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 437
+								}, this),
+								/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "최근 경험" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 450
+								}, this), /* @__PURE__ */ _jsxDEV("strong", { children: latest.note }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 468
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 34,
+									columnNumber: 445
+								}, this)
+							]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 34,
+							columnNumber: 259
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__badges",
+							children: badges.map(([icon, title, description]) => /* @__PURE__ */ _jsxDEV("article", { children: [/* @__PURE__ */ _jsxDEV("span", {
+								"aria-hidden": "true",
+								children: icon
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 613
+							}, this), /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: title }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 656
+							}, this), /* @__PURE__ */ _jsxDEV("p", { children: description }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 680
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 651
+							}, this)] }, title, true, {
+								fileName: _jsxFileName,
+								lineNumber: 34,
+								columnNumber: 592
+							}, this))
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 34,
+							columnNumber: 510
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", {
+							className: "teacher-demo__caution",
+							children: "게임의 승패는 규칙 수행 성취와 별도로 보며, 이 화면은 집중력·지능·발달 수준을 평가하지 않습니다."
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 34,
+							columnNumber: 724
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 34,
+					columnNumber: 5
+				}, this),
+				/* @__PURE__ */ _jsxDEV("section", {
+					className: "teacher-demo__section",
+					"aria-labelledby": "books",
+					children: [/* @__PURE__ */ _jsxDEV("div", {
+						className: "teacher-demo__section-heading",
+						children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+							className: "teacher-kicker",
+							children: "그림책 연계 활동"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 35,
+							columnNumber: 124
+						}, this), /* @__PURE__ */ _jsxDEV("h2", {
+							id: "books",
+							children: "교사를 위한 주제 중심 활동 예시"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 35,
+							columnNumber: 173
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 35,
+							columnNumber: 119
+						}, this), /* @__PURE__ */ _jsxDEV("p", { children: "도서 API 미연결" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 35,
+							columnNumber: 217
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 35,
+						columnNumber: 72
+					}, this), /* @__PURE__ */ _jsxDEV("div", {
+						className: "teacher-demo__book-grid",
+						children: [/* @__PURE__ */ _jsxDEV("article", { children: [
+							/* @__PURE__ */ _jsxDEV("span", {
+								className: "teacher-demo__book-icon",
+								children: "📖"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 290
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "규칙·차례 그림책 연계 예시" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 341
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "가위바위보에서 경험한 규칙, 선택, 차례를 그림책을 읽으며 다시 이야기합니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 365
+							}, this),
+							/* @__PURE__ */ _jsxDEV("strong", { children: "활동 방법" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 415
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "등장인물이 차례를 지키는 장면에서 멈추고 다음 행동을 손짓으로 골라 보게 합니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 437
+							}, this)
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 35,
+							columnNumber: 281
+						}, this), /* @__PURE__ */ _jsxDEV("article", { children: [
+							/* @__PURE__ */ _jsxDEV("span", {
+								className: "teacher-demo__book-icon",
+								children: "🔢"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 508
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "수 세기 그림책 연계 예시" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 559
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "향후 손가락 수 세기 놀이를 경험했을 때 사용할 수 있는 수 개념 중심 샘플입니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 582
+							}, this),
+							/* @__PURE__ */ _jsxDEV("strong", { children: "후속 놀이" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 635
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "교사가 그림책과 활동을 선택한 뒤에만 아이 화면에는 그림과 행동 중심의 놀이로 전달합니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 35,
+								columnNumber: 657
+							}, this)
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 35,
+							columnNumber: 499
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 35,
+						columnNumber: 240
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 35,
+					columnNumber: 5
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 30,
+			columnNumber: 289
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 30,
+		columnNumber: 10
+	}, this);
+}
+_s(LegacyTeacherDemoDashboard, "3yXuDwyEZJKc4i1eUbyvYMOTxI8=");
+_c = LegacyTeacherDemoDashboard;
+export function TeacherDemoDashboard() {
+	_s2();
+	const [periodId, setPeriodId] = useState("all");
+	const [tab, setTab] = useState("overview");
+	const period = periods.find((item) => item.id === periodId) ?? periods[2];
+	const records = useMemo(() => teacherDemoSessions.filter((item) => item.daysAgo <= period.days), [period.days]);
+	const attempts = records.reduce((sum, item) => sum + item.attempts, 0);
+	const targetChoices = records.reduce((sum, item) => sum + item.targetChoices, 0);
+	const latest = records.at(-1) ?? teacherDemoSessions.at(-1);
+	const menu = [
+		["overview", "전체 현황"],
+		["content", "아동별 놀이 기록"],
+		["evidence", "분석 근거"],
+		["support", "교육적 점검"]
+	];
+	return /* @__PURE__ */ _jsxDEV("main", {
+		className: "teacher-portal teacher-demo teacher-demo--workspace",
+		children: [/* @__PURE__ */ _jsxDEV("aside", {
+			className: "teacher-demo__sidebar",
+			"aria-label": "데모 LMS 메뉴",
+			children: [
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "teacher-demo__sidebar-brand",
+					children: [/* @__PURE__ */ _jsxDEV("strong", { children: "PIKIPICK" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 189
+					}, this), /* @__PURE__ */ _jsxDEV("span", { children: "데모 LMS" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 214
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 144
+				}, this),
+				/* @__PURE__ */ _jsxDEV("nav", { children: menu.map(([key, label]) => /* @__PURE__ */ _jsxDEV("button", {
+					type: "button",
+					className: tab === key ? "is-active" : "",
+					onClick: () => setTab(key),
+					children: label
+				}, key, false, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 272
+				}, this)) }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 239
+				}, this),
+				/* @__PURE__ */ _jsxDEV("a", {
+					href: "/teacher/login",
+					children: "실제 교사 로그인"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 399
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 51,
+			columnNumber: 80
+		}, this), /* @__PURE__ */ _jsxDEV("section", {
+			className: "teacher-demo__workspace",
+			children: [/* @__PURE__ */ _jsxDEV("header", {
+				className: "teacher-portal__header",
+				children: [/* @__PURE__ */ _jsxDEV("a", {
+					href: "/teacher/dashboard",
+					"aria-label": "PIKIPICK Teacher 대시보드로 돌아가기",
+					children: [/* @__PURE__ */ _jsxDEV(BrandLogo, {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 603
+					}, this), /* @__PURE__ */ _jsxDEV("span", { children: "PIKIPICK Teacher" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 616
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 533
+				}, this), /* @__PURE__ */ _jsxDEV("a", {
+					className: "teacher-portal__child-link",
+					href: "/play",
+					children: "아이 놀이로"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 649
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 51,
+				columnNumber: 490
+			}, this), /* @__PURE__ */ _jsxDEV("div", {
+				className: "teacher-demo__content",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "teacher-demo__notice",
+						role: "note",
+						children: "DEMO · 합성 데이터 · 실제 아동 기록이 아닙니다"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 762
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "teacher-demo__heading",
+						children: [/* @__PURE__ */ _jsxDEV("div", { children: [
+							/* @__PURE__ */ _jsxDEV("span", {
+								className: "teacher-kicker",
+								children: "개인 아동 관찰 · 데모"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 892
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h1", { children: menu.find(([key]) => key === tab)?.[1] }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 945
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "아동 A의 데모 기록으로 실제 LMS 레이아웃을 확인합니다." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 994
+							}, this)
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 51,
+							columnNumber: 887
+						}, this), /* @__PURE__ */ _jsxDEV("label", {
+							className: "teacher-demo__period",
+							children: ["조회 기간", /* @__PURE__ */ _jsxDEV("select", {
+								value: periodId,
+								onChange: (event) => setPeriodId(event.target.value),
+								children: periods.map((item) => /* @__PURE__ */ _jsxDEV("option", {
+									value: item.id,
+									children: item.label
+								}, item.id, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 1202
+								}, this))
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 1085
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 51,
+							columnNumber: 1040
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 848
+					}, this),
+					tab === "overview" && /* @__PURE__ */ _jsxDEV("div", {
+						className: "teacher-demo__overview-grid",
+						children: [
+							/* @__PURE__ */ _jsxDEV("section", {
+								className: "teacher-demo__panel",
+								children: [
+									/* @__PURE__ */ _jsxDEV("span", {
+										className: "teacher-kicker",
+										children: "놀이 참여"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1395
+									}, this),
+									/* @__PURE__ */ _jsxDEV("h2", { children: "최근 놀이 경험" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1440
+									}, this),
+									/* @__PURE__ */ _jsxDEV("strong", {
+										className: "teacher-demo__big-number",
+										children: records.length
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1457
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: "선택한 기간의 데모 세션" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1527
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 1354
+							}, this),
+							/* @__PURE__ */ _jsxDEV("section", {
+								className: "teacher-demo__panel",
+								children: [
+									/* @__PURE__ */ _jsxDEV("span", {
+										className: "teacher-kicker",
+										children: "시도 기록"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1598
+									}, this),
+									/* @__PURE__ */ _jsxDEV("h2", { children: "놀이 시도" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1643
+									}, this),
+									/* @__PURE__ */ _jsxDEV("strong", {
+										className: "teacher-demo__big-number",
+										children: attempts
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1657
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: "실제 데모 원본에서 계산" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1721
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 1557
+							}, this),
+							/* @__PURE__ */ _jsxDEV("section", {
+								className: "teacher-demo__panel teacher-demo__panel--wide",
+								children: [
+									/* @__PURE__ */ _jsxDEV("span", {
+										className: "teacher-kicker",
+										children: "기간별 변화"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1818
+									}, this),
+									/* @__PURE__ */ _jsxDEV("h2", { children: "최근 활동 미리보기" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1864
+									}, this),
+									/* @__PURE__ */ _jsxDEV("ol", {
+										className: "teacher-demo__mini-timeline",
+										children: records.slice().reverse().map((item) => /* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV("b", { children: item.date }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 51,
+											columnNumber: 1984
+										}, this), /* @__PURE__ */ _jsxDEV("span", { children: [
+											item.activity,
+											" · ",
+											item.rule,
+											" · 시도 ",
+											item.attempts,
+											"회"
+										] }, void 0, true, {
+											fileName: _jsxFileName,
+											lineNumber: 51,
+											columnNumber: 2002
+										}, this)] }, item.id, true, {
+											fileName: _jsxFileName,
+											lineNumber: 51,
+											columnNumber: 1966
+										}, this))
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 1883
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 1751
+							}, this),
+							/* @__PURE__ */ _jsxDEV("section", {
+								className: "teacher-demo__panel",
+								children: [
+									/* @__PURE__ */ _jsxDEV("span", {
+										className: "teacher-kicker",
+										children: "담당자 미리보기"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2129
+									}, this),
+									/* @__PURE__ */ _jsxDEV("h2", { children: "아동 A" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2177
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: ["최근 경험: ", latest.note] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2190
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: [
+										"목표 선택 ",
+										targetChoices,
+										"회"
+									] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2217
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 2088
+							}, this),
+							/* @__PURE__ */ _jsxDEV("section", {
+								className: "teacher-demo__panel",
+								children: [
+									/* @__PURE__ */ _jsxDEV("span", {
+										className: "teacher-kicker",
+										children: "미정"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2297
+									}, this),
+									/* @__PURE__ */ _jsxDEV("h2", { children: "기능을 준비 중입니다" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2339
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: "확정되지 않은 추천·알림 기능은 표시하지 않습니다." }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2359
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 2256
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 1309
+					}, this),
+					tab === "content" && /* @__PURE__ */ _jsxDEV("section", {
+						className: "teacher-demo__section",
+						children: [
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-demo__section-heading",
+								children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+									className: "teacher-kicker",
+									children: "아동별 놀이 기록"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 2528
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "최근 놀이 경험" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 2577
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 2523
+								}, this), /* @__PURE__ */ _jsxDEV("p", { children: [period.label, " 기준"] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 2600
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 2476
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-demo__summary",
+								children: [
+									/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: records.length }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2674
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "놀이 참여" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2707
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2669
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: attempts }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2736
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "시도" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2763
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2731
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: targetChoices }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2789
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "목표에 맞는 선택" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2821
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2784
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: records.filter((item) => item.retried).length }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2854
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "다시 도전" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2916
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 2849
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 2630
+							}, this),
+							/* @__PURE__ */ _jsxDEV("ol", {
+								className: "teacher-demo__timeline",
+								children: records.slice().reverse().map((item) => /* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV("time", { children: item.date }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3042
+								}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+									/* @__PURE__ */ _jsxDEV("strong", { children: [
+										item.activity,
+										" · ",
+										item.rule
+									] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 3071
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: item.note }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 3117
+									}, this),
+									/* @__PURE__ */ _jsxDEV("span", { children: [
+										"시도 ",
+										item.attempts,
+										"회 · 목표 선택 ",
+										item.targetChoices,
+										"회"
+									] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 3135
+									}, this)
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3066
+								}, this)] }, item.id, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3024
+								}, this))
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 2946
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 2433
+					}, this),
+					tab === "evidence" && /* @__PURE__ */ _jsxDEV("section", {
+						className: "teacher-demo__section",
+						children: [/* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__section-heading",
+							children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+								className: "teacher-kicker",
+								children: "분석 근거"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3344
+							}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "데모 원본과 계산 기준" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3389
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3339
+							}, this), /* @__PURE__ */ _jsxDEV("p", { children: "DEMO" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3416
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 51,
+							columnNumber: 3292
+						}, this), /* @__PURE__ */ _jsxDEV("div", {
+							className: "teacher-demo__evidence-grid",
+							children: [/* @__PURE__ */ _jsxDEV("article", { children: [
+								/* @__PURE__ */ _jsxDEV("strong", { children: "시도 횟수" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3487
+								}, this),
+								/* @__PURE__ */ _jsxDEV("p", { children: "선택한 기간의 각 세션 `attempts` 합계" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3509
+								}, this),
+								/* @__PURE__ */ _jsxDEV("small", { children: [
+									"원본 세션 ",
+									records.length,
+									"건"
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3542
+								}, this)
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3478
+							}, this), /* @__PURE__ */ _jsxDEV("article", { children: [
+								/* @__PURE__ */ _jsxDEV("strong", { children: "목표 선택" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3599
+								}, this),
+								/* @__PURE__ */ _jsxDEV("p", { children: "각 세션 `targetChoices` 합계" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3621
+								}, this),
+								/* @__PURE__ */ _jsxDEV("small", { children: "임의의 재도전 수를 만들지 않음" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3651
+								}, this)
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3590
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 51,
+							columnNumber: 3433
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 3249
+					}, this),
+					tab === "support" && /* @__PURE__ */ _jsxDEV("section", {
+						className: "teacher-demo__section",
+						children: [
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-demo__section-heading",
+								children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+									className: "teacher-kicker",
+									children: "교육적 점검"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3827
+								}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "데모 지원 정보" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3873
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3822
+								}, this), /* @__PURE__ */ _jsxDEV("p", { children: "실제 기능 아님" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 3896
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3775
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "teacher-demo__book-grid",
+								children: badges.map(([icon, title, description]) => /* @__PURE__ */ _jsxDEV("article", { children: [
+									/* @__PURE__ */ _jsxDEV("span", {
+										className: "teacher-demo__book-icon",
+										children: icon
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 4023
+									}, this),
+									/* @__PURE__ */ _jsxDEV("h3", { children: title }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 4078
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: description }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 51,
+										columnNumber: 4094
+									}, this)
+								] }, title, true, {
+									fileName: _jsxFileName,
+									lineNumber: 51,
+									columnNumber: 4002
+								}, this))
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 3917
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", {
+								className: "teacher-demo__caution",
+								children: "데모 배지와 활동 예시는 실제 아동 평가나 발달 판정에 사용되지 않습니다."
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 51,
+								columnNumber: 4132
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 51,
+						columnNumber: 3732
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 51,
+				columnNumber: 723
+			}, this)]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 51,
+			columnNumber: 445
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 51,
+		columnNumber: 10
+	}, this);
+}
+_s2(TeacherDemoDashboard, "wWO1asgPSHcAxAVDYq5xfzcjmck=");
+_c2 = TeacherDemoDashboard;
+var _c, _c2;
+$RefreshReg$(_c, "LegacyTeacherDemoDashboard");
+$RefreshReg$(_c2, "TeacherDemoDashboard");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/TeacherDemoDashboard.tsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherDemoDashboard.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherDemoDashboard.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/mbc/Desktop/PIKIPICK/frontend/src/components/TeacherDemoDashboard.tsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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QkFBaUIsd0JBQUMsV0FBRDtTQUFxQix3QkFBQyxRQUFEO1VBQU0sV0FBVTtvQkFBMkI7U0FBVzs7Ozs7U0FBQyx3QkFBQyxNQUFELFlBQUssTUFBVTs7Ozs7U0FBQyx3QkFBQyxLQUFELFlBQUksWUFBZTs7Ozs7UUFBVSxLQUEzRzs7OztlQUEyRyxDQUFDO09BQU87Ozs7O09BQUMsd0JBQUMsS0FBRDtRQUFHLFdBQVU7a0JBQXdCO09BQTRDOzs7OztNQUFVOzs7Ozs7SUFBTzs7Ozs7V0FBVTs7Ozs7VUFBTzs7Ozs7O0FBQ3RwSSIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJUZWFjaGVyRGVtb0Rhc2hib2FyZC50c3giXSwidmVyc2lvbiI6Mywic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdXNlTWVtbywgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCB7IEJyYW5kTG9nbyB9IGZyb20gJy4vQnJhbmRMb2dvJztcclxuaW1wb3J0ICcuL1RlYWNoZXJQb3J0YWwuY3NzJztcclxuaW1wb3J0ICcuL1RlYWNoZXJEZW1vRGFzaGJvYXJkLmNzcyc7XHJcblxyXG50eXBlIERlbW9TZXNzaW9uID0geyBpZDogc3RyaW5nOyBkYXRlOiBzdHJpbmc7IGRheXNBZ286IG51bWJlcjsgYWN0aXZpdHk6IHN0cmluZzsgcnVsZTogc3RyaW5nOyBhdHRlbXB0czogbnVtYmVyOyB0YXJnZXRDaG9pY2VzOiBudW1iZXI7IHJldHJpZWQ6IGJvb2xlYW47IG5vdGU6IHN0cmluZyB9O1xyXG5cclxuZXhwb3J0IGNvbnN0IHRlYWNoZXJEZW1vU2Vzc2lvbnM6IERlbW9TZXNzaW9uW10gPSBbXHJcbiAgeyBpZDogJ2RlbW8tMDEnLCBkYXRlOiAnNeyblCA47J28JywgZGF5c0FnbzogMTYsIGFjdGl2aXR5OiAn6rCA7JyE67CU7JyE67O0JywgcnVsZTogJ+q3nOy5mSDsl7DsirUnLCBhdHRlbXB0czogMywgdGFyZ2V0Q2hvaWNlczogMiwgcmV0cmllZDogdHJ1ZSwgbm90ZTogJ+2UvO2CpOydmCDshpDsnYQg67O06rOgIOuLpOyLnCDqs6jrnbwg67O07JWY7Ja07JqULicgfSxcclxuICB7IGlkOiAnZGVtby0wMicsIGRhdGU6ICc17JuUIDE07J28JywgZGF5c0FnbzogMTAsIGFjdGl2aXR5OiAn6rCA7JyE67CU7JyE67O0JywgcnVsZTogJ+ydtOq4sOq4sCcsIGF0dGVtcHRzOiAyLCB0YXJnZXRDaG9pY2VzOiAxLCByZXRyaWVkOiBmYWxzZSwgbm90ZTogJ+ydtOq4sOuKlCDshpDsnYQg6rOo6528IOuGgOydtOulvCDsnbTslrQg6rCU7Ja07JqULicgfSxcclxuICB7IGlkOiAnZGVtby0wMycsIGRhdGU6ICc17JuUIDIw7J28JywgZGF5c0FnbzogNCwgYWN0aXZpdHk6ICfqsIDsnITrsJTsnITrs7QnLCBydWxlOiAn67mE6riw6riwJywgYXR0ZW1wdHM6IDMsIHRhcmdldENob2ljZXM6IDIsIHJldHJpZWQ6IHRydWUsIG5vdGU6ICfqsJnsnYAg7IaQ7J2EIOywvuycvOupsCDri6Tsi5wg64+E7KCE7ZaI7Ja07JqULicgfSxcclxuICB7IGlkOiAnZGVtby0wNCcsIGRhdGU6ICc17JuUIDIz7J28JywgZGF5c0FnbzogMSwgYWN0aXZpdHk6ICfqsIDsnITrsJTsnITrs7QnLCBydWxlOiAn7KeA6riwJywgYXR0ZW1wdHM6IDIsIHRhcmdldENob2ljZXM6IDIsIHJldHJpZWQ6IGZhbHNlLCBub3RlOiAn66qp7ZGc7JeQIOunnuuKlCDshpDsnYQg7Iqk7Iqk66GcIOqzqOuekOyWtOyalC4nIH0sXHJcbl07XHJcblxyXG5jb25zdCBiYWRnZXMgPSBbXHJcbiAgWyfwn4yxJywgJ+yymOydjCDtlbQg67Sk7Ja07JqUJywgJ+qwgOychOuwlOychOuztCDqt5zsuZkg7Jew7Iq17J2EIOyymOydjCDqsr3tl5jtlZwg642w66qoIOuwsOyngCddLFxyXG4gIFsn8J+UgScsICfri6Tsi5wg7ZW0IOu0pOyWtOyalCcsICfslrTroKTsm6DrjZgg7ISg7YOdIOuSpOyXkCDri6Tsi5wg7Iuc64+E7ZWcIOuNsOuqqCDrsLDsp4AnXSxcclxuICBbJ/Cfp6knLCAn6rec7LmZ7J2EIOywvuyVmOyWtOyalCcsICfrqqntkZzsl5Ag66ee64qUIOyGkOydhCDqs6jrnbwg67O4IOuNsOuqqCDrsLDsp4AnXSxcclxuXSBhcyBjb25zdDtcclxuY29uc3QgcGVyaW9kcyA9IFt7IGlkOiAnNycsIGxhYmVsOiAn7LWc6re8IDfsnbwnLCBkYXlzOiA3IH0sIHsgaWQ6ICczMCcsIGxhYmVsOiAn7LWc6re8IDMw7J28JywgZGF5czogMzAgfSwgeyBpZDogJ2FsbCcsIGxhYmVsOiAn7KCE7LK0IOuNsOuqqCcsIGRheXM6IEluZmluaXR5IH1dIGFzIGNvbnN0O1xyXG5cclxuZnVuY3Rpb24gTGVnYWN5VGVhY2hlckRlbW9EYXNoYm9hcmQoKSB7XHJcbiAgY29uc3QgW3BlcmlvZElkLCBzZXRQZXJpb2RJZF0gPSB1c2VTdGF0ZTwodHlwZW9mIHBlcmlvZHMpW251bWJlcl1bJ2lkJ10+KCdhbGwnKTtcclxuICBjb25zdCBwZXJpb2QgPSBwZXJpb2RzLmZpbmQoaXRlbSA9PiBpdGVtLmlkID09PSBwZXJpb2RJZCkgPz8gcGVyaW9kc1syXTtcclxuICBjb25zdCByZWNvcmRzID0gdXNlTWVtbygoKSA9PiB0ZWFjaGVyRGVtb1Nlc3Npb25zLmZpbHRlcihpdGVtID0+IGl0ZW0uZGF5c0FnbyA8PSBwZXJpb2QuZGF5cyksIFtwZXJpb2QuZGF5c10pO1xyXG4gIGNvbnN0IHRvdGFsID0gKGtleTogJ2F0dGVtcHRzJyB8ICd0YXJnZXRDaG9pY2VzJykgPT4gcmVjb3Jkcy5yZWR1Y2UoKHN1bSwgaXRlbSkgPT4gc3VtICsgaXRlbVtrZXldLCAwKTtcclxuICBjb25zdCBmaXJzdCA9IHRlYWNoZXJEZW1vU2Vzc2lvbnNbMF07XHJcbiAgY29uc3QgbGF0ZXN0ID0gcmVjb3Jkcy5hdCgtMSkgPz8gdGVhY2hlckRlbW9TZXNzaW9ucy5hdCgtMSkhO1xyXG5cclxuICByZXR1cm4gPG1haW4gY2xhc3NOYW1lPVwidGVhY2hlci1wb3J0YWwgdGVhY2hlci1kZW1vXCI+PGhlYWRlciBjbGFzc05hbWU9XCJ0ZWFjaGVyLXBvcnRhbF9faGVhZGVyXCI+PGEgaHJlZj1cIi90ZWFjaGVyL2Rhc2hib2FyZFwiIGFyaWEtbGFiZWw9XCJQSUtJUElDSyBUZWFjaGVyIOuMgOyLnOuztOuTnOuhnCDrj4zslYTqsIDquLBcIj48QnJhbmRMb2dvIC8+PHNwYW4+UElLSVBJQ0sgVGVhY2hlcjwvc3Bhbj48L2E+PGEgY2xhc3NOYW1lPVwidGVhY2hlci1wb3J0YWxfX2NoaWxkLWxpbmtcIiBocmVmPVwiL3BsYXlcIj7slYTsnbQg64aA7J2066GcPC9hPjwvaGVhZGVyPjxzZWN0aW9uIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fY29udGVudFwiIGFyaWEtbGFiZWw9XCLqsJzsnbgg7JWE64+ZIOykkeyLrCBMTVMg64yA7Iuc67O065OcIOuNsOuqqFwiPlxyXG4gICAgPGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX25vdGljZVwiIHJvbGU9XCJub3RlXCI+642w66qoIOuNsOydtO2EsCDCtyDsi6TsoJwg7JWE64+ZIOq4sOuhneydtCDslYTri5nri4jri6Q8L2Rpdj5cclxuICAgIDxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19oZWFkaW5nXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuqwnOyduCDslYTrj5kg6rSA7LCwIMK3IOuNsOuqqDwvc3Bhbj48aDE+7JWE64+ZIEHsnZgg64aA7J20IO2dkOumhDwvaDE+PHA+64uk66W4IOyVhOuPmeqzvCDruYTqtZDtlZjsp4Ag7JWK6rOgLCDslYTrj5kgQeqwgCDtlbQg67O4IOuGgOydtOyZgCDri6TsnYwg7Zmc64+Z7J2EIOykgOu5hO2VmOuKlCDsmIjsi5wg7ZmU66m07J6F64uI64ukLjwvcD48L2Rpdj48bGFiZWwgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19wZXJpb2RcIj7sobDtmowg6riw6rCEPHNlbGVjdCB2YWx1ZT17cGVyaW9kSWR9IG9uQ2hhbmdlPXtldmVudCA9PiBzZXRQZXJpb2RJZChldmVudC50YXJnZXQudmFsdWUgYXMgdHlwZW9mIHBlcmlvZElkKX0+e3BlcmlvZHMubWFwKGl0ZW0gPT4gPG9wdGlvbiB2YWx1ZT17aXRlbS5pZH0ga2V5PXtpdGVtLmlkfT57aXRlbS5sYWJlbH08L29wdGlvbj4pfTwvc2VsZWN0PjwvbGFiZWw+PC9kaXY+XHJcbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3NlY3Rpb25cIiBhcmlhLWxhYmVsbGVkYnk9XCJwbGF5LXJlY29yZHNcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fc2VjdGlvbi1oZWFkaW5nXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuuGgOydtCDquLDroZ08L3NwYW4+PGgyIGlkPVwicGxheS1yZWNvcmRzXCI+7LWc6re8IOuGgOydtCDqsr3tl5g8L2gyPjwvZGl2PjxwPntwZXJpb2QubGFiZWx9IOq4sOykgDwvcD48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fc3VtbWFyeVwiPjxkaXY+PHN0cm9uZz57cmVjb3Jkcy5sZW5ndGh9PC9zdHJvbmc+PHNwYW4+64aA7J20IOywuOyXrDwvc3Bhbj48L2Rpdj48ZGl2PjxzdHJvbmc+e3RvdGFsKCdhdHRlbXB0cycpfTwvc3Ryb25nPjxzcGFuPuyLnOuPhDwvc3Bhbj48L2Rpdj48ZGl2PjxzdHJvbmc+e3RvdGFsKCd0YXJnZXRDaG9pY2VzJyl9PC9zdHJvbmc+PHNwYW4+66qp7ZGc7JeQIOunnuuKlCDshKDtg508L3NwYW4+PC9kaXY+PGRpdj48c3Ryb25nPntyZWNvcmRzLmZpbHRlcihpdGVtID0+IGl0ZW0ucmV0cmllZCkubGVuZ3RofTwvc3Ryb25nPjxzcGFuPuuLpOyLnCDrj4TsoIQ8L3NwYW4+PC9kaXY+PC9kaXY+PG9sIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fdGltZWxpbmVcIj57cmVjb3Jkcy5zbGljZSgpLnJldmVyc2UoKS5tYXAoaXRlbSA9PiA8bGkga2V5PXtpdGVtLmlkfT48dGltZT57aXRlbS5kYXRlfTwvdGltZT48ZGl2PjxzdHJvbmc+e2l0ZW0uYWN0aXZpdHl9IMK3IHtpdGVtLnJ1bGV9PC9zdHJvbmc+PHA+e2l0ZW0ubm90ZX08L3A+PHNwYW4+7Iuc64+EIHtpdGVtLmF0dGVtcHRzfe2ajCDCtyDrqqntkZwg7ISg7YOdIHtpdGVtLnRhcmdldENob2ljZXN97ZqMe2l0ZW0ucmV0cmllZCA/ICcgwrcg64uk7IucIOuPhOyghCcgOiAnJ308L3NwYW4+PC9kaXY+PC9saT4pfTwvb2w+PC9zZWN0aW9uPlxyXG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19zZWN0aW9uIHRlYWNoZXItZGVtb19fZ3Jvd3RoXCIgYXJpYS1sYWJlbGxlZGJ5PVwiZ3Jvd3RoXCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3NlY3Rpb24taGVhZGluZ1wiPjxkaXY+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1raWNrZXJcIj7shLHst6jsmYAg6rCc7J2467OEIOuzgO2ZlDwvc3Bhbj48aDIgaWQ9XCJncm93dGhcIj7slYTrj5kgQeydmCDsnbTsoIQg6rK97ZeY6rO8IOy1nOq3vCDqsr3tl5g8L2gyPjwvZGl2PjxwPuuNsOuqqCDrsLDsp4A8L3A+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3BhdGhcIj48ZGl2PjxzcGFuPuyymOydjCDsi5zrj4Q8L3NwYW4+PHN0cm9uZz57Zmlyc3QuZGF0ZX0gwrcge2ZpcnN0LnJ1bGV9PC9zdHJvbmc+PC9kaXY+PGk+4oaSPC9pPjxkaXY+PHNwYW4+7LWc6re8IOuLpOyLnCDrj4TsoIQ8L3NwYW4+PHN0cm9uZz417JuUIDIw7J28IMK3IOu5hOq4sOq4sDwvc3Ryb25nPjwvZGl2PjxpPuKGkjwvaT48ZGl2PjxzcGFuPuy1nOq3vCDqsr3tl5g8L3NwYW4+PHN0cm9uZz57bGF0ZXN0Lm5vdGV9PC9zdHJvbmc+PC9kaXY+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX2JhZGdlc1wiPntiYWRnZXMubWFwKChbaWNvbiwgdGl0bGUsIGRlc2NyaXB0aW9uXSkgPT4gPGFydGljbGUga2V5PXt0aXRsZX0+PHNwYW4gYXJpYS1oaWRkZW49XCJ0cnVlXCI+e2ljb259PC9zcGFuPjxkaXY+PHN0cm9uZz57dGl0bGV9PC9zdHJvbmc+PHA+e2Rlc2NyaXB0aW9ufTwvcD48L2Rpdj48L2FydGljbGU+KX08L2Rpdj48cCBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX2NhdXRpb25cIj7qsozsnoTsnZgg7Iq57Yyo64qUIOq3nOy5mSDsiJjtlokg7ISx7Leo7JmAIOuzhOuPhOuhnCDrs7TrqbAsIOydtCDtmZTrqbTsnYAg7KeR7KSR66Clwrfsp4DriqXCt+uwnOuLrCDsiJjspIDsnYQg7Y+J6rCA7ZWY7KeAIOyViuyKteuLiOuLpC48L3A+PC9zZWN0aW9uPlxyXG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19zZWN0aW9uXCIgYXJpYS1sYWJlbGxlZGJ5PVwiYm9va3NcIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fc2VjdGlvbi1oZWFkaW5nXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuq3uOumvOyxhSDsl7Dqs4Qg7Zmc64+ZPC9zcGFuPjxoMiBpZD1cImJvb2tzXCI+6rWQ7IKs66W8IOychO2VnCDso7zsoJwg7KSR7IusIO2ZnOuPmSDsmIjsi5w8L2gyPjwvZGl2PjxwPuuPhOyEnCBBUEkg66+47Jew6rKwPC9wPjwvZGl2PjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19ib29rLWdyaWRcIj48YXJ0aWNsZT48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX2Jvb2staWNvblwiPvCfk5Y8L3NwYW4+PGgzPuq3nOy5mcK37LCo66GAIOq3uOumvOyxhSDsl7Dqs4Qg7JiI7IucPC9oMz48cD7qsIDsnITrsJTsnITrs7Tsl5DshJwg6rK97ZeY7ZWcIOq3nOy5mSwg7ISg7YOdLCDssKjroYDrpbwg6re466a87LGF7J2EIOydveycvOupsCDri6Tsi5wg7J207JW86riw7ZWp64uI64ukLjwvcD48c3Ryb25nPu2ZnOuPmSDrsKnrspU8L3N0cm9uZz48cD7rk7HsnqXsnbjrrLzsnbQg7LCo66GA66W8IOyngO2CpOuKlCDsnqXrqbTsl5DshJwg66mI7LaU6rOgIOuLpOydjCDtlonrj5nsnYQg7IaQ7KeT7Jy866GcIOqzqOudvCDrs7Tqsowg7ZWp64uI64ukLjwvcD48L2FydGljbGU+PGFydGljbGU+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19ib29rLWljb25cIj7wn5SiPC9zcGFuPjxoMz7siJgg7IS46riwIOq3uOumvOyxhSDsl7Dqs4Qg7JiI7IucPC9oMz48cD7tlqXtm4Qg7IaQ6rCA6529IOyImCDshLjquLAg64aA7J2066W8IOqyve2XmO2WiOydhCDrlYwg7IKs7Jqp7ZWgIOyImCDsnojripQg7IiYIOqwnOuFkCDspJHsi6wg7IOY7ZSM7J6F64uI64ukLjwvcD48c3Ryb25nPu2bhOyGjSDrhoDsnbQ8L3N0cm9uZz48cD7qtZDsgqzqsIAg6re466a87LGF6rO8IO2ZnOuPmeydhCDshKDtg53tlZwg65Kk7JeQ66eMIOyVhOydtCDtmZTrqbTsl5DripQg6re466a86rO8IO2WieuPmSDspJHsi6zsnZgg64aA7J2066GcIOyghOuLrO2VqeuLiOuLpC48L3A+PC9hcnRpY2xlPjwvZGl2Pjwvc2VjdGlvbj5cclxuICA8L3NlY3Rpb24+PC9tYWluPjtcclxufVxyXG5cclxudHlwZSBEZW1vVGFiID0gJ292ZXJ2aWV3JyB8ICdjb250ZW50JyB8ICdldmlkZW5jZScgfCAnc3VwcG9ydCc7XHJcblxyXG5leHBvcnQgZnVuY3Rpb24gVGVhY2hlckRlbW9EYXNoYm9hcmQoKSB7XHJcbiAgY29uc3QgW3BlcmlvZElkLCBzZXRQZXJpb2RJZF0gPSB1c2VTdGF0ZTwodHlwZW9mIHBlcmlvZHMpW251bWJlcl1bJ2lkJ10+KCdhbGwnKTtcclxuICBjb25zdCBbdGFiLCBzZXRUYWJdID0gdXNlU3RhdGU8RGVtb1RhYj4oJ292ZXJ2aWV3Jyk7XHJcbiAgY29uc3QgcGVyaW9kID0gcGVyaW9kcy5maW5kKGl0ZW0gPT4gaXRlbS5pZCA9PT0gcGVyaW9kSWQpID8/IHBlcmlvZHNbMl07XHJcbiAgY29uc3QgcmVjb3JkcyA9IHVzZU1lbW8oKCkgPT4gdGVhY2hlckRlbW9TZXNzaW9ucy5maWx0ZXIoaXRlbSA9PiBpdGVtLmRheXNBZ28gPD0gcGVyaW9kLmRheXMpLCBbcGVyaW9kLmRheXNdKTtcclxuICBjb25zdCBhdHRlbXB0cyA9IHJlY29yZHMucmVkdWNlKChzdW0sIGl0ZW0pID0+IHN1bSArIGl0ZW0uYXR0ZW1wdHMsIDApO1xyXG4gIGNvbnN0IHRhcmdldENob2ljZXMgPSByZWNvcmRzLnJlZHVjZSgoc3VtLCBpdGVtKSA9PiBzdW0gKyBpdGVtLnRhcmdldENob2ljZXMsIDApO1xyXG4gIGNvbnN0IGxhdGVzdCA9IHJlY29yZHMuYXQoLTEpID8/IHRlYWNoZXJEZW1vU2Vzc2lvbnMuYXQoLTEpITtcclxuICBjb25zdCBtZW51ID0gW1snb3ZlcnZpZXcnLCAn7KCE7LK0IO2YhO2ZqSddLCBbJ2NvbnRlbnQnLCAn7JWE64+Z67OEIOuGgOydtCDquLDroZ0nXSwgWydldmlkZW5jZScsICfrtoTshJ0g6re86rGwJ10sIFsnc3VwcG9ydCcsICfqtZDsnKHsoIEg7KCQ6rKAJ11dIGFzIGNvbnN0O1xyXG5cclxuICByZXR1cm4gPG1haW4gY2xhc3NOYW1lPVwidGVhY2hlci1wb3J0YWwgdGVhY2hlci1kZW1vIHRlYWNoZXItZGVtby0td29ya3NwYWNlXCI+PGFzaWRlIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fc2lkZWJhclwiIGFyaWEtbGFiZWw9XCLrjbDrqqggTE1TIOuplOuJtFwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19zaWRlYmFyLWJyYW5kXCI+PHN0cm9uZz5QSUtJUElDSzwvc3Ryb25nPjxzcGFuPuuNsOuqqCBMTVM8L3NwYW4+PC9kaXY+PG5hdj57bWVudS5tYXAoKFtrZXksIGxhYmVsXSkgPT4gPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIga2V5PXtrZXl9IGNsYXNzTmFtZT17dGFiID09PSBrZXkgPyAnaXMtYWN0aXZlJyA6ICcnfSBvbkNsaWNrPXsoKSA9PiBzZXRUYWIoa2V5KX0+e2xhYmVsfTwvYnV0dG9uPil9PC9uYXY+PGEgaHJlZj1cIi90ZWFjaGVyL2xvZ2luXCI+7Iuk7KCcIOq1kOyCrCDroZzqt7jsnbg8L2E+PC9hc2lkZT48c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3dvcmtzcGFjZVwiPjxoZWFkZXIgY2xhc3NOYW1lPVwidGVhY2hlci1wb3J0YWxfX2hlYWRlclwiPjxhIGhyZWY9XCIvdGVhY2hlci9kYXNoYm9hcmRcIiBhcmlhLWxhYmVsPVwiUElLSVBJQ0sgVGVhY2hlciDrjIDsi5zrs7Trk5zroZwg64+M7JWE6rCA6riwXCI+PEJyYW5kTG9nbyAvPjxzcGFuPlBJS0lQSUNLIFRlYWNoZXI8L3NwYW4+PC9hPjxhIGNsYXNzTmFtZT1cInRlYWNoZXItcG9ydGFsX19jaGlsZC1saW5rXCIgaHJlZj1cIi9wbGF5XCI+7JWE7J20IOuGgOydtOuhnDwvYT48L2hlYWRlcj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fY29udGVudFwiPjxkaXYgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19ub3RpY2VcIiByb2xlPVwibm90ZVwiPkRFTU8gwrcg7ZWp7ISxIOuNsOydtO2EsCDCtyDsi6TsoJwg7JWE64+ZIOq4sOuhneydtCDslYTri5nri4jri6Q8L2Rpdj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19faGVhZGluZ1wiPjxkaXY+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1raWNrZXJcIj7qsJzsnbgg7JWE64+ZIOq0gOywsCDCtyDrjbDrqqg8L3NwYW4+PGgxPnttZW51LmZpbmQoKFtrZXldKSA9PiBrZXkgPT09IHRhYik/LlsxXX08L2gxPjxwPuyVhOuPmSBB7J2YIOuNsOuqqCDquLDroZ3snLzroZwg7Iuk7KCcIExNUyDroIjsnbTslYTsm4PsnYQg7ZmV7J247ZWp64uI64ukLjwvcD48L2Rpdj48bGFiZWwgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19wZXJpb2RcIj7sobDtmowg6riw6rCEPHNlbGVjdCB2YWx1ZT17cGVyaW9kSWR9IG9uQ2hhbmdlPXtldmVudCA9PiBzZXRQZXJpb2RJZChldmVudC50YXJnZXQudmFsdWUgYXMgdHlwZW9mIHBlcmlvZElkKX0+e3BlcmlvZHMubWFwKGl0ZW0gPT4gPG9wdGlvbiB2YWx1ZT17aXRlbS5pZH0ga2V5PXtpdGVtLmlkfT57aXRlbS5sYWJlbH08L29wdGlvbj4pfTwvc2VsZWN0PjwvbGFiZWw+PC9kaXY+e3RhYiA9PT0gJ292ZXJ2aWV3JyAmJiA8ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fb3ZlcnZpZXctZ3JpZFwiPjxzZWN0aW9uIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fcGFuZWxcIj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuuGgOydtCDssLjsl6w8L3NwYW4+PGgyPuy1nOq3vCDrhoDsnbQg6rK97ZeYPC9oMj48c3Ryb25nIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fYmlnLW51bWJlclwiPntyZWNvcmRzLmxlbmd0aH08L3N0cm9uZz48cD7shKDtg53tlZwg6riw6rCE7J2YIOuNsOuqqCDshLjshZg8L3A+PC9zZWN0aW9uPjxzZWN0aW9uIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fcGFuZWxcIj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuyLnOuPhCDquLDroZ08L3NwYW4+PGgyPuuGgOydtCDsi5zrj4Q8L2gyPjxzdHJvbmcgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19iaWctbnVtYmVyXCI+e2F0dGVtcHRzfTwvc3Ryb25nPjxwPuyLpOygnCDrjbDrqqgg7JuQ67O47JeQ7IScIOqzhOyCsDwvcD48L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19wYW5lbCB0ZWFjaGVyLWRlbW9fX3BhbmVsLS13aWRlXCI+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1raWNrZXJcIj7quLDqsITrs4Qg67OA7ZmUPC9zcGFuPjxoMj7stZzqt7wg7Zmc64+ZIOuvuOumrOuztOq4sDwvaDI+PG9sIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fbWluaS10aW1lbGluZVwiPntyZWNvcmRzLnNsaWNlKCkucmV2ZXJzZSgpLm1hcChpdGVtID0+IDxsaSBrZXk9e2l0ZW0uaWR9PjxiPntpdGVtLmRhdGV9PC9iPjxzcGFuPntpdGVtLmFjdGl2aXR5fSDCtyB7aXRlbS5ydWxlfSDCtyDsi5zrj4Qge2l0ZW0uYXR0ZW1wdHN97ZqMPC9zcGFuPjwvbGk+KX08L29sPjwvc2VjdGlvbj48c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3BhbmVsXCI+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1raWNrZXJcIj7ri7Tri7nsnpAg66+466as67O06riwPC9zcGFuPjxoMj7slYTrj5kgQTwvaDI+PHA+7LWc6re8IOqyve2XmDoge2xhdGVzdC5ub3RlfTwvcD48cD7rqqntkZwg7ISg7YOdIHt0YXJnZXRDaG9pY2Vzfe2ajDwvcD48L3NlY3Rpb24+PHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19wYW5lbFwiPjxzcGFuIGNsYXNzTmFtZT1cInRlYWNoZXIta2lja2VyXCI+66+47KCVPC9zcGFuPjxoMj7quLDriqXsnYQg7KSA67mEIOykkeyeheuLiOuLpDwvaDI+PHA+7ZmV7KCV65CY7KeAIOyViuydgCDstpTsspzCt+yVjOumvCDquLDriqXsnYAg7ZGc7Iuc7ZWY7KeAIOyViuyKteuLiOuLpC48L3A+PC9zZWN0aW9uPjwvZGl2Pn17dGFiID09PSAnY29udGVudCcgJiYgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19zZWN0aW9uXCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3NlY3Rpb24taGVhZGluZ1wiPjxkaXY+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1raWNrZXJcIj7slYTrj5nrs4Qg64aA7J20IOq4sOuhnTwvc3Bhbj48aDI+7LWc6re8IOuGgOydtCDqsr3tl5g8L2gyPjwvZGl2PjxwPntwZXJpb2QubGFiZWx9IOq4sOykgDwvcD48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fc3VtbWFyeVwiPjxkaXY+PHN0cm9uZz57cmVjb3Jkcy5sZW5ndGh9PC9zdHJvbmc+PHNwYW4+64aA7J20IOywuOyXrDwvc3Bhbj48L2Rpdj48ZGl2PjxzdHJvbmc+e2F0dGVtcHRzfTwvc3Ryb25nPjxzcGFuPuyLnOuPhDwvc3Bhbj48L2Rpdj48ZGl2PjxzdHJvbmc+e3RhcmdldENob2ljZXN9PC9zdHJvbmc+PHNwYW4+66qp7ZGc7JeQIOunnuuKlCDshKDtg508L3NwYW4+PC9kaXY+PGRpdj48c3Ryb25nPntyZWNvcmRzLmZpbHRlcihpdGVtID0+IGl0ZW0ucmV0cmllZCkubGVuZ3RofTwvc3Ryb25nPjxzcGFuPuuLpOyLnCDrj4TsoIQ8L3NwYW4+PC9kaXY+PC9kaXY+PG9sIGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fdGltZWxpbmVcIj57cmVjb3Jkcy5zbGljZSgpLnJldmVyc2UoKS5tYXAoaXRlbSA9PiA8bGkga2V5PXtpdGVtLmlkfT48dGltZT57aXRlbS5kYXRlfTwvdGltZT48ZGl2PjxzdHJvbmc+e2l0ZW0uYWN0aXZpdHl9IMK3IHtpdGVtLnJ1bGV9PC9zdHJvbmc+PHA+e2l0ZW0ubm90ZX08L3A+PHNwYW4+7Iuc64+EIHtpdGVtLmF0dGVtcHRzfe2ajCDCtyDrqqntkZwg7ISg7YOdIHtpdGVtLnRhcmdldENob2ljZXN97ZqMPC9zcGFuPjwvZGl2PjwvbGk+KX08L29sPjwvc2VjdGlvbj59e3RhYiA9PT0gJ2V2aWRlbmNlJyAmJiA8c2VjdGlvbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3NlY3Rpb25cIj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fc2VjdGlvbi1oZWFkaW5nXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWtpY2tlclwiPuu2hOyEnSDqt7zqsbA8L3NwYW4+PGgyPuuNsOuqqCDsm5Drs7jqs7wg6rOE7IKwIOq4sOykgDwvaDI+PC9kaXY+PHA+REVNTzwvcD48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cInRlYWNoZXItZGVtb19fZXZpZGVuY2UtZ3JpZFwiPjxhcnRpY2xlPjxzdHJvbmc+7Iuc64+EIO2an+yImDwvc3Ryb25nPjxwPuyEoO2Dne2VnCDquLDqsITsnZgg6rCBIOyEuOyFmCBgYXR0ZW1wdHNgIO2VqeqzhDwvcD48c21hbGw+7JuQ67O4IOyEuOyFmCB7cmVjb3Jkcy5sZW5ndGh96rG0PC9zbWFsbD48L2FydGljbGU+PGFydGljbGU+PHN0cm9uZz7rqqntkZwg7ISg7YOdPC9zdHJvbmc+PHA+6rCBIOyEuOyFmCBgdGFyZ2V0Q2hvaWNlc2Ag7ZWp6rOEPC9wPjxzbWFsbD7snoTsnZjsnZgg7J6s64+E7KCEIOyImOulvCDrp4zrk6Tsp4Ag7JWK7J2MPC9zbWFsbD48L2FydGljbGU+PC9kaXY+PC9zZWN0aW9uPn17dGFiID09PSAnc3VwcG9ydCcgJiYgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19zZWN0aW9uXCI+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX3NlY3Rpb24taGVhZGluZ1wiPjxkaXY+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1raWNrZXJcIj7qtZDsnKHsoIEg7KCQ6rKAPC9zcGFuPjxoMj7rjbDrqqgg7KeA7JuQIOygleuztDwvaDI+PC9kaXY+PHA+7Iuk7KCcIOq4sOuKpSDslYTri5g8L3A+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJ0ZWFjaGVyLWRlbW9fX2Jvb2stZ3JpZFwiPntiYWRnZXMubWFwKChbaWNvbiwgdGl0bGUsIGRlc2NyaXB0aW9uXSkgPT4gPGFydGljbGUga2V5PXt0aXRsZX0+PHNwYW4gY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19ib29rLWljb25cIj57aWNvbn08L3NwYW4+PGgzPnt0aXRsZX08L2gzPjxwPntkZXNjcmlwdGlvbn08L3A+PC9hcnRpY2xlPil9PC9kaXY+PHAgY2xhc3NOYW1lPVwidGVhY2hlci1kZW1vX19jYXV0aW9uXCI+642w66qoIOuwsOyngOyZgCDtmZzrj5kg7JiI7Iuc64qUIOyLpOygnCDslYTrj5kg7Y+J6rCA64KYIOuwnOuLrCDtjJDsoJXsl5Ag7IKs7Jqp65CY7KeAIOyViuyKteuLiOuLpC48L3A+PC9zZWN0aW9uPn08L2Rpdj48L3NlY3Rpb24+PC9tYWluPjtcclxufVxyXG4iXX0=

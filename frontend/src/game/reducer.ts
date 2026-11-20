@@ -1,9 +1,11 @@
 import { isGameMode, isGesture, judgeRound, nextOpponent } from './rules';
+import { isLearningGameId, type LearningGameId } from './learning/types';
 import type { AdvanceTiming, GameInput, GameMode, Gesture, InputSource, InputTiming, Phase, RoundResult } from './types';
 
 export interface CurrentPlayState {
   phase: Phase;
   mode: GameMode | null;
+  learningGameId: LearningGameId | null;
 }
 
 export interface CurrentRoundState {
@@ -26,14 +28,16 @@ export interface GameState extends CurrentPlayState, CurrentRoundState, Cumulati
 }
 
 export const initialState: GameState = {
-  phase: 'START', mode: null, opponent: null, result: null, successCount: 0, partyCount: 0, celebrationId: 0, roundId: 0,
+  phase: 'START', mode: null, learningGameId: null, opponent: null, result: null, successCount: 0, partyCount: 0, celebrationId: 0, roundId: 0,
   inputSequence: 0, advanceSequence: 0, lastInputTiming: null, lastAdvanceTiming: null,
 };
 
 export type GameAction =
-  | { type: 'NAVIGATE'; phase: 'START' | 'ACTIVITY_SELECT' | 'MODE_SELECT' | 'RULE_PRACTICE' | 'RECORDS' | 'SECRET_LAND' | 'BADGE_COLLECTION' }
-  | { type: 'RESTORE_SCREEN'; screen: Pick<GameState, 'phase' | 'mode' | 'opponent' | 'result'> }
+  | { type: 'NAVIGATE'; phase: 'START' | 'ACTIVITY_SELECT' | 'IMAGINATION_EXPRESSION' | 'LEARNING_PLAY' | 'MODE_SELECT' | 'RULE_PRACTICE' | 'RECORDS' | 'SECRET_LAND' | 'BADGE_COLLECTION' }
+  | { type: 'OPEN_LEARNING_GAME'; gameId: LearningGameId }
+  | { type: 'RESTORE_SCREEN'; screen: Pick<GameState, 'phase' | 'mode' | 'learningGameId' | 'opponent' | 'result'> }
   | { type: 'BEGIN' }
+  | { type: 'OPEN_IMAGINATION_EXPRESSION' }
   | { type: 'OPEN_RPS_MODE_SELECT' }
   | { type: 'SELECT_MODE'; mode: GameMode }
   | { type: 'OPEN_RULE_PRACTICE' }
@@ -58,22 +62,30 @@ function advanceTiming(state: GameState, requestedAt: number | undefined, kind: 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'NAVIGATE':
-      return { ...state, phase: action.phase, mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null };
+      return { ...state, phase: action.phase, mode: null, learningGameId: action.phase === 'LEARNING_PLAY' ? state.learningGameId : null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null };
+    case 'OPEN_LEARNING_GAME':
+      return state.phase === 'ACTIVITY_SELECT' && isLearningGameId(action.gameId)
+        ? { ...state, phase: 'LEARNING_PLAY', learningGameId: action.gameId, mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null }
+        : state;
     case 'RESTORE_SCREEN':
       // 화면 이동만 복원하며, 누적 보상은 되돌리지 않는다.
       return { ...state, ...action.screen, lastInputTiming: null, lastAdvanceTiming: null };
     case 'BEGIN':
       return state.phase === 'START' ? { ...state, phase: 'MODE_SELECT' } : state;
+    case 'OPEN_IMAGINATION_EXPRESSION':
+      return state.phase === 'ACTIVITY_SELECT'
+        ? { ...state, phase: 'IMAGINATION_EXPRESSION', learningGameId: null, mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null }
+        : state;
     case 'OPEN_RPS_MODE_SELECT':
       return state.phase === 'ACTIVITY_SELECT'
-        ? { ...state, phase: 'MODE_SELECT', mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null }
+        ? { ...state, phase: 'MODE_SELECT', learningGameId: null, mode: null, opponent: null, result: null, lastInputTiming: null, lastAdvanceTiming: null }
         : state;
     case 'SELECT_MODE':
       return state.phase === 'MODE_SELECT' && isGameMode(action.mode)
-        ? { ...state, mode: action.mode, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null } : state;
+        ? { ...state, mode: action.mode, learningGameId: null, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null } : state;
     case 'OPEN_RULE_PRACTICE':
       return state.phase === 'MODE_SELECT'
-        ? { ...state, phase: 'RULE_PRACTICE', mode: null, opponent: null, result: null } : state;
+        ? { ...state, phase: 'RULE_PRACTICE', learningGameId: null, mode: null, opponent: null, result: null } : state;
     case 'TO_INSTRUCTION':
       return state.mode && state.phase === 'READY' ? { ...state, phase: 'INSTRUCTION' } : state;
     case 'TO_READY':
@@ -109,7 +121,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return state.phase === 'RESULT' && state.result?.success && state.mode
         ? { ...state, phase: 'PLAYING', opponent: nextOpponent(), result: null, roundId: state.roundId + 1, lastInputTiming: null, ...advanceTiming(state, action.requestedAt, 'NEXT') } : state;
     case 'CHOOSE_ANOTHER_MODE':
-      return state.phase !== 'START' ? { ...state, phase: 'MODE_SELECT', mode: null, opponent: null, result: null, lastInputTiming: null } : state;
+      return state.phase !== 'START' ? { ...state, phase: 'MODE_SELECT', learningGameId: null, mode: null, opponent: null, result: null, lastInputTiming: null } : state;
     case 'CLEAR_RECORDS':
       // 기록 초기화는 이 전용 액션에서만 수행한다. 화면/모드 이동은 누적 기록을 지우지 않는다.
       return { ...state, successCount: 0, partyCount: 0, celebrationId: 0 };

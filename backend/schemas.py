@@ -60,3 +60,13 @@ class TeacherLogin(ApiInput):
 
 class InstitutionPlayLeaseCreate(ApiInput):
     expires_in_minutes: int = Field(default=30, ge=5, le=120, strict=True)
+
+
+class RagSearch(BaseModel):
+    query: str = Field(min_length=2, max_length=200)
+    limit: int = Field(default=5, ge=1, le=10)
+    document_type: Literal["notice", "explanation", "play_understanding", "play_implementation"] | None = None
+
+
+class RagPlayAnalysis(BaseModel):
+    observation: str = Field(min_length=2, max_length=4000)

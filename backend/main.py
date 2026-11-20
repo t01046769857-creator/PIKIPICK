@@ -17,6 +17,7 @@ from starlette.concurrency import run_in_threadpool
 
 from .database import Database, failure_category, log_failure
 from .books import BookApiError, BookRecommendationService, Data4LibraryClient, MAX_PAGE_SIZE
+from .rag import NuriRagService, RagError
 from .content_catalog import get_content, public_catalog
 from .content_analysis import calculate_metrics
 from .content_recommendations import recommend_from_history
@@ -25,7 +26,7 @@ from .models import (Activity, ActivityVersion, EnrolledChild, HomeRecordAccessG
                      PlayEvent, Player, PlaySession, PlaySessionContext,
                      TeacherAccount, TeacherAuthSession, TeacherChildAssignment,
                      TeacherInstitutionMembership, utcnow)
-from .schemas import EventCreate, InstitutionPlayLeaseCreate, SessionCreate, TeacherLogin
+from .schemas import EventCreate, InstitutionPlayLeaseCreate, RagPlayAnalysis, RagSearch, SessionCreate, TeacherLogin
 from .settings import ConfigurationError, Settings
 
 logger = logging.getLogger("pikipick.api")
@@ -369,9 +370,11 @@ def validate_event(payload: EventCreate, session: PlaySession, activity: Activit
             raise HTTPException(422, "Round result is inconsistent with its gestures and mode")
 
 
-def create_app(database: Database | None = None, book_service: BookRecommendationService | None = None):
+def create_app(database: Database | None = None, book_service: BookRecommendationService | None = None,
+               rag_service: NuriRagService | None = None):
     db_service = database or Database()
     books = book_service or BookRecommendationService(Data4LibraryClient(db_service.settings or Settings.from_env()))
+    rag = rag_service or NuriRagService(db_service.settings or Settings.from_env())
 
     @asynccontextmanager
     async def lifespan(application: FastAPI):
@@ -387,6 +390,7 @@ def create_app(database: Database | None = None, book_service: BookRecommendatio
     application = FastAPI(title="PIKIPICK API", version="0.1.0", lifespan=lifespan)
     application.state.database = db_service
     application.state.books = books
+    application.state.rag = rag
     application.add_middleware(CORSMiddleware,
         allow_origins=list((db_service.settings or Settings()).cors_origins),
         allow_credentials=False, allow_methods=["GET", "POST", "OPTIONS"],
@@ -414,6 +418,11 @@ def create_app(database: Database | None = None, book_service: BookRecommendatio
     async def book_api_error(_request, error):
         status = 429 if error.code == "book_api_rate_limited" else 422 if error.code == "book_activity_not_supported" else 503
         return JSONResponse(status_code=status, content={"detail": "Book recommendation service is unavailable", "code": error.code})
+
+    @application.exception_handler(RagError)
+    async def rag_error(_request, error):
+        status = 404 if error.code == "rag_not_indexed" else 422 if error.code in {"rag_pdf_missing", "rag_pdf_text_unusable"} else 503
+        return JSONResponse(status_code=status, content={"detail": "Nuri curriculum RAG is unavailable", "code": error.code})
 
     @application.middleware("http")
     async def no_cache_and_body_limit(request: Request, call_next):
@@ -477,6 +486,24 @@ def create_app(database: Database | None = None, book_service: BookRecommendatio
     def book_recommendations(activity: str = Query(min_length=1, max_length=64), age: int = Query(ge=5, le=7),
                              limit: int = Query(default=10, ge=1, le=MAX_PAGE_SIZE)):
         return books.recommendations(activity, age, limit)
+
+    @application.get("/api/rag/health")
+    def rag_health():
+        return rag.health()
+
+    @application.post("/api/rag/index")
+    def rag_index():
+        if not rag.settings.rag_index_enabled:
+            raise HTTPException(403, "RAG indexing is disabled. Set RAG_INDEX_ENABLED=1 only in an approved development environment.")
+        return rag.index_documents()
+
+    @application.post("/api/rag/search")
+    def rag_search(payload: RagSearch):
+        return rag.search(payload.query.strip(), payload.limit, payload.document_type)
+
+    @application.post("/api/rag/analyze-play")
+    def rag_analyze_play(payload: RagPlayAnalysis):
+        return rag.analyze_play(payload.observation.strip())
 
     @application.post("/api/teacher/auth/login")
     def teacher_login(payload: TeacherLogin, db: Session = Depends(get_db)):

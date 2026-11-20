@@ -17,6 +17,10 @@ __pycache__/
 *.p12
 *.pfx
 backend/certs/
+data/nuri_pdfs/
+data/rag_store/
+data/data/
+data/PIKIPICK_nuri_rag_source_pdfs.zip
 backups/
 backend/.pytest_cache/
 backend/test-results/

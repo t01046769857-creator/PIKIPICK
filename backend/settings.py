@@ -22,6 +22,16 @@ class Settings:
     allow_insecure_local: bool = False
     connect_timeout: int = 5
     data4library_api_key: str = field(default="", repr=False)
+    llm_provider: str = ""
+    llm_model: str = ""
+    llm_api_base_url: str = ""
+    llm_api_key: str = field(default="", repr=False)
+    embedding_provider: str = "local_hash"
+    embedding_model: str = "local-hash-embedding-v1"
+    embedding_api_key: str = field(default="", repr=False)
+    rag_vector_store_dir: str = str(BACKEND_DIR.parent / "data" / "rag_store")
+    rag_pdf_dir: str = str(BACKEND_DIR.parent / "data" / "nuri_pdfs")
+    rag_index_enabled: bool = False
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     @classmethod
@@ -42,6 +52,14 @@ class Settings:
             db_ssl_ca=os.getenv("DB_SSL_CA", "").strip(), connect_timeout=timeout,
             allow_insecure_local=os.getenv("DB_ALLOW_INSECURE_LOCAL", "").strip() == "1",
             data4library_api_key=os.getenv("DATA4LIBRARY_API_KEY", "").strip(),
+            llm_provider=os.getenv("LLM_PROVIDER", "").strip(), llm_model=os.getenv("LLM_MODEL", "").strip(),
+            llm_api_base_url=os.getenv("LLM_API_BASE_URL", "").strip(), llm_api_key=os.getenv("LLM_API_KEY", "").strip(),
+            embedding_provider=os.getenv("EMBEDDING_PROVIDER", "local_hash").strip() or "local_hash",
+            embedding_model=os.getenv("EMBEDDING_MODEL", "local-hash-embedding-v1").strip() or "local-hash-embedding-v1",
+            embedding_api_key=os.getenv("EMBEDDING_API_KEY", "").strip(),
+            rag_vector_store_dir=os.getenv("RAG_VECTOR_STORE_DIR", str(BACKEND_DIR.parent / "data" / "rag_store")).strip(),
+            rag_pdf_dir=os.getenv("RAG_PDF_DIR", str(BACKEND_DIR.parent / "data" / "nuri_pdfs")).strip(),
+            rag_index_enabled=os.getenv("RAG_INDEX_ENABLED", "").strip() == "1",
             cors_origins=tuple(x.strip() for x in os.getenv(
                 "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
             ).split(",") if x.strip()),
